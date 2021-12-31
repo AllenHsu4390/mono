@@ -336,6 +336,15 @@ export const feather_31 = {
     critRate: 0.163
 };
 
+export const circlet_32 = {
+    type: "husk",
+    defPct: 0.583,
+    hpPct: 0.053,
+    critDmg: 0.288,
+    atk: 31,
+    recharge: 0.065
+};
+
 // yoimiya
 export const flower_4 = {
     type: "shime",
