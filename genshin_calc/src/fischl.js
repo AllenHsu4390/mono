@@ -93,6 +93,6 @@ export const print = () => {
     console.log(`Stringless r2 Geo team: ${damageDps(stats(char, stringlessR2, artifacts), hits(geoTeam, geoTeamDebuffs), 10)}`);
 
     
-    console.log(`Stringless r2 Pyro team summon CRIT: ${damageDps(stats(char, stringlessR2, artifacts.concat({ critRate: 1 })), hits(pyroTeam).slice(0, 1), 10)}`);
-    console.log(`Stringless r2 Geo team summon CRIT: ${damageDps(stats(char, stringlessR2, artifacts.concat({ critRate: 1 })), hits(geoTeam, geoTeamDebuffs).slice(0, 1), 10)}`);
+    console.log(`Stringless r2 Pyro team summon CRIT: ${damageDps(stats(char, stringlessR2, artifacts.concat({ critRate: 1 })), hits(pyroTeam).slice(0, 1))}`);
+    console.log(`Stringless r2 Geo team summon CRIT: ${damageDps(stats(char, stringlessR2, artifacts.concat({ critRate: 1 })), hits(geoTeam, geoTeamDebuffs).slice(0, 1))}`);
 };
