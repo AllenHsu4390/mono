@@ -11,6 +11,8 @@ import * as albedo from './albedo.js';
 import * as itto from './itto.js';
 import { hutao_xingqiu_albedo_zhongli, raiden_xingqiu_xiangling_bennett, yoimiya_xingqiu_fischl_zhongli, yoimiya_xingqiu_fischl_bennett, yoimiya_xingqiu_albedo_zhongli, hutao_xingqiu_fischl_zhongli, raiden_mona_jean_bennett, ganyu_xiangling_bennett_zhongli, eula_raiden_albedo_zhongli, eula_fischl_albedo_zhongli, eula_raiden_lisa_zhongli, yoimiya_xingqiu_bennett_zhongli, yoimiya_fischl_albedo_zhongli, yoimiya_fischl_bennett_zhongli, xiao_jean_albedo_zhongli, xingqiu_xiangling_bennett_zhongli, xiao_jean_fischl_zhongli, hutao_xingqiu_sara_zhongli, eula_raiden_rosaria_zhongli, eula_fischl_lisa_diona, hutao_xingqiu_sucrose_xinyan, xingqiu_xiangling_bennett_sucrose, yoimiya_xingqiu_sucrose_xinyan, yoimiya_xingqiu_sara_zhongli, xiao_jean_bennett_zhongli, xiao_raiden_albedo_zhongli, raiden_xingqiu_yoimiya_zhongli, itto_xingqiu_albedo_gorou, itto_raiden_albedo_gorou, itto_fischl_albedo_gorou, xiao_raiden_bennett_zhongli, itto_bennett_albedo_gorou } from './teams.js';
 
+export { getOutputString } from './output.js';
+
 var args = process.argv.slice(2);
 
 console.log(`-------Damage Calcs for ${args[0]}--------`);

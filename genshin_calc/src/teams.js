@@ -26,6 +26,8 @@ import { cryoMelt, pyroVape } from './amplifiers.js';
 import { overloaded, swirl } from './reactions.js';
 import { redhorn, wolfs } from './claymore.js';
 
+import { output } from './output.js';
+
 const yoimiyaArtifacts = [flower_4, feather_4, sand_27, goblet_26, circlet_4];
 //[flower_4, feather_4, sand_4, goblet_4, circlet_4];
 
@@ -41,7 +43,7 @@ export const yoimiya_xingqiu_fischl_bennett = () => {
         transforms: [yoimiya.icdOverloaded, yoimiya.fischlBonus(teamWide)],
     });
 
-    console.log(`Yoimiya, Xingqiu, Fischl, Bennett: ${teamDamageDps([
+    output(`Yoimiya, Xingqiu, Fischl, Bennett: ${teamDamageDps([
         xingqiu.raincutterAction({
             weapon: sacSword,
             artifacts: [flower_1, feather_1, sand_1, goblet_1, circlet_3],
@@ -73,7 +75,7 @@ export const yoimiya_fischl_bennett_zhongli = () => {
         transforms: [yoimiya.icdOverloaded, yoimiya.fischlBonus(teamWide)],
     });
 
-    console.log(`Yoimiya, Fischl, Bennett, Zhong Li: ${teamDamageDps([
+    output(`Yoimiya, Fischl, Bennett, Zhong Li: ${teamDamageDps([
         firedanceAction,
         fischl.ozAction({
             weapon: stringlessR2,
@@ -101,7 +103,7 @@ export const yoimiya_xingqiu_bennett_zhongli = () => {
         amps: [yoimiya.icdPyroVape],
     });
 
-    console.log(`Yoimiya, Xingqiu, Bennett, Zhong Li: ${teamDamageDps([
+    output(`Yoimiya, Xingqiu, Bennett, Zhong Li: ${teamDamageDps([
         firedanceAction,
         xingqiu.raincutterAction({
             weapon: sacSword,
@@ -130,7 +132,7 @@ export const yoimiya_xingqiu_sara_zhongli = () => {
         amps: [yoimiya.icdPyroVape],
     });
 
-    console.log(`Yoimiya, Xingqiu, Sara, Zhong Li: ${teamDamageDps([
+    output(`Yoimiya, Xingqiu, Sara, Zhong Li: ${teamDamageDps([
         firedanceAction,
         xingqiu.raincutterAction({
             weapon: sacSword,
@@ -171,7 +173,7 @@ export const yoimiya_xingqiu_fischl_zhongli = () => {
         transforms: [yoimiya.icdOverloaded, yoimiya.fischlBonus(teamWide)],
     });
 
-    console.log(`Yoimiya, Xingqiu, Fischl, Zhong Li: ${teamDamageDps([
+    output(`Yoimiya, Xingqiu, Fischl, Zhong Li: ${teamDamageDps([
         firedanceAction,
         xingqiu.raincutterAction({
             weapon: sacSword,
@@ -203,7 +205,7 @@ export const yoimiya_xingqiu_albedo_zhongli = () => {
         amps: [yoimiya.icdPyroVape],
     });
 
-    console.log(`Yoimiya, Xingqiu, Albedo, Zhong Li: ${teamDamageDps([
+    output(`Yoimiya, Xingqiu, Albedo, Zhong Li: ${teamDamageDps([
         firedanceAction, 
         xingqiu.raincutterAction({
             weapon: sacSword,
@@ -241,7 +243,7 @@ export const yoimiya_fischl_albedo_zhongli = () => {
         transforms: [yoimiya.icdOverloaded, yoimiya.fischlBonus(teamWide)],
     });
 
-    console.log(`Yoimiya, Fischl, Albedo, Zhong Li: ${teamDamageDps([
+    output(`Yoimiya, Fischl, Albedo, Zhong Li: ${teamDamageDps([
         firedanceAction, {
             char: stats(fischl.char, stringlessR2, [flower_13, feather_16, sand_13, goblet_15, circlet_13]),
             hits: fischl.hits(teamWide, debuffs),
@@ -281,7 +283,7 @@ export const yoimiya_xingqiu_sucrose_xinyan = () => {
         transforms: [yoimiya.icdOverloaded, yoimiya.fischlBonus(teamWide)],
     });
 
-    console.log(`Yoimiya, Xingqiu, Sucrose, Xinyan: ${teamDamageDps([
+    output(`Yoimiya, Xingqiu, Sucrose, Xinyan: ${teamDamageDps([
         firedanceAction, 
         xingqiu.raincutterAction({
             weapon: sacSword,
@@ -308,7 +310,7 @@ export const hutao_xingqiu_albedo_zhongli = () => {
         amps: [hutao.icdPyroVape]
     });
 
-    console.log(`Hutao, Xingqiu, Albedo, Zhong Li: ${teamDamageDps([
+    output(`Hutao, Xingqiu, Albedo, Zhong Li: ${teamDamageDps([
         afterlifeAction, 
         xingqiu.raincutterAction({
             weapon: sacSword,
@@ -347,7 +349,7 @@ export const hutao_xingqiu_fischl_zhongli = () => {
         transforms: [hutao.icdOverloaded, yoimiya.fischlBonus(onField, debuffs)]
     });
 
-    console.log(`Hutao, Xingqiu, Fischl, Zhong Li: ${teamDamageDps([
+    output(`Hutao, Xingqiu, Fischl, Zhong Li: ${teamDamageDps([
         afterlifeAction, 
         xingqiu.raincutterAction({
             weapon: sacSword,
@@ -379,7 +381,7 @@ export const hutao_xingqiu_sara_zhongli = () => {
         amps: [hutao.icdPyroVape]
     });
 
-    console.log(`Hutao, Xingqiu, Sara, Zhong Li: ${teamDamageDps([
+    output(`Hutao, Xingqiu, Sara, Zhong Li: ${teamDamageDps([
         afterlifeAction,
         xingqiu.raincutterAction({
             weapon: sacSword,
@@ -405,7 +407,7 @@ export const hutao_xingqiu_sucrose_xinyan = () => {
         amps: [hutao.icdPyroVape]
     });
 
-    console.log(`Hutao, Xingqiu, Sucrose, Xinyan: ${teamDamageDps([
+    output(`Hutao, Xingqiu, Sucrose, Xinyan: ${teamDamageDps([
         afterlifeAction,
         xingqiu.raincutterAction({
             weapon: sacSword,
@@ -433,7 +435,7 @@ export const raiden_xingqiu_xiangling_bennett = () => {
         transforms: [raiden.icdElectroCharged],
     });
 
-    console.log(`Raiden, Xingqiu, Xiangling, Bennett: ${teamDamageDps([
+    output(`Raiden, Xingqiu, Xiangling, Bennett: ${teamDamageDps([
         musouAction,
         xingqiu.raincutterAction({
             weapon: lionroarR5,
@@ -477,7 +479,7 @@ export const raiden_xingqiu_yoimiya_zhongli = () => {
         amps: [yoimiya.icdPyroVape]
     });
 
-    console.log(`Raiden, Xingqiu, Yoimiya, Zhongli: ${teamDamageDps([
+    output(`Raiden, Xingqiu, Yoimiya, Zhongli: ${teamDamageDps([
         musouAction,
         firedanceAction,
         xingqiu.raincutterAction({
@@ -508,7 +510,7 @@ export const raiden_mona_jean_bennett = () => {
         artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
     });
 
-    console.log(`Raiden, Mona, Jean, Bennett: ${teamDamageDps([
+    output(`Raiden, Mona, Jean, Bennett: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
             weapon: jadeSpear,
@@ -523,7 +525,7 @@ export const ganyu_xiangling_bennett_zhongli = () => {
     const onField = [bennBurst, ...teamWide];
     const debuffs = [lapidus];
 
-    console.log(`Ganyu, Xiangling, Bennett, Zhong Li: ${teamDamageDps([
+    output(`Ganyu, Xiangling, Bennett, Zhong Li: ${teamDamageDps([
         {
             char: stats(ganyu.char, amosR2, [flower_11, feather_11, sand_11, goblet_11, circlet_7]),
             hits: ganyu.hits(onField, debuffs, [cryoMelt])
@@ -559,7 +561,7 @@ export const eula_raiden_albedo_zhongli = () => {
         artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
     });
 
-    console.log(`Eula, Raiden, Albedo, Zhong Li: ${teamDamageDps([
+    output(`Eula, Raiden, Albedo, Zhong Li: ${teamDamageDps([
         glacialAction,
         musouAction, 
         albedo.blossomAction({
@@ -591,7 +593,7 @@ export const eula_fischl_albedo_zhongli = () => {
         transforms: [yoimiya.fischlBonus(teamWide, debuffs)]
     });
 
-    console.log(`Eula, Fischl, Albedo, Zhong Li: ${teamDamageDps([
+    output(`Eula, Fischl, Albedo, Zhong Li: ${teamDamageDps([
         glacialAction, 
         fischl.ozAction({
             weapon: stringlessR2,
@@ -629,7 +631,7 @@ export const eula_raiden_rosaria_zhongli = () => {
         artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
     });
 
-    console.log(`Eula, Raiden, Rosaria, Zhong Li: ${teamDamageDps([
+    output(`Eula, Raiden, Rosaria, Zhong Li: ${teamDamageDps([
         glacialAction,
         musouAction,
         raiden.omenAction({
@@ -661,7 +663,7 @@ export const eula_raiden_lisa_zhongli = () => {
         artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
     });
 
-    console.log(`Eula, Raiden, Lisa, Zhong Li: ${teamDamageDps([
+    output(`Eula, Raiden, Lisa, Zhong Li: ${teamDamageDps([
         glacialAction,
         musouAction, 
         raiden.omenAction({
@@ -681,7 +683,7 @@ export const eula_fischl_lisa_diona = () => {
     const duration = 10;
     const downtime = 4;
 
-    console.log(`Eula, Fischl, Lisa, Diona: ${teamDamageDps([{
+    output(`Eula, Fischl, Lisa, Diona: ${teamDamageDps([{
         char: stats(eula.char, wolfs, [flower_10, feather_10, sand_10, goblet_10, circlet_23]),
         hits: eula.hits(onField, debuffs)
     }, {
@@ -702,7 +704,7 @@ export const xiao_jean_albedo_zhongli = () => {
         debuffs,
     });
 
-    console.log(`Xiao, Jean, Albedo, Zhong Li: ${teamDamageDps([
+    output(`Xiao, Jean, Albedo, Zhong Li: ${teamDamageDps([
         baneAction,
         albedo.blossomAction({
             weapon: cinnabar,
@@ -727,7 +729,7 @@ export const xiao_jean_bennett_zhongli = () => {
         debuffs,
     });
 
-    console.log(`Xiao, Jean, Bennett, Zhong Li: ${teamDamageDps([
+    output(`Xiao, Jean, Bennett, Zhong Li: ${teamDamageDps([
         baneAction,
         bennett.passionAction(),
         bennett.passionAction(),
@@ -762,7 +764,7 @@ export const xiao_jean_fischl_zhongli = () => {
         transforms: [fischlBonus(teamWide, [vvShred, ...debuffs]), swirl]
     });
 
-    console.log(`Xiao, Jean, Fischl, Zhong Li: ${teamDamageDps([
+    output(`Xiao, Jean, Fischl, Zhong Li: ${teamDamageDps([
         baneAction, 
         fischl.ozAction({
             weapon: stringlessR2,
@@ -793,7 +795,7 @@ export const xiao_raiden_albedo_zhongli = () => {
         artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
     });
 
-    console.log(`Xiao, Raiden, Albedo, Zhong Li: ${teamDamageDps([
+    output(`Xiao, Raiden, Albedo, Zhong Li: ${teamDamageDps([
         baneAction,
         musouAction, 
         raiden.omenAction({
@@ -839,7 +841,7 @@ export const xiao_raiden_bennett_zhongli = () => {
         artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
     });
 
-    console.log(`Xiao, Raiden, Bennett, Zhong Li: ${teamDamageDps([
+    output(`Xiao, Raiden, Bennett, Zhong Li: ${teamDamageDps([
         baneAction1,
         musouAction, 
         raiden.omenAction({
@@ -857,7 +859,7 @@ export const xingqiu_xiangling_bennett_zhongli = () => {
     const onField = [bennBurst, ...teamWide];
     const debuffs = [lapidus];
 
-    console.log(`Xingqiu, Xiangling, Bennett, Zhongli: ${teamDamageDps([
+    output(`Xingqiu, Xiangling, Bennett, Zhongli: ${teamDamageDps([
         xingqiu.raincutterAction({
             weapon: sacSword,
             artifacts: [flower_1, feather_1, sand_1, goblet_1, circlet_3],
@@ -882,7 +884,7 @@ export const xingqiu_xiangling_bennett_sucrose = () => {
     const teamWide = [noblesse, pyroRes];
     const onField = [bennBurst, ...teamWide, sucroseSwirl];
 
-    console.log(`Xingqiu, Xiangling, Bennett, Sucrose: ${teamDamageDps([
+    output(`Xingqiu, Xiangling, Bennett, Sucrose: ${teamDamageDps([
         xingqiu.raincutterAction({
             weapon: sacSword,
             artifacts: [flower_1, feather_1, sand_1, goblet_1, circlet_3],
@@ -920,7 +922,7 @@ export const itto_raiden_albedo_gorou = () => {
         artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
     });
 
-    console.log(`Itto, Raiden, Albedo, Gorou: ${teamDamageDps([
+    output(`Itto, Raiden, Albedo, Gorou: ${teamDamageDps([
         royalAction,
         musouAction, 
         raiden.omenAction({
@@ -957,7 +959,7 @@ export const itto_xingqiu_albedo_gorou = () => {
         buffs: teamWide,
     });
 
-    console.log(`Itto, Xingqiu, Albedo, Gorou: ${teamDamageDps([
+    output(`Itto, Xingqiu, Albedo, Gorou: ${teamDamageDps([
         royalAction,
         raincutterAction,
         albedo.blossomAction({
@@ -1004,7 +1006,7 @@ export const itto_fischl_albedo_gorou = () => {
         debuffs,
     });
 
-    console.log(`Itto, Fischl, Albedo, Gorou: ${teamDamageDps([
+    output(`Itto, Fischl, Albedo, Gorou: ${teamDamageDps([
         royalAction,
         ozAction,
         albedo.blossomAction({
@@ -1029,7 +1031,7 @@ export const itto_bennett_albedo_gorou = () => {
         artifacts: [flower_28, feather_31, sands_28, goblet_20, circlet_29]
     });
 
-    console.log(`Itto, Bennett, Albedo, Gorou: ${teamDamageDps([
+    output(`Itto, Bennett, Albedo, Gorou: ${teamDamageDps([
         royalAction,
         albedo.blossomAction({
             weapon: cinnabar,
