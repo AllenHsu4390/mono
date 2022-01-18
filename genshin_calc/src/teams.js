@@ -486,6 +486,7 @@ export const raiden_xingqiu_yoimiya_zhongli = () => {
             weapon: lionroarR5,
             artifacts: [flower_1, feather_1, sand_1, goblet_1, circlet_3],
             buffs: teamWide,
+            debuffs,
             hitStats: ["hasElectro"]
         }),
         raiden.omenAction({
@@ -498,8 +499,61 @@ export const raiden_xingqiu_yoimiya_zhongli = () => {
     ])}`);
 };
 
+export const raiden_xingqiu_sara_jean = () => {
+    const teamWide = [noblesse, baalE];
+    const onField = [saraC6Burst, ...teamWide];
+    const debuffs = [vvShred]
+    
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
+        transforms: [raiden.icdElectroCharged],
+    });
+
+    output(`Raiden, Xingqiu, Sara, Jean: ${teamDamageDps([
+        musouAction,
+        xingqiu.raincutterAction({
+            weapon: lionroarR5,
+            artifacts: [flower_1, feather_1, sand_1, goblet_1, circlet_3],
+            buffs: teamWide,
+            hitStats: ["hasElectro"]
+        }),
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
+        }),
+    ])}`);
+};
+
+export const raiden_sara_jean_bennett = () => {
+    const teamWide = [noblesse, baalE];
+    const onField = [bennBurst, saraC6Burst, ...teamWide];
+    const debuffs = [vvShred];
+
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        debuffs: debuffs,
+        buffs: onField,
+        artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
+    });
+
+    output(`Raiden, Sara, Jean, Bennett: ${teamDamageDps([
+        musouAction,
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
+        }),
+    ])}`);
+};
+
 export const raiden_mona_jean_bennett = () => {
-    const teamWide = [noblesse, pyroRes, baalE, ttds, monaOmen];
+    const teamWide = [noblesse, baalE, ttds, monaOmen];
     const onField = [bennBurst, ...teamWide];
     const debuffs = [vvShred];
 
@@ -515,6 +569,7 @@ export const raiden_mona_jean_bennett = () => {
         raiden.omenAction({
             weapon: jadeSpear,
             buffs: teamWide,
+            debuffs,
             artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
         }),
     ])}`);
@@ -1043,5 +1098,430 @@ export const itto_bennett_albedo_gorou = () => {
         bennett.passionAction(),
         bennett.passionAction(),
         bennett.passionAction(),
+    ])}`);
+};
+
+export const ayaka_mona_venti_diona = () => {
+
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["frozen"]
+    });
+    const soumetsuAction = ayaka.soumetsuAction({
+        weapon: amenoma,
+        debuffs: [vvShred],
+        buffs: [monaOmen, noblesse, ttds, cryoRes],
+        artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+    });
+
+    output(`Ayaka, Mona, Venti, Diona: ${teamDamageDps([
+        soumetsuAction,
+        ayaka.comboAction({
+            weapon: amenoma,
+            debuffs: [vvShred],
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs: [vvShred],
+            buffs: [monaOmen, noblesse, ttds, cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs: [vvShred],
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+    ])}`);
+};
+
+export const ayaka_mona_venti_shenhe = () => {
+    const teamWide = [cryoRes];
+    const debuffs = [vvShred, shenheBurst];
+    
+    // prototype amber mona
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["frozen"]
+    });
+    const soumetsuAction = ayaka.soumetsuAction({
+        weapon: amenoma,
+        debuffs,
+        buffs: [monaOmen, makeShenheE(10), ...teamWide],
+        artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+    });
+
+    output(`Ayaka, Mona, Venti, Shenhe: ${teamDamageDps([
+        soumetsuAction,
+        ayaka.comboAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [monaOmen, ...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.divineAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide })
+    ])}`);
+};
+
+export const ayaka_mona_diona_shenhe = () => {
+    const teamWide = [cryoRes, noblesse];
+    const debuffs = [shenheBurst];
+    
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["frozen"]
+    });
+
+    const soumetsuAction = ayaka.soumetsuAction({
+        weapon: amenoma,
+        debuffs,
+        buffs: [monaOmen, ttds, makeShenheE(10), ...teamWide],
+        artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+    });
+
+    output(`Ayaka, Mona, Diona, Shenhe: ${teamDamageDps([
+        soumetsuAction,
+        ayaka.comboAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [monaOmen, ttds, ...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.divineAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            debuffs
+        }),
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide })
+    ])}`);
+};
+
+export const ayaka_venti_diona_shenhe = () => {
+    const teamWide = [cryoRes, noblesse];
+    const debuffs = [shenheBurst, vvShred];
+
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasCryo"]
+    });
+    const soumetsuAction = ayaka.soumetsuAction({
+        weapon: amenoma,
+        debuffs,
+        buffs: [makeShenheE(10), ...teamWide],
+        artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+    });
+
+    output(`Ayaka, Venti, Diona, Shenhe: ${teamDamageDps([
+        soumetsuAction,
+        ayaka.comboAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.divineAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide })
+    ])}`);
+};
+
+export const ayaka_mona_bennett_shenhe = () => {
+    const teamWide = [cryoRes, noblesse, bennBurst];
+    const debuffs = [shenheBurst];
+
+    // prototype amber mona
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["frozen"]
+    });
+
+    const soumetsuAction = ayaka.soumetsuAction({
+        weapon: amenoma,
+        debuffs,
+        buffs: [monaOmen, makeShenheE(10, 4000), ...teamWide],
+        artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+    });
+
+    output(`Ayaka, Mona, Bennett, Shenhe: ${teamDamageDps([
+        soumetsuAction,
+        ayaka.comboAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [monaOmen, ...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.divineAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            debuffs
+        }),
+        bennett.passionAction(),
+        bennett.passionAction(),
+        {
+            char: { name: "ayaka", element: "cryo"},
+            hits: [],
+            delay: 4
+        }
+    ])}`);
+};
+
+export const ayaka_venti_bennett_shenhe = () => {
+    const teamWide = [cryoRes, noblesse, bennBurst];
+    const debuffs = [shenheBurst, vvShred];
+
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasCryo"]
+    });
+
+    const soumetsuAction = ayaka.soumetsuAction({
+        weapon: amenoma,
+        debuffs,
+        buffs: [makeShenheE(10, 4000), ...teamWide],
+        artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+    });
+
+    output(`Ayaka, Venti, Bennett, Shenhe: ${teamDamageDps([
+        soumetsuAction,
+        ayaka.comboAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [cryoRes],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.divineAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
+        bennett.passionAction(),
+        bennett.passionAction(),
+    ])}`);
+};
+
+export const ayaka_mona_zhongli_shenhe = () => {
+    const teamWide = [cryoRes, tom];
+    const debuffs = [shenheBurst, lapidus];
+    
+    // prototype amber mona
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["frozen"]
+    });
+
+    const soumetsuAction = ayaka.soumetsuAction({
+        weapon: amenoma,
+        debuffs,
+        buffs: [monaOmen, makeShenheE(10), ...teamWide],
+        artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+    });
+
+    output(`Ayaka, Mona, Zhongli, Shenhe: ${teamDamageDps([
+        soumetsuAction,
+        ayaka.comboAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [ ...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [monaOmen, ...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.divineAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.springAction({
+            weapon: lithic1,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            debuffs
+        }),
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
+        zhongli.lapidusAction(),
+        {
+            char: { name: "ayaka", element: "cryo"},
+            hits: [],
+            delay: 4
+        }
     ])}`);
 };
