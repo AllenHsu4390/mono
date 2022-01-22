@@ -3,7 +3,7 @@ import { damageDps } from './damage.js';
 import { flower_9, feather_9, sand_9, goblet_9, circlet_9 } from './my_artifacts.js';
 import { stats } from './stats.js';
 import { baalE, bennBurst, geoRes, monaOmen, noblesse, pyroRes, saraC6Burst, tom, ttds } from './traits.js';
-import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel, theCatchR5, favoniusLance, wavebreakerR3 } from './polearms.js';
+import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel, theCatchR5, favoniusLance, wavebreakerR3, homa } from './polearms.js';
 import { lisaA2, raidenC2, vvShred } from './debuffs.js';
 import { electroCharged, overloaded } from './reactions.js';
 import { raiden } from './my_characters.js';
@@ -110,20 +110,14 @@ export const print = () => {
     console.log("National Team");
     console.log(`Jade r1 3NA5 spam: ${damageDps(stats(char, jadeSpear, artifacts), nationalTeamEasy, 7, 11)}`);
     console.log(`Catch r5 3NA5 spam: ${damageDps(stats(char, theCatchR5, artifacts), nationalTeamEasy, 7, 11)}`);
-    console.log(`Deathmatch r1 3NA5 spam: ${damageDps(stats(char, deathmatch1, artifacts), nationalTeamEasy, 7, 11)}`);
+    console.log(`Homa r1 3NA5 spam: ${damageDps(stats(char, homa, artifacts), nationalTeamEasy, 7, 11)}`);
     console.log(`Wavebreaker 3NA5 spam: ${damageDps(stats(char, wavebreakerR3, artifacts), nationalTeamEasy, 7, 11)}`);
-    console.log(`Jade r1 combo: ${damageDps(stats(char, jadeSpear, artifacts), nationalTeamHard, 7, 11)}`);
-    console.log(`Catch r5 combo: ${damageDps(stats(char, theCatchR5, artifacts), nationalTeamHard, 7, 11)}`);
-    console.log(`Wavebreaker r3 combo: ${damageDps(stats(char, wavebreakerR3, artifacts), nationalTeamHard, 7, 11)}`);
     console.log("");
     console.log("Buff Team");
     console.log(`Jade r1 spam: ${damageDps(stats(char, jadeSpear, artifacts), buffTeamEasy, 7, 11)}`);
     console.log(`Catch r5 spam: ${damageDps(stats(char, theCatchR5, artifacts), buffTeamEasy, 7, 11)}`);
-    console.log(`Deathmatch r1 spam: ${damageDps(stats(char, deathmatch1, artifacts), buffTeamEasy, 7, 11)}`);
+    console.log(`Homa r1 spam: ${damageDps(stats(char, homa, artifacts), buffTeamEasy, 7, 11)}`);
     console.log(`Wavebreaker spam: ${damageDps(stats(char, favoniusLance, artifacts), buffTeamEasy, 7, 11)}`);
-    console.log(`Jade r1 combo: ${damageDps(stats(char, jadeSpear, artifacts), buffTeamHard, 7, 11)}`);
-    console.log(`Catch r5 combo: ${damageDps(stats(char, theCatchR5, artifacts), buffTeamHard, 7, 11)}`);
-    console.log(`Wavebreaker r3 combo: ${damageDps(stats(char, wavebreakerR3, artifacts), buffTeamHard, 7, 11)}`);
 
     /*
     console.log("");
@@ -142,13 +136,13 @@ export const print = () => {
     console.log("National Team first hit");
     console.log(`Jade r1 initial hit CRIT: ${damageDps(stats(char, jadeSpear, artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
     console.log(`Catch r5 initial hit CRIT: ${damageDps(stats(char, theCatchR5, artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
-    console.log(`Deathmatch r1 initial hit CRIT: ${damageDps(stats(char, deathmatch1, artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
+    console.log(`Homa r1 initial hit CRIT: ${damageDps(stats(char, homa, artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
     console.log(`Wavebreaker r3 initial hit CRIT: ${damageDps(stats(char, wavebreakerR3, artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
     console.log("");
     console.log("Buff Team first hit");
     console.log(`Jade r1 initial hit CRIT: ${damageDps(stats(char, jadeSpear, artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
     console.log(`Catch r5 initial hit CRIT: ${damageDps(stats(char, theCatchR5, artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
-    console.log(`Deathmatch r1 initial hit CRIT: ${damageDps(stats(char, deathmatch1, artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
+    console.log(`Homa r1 initial hit CRIT: ${damageDps(stats(char, homa, artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
     console.log(`Wavebreaker r3 initial hit CRIT: ${damageDps(stats(char, wavebreakerR3, artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
 
     console.log("");

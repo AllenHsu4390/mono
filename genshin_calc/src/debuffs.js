@@ -38,4 +38,10 @@ export const geoResShred = (enemy, hit) => {
     return {
         resDebuff: enemy.resDebuff + (hit.stats.includes("geo") ? 0.20 : 0)
     };
-}; 
+};
+
+export const shenheBurst = (enemy, hit) => {
+    return {
+        resDebuff: enemy.resDebuff + (hit.stats.includes("cryo") || hit.stats.includes("physical") ? 0.13 : 0)
+    };
+};

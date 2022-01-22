@@ -94,7 +94,15 @@ export const teamDamage = (characterActions) => {
 };
 
 export const teamDamageDps = (characterActions = [], duration = 1, downtime = 0) => {
-    const totalDmg = teamDamage(characterActions);
+    let totalDmg = 0;
+    let charDmg = {};
+
+    for (const action of characterActions) {
+        const { char, hits, hitStat = "atk" } = action;
+        const dmg = damage(char, hits, hitStat)
+        totalDmg += dmg;
+        charDmg[char.name] = (charDmg[char.name] || 0) + dmg;
+    }
 
     if (characterActions.find((ca) => ca.duration)) {
         duration = characterActions.reduce((sum, { duration = 0 }) => {
@@ -117,15 +125,8 @@ export const teamDamageDps = (characterActions = [], duration = 1, downtime = 0)
             return sum + delay;
         }, 0), downtime);
     }
-
-    const characterDamagePcts = characterActions.reduce((accum, { char, hits, hitStat = "atk" }) => {
-        return {
-            ...accum,
-            [char.name]: (accum[char.name] || 0) + Math.round((damage(char, hits, hitStat) / totalDmg) * 100)
-        };
-    }, {});
-    const outputStr = Object.keys(characterDamagePcts).reduce((str, name) => {
-        return `${str} | ${characterDamagePcts[name].toLocaleString()}% ${name}`
+    const outputStr = Object.keys(charDmg).reduce((str, name) => {
+        return `${str} | ${Math.round((charDmg[name] / totalDmg) * 100).toLocaleString()}% ${name}`
     }, '');
 
     return `${Math.floor(totalDmg / (duration + downtime)).toLocaleString()} dps | ${Math.floor(totalDmg).toLocaleString()} in ${duration + downtime} sec${outputStr}`;

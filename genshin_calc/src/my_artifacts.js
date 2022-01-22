@@ -716,3 +716,86 @@ export const circlet_20 = {
     hpPct: 0.053,
     atkPct: 0.117,
 };
+
+// ayaka
+export const flower_33 = {
+    type: "bliz",
+    hp: 4780,
+    critDmg: 0.194,
+    critRate: 0.07,
+    atk: 39,
+    elemMast: 23,
+};
+
+export const feather_33 = {
+    type: "bliz",
+    atk: 311,
+    critDmg: 0.171,
+    critRate: 0.101,
+    recharge: 0.045,
+    hp: 42,
+};
+
+export const sand_33 = {
+    type: "bliz",
+    atkPct: .466,
+    critDmg: 0.163,
+    def: 0.255,
+    elemMast: 21,
+    atk: 14
+};
+
+export const goblet_33 = {
+    type: "glad",
+    elemDmg: 0.466,
+    hp: 0.053,
+    critRate: 0.082,
+    atkPct: 0.093,
+    critDmg: 0.14,
+};
+
+export const circlet_33 = {
+    type: "bliz",
+    critDmg: 0.622,
+    atk: 31,
+    atkPct: 0.053,
+    def: 65,
+    elemMast: 44,
+};
+
+// shenhe
+export const flower_34 = {
+    type: "glad",
+    hp: 4780,
+    recharge: 0.175,
+    critRate: 0.039,
+    atk: 18,
+    atkPct: 0.157,
+};
+
+export const feather_34 = {
+    type: "glad",
+    atk: 311,
+    atkPct: 0.087,
+    critDmg: 0.148,
+    critRate: 0.086,
+    hpPct: 0.99,
+};
+
+export const sand_34 = {
+    type: "glad",
+    atkPct: .466,
+    recharge: 0.175,
+    critRate: 0.039,
+    defPct: 0.066,
+    atk: 39
+};
+
+export const goblet_34 = {
+    type: "shime",
+    atkPct: 0.466,
+    recharge: 0.104,
+    def: 0.058,
+    hp: 269,
+    critDmg: 0.272,
+};

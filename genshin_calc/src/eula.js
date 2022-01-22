@@ -1,11 +1,11 @@
 import { crit, pyroVape } from './amplifiers.js';
 import { serpentSpine, wolfs } from './claymore.js';
 import { damageDps } from './damage.js';
-import { icetide, lapidus, lisaA2, superConduct } from './debuffs.js';
+import { icetide, lapidus, lisaA2, shenheBurst, superConduct } from './debuffs.js';
 import { flower_10, feather_10, sand_10, goblet_10, circlet_10, circlet_23 } from './my_artifacts.js';
 import { eula } from './my_characters.js';
 import { stats } from './stats.js';
-import { baalE, bennBurst, cryoRes, geoRes, homNature, noblesse, pyroRes, tom, ttds } from './traits.js';
+import { baalE, bennBurst, cryoRes, geoRes, homNature, noblesse, pyroRes, makeShenheE, tom, ttds } from './traits.js';
 
 const enemy = {
     lvl: 90,
@@ -135,15 +135,15 @@ const artifacts = [flower_10, feather_10, sand_10, goblet_10, circlet_23];
 const pyroTeam = [bennBurst, tom, noblesse, baalE, xinyanFervor];
 const geoTeam = [tom, geoRes, baalE];
 const electroTeam = [tom, baalE, ttds];
-const cryoTeam = [noblesse, baalE, cryoRes];
-const xinyanTeam = [tom, baalE, xinyanFervor, ttds];
+const cryoTeam = [baalE, cryoRes, makeShenheE(12)];
+const xinyanTeam = [tom, baalE, xinyanFervor];
 
 export const char = eula;
 
 export const print = () => {
     const geoTeamHits = hits(geoTeam, [lapidus, superConduct]);
     const pyroTeamHits =  hits(pyroTeam, [superConduct, xinyanC4], undefined, undefined, ["pyro"]);
-    const cryoTeamHits =  hits(cryoTeam, [lapidus, superConduct]);
+    const cryoTeamHits =  hits(cryoTeam, [lapidus, superConduct, shenheBurst]);
     const electroTeamHits = hits(electroTeam, [lapidus, superConduct, lisaA2]);
     const xinyanTeamHits = hits(xinyanTeam, [superConduct, xinyanC4, lisaA2]);
 
@@ -159,7 +159,7 @@ export const print = () => {
     console.log(`Wolfs r1 ER sands Last Hit CRIT: ${damageDps(stats(char, wolfs, artifacts.concat({ critRate: 1 })), pyroTeamHits.slice(-1))}`);
     console.log(`Serpent Spine r2 ER sands Last Hit CRIT: ${damageDps(stats(char, serpentSpine, artifacts.concat({ critRate: 1 })), pyroTeamHits.slice(-1))}`);
     console.log("");
-    console.log("Cryo team: Eula, Raiden, Rosaria, Zhong Li");
+    console.log("Cryo team: Eula, Raiden, Shenhe, Zhong Li");
     console.log(`Wolfs r1 ER sands: ${damageDps(stats(char, wolfs, artifacts), cryoTeamHits, 7)}`);
     console.log(`Serpent Spine r2 ER sands: ${damageDps(stats(char, serpentSpine, artifacts), cryoTeamHits, 7)}`);
     console.log(`Wolfs r1 ER sands Last Hit CRIT: ${damageDps(stats(char, wolfs, artifacts.concat({ critRate: 1 })), cryoTeamHits.slice(-1))}`);

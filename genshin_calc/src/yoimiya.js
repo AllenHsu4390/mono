@@ -2,11 +2,10 @@ import { crit, pyroVape, pyroMelt } from './amplifiers.js';
 import { amosR2, rustR1, rustR5, skywardHarpR1, thunderingPulseR1 } from './bows.js';
 import { damage, damageDps } from './damage.js';
 import { lapidus, vvShred } from './debuffs.js';
-import { fischlA2, fischlC6 } from './fischl.js';
 import { flower_4, feather_4, sand_4, goblet_4, circlet_4, circlet_5, circlet_6, flower_13, circlet_13, flower_7, feather_7, circlet_2, feather_16, sand_8, sand_27, goblet_26 } from './my_artifacts.js';
 import { overloaded } from './reactions.js';
 import { stats } from './stats.js';
-import { bennBurst, dionaC6, geoRes, homNature, noblesse, pyroRes, sucroseC6, sucroseSwirl, tom, xianglingC6 } from './traits.js';
+import { bennBurst, dionaC6, geoRes, homNature, noblesse, pyroRes, sucroseC6, sucroseSwirl, tom, xianglingC6, yunjinBurst } from './traits.js';
 import { yoimiya } from './my_characters.js';
 
 export const char = yoimiya;
@@ -71,13 +70,6 @@ export const hits = (traits, debuffs, amps, transforms, stats = []) => {
     }));
 };
 
-export const fischlBonus = (traits, debuffs) => {
-    return (attr, hit) => {
-        return (hit.index % 3 === 0 ? fischlA2(enemy, traits, debuffs)(attr, hit) : 0) +
-            fischlC6(enemy, traits, debuffs)(attr, hit);
-    };
-};
-
 export const fireDanceAction = ({ weapon, artifacts, buffs, debuffs, amps = [], transforms, hitStats }) => {
     return {
         char: stats(yoimiya, weapon, artifacts),
@@ -94,7 +86,7 @@ const cr_circ = circlet_4;
 const artifacts = [flower_4, feather_4, sand_27, goblet_26, circlet_4];
 const monoPyroTeam = [bennBurst, noblesse, pyroRes, xianglingC6]
 const pyroTeam = [bennBurst, noblesse, pyroRes];
-const geoTeam = [tom, geoRes, homNature];
+const geoTeam = [tom, geoRes, yunjinBurst];
 const mixTeam = [tom];
 
 export const print = () => {
@@ -128,11 +120,11 @@ export const print = () => {
     console.log(`Rust r5 CR circ: ${damageDps(stats(yoimiya, rustR5, artifacts), overloadPyro, 10)}`);
     console.log(`Rust r5 CR circ Last Hit CRIT: ${damageDps(stats(yoimiya, rustR5, artifacts.concat({ critRate: 1})), overloadPyro.slice(6, 7))}`);
     console.log("");
-    console.log("Geo team vape: Yoimiya, Xingqiu, Albedo, ZhongLi");
+    console.log("Geo team vape: Yoimiya, Xingqiu, Yunjin, ZhongLi");
     console.log(`Rust r5 CR circ: ${damageDps(stats(yoimiya, rustR5, artifacts), vapeGeo, 10)}`);
     console.log(`Rust r5 CR circ Last Hit CRIT: ${damageDps(stats(yoimiya, rustR5, artifacts.concat({ critRate: 1})), vapeGeo.slice(6, 7))}`);
     console.log("");
-    console.log("Geo team overload: Yoimiya, Fischl, Albedo, ZhongLi");
+    console.log("Geo team overload: Yoimiya, Fischl, Yunjin, ZhongLi");
     console.log(`Rust r5 CR circ: ${damageDps(stats(yoimiya, rustR5, artifacts), overloadGeo, 10)}`);
     console.log(`Rust r5 CR circ Last Hit CRIT: ${damageDps(stats(yoimiya, rustR5, artifacts.concat({ critRate: 1 })), overloadGeo.slice(6, 7))}`);
     console.log("");
