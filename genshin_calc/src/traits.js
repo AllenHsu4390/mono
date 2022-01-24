@@ -6,7 +6,7 @@ export const bennBurst = ({ atk, elemDmg }, hit) => {
 };
 export const saraC6Burst = ({ atk, critDmg }, hit) => {
     return {
-        atk: atk + 537,
+        atk: atk + 600,
         critDmg: critDmg + (hit.stats.includes("electro") ? 0.6 : 0)
     };
 };
@@ -88,3 +88,22 @@ export const gorouBanner3C6 = ({ elemDmg, def, baseDef, critDmg }, hit) => {
         critDmg: critDmg + 0.4
     };
 };
+
+export const yunjinBurst = ({ flatDmg }, hit) => {
+    const DEF = 2128; // hard code until figure
+    return {
+        flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.56 * DEF) : 0)
+    };
+};
+
+export const makeShenheE = (num, ATK = 3300) => {
+    let shenheQuota = num;
+    return ({ flatDmg, elemDmg }, hit) => {
+        shenheQuota--;
+        return {
+            flatDmg: flatDmg + ((hit.stats.includes("cryo") && shenheQuota > -1) ? (0.73 * ATK) : 0),
+            // ascension 1
+            elemDmg: elemDmg + ((hit.stats.includes("burst") || hit.stats.includes("skill")) ? 0.15 : 0)
+        };
+    }
+}

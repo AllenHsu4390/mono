@@ -96,3 +96,19 @@ export const husk4 = ({ defPct, elemDmg }, hit) => {
         elemDmg: elemDmg + (hit.stats.includes("geo") ? 0.24 : 0)
     };
 };
+
+export const bliz2 = () => {
+    return {
+        element: "cryo",
+        elemDmg: 0.15,
+    };
+};
+
+export const bliz4 = ({ critRate }, hit) => {
+    const stats = hit.enemy && hit.enemy.stats;
+    const isFrozen = stats && stats.includes("frozen");
+    const hasCryo = stats && stats.includes("hasCryo");
+    return {
+        critRate: critRate + (isFrozen ? 0.40 : hasCryo ? 0.20 : 0)
+    };
+};

@@ -48,7 +48,7 @@ export const raincutterAction = ({ weapon, artifacts, buffs, debuffs, amps = [],
         hits: hits(buffs, debuffs, amps, transforms, hitStats, duration),
         cooldown: 20,
         delay: 1
-    }
+    };
 };
 
 const artifacts = [flower_1, feather_1, sand_1, goblet_1];

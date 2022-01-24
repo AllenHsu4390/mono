@@ -106,13 +106,25 @@ export const favoniusLance = (attr) => {
 
 export const lithic3 = (attr) => {
     const { atkPct, baseAtk, critRate } = attr;
-    const newBaseAtk = baseAtk + 497
+    const newBaseAtk = baseAtk + 523
 
     return {
         name: "lithic",
         baseAtk: newBaseAtk,
-        atkPct: atkPct + (0.07 * 3),
+        atkPct: atkPct + (0.07 * 3) + 0.251,
         critRate: critRate + (.03 * 3)
+    };
+};
+
+export const lithic1 = (attr) => {
+    const { atkPct, baseAtk, critRate } = attr;
+    const newBaseAtk = baseAtk + 523
+
+    return {
+        name: "lithic",
+        baseAtk: newBaseAtk,
+        atkPct: atkPct + (0.07 * 1) + 0.251,
+        critRate: critRate + (.03 * 1)
     };
 };
 
@@ -147,6 +159,6 @@ export const wavebreakerR3 = (attr) => {
         name: "wavebreaker",
         baseAtk: newBaseAtk,
         elemDmg: elemDmg + .468, // hard code for now 260 energy
-        atkPct:  atkPct + .125,
+        atkPct:  atkPct + .126,
     };
 };

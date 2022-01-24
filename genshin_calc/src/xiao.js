@@ -7,7 +7,6 @@ import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel } from './polearms
 import { lapidus } from './debuffs.js';
 import { xiao } from './my_characters.js';
 import { swirl } from './reactions.js';
-import { fischlA2, fischlC6 } from './fischl.js';
 
 export const char = xiao;
 
@@ -74,12 +73,6 @@ const normalhits = Array(3).fill([.407, .407, .841, 1.013, .566, .566, 1.057, 1.
 });
 
 const artifacts = [flower_8, feather_8, sand_8, goblet_8, circlet_8];
-
-const fischlBonus = (traits, debuffs) => {
-    return (attr, hit) => {
-        return fischlA2(enemy, traits, debuffs)(attr, hit) + fischlC6(enemy, traits, debuffs)(attr, hit);
-    };
-};
 
 export const print = () => {
     const debuffs = [lapidus];

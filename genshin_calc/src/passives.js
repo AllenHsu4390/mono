@@ -76,7 +76,7 @@ export const festering = ({ critRate, elemDmg }, { stats }) => {
 export const stringless = ({ elemDmg }, { stats }) => {
     if (stats.includes("burst") || stats.includes("skill")) {
         return {
-            elemDmg: elemDmg + 0.30
+            elemDmg: elemDmg + 0.48
         };
     }
 

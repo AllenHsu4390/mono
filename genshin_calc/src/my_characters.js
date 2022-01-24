@@ -165,3 +165,45 @@ export const gorou = {
     element: "geo",
     name: "gorou",
 };
+
+export const shenhe = {
+    element: "cryo",
+    name: "shenhe",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 11463,
+    baseAtk: 268,
+    baseDef: 732,
+    recharge: 1,
+    atkPct: 0.216,
+    critRate: 0.05,
+    critDmg: 0.50
+};
+
+export const yunjin = {
+    element: "geo",
+    name: "yunjin",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 9445,
+    baseAtk: 169,
+    baseDef: 651,
+    recharge: 1.2,
+    atkPct: 0,
+    critRate: 0.05,
+    critDmg: 0.50
+};
+
+export const ayaka = {
+    element: "cryo",
+    name: "ayaka",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 11345,
+    baseAtk: 302,
+    baseDef: 692,
+    recharge: 1,
+    atkPct: 0,
+    critRate: 0.05,
+    critDmg: 0.788
+};

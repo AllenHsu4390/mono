@@ -43,38 +43,39 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
 
 const artifacts = [flower_13, feather_16, sand_13, goblet_15, circlet_13];
 
-export const fischlA2 = (enemy, traits, debuffs, transforms) => {
-    return (attr, hit) => {
-        return damage(stats(char, stringlessR2, artifacts), [0.80].map((motionValue) => {
+export const a2Action = ({ weapon, artifacts, buffs, debuffs, amps = [], transforms, hitStats = [], duration }) => {
+    return {
+        char: stats(fischl, weapon, artifacts),
+        hits: Array(duration).fill(0.80).map((motionValue) => {
             return {
-                stats: ["electro"],
-                traits,
+                stats: ["electro", ...hitStats],
+                traits: buffs,
                 transforms,
                 amplifiers: [crit],
                 motionValue,
                 debuffs,
                 enemy
             };
-        }));
+        })
     };
-};
+}; 
 
-
-export const fischlC6 = (enemy, traits, debuffs, transforms) => {
-    return (attr, hit) => {
-        return damage(stats(char, stringlessR2, artifacts), [0.30].map((motionValue) => {
+export const c6Action = ({ weapon, artifacts, buffs, debuffs, amps = [], transforms, hitStats = [], duration }) => {
+    return {
+        char: stats(fischl, weapon, artifacts),
+        hits: Array(duration).fill(0.30).map((motionValue) => {
             return {
-                stats: ["electro"],
-                traits,
+                stats: ["electro", ...hitStats],
+                traits: buffs,
                 transforms,
                 amplifiers: [crit],
                 motionValue,
                 debuffs,
                 enemy
             };
-        }));
+        })
     };
-};
+}; 
 
 export const ozAction = ({ weapon, artifacts, buffs, debuffs, amps = [], transforms, hitStats, duration }) => {
     return {
@@ -89,10 +90,10 @@ export const print = () => {
     const geoTeam = [tom, geoRes];
     const geoTeamDebuffs = [lapidus];
 
-    console.log(`Stringless r2 Pyro team: ${damageDps(stats(char, stringlessR2, artifacts), hits(pyroTeam), 10)}`);
-    console.log(`Stringless r2 Geo team: ${damageDps(stats(char, stringlessR2, artifacts), hits(geoTeam, geoTeamDebuffs), 10)}`);
+    console.log(`Stringless r5 Pyro team: ${damageDps(stats(char, stringlessR2, artifacts), hits(pyroTeam), 10)}`);
+    console.log(`Stringless r5 Geo team: ${damageDps(stats(char, stringlessR2, artifacts), hits(geoTeam, geoTeamDebuffs), 10)}`);
 
     
-    console.log(`Stringless r2 Pyro team summon CRIT: ${damageDps(stats(char, stringlessR2, artifacts.concat({ critRate: 1 })), hits(pyroTeam).slice(0, 1))}`);
-    console.log(`Stringless r2 Geo team summon CRIT: ${damageDps(stats(char, stringlessR2, artifacts.concat({ critRate: 1 })), hits(geoTeam, geoTeamDebuffs).slice(0, 1))}`);
+    console.log(`Stringless r5 Pyro team summon CRIT: ${damageDps(stats(char, stringlessR2, artifacts.concat({ critRate: 1 })), hits(pyroTeam).slice(0, 1))}`);
+    console.log(`Stringless r5 Geo team summon CRIT: ${damageDps(stats(char, stringlessR2, artifacts.concat({ critRate: 1 })), hits(geoTeam, geoTeamDebuffs).slice(0, 1))}`);
 };

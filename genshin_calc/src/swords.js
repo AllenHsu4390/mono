@@ -31,6 +31,16 @@ export const harbinger = (attr) => {
     };
 };
 
+export const amenoma = (attr) => {
+    const { baseAtk, atkPct } = attr;
+    const newBaseAtk = baseAtk + 454;
+    return {
+        name: "amenoma",
+        baseAtk: newBaseAtk,
+        atkPct: atkPct + 0.551
+    };
+};
+
 export const festering = (attr) => {
     const { baseAtk, recharge } = attr;
     const newBaseAtk = baseAtk + 475;
