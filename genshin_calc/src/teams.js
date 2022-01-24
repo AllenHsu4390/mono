@@ -23,7 +23,7 @@ import { amenoma, cinnabar, harbinger, lionroarR5, sacSword } from './swords.js'
 import { circlet_10, circlet_11, circlet_12, circlet_13, circlet_20, circlet_23, circlet_3, circlet_4, circlet_25, circlet_7, circlet_8, circlet_9, feather_1, feather_10, feather_11, feather_13, feather_16, feather_2, feather_20, feather_4, feather_7, feather_8, feather_9, flower_1, flower_10, flower_11, flower_13, flower_18, flower_2, flower_20, flower_4, flower_7, flower_8, flower_9, goblet_1, goblet_10, goblet_11, goblet_15, goblet_2, goblet_20, goblet_4, goblet_7, goblet_8, goblet_9, sand_1, sand_10, sand_11, sand_13, sand_2, sand_20, sand_4, sand_7, sand_8, sand_9, sand_27, goblet_26, feather_28, circlet_29, sands_28, flower_28, flower_30, feather_30, sands_30, goblet_30, circlet_30, feather_31, circlet_28, flower_33, feather_33, sand_33, goblet_33, circlet_33, flower_34, feather_34, sand_34, goblet_34, circlet_5 } from './my_artifacts.js';
 import { baalE, bennBurst, cryoRes, geoRes, gorouBanner3C6, homNature, monaOmen, noblesse, pyroRes, saraC6Burst, makeShenheE, sucroseC6, sucroseSwirl, tom, ttds, xianglingC6, yoimiyaSaxi, yunjinBurst } from './traits.js';
 import { amosR2, rustR5, stringlessR2 } from './bows.js';
-import { deathmatch1, jadeSpear, theCatchR5, homa, lithic1 } from './polearms.js';
+import { deathmatch1, jadeSpear, theCatchR5, homa, wavebreakerR3 } from './polearms.js';
 import { geoResShred, lapidus, lisaA2, raidenC2, shenheBurst, superConduct, vvShred } from './debuffs.js';
 import { cryoMelt, pyroVape } from './amplifiers.js';
 import { overloaded, swirl } from './reactions.js';
@@ -626,8 +626,68 @@ export const raiden_xingqiu_sara_jean = () => {
     ])}`);
 };
 
+export const raiden_bennett_sara_jean = () => {
+    const teamWide = [noblesse, baalE];
+    const onField = [saraC6Burst, bennBurst, ...teamWide];
+    const debuffs = [vvShred]
+    
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
+        transforms: [raiden.icdElectroCharged],
+    });
+
+    output(`Raiden, Bennett, Sara, Jean: ${teamDamageDps([
+        musouAction,
+        xingqiu.raincutterAction({
+            weapon: lionroarR5,
+            artifacts: [flower_1, feather_1, sand_1, goblet_1, circlet_3],
+            buffs: teamWide,
+            hitStats: ["hasElectro"]
+        }),
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
+        }),
+    ])}`);
+};
+
+export const raiden_bennett_lisa_jean = () => {
+    const teamWide = [noblesse, baalE];
+    const onField = [ttds, bennBurst, ...teamWide];
+    const debuffs = [vvShred, lisaA2];
+    
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
+        transforms: [raiden.icdElectroCharged],
+    });
+
+    output(`Raiden, Bennett, Lisa, Jean: ${teamDamageDps([
+        musouAction,
+        xingqiu.raincutterAction({
+            weapon: lionroarR5,
+            artifacts: [flower_1, feather_1, sand_1, goblet_1, circlet_3],
+            buffs: teamWide,
+            hitStats: ["hasElectro"]
+        }),
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
+        }),
+    ])}`);
+};
+
 export const raiden_mona_jean_bennett = () => {
-    const teamWide = [noblesse, pyroRes, baalE, ttds, monaOmen];
+    const teamWide = [noblesse, baalE, ttds, monaOmen];
     const onField = [bennBurst, ...teamWide];
     const debuffs = [vvShred];
 
@@ -737,13 +797,13 @@ export const eula_raiden_shenhe_zhongli = () => {
             artifacts: [flower_9, feather_9, sand_9, goblet_9, circlet_9],
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.divineAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
@@ -1301,7 +1361,7 @@ export const ayaka_mona_venti_shenhe = () => {
     const soumetsuAction = ayaka.soumetsuAction({
         weapon: amenoma,
         debuffs,
-        buffs: [monaOmen, ttds, makeShenheE(10), ...teamWide],
+        buffs: [monaOmen, makeShenheE(10), ...teamWide],
         artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
     });
 
@@ -1316,7 +1376,7 @@ export const ayaka_mona_venti_shenhe = () => {
         ayaka.hyoukaAction({
             weapon: amenoma,
             debuffs,
-            buffs: [monaOmen, ttds, ...teamWide],
+            buffs: [monaOmen, ...teamWide],
             artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
         }),
         ayaka.hyoukaAction({
@@ -1326,19 +1386,19 @@ export const ayaka_mona_venti_shenhe = () => {
             artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.divineAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
@@ -1388,19 +1448,19 @@ export const ayaka_mona_diona_shenhe = () => {
             artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.divineAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             debuffs
         }),
@@ -1448,19 +1508,19 @@ export const ayaka_venti_diona_shenhe = () => {
             artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.divineAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
@@ -1486,7 +1546,7 @@ export const ayaka_mona_bennett_shenhe = () => {
     const soumetsuAction = ayaka.soumetsuAction({
         weapon: amenoma,
         debuffs,
-        buffs: [monaOmen, ttds, makeShenheE(10, 4000), ...teamWide],
+        buffs: [monaOmen, makeShenheE(10, 4000), ...teamWide],
         artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
     });
 
@@ -1501,7 +1561,7 @@ export const ayaka_mona_bennett_shenhe = () => {
         ayaka.hyoukaAction({
             weapon: amenoma,
             debuffs,
-            buffs: [monaOmen, ttds, ...teamWide],
+            buffs: [monaOmen, ...teamWide],
             artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
         }),
         ayaka.hyoukaAction({
@@ -1511,19 +1571,19 @@ export const ayaka_mona_bennett_shenhe = () => {
             artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.divineAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             debuffs
         }),
@@ -1574,19 +1634,19 @@ export const ayaka_venti_bennett_shenhe = () => {
             artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.divineAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
@@ -1614,7 +1674,7 @@ export const ayaka_mona_zhongli_shenhe = () => {
     const soumetsuAction = ayaka.soumetsuAction({
         weapon: amenoma,
         debuffs,
-        buffs: [monaOmen, ttds, makeShenheE(10), ...teamWide],
+        buffs: [monaOmen, makeShenheE(10), ...teamWide],
         artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
     });
 
@@ -1629,7 +1689,7 @@ export const ayaka_mona_zhongli_shenhe = () => {
         ayaka.hyoukaAction({
             weapon: amenoma,
             debuffs,
-            buffs: [monaOmen, ttds, ...teamWide],
+            buffs: [monaOmen, ...teamWide],
             artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
         }),
         ayaka.hyoukaAction({
@@ -1639,23 +1699,22 @@ export const ayaka_mona_zhongli_shenhe = () => {
             artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.divineAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
         }),
         shenhe.springAction({
-            weapon: lithic1,
+            weapon: wavebreakerR3,
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             debuffs
         }),
-        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
         zhongli.lapidusAction()
     ])}`);
 };

@@ -159,6 +159,6 @@ export const wavebreakerR3 = (attr) => {
         name: "wavebreaker",
         baseAtk: newBaseAtk,
         elemDmg: elemDmg + .468, // hard code for now 260 energy
-        atkPct:  atkPct + .125,
+        atkPct:  atkPct + .126,
     };
 };
