@@ -31,7 +31,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
     });
 };
 
-export const fatalRainScreen = [3.02, 3.44].map((motionValue, index) => {
+const fatalRainScreen = [3.02, 3.44].map((motionValue, index) => {
     const c4 = () => 1.5;
 
     return {
