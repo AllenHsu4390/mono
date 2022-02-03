@@ -391,6 +391,15 @@ export const flower_39 = {
     critDmg: 0.124,
 };
 
+export const feather_40 = {
+    type: "eosf",
+    atk: 311,
+    critRate: 0.078,
+    recharge: 0.162,
+    critDmg: 0.132,
+    atkPct: 0.041
+};
+
 // yoimiya
 export const flower_4 = {
     type: "shime",
