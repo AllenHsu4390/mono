@@ -1,2 +1,3 @@
 /mono-server/node_modules/*
 /mono-server/.next/*
+/mono-server/package-lock.json

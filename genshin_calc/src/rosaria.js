@@ -2,7 +2,7 @@ import { crit, cryoMelt, pyroMelt } from './amplifiers.js';
 import { damageDps } from './damage.js';
 import { shenheBurst, vvShred } from './debuffs.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
-import { circlet_2, circlet_33, circlet_36, circlet_5, feather_33, feather_34, feather_36, flower_33, flower_34, flower_36, goblet_33, goblet_34, goblet_36, sand_33, sand_34, sand_36 } from './my_artifacts.js';
+import { circlet_2, circlet_33, circlet_36, circlet_5, feather_1, feather_33, feather_34, feather_36, flower_33, flower_34, flower_36, goblet_33, goblet_34, goblet_36, sand_33, sand_34, sand_36 } from './my_artifacts.js';
 import { rosaria } from './my_characters.js';
 import { deathmatch1, dragonsBane, homa, kitain, lithic1, wavebreakerR3 } from './polearms.js';
 import { stats } from './stats.js';
@@ -72,7 +72,7 @@ export const icdCryoMelt = (attr, hit) => {
 const buffs = [noblesse, cryoRes, bennBurst, pyroRes];
 const debuffs = [shenheBurst];
 const amps = [icdCryoMelt];
-const artifacts = [flower_36, feather_36, sand_36, goblet_36, circlet_2];
+const artifacts = [flower_36, feather_1, sand_36, goblet_36, circlet_2];
 
 export const print = () => {
     setCurrentEnemy(enemy);

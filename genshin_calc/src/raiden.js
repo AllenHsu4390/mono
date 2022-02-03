@@ -1,6 +1,6 @@
 import { crit, pyroVape } from './amplifiers.js';
 import { damageDps } from './damage.js';
-import { flower_9, feather_9, sand_9, goblet_9, circlet_9 } from './my_artifacts.js';
+import { flower_9, feather_9, sand_9, goblet_9, circlet_9, feather_40, circlet_39 } from './my_artifacts.js';
 import { stats } from './stats.js';
 import { baalE, bennBurst, geoRes, monaOmen, noblesse, pyroRes, saraBurst, tom, ttds } from './traits.js';
 import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel, theCatchR5, favoniusLance, wavebreakerR3, homa } from './polearms.js';
@@ -94,7 +94,7 @@ export const omenAction = ({ weapon, artifacts, buffs = [], debuffs, amps = [], 
     };
 };
 
-const artifacts = [flower_9, feather_9, sand_9, goblet_9, circlet_9];
+const artifacts = [flower_9, feather_40, sand_9, goblet_9, circlet_9];
 
 const nationalTeam = [bennBurst, noblesse, pyroRes, baalE];
 const buffTeam = [bennBurst, noblesse, baalE, ttds, monaOmen];

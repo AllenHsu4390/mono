@@ -234,3 +234,16 @@ export const rosaria = {
     critRate: 0.05,
     critDmg: 0.5
 };
+
+export const diluc = {
+    element: "pyro",
+    name: "diluc",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 11453,
+    baseAtk: 295,
+    baseDef: 692,
+    recharge: 1,
+    critRate: 0.194,
+    critDmg: 0.5
+};
