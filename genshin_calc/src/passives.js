@@ -83,6 +83,13 @@ export const stringless = ({ elemDmg }, { stats }) => {
     return {};
 };
 
+export const wavebreaker = ({ elemDmg }, { stats }) => {
+    const BOOST = 260 * 0.0018;
+    return {
+        elemDmg: elemDmg + (stats.includes("burst") ? BOOST : 0),
+    };
+};
+
 export const skywardHarp = ({ critDmg }, { stats }) => {
     return {
         critDmg: critDmg + 0.2

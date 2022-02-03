@@ -2,7 +2,7 @@ import { crit, pyroVape } from './amplifiers.js';
 import { damageDps } from './damage.js';
 import { flower_9, feather_9, sand_9, goblet_9, circlet_9 } from './my_artifacts.js';
 import { stats } from './stats.js';
-import { baalE, bennBurst, geoRes, monaOmen, noblesse, pyroRes, saraC6Burst, tom, ttds } from './traits.js';
+import { baalE, bennBurst, geoRes, monaOmen, noblesse, pyroRes, saraBurst, tom, ttds } from './traits.js';
 import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel, theCatchR5, favoniusLance, wavebreakerR3, homa } from './polearms.js';
 import { lisaA2, raidenC2, vvShred } from './debuffs.js';
 import { electroCharged, overloaded } from './reactions.js';

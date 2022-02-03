@@ -293,10 +293,10 @@ export const flower_30 = {
 export const feather_30 = {
     type: "husk",
     atk: 311,
-    atkPct: 0.14,
-    defPct: 0.051,
-    recharge: 0.097,
-    critRate: 0.066
+    atkPct: 0.169,
+    elemMast: 19,
+    recharge: 0.104,
+    critRate: 0.07
 };
 
 export const sands_30 = {
@@ -343,6 +343,52 @@ export const circlet_32 = {
     critDmg: 0.288,
     atk: 31,
     recharge: 0.065
+};
+
+
+export const sand_35 = {
+    type: "shime",
+    recharge: 0.518,
+    def: 21,
+    critDmg: 0.264,
+    critRate: 0.058,
+    atkPct: 0.047
+};
+
+export const circlet_37 = {
+    type: "eosf",
+    critDmg: 0.622,
+    critRate: 0.156,
+    hp: 239,
+    atk: 31,
+    elemMast: 19
+};
+
+export const circlet_38 = {
+    type: "husk",
+    defPct: 0.583,
+    critDmg: 0.288,
+    recharge: 0.065,
+    hpPct: 0.099,
+    atk: 31
+};
+
+export const circlet_39 = {
+    type: "eosf",
+    atkPct: 0.466,
+    critRate: 0.089,
+    elemMast: 21,
+    recharge: 0.24,
+    atk: 14
+};
+
+export const flower_39 = {
+    type: "shime",
+    hp: 4780,
+    def: 39,
+    atk: 35,
+    critRate: 0.074,
+    critDmg: 0.124,
 };
 
 // yoimiya
@@ -786,7 +832,7 @@ export const sand_34 = {
     type: "glad",
     atkPct: .466,
     recharge: 0.175,
-    critRate: 0.039,
+    critRate: 0.07,
     defPct: 0.066,
     atk: 39
 };
@@ -798,4 +844,51 @@ export const goblet_34 = {
     def: 0.058,
     hp: 269,
     critDmg: 0.272,
+};
+
+// rosaria
+export const flower_36 = {
+    type: "eosf",
+    hp: 4780,
+    recharge: 0.052,
+    critRate: 0.039,
+    critDmg: 0.078,
+    elemMast: 58,
+};
+
+export const feather_36 = {
+    type: "eosf",
+    atk: 311,
+    atkPct: 0.047,
+    critDmg: 0.202,
+    recharge: 0.117,
+    hp: 538,
+};
+
+export const sand_36 = {
+    type: "eosf",
+    elemMast: 187,
+    recharge: 0.097,
+    critDmg: 0.21,
+    hp: 209,
+    atkPct: 0.093
+};
+
+export const goblet_36 = {
+    type: "bliz",
+    element: "cryo",
+    elemDmg: 0.466,
+    atk: 51,
+    atkPct: 0.105,
+    elemMast: 23,
+    critRate: 0.035,
+};
+
+export const circlet_36 = {
+    type: "eosf",
+    critRate: 0.311,
+    hp: 239,
+    atkPct: 0.093,
+    defPct: 0.175,
+    elemMast: 40,
 };

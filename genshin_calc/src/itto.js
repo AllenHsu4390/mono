@@ -1,11 +1,11 @@
 import { crit } from './amplifiers.js';
 import { redhorn } from './claymore.js';
 import { damageDps } from './damage.js';
-import { flower_20, feather_20, sand_20, goblet_20, circlet_20, circlet_28,  feather_28, sands_28, flower_28, circlet_29, flower_30, feather_30, sands_30, goblet_30, circlet_30, feather_31 } from './my_artifacts.js';
+import { flower_20, feather_20, sand_20, goblet_20, circlet_20, circlet_28,  feather_28, sands_28, flower_28, circlet_29, flower_30, feather_30, sands_30, goblet_30, circlet_30, feather_31, circlet_38 } from './my_artifacts.js';
 import { stats } from './stats.js';
 import { itto } from './my_characters.js';
 import { geoResShred, lapidus } from './debuffs.js';
-import { geoRes, gorouBanner3C6 } from './traits.js';
+import { bennBurst, geoRes, gorouBanner3, noblesse } from './traits.js';
 
 const enemy = {
     lvl: 90,
@@ -36,7 +36,9 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
     });
 };
 
-const artifacts = [flower_28, feather_31, sands_28, goblet_20, circlet_29];
+const circ = circlet_28;circlet_29;circlet_38;
+
+const artifacts = [flower_20, feather_31, sands_28, goblet_30, circlet_28];
 
 export const royalAction = ({ weapon, artifacts, buffs, debuffs, amps, transforms, hitStats, duration }) => {
     return {
@@ -48,7 +50,7 @@ export const royalAction = ({ weapon, artifacts, buffs, debuffs, amps, transform
     };
 };
 
-const buffs = [gorouBanner3C6, geoRes];
+const buffs = [gorouBanner3, geoRes];
 
 export const print = () => {
     const debuffs = [geoResShred];

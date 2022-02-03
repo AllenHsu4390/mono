@@ -60,3 +60,13 @@ export const cinnabar = (attr) => {
         defPct: defPct + 0.69
     };
 };
+
+export const blackSword = (attr) => {
+    const { baseAtk, critRate } = attr;
+    const newBaseAtk = baseAtk + 449;
+    return {
+        name: "blacksword",
+        baseAtk: newBaseAtk,
+        critRate: critRate + 0.25
+    };
+};

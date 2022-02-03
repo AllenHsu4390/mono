@@ -81,7 +81,7 @@ export const ozAction = ({ weapon, artifacts, buffs, debuffs, amps = [], transfo
     return {
         char: stats(fischl, weapon, artifacts),
         hits: hits(buffs, debuffs, amps, transforms, hitStats, duration),
-        delay: 1
+        delay: 1,
     };
 };
 

@@ -1,7 +1,7 @@
 import { crit, hydroVape } from './amplifiers.js';
-import { lionroarR5, sacSword, harbinger } from './swords.js';
+import { lionroarR5, sacSword, harbinger, blackSword } from './swords.js';
 import { damageDps } from './damage.js';
-import { flower_1, feather_1, sand_1, goblet_1, circlet_2, circlet_3, circlet_12, feather_2 } from './my_artifacts.js';
+import { flower_1, feather_1, sand_1, goblet_1, circlet_2, circlet_3, circlet_12, feather_2, circlet_37 } from './my_artifacts.js';
 import { stats } from './stats.js';
 import { bennBurst, noblesse, pyroRes, baalE } from './traits.js';
 import { xingqiu } from './my_characters.js';
@@ -51,40 +51,34 @@ export const raincutterAction = ({ weapon, artifacts, buffs, debuffs, amps = [],
     };
 };
 
-const artifacts = [flower_1, feather_1, sand_1, goblet_1];
-
-const cr_circ = circlet_3;circlet_12;
-const cd_circ = circlet_2;
+const artifacts = [flower_1, feather_1, sand_1, goblet_1, circlet_37];
 
 export const print = () => {
-    // console.log(stats(xingqiu, lionroarR5, artifacts.concat(cd_circ)));
+    // console.log(stats(xingqiu, lionroarR5, artifacts));
 
-    console.log(`Lion's roar CD Circ: ${damageDps(stats(xingqiu, lionroarR5, artifacts.concat(cd_circ)), hits([noblesse, pyroRes, baalE], undefined, undefined, undefined, ["hasElectro"]), 15)}`);
-    console.log(`Lion's roar CR Circ: ${damageDps(stats(xingqiu, lionroarR5, artifacts.concat(cr_circ)), hits([noblesse, pyroRes, baalE], undefined, undefined, undefined, ["hasElectro"]), 15)}`);
-    console.log(`Sac sword CD Circ: ${damageDps(stats(xingqiu, sacSword, artifacts.concat(cd_circ)), hits([noblesse, pyroRes, baalE]), 15)}`);
-    console.log(`Sac sword CR Circ: ${damageDps(stats(xingqiu, sacSword, artifacts.concat(cr_circ)), hits([noblesse, pyroRes, baalE]), 15)}`);
-    console.log(`HOD CR Circ: ${damageDps(stats(xingqiu, harbinger, artifacts.concat(cr_circ)), hits([noblesse, pyroRes, baalE]), 15)}`);
-    console.log(`HOD CD Circ: ${damageDps(stats(xingqiu, harbinger, artifacts.concat(cd_circ)), hits([noblesse, pyroRes, baalE]), 15)}`);
+    console.log("Total raincutter");
+    console.log(`Lion's roar: ${damageDps(stats(xingqiu, lionroarR5, artifacts), hits([noblesse, pyroRes, baalE], undefined, undefined, undefined, ["hasElectro"]), 15)}`);
+    console.log(`Sac sword: ${damageDps(stats(xingqiu, sacSword, artifacts), hits([noblesse, pyroRes, baalE]), 15)}`);
+    console.log(`HOD: ${damageDps(stats(xingqiu, harbinger, artifacts), hits([noblesse, pyroRes, baalE]), 15)}`);
+    console.log(`Black sword: ${damageDps(stats(xingqiu, blackSword, artifacts), hits([noblesse, pyroRes, baalE]), 15)}`);
 
-    console.log("");
-    console.log(`Sac sword CR Circ E slash CRIT: ${damageDps(stats(xingqiu, sacSword, artifacts.concat(cr_circ)), fatalRainScreen)}`);
-    console.log(`Lion's roar CR Circ E slash CRIT: ${damageDps(stats(xingqiu, lionroarR5, artifacts.concat(cr_circ)), fatalRainScreen)}`);
-    console.log(`HOD CR Circ E slash CRIT: ${damageDps(stats(xingqiu, harbinger, artifacts.concat(cr_circ)), fatalRainScreen)}`);
-    console.log(`Sac sword CD Circ E slash CRIT: ${damageDps(stats(xingqiu, sacSword, artifacts.concat(cd_circ)), fatalRainScreen)}`);
-    console.log(`Lion's roar CD Circ E slash CRIT: ${damageDps(stats(xingqiu, lionroarR5, artifacts.concat(cd_circ)), fatalRainScreen)}`);
-    console.log(`HOD CD Circ E slash CRIT: ${damageDps(stats(xingqiu, harbinger, artifacts.concat(cd_circ)), fatalRainScreen)}`);
+    console.log("Total rainscreen");
+    console.log(`Sac sword: ${damageDps(stats(xingqiu, sacSword, artifacts), fatalRainScreen)}`);
+    console.log(`Lion's roar: ${damageDps(stats(xingqiu, lionroarR5, artifacts), fatalRainScreen)}`);
+    console.log(`HOD: ${damageDps(stats(xingqiu, harbinger, artifacts), fatalRainScreen)}`);
+    console.log(`Black sword: ${damageDps(stats(xingqiu, blackSword, artifacts), fatalRainScreen)}`);
 
     /* 
     console.log("");
-    console.log(`Lion's roar CD Circ Single sword CRIT: ${damageDps(stats(xingqiu, lionroarR5, artifacts.concat(cd_circ).concat({ critRate: 1})), hits.slice(0, 1))}`);
-    console.log(`Sac sword CD Circ Single sword CRIT: ${damageDps(stats(xingqiu, sacSword, artifacts.concat(cd_circ).concat({ critRate: 1})), hits.slice(0, 1))}`);
+    console.log(`Lion's roar CD Circ Single sword CRIT: ${damageDps(stats(xingqiu, lionroarR5, artifacts.concat({ critRate: 1})), hits.slice(0, 1))}`);
+    console.log(`Sac sword CD Circ Single sword CRIT: ${damageDps(stats(xingqiu, sacSword, artifacts.concat({ critRate: 1})), hits.slice(0, 1))}`);
     
-    console.log(`Sac sword CD Circ: ${damage(stats(xingqiu, sacSword, artifacts.concat(cd_circ)), fatalRainScreen) * 0.6 * 2}`);
+    console.log(`Sac sword CD Circ: ${damage(stats(xingqiu, sacSword, artifacts), fatalRainScreen) * 0.6 * 2}`);
     console.log(`Sac sword ATK Circ: ${damage(stats(xingqiu, sacSword, artifacts.concat(atk_circ)), fatalRainScreen) * 0.6 * 2}`);
     console.log("");
-    console.log(`Lion's roar CD Circ: ${damage(stats(xingqiu, lionroarR5, artifacts.concat(cd_circ)), fatalRainScreen)}`);
+    console.log(`Lion's roar CD Circ: ${damage(stats(xingqiu, lionroarR5, artifacts), fatalRainScreen)}`);
     console.log(`Lion's roar ATK Circ: ${damage(stats(xingqiu, lionroarR5, artifacts.concat(atk_circ)), fatalRainScreen)}`);
-    console.log(`Lion's roar CR Circ: ${damage(stats(xingqiu, lionroarR5, artifacts.concat(cr_circ)), fatalRainScreen)}`);
+    console.log(`Lion's roar CR Circ: ${damage(stats(xingqiu, lionroarR5, artifacts), fatalRainScreen)}`);
     console.log(`Lion's roar ATK lvl 20 Circ: ${damage(stats(xingqiu, lionroarR5, artifacts.concat(atk_circ_lvl_20)), fatalRainScreen)}`);
     */
 };

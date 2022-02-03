@@ -4,6 +4,6 @@ export const passionAction = () => {
     return {
         char: bennett,
         hits: [],
-        delay: 4
+        delay: 4,
     };
 };

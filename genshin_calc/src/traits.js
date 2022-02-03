@@ -4,10 +4,10 @@ export const bennBurst = ({ atk, elemDmg }, hit) => {
         elemDmg: elemDmg + (hit.stats.includes("pyro") ? 0.15 : 0)
     };
 };
-export const saraC6Burst = ({ atk, critDmg }, hit) => {
+export const saraBurst = ({ atk, critDmg }, hit) => {
     return {
         atk: atk + 600,
-        critDmg: critDmg + (hit.stats.includes("electro") ? 0.6 : 0)
+        //critDmg: critDmg + (hit.stats.includes("electro") ? 0.6 : 0)
     };
 };
 export const sucroseSwirl = ({ elemMast }, hit) => {
@@ -81,29 +81,37 @@ export const yoimiyaSaxi = ({ atk, baseAtk, name }) => {
     };
 };
 
-export const gorouBanner3C6 = ({ elemDmg, def, baseDef, critDmg }, hit) => {
+export const gorouBanner3 = ({ elemDmg, def, baseDef, critDmg }, hit) => {
+    // c6
     return {
         def: def + 391.7 + (baseDef * 0.25),
-        elemDmg: elemDmg + 0.15,
-        critDmg: critDmg + 0.4
+        elemDmg: elemDmg + (hit.stats.includes("geo") ? 0.15 : 0),
+        critDmg: critDmg + (hit.stats.includes("geo") ? 0.4 : 0)
     };
 };
 
-export const yunjinBurst = ({ flatDmg }, hit) => {
-    const DEF = 2128; // hard code until figure
+export const yunjinBurst = ({ flatDmg, elemDmg }, hit) => {
+    // c2
+    const DEF = 2200; // hard code until figure
     return {
-        flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.56 * DEF) : 0)
+        flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.56 * DEF) : 0),
+        elemDmg: elemDmg + (hit.stats.includes("normal") ? 0.15 : 0),
     };
 };
 
-export const makeShenheE = (num, ATK = 3300) => {
+export const makeShenheE = (num, ATK = 3300, hold = false) => {
     let shenheQuota = num;
     return ({ flatDmg, elemDmg }, hit) => {
-        shenheQuota--;
+        if (hit.stats.includes("cryo")) {
+            shenheQuota--;
+        }
+        const boost = hold ?
+            ((hit.stats.includes("normal") || hit.stats.includes("charged")) ? 0.15 : 0) :
+            ((hit.stats.includes("burst") || hit.stats.includes("skill")) ? 0.15 : 0);
         return {
             flatDmg: flatDmg + ((hit.stats.includes("cryo") && shenheQuota > -1) ? (0.73 * ATK) : 0),
             // ascension 1
-            elemDmg: elemDmg + ((hit.stats.includes("burst") || hit.stats.includes("skill")) ? 0.15 : 0)
+            elemDmg: elemDmg + boost
         };
     }
 }

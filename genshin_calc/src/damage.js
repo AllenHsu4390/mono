@@ -111,12 +111,7 @@ export const teamDamageDps = (characterActions = [], duration = 1, downtime = 0)
     }
 
     if (characterActions.find((ca) => ca.cooldown)) {
-        downtime = characterActions.reduce((largest, { cooldown = 0 }) => {
-            if (largest < cooldown) {
-                return cooldown;
-            }
-            return largest;
-        }, 0) - duration;
+        downtime = characterActions.reduce((largest, { cooldown = 0 }) => Math.max(largest, cooldown), 0) - duration;
         downtime = Math.max(0, downtime);
     }
 
