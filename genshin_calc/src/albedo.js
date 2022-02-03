@@ -5,7 +5,7 @@ import { flower_20, feather_20, sand_20, goblet_20, circlet_20, circlet_28,  fea
 import { stats } from './stats.js';
 import { albedo } from './my_characters.js';
 import { geoResShred, lapidus } from './debuffs.js';
-import { geoRes, gorouBanner3C6 } from './traits.js';
+import { geoRes, gorouBanner3 } from './traits.js';
 
 export const char = albedo;
 
@@ -49,7 +49,8 @@ export const burst = (traits = [], debuffs = [], amps = [], transforms = [], sta
 
 //const artifacts = [flower_20, feather_20, sand_20, goblet_20, circlet_20];
 //const artifacts = [flower_28, feather_28, sands_28, goblet_20, circlet_29];
-const artifacts = [flower_20, feather_30, sands_30, goblet_30, circlet_28];
+const artifacts = [flower_28, feather_30, sands_30, goblet_20, circlet_29];
+//const artifacts = [flower_20, feather_30, sands_30, goblet_30, circlet_28];
 
 export const blossomAction = ({ weapon, artifacts, buffs, debuffs, amps, transforms, hitStats, duration }) => {
     return {
@@ -69,7 +70,7 @@ export const tectonicAction = ({ weapon, artifacts, buffs, debuffs, amps = [], t
     };
 };
 
-const buffs = [gorouBanner3C6];
+const buffs = [gorouBanner3];
 
 export const print = () => {
     const debuffs = [lapidus, geoResShred];

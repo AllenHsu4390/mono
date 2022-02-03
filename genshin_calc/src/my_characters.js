@@ -141,6 +141,19 @@ export const fischl = {
     critDmg: 0.50
 };
 
+export const ganyu = {
+    type: "cryo",
+    name: "ganyu",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 8643,
+    baseAtk: 295,
+    baseDef: 556,
+    recharge: 1,
+    critRate: 0.05,
+    critDmg: 0.788
+};
+
 export const zhongli = {
     element: "geo",
     name: "zhongli"
@@ -206,4 +219,18 @@ export const ayaka = {
     atkPct: 0,
     critRate: 0.05,
     critDmg: 0.788
+};
+
+export const rosaria = {
+    element: "cryo",
+    name: "rosaria",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 10891,
+    baseAtk: 213,
+    baseDef: 629,
+    recharge: 1,
+    atkPct: .18,
+    critRate: 0.05,
+    critDmg: 0.5
 };

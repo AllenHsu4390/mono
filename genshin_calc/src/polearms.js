@@ -4,7 +4,7 @@ export const deathmatch1 = (attr) => {
     return {
         name: "deathmatch",
         baseAtk: newBaseAtk,
-        atkPct: atkPct + 0.24,
+        atkPct: atkPct + 0.30,
         critRate: critRate + .368
     };
 };
@@ -16,7 +16,7 @@ export const deathmatch2 = (attr) => {
     return {
         name: "deathmatch",
         baseAtk: newBaseAtk,
-        atkPct: atkPct + 0.16,
+        atkPct: atkPct + 0.20,
         critRate: critRate + .368
     };
 };
@@ -73,18 +73,18 @@ export const jadeSpear = (attr) => {
 
 export const kitain = (attr) => {
     const { elemMast, baseAtk } = attr;
-    const newBaseAtk = baseAtk + 497
+    const newBaseAtk = baseAtk + 523;
 
     return {
         name: "kitain",
         baseAtk: newBaseAtk,
-        elemMast: elemMast + 100 // bug says 101, but is 100
+        elemMast: elemMast + 101
     };
 };
 
 export const dragonsBane = (attr) => {
     const { elemMast, baseAtk } = attr;
-    const newBaseAtk = baseAtk + 401;
+    const newBaseAtk = baseAtk + 427;
 
     return {
         name: "dragonsBane",
@@ -151,14 +151,13 @@ export const homa = (attr) => {
     };
 };
 
-export const wavebreakerR3 = (attr) => {
+export const wavebreakerR3 = (attr, hit) => {
     const { baseAtk, atkPct, elemDmg } = attr;
     const newBaseAtk = baseAtk + 571;
 
     return {
         name: "wavebreaker",
         baseAtk: newBaseAtk,
-        elemDmg: elemDmg + .468, // hard code for now 260 energy
-        atkPct:  atkPct + .126,
+        atkPct:  atkPct + .125,
     };
 };

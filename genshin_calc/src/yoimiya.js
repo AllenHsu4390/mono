@@ -2,7 +2,7 @@ import { crit, pyroVape, pyroMelt } from './amplifiers.js';
 import { amosR2, rustR1, rustR5, skywardHarpR1, thunderingPulseR1 } from './bows.js';
 import { damage, damageDps } from './damage.js';
 import { lapidus, vvShred } from './debuffs.js';
-import { flower_4, feather_4, sand_4, goblet_4, circlet_4, circlet_5, circlet_6, flower_13, circlet_13, flower_7, feather_7, circlet_2, feather_16, sand_8, sand_27, goblet_26 } from './my_artifacts.js';
+import { flower_4, feather_4, sand_4, goblet_4, circlet_4, circlet_5, circlet_6, flower_13, circlet_13, flower_7, feather_7, circlet_2, feather_16, sand_8, sand_27, goblet_26, sand_35 } from './my_artifacts.js';
 import { overloaded } from './reactions.js';
 import { stats } from './stats.js';
 import { bennBurst, dionaC6, geoRes, homNature, noblesse, pyroRes, sucroseC6, sucroseSwirl, tom, xianglingC6, yunjinBurst } from './traits.js';
@@ -83,7 +83,7 @@ export const fireDanceAction = ({ weapon, artifacts, buffs, debuffs, amps = [], 
 const cd_circ = circlet_6;
 const atk_circ = circlet_5;
 const cr_circ = circlet_4;
-const artifacts = [flower_4, feather_4, sand_27, goblet_26, circlet_4];
+const artifacts = [flower_4, feather_4, sand_35, goblet_26, circlet_4];
 const monoPyroTeam = [bennBurst, noblesse, pyroRes, xianglingC6]
 const pyroTeam = [bennBurst, noblesse, pyroRes];
 const geoTeam = [tom, geoRes, yunjinBurst];
@@ -91,12 +91,12 @@ const mixTeam = [tom];
 
 export const print = () => {
 
-    const vapeOverloadPyro = hits(pyroTeam, undefined, [firedance, icdPyroVape], [icdOverloaded, fischlBonus([noblesse, pyroRes])], ["hasHydro", "hasElectro"]);
+    const vapeOverloadPyro = hits(pyroTeam, undefined, [firedance, icdPyroVape], [icdOverloaded], ["hasHydro", "hasElectro"]);
     const vapePyro = hits(pyroTeam, [lapidus], [firedance, icdPyroVape], [], ["hasHydro"]);
-    const overloadPyro = hits(pyroTeam, [lapidus], [firedance], [icdOverloaded, fischlBonus([noblesse, pyroRes], [lapidus])], ["hasElectro"]);
+    const overloadPyro = hits(pyroTeam, [lapidus], [firedance], [icdOverloaded], ["hasElectro"]);
     const vapeGeo = hits(geoTeam, [lapidus], [firedance, icdPyroVape], [], ["hasHydro"]);
-    const overloadGeo = hits(geoTeam, [lapidus], [firedance], [icdOverloaded, fischlBonus([tom, geoRes], [lapidus])], ["hasElectro"]);
-    const vapeOverload = hits(mixTeam, [lapidus], [firedance, icdPyroVape], [icdOverloaded, fischlBonus([tom], [lapidus])], ["hasHydro", "hasElectro"]);
+    const overloadGeo = hits(geoTeam, [lapidus], [firedance], [icdOverloaded], ["hasElectro"]);
+    const vapeOverload = hits(mixTeam, [lapidus], [firedance, icdPyroVape], [icdOverloaded], ["hasHydro", "hasElectro"]);
     const vapeMonoPyro = hits(monoPyroTeam, [], [firedance, icdPyroVape], [], ["hasHydro"]);
     const vvVape = hits([tom, pyroRes, sucroseSwirl, sucroseC6], [vvShred], [icdPyroVape], [], ["hasHydro"]);
 

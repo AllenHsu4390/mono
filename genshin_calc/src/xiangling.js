@@ -42,9 +42,8 @@ export const pyronadoAction = ({ weapon, artifacts, buffs = [], debuffs, amps = 
     return {
         char: stats(xiangling, weapon, artifacts),
         hits: hits(buffs, debuffs, amps, transforms, hitStats),
-        duration: 7,
-        cooldown: 18,
-        delay: 2
+        cooldown: 20,
+        delay: 2,
     };
 };
 

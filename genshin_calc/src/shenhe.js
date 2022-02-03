@@ -4,7 +4,7 @@ import { shenheBurst, vvShred } from './debuffs.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 import { circlet_33, circlet_5, feather_33, feather_34, flower_33, flower_34, goblet_33, goblet_34, sand_33, sand_34 } from './my_artifacts.js';
 import { ayaka, shenhe } from './my_characters.js';
-import { lithic1 } from './polearms.js';
+import { wavebreakerR3 } from './polearms.js';
 import { stats } from './stats.js';
 import { amenoma, harbinger } from './swords.js';
 import { cryoRes, makeShenheE, noblesse, ttds } from './traits.js';
@@ -12,7 +12,7 @@ import { cryoRes, makeShenheE, noblesse, ttds } from './traits.js';
 const springHit = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
     return Array(1).fill(2.23).map((motionValue, index) => {
         return {
-            stats: ["cryo", ...stats],
+            stats: ["cryo", "skill", ...stats],
             traits: [...traits],
             amplifiers: [crit, ...amps],
             motionValue,
@@ -28,7 +28,7 @@ const divineHits = (traits = [], debuffs = [], amps = [], transforms = [], stats
     const shenheE = makeShenheE(5);
     return [1.512].concat(Array(12).fill(.4968)).map((motionValue, index) => {
         return {
-            stats: ["cryo", ...stats],
+            stats: ["cryo", "burst", ...stats],
             traits: [...traits, shenheE],
             amplifiers: [crit, ...amps],
             motionValue,
@@ -119,16 +119,16 @@ const noWeapon = () => { return { name: 'none' }};
 export const print = () => {
     setCurrentEnemy(enemy);
     console.log('-----Shenhe 3 Cryo-----');
-    console.log(`Lithic Divine Damage: ${damageDps(stats(shenhe, lithic1, artifacts), hits(buffs, debuffs, undefined, undefined, undefined))}`);
+    console.log(`Wave Divine Damage: ${damageDps(stats(shenhe, wavebreakerR3, artifacts), hits(buffs, debuffs, undefined, undefined, undefined))}`);
     console.log('-----Shenhe 1 Cryo Base-----');
-    console.log(`Lithic Quill Damage: ${damageDps(stats(baseChar, () => { return { name: 'none' }}, []), quillHits(buffs, debuffs, undefined, undefined, undefined, 5))}`);
-    console.log(`Lithic Quill Damage Ayaka: ${damageDps(stats(ayaka, amenoma, [flower_33, feather_33, sand_33, goblet_33, circlet_33]), quillHits(buffs, debuffs, undefined, undefined, undefined, 5))}`);
-    console.log(`Lithic Quill Damage Weak Char: ${damageDps(stats(baseChar, noWeapon, [].concat({ critDmg: 0.27, critRate: 0.47, atk: 400 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 5))}`);
-    console.log(`Lithic Quill Damage Strong Char: ${damageDps(stats(baseChar, noWeapon, [].concat({ critDmg: 1, critRate: 0.6, atk: 1000, elemDmg: 0.466 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 5))}`);
+    console.log(`Wave Quill Damage: ${damageDps(stats(baseChar, () => { return { name: 'none' }}, []), quillHits(buffs, debuffs, undefined, undefined, undefined, 5))}`);
+    console.log(`Wave Quill Damage Ayaka: ${damageDps(stats(ayaka, amenoma, [flower_33, feather_33, sand_33, goblet_33, circlet_33]), quillHits(buffs, debuffs, undefined, undefined, undefined, 5))}`);
+    console.log(`Wave Quill Damage Weak Char: ${damageDps(stats(baseChar, noWeapon, [].concat({ critDmg: 0.27, critRate: 0.47, atk: 400 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 5))}`);
+    console.log(`Wave Quill Damage Strong Char: ${damageDps(stats(baseChar, noWeapon, [].concat({ critDmg: 1, critRate: 0.6, atk: 1000, elemDmg: 0.466 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 5))}`);
     console.log('-----Shenhe Buff CRIT 1 hit-----');
-    console.log(`Lithic Spring Damage: ${damageDps(stats(shenhe, lithic1, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs, undefined, undefined, undefined).slice(0, 1))}`);
-    console.log(`Lithic Quill Damage Base: ${damageDps(stats(baseChar, noWeapon, [].concat({ critRate: 1 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 15).slice(0, 1))}`);
-    console.log(`Lithic Quill Damage Ayaka: ${damageDps(stats(ayaka, amenoma, [flower_33, feather_33, sand_33, goblet_33, circlet_33].concat({ critRate: 1 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 15).slice(0, 1))}`);
-    console.log(`Lithic Quill Damage Weak Char: ${damageDps(stats(baseChar, noWeapon, [].concat({ critDmg: 0.27, critRate: 1, atk: 400 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 15).slice(0, 1))}`);
-    console.log(`Lithic Quill Damage Strong Char: ${damageDps(stats(baseChar, noWeapon, [].concat({ critDmg: 1, critRate: 1, atk: 1000, elemDmg: 0.466 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 15).slice(0, 1))}`);
+    console.log(`Wave Spring Damage: ${damageDps(stats(shenhe, wavebreakerR3, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs, undefined, undefined, undefined).slice(0, 1))}`);
+    console.log(`Wave Quill Damage Base: ${damageDps(stats(baseChar, noWeapon, [].concat({ critRate: 1 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 15).slice(0, 1))}`);
+    console.log(`Wave Quill Damage Ayaka: ${damageDps(stats(ayaka, amenoma, [flower_33, feather_33, sand_33, goblet_33, circlet_33].concat({ critRate: 1 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 15).slice(0, 1))}`);
+    console.log(`Wave Quill Damage Weak Char: ${damageDps(stats(baseChar, noWeapon, [].concat({ critDmg: 0.27, critRate: 1, atk: 400 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 15).slice(0, 1))}`);
+    console.log(`Wave Quill Damage Strong Char: ${damageDps(stats(baseChar, noWeapon, [].concat({ critDmg: 1, critRate: 1, atk: 1000, elemDmg: 0.466 })), quillHits(buffs, debuffs, undefined, undefined, undefined, 15).slice(0, 1))}`);
  };

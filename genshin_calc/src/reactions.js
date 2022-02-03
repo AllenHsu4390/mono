@@ -32,6 +32,6 @@ export const swirl = ({ lvl, elemMast, reactDmg }) => {
     return 1.2 * reactionDamage(elemMast, reactDmg) * levelMult(lvl);
 };
 
-export const superConduct = ({ lvl, elemMast, reactDmg }) => {
+export const superConducted = ({ lvl, elemMast, reactDmg }) => {
     return 1 * reactionDamage(elemMast, reactDmg) * levelMult(lvl);
 };
