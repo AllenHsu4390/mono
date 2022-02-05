@@ -40,7 +40,17 @@ export const whiteTassel = ({ elemDmg }, { stats }) => {
         };
     }
     return {};
-}
+};
+
+export const rainslasher = ({ elemDmg }, { stats }) => {
+    if (stats.includes("hasHydro") || stats.includes("hasElectro")) {
+        return {
+            elemDmg: elemDmg + .36
+        };
+    }
+
+    return {};
+};
 
 export const dragonsBane = ({ elemDmg }, { stats }) => {
     if (stats.includes("hasHydro") || stats.includes("hasPyro")) {

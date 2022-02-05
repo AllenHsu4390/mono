@@ -16,19 +16,21 @@ import * as zhongli from './zhongli.js';
 import * as gorou from './gorou.js';
 import * as sucrose from './sucrose.js';
 import * as jean from './jean.js';
+import * as sara from './sara.js';
 import * as itto from './itto.js';
 import * as ayaka from './ayaka.js';
 import * as yunjin from './yunjin.js';
 import * as rosaria from './rosaria.js';
+import * as diluc from './diluc.js';
 import { amenoma, cinnabar, harbinger, lionroarR5, sacSword } from './swords.js';
-import { circlet_10, circlet_11, circlet_12, circlet_13, circlet_20, circlet_23, circlet_3, circlet_4, circlet_25, circlet_7, circlet_8, circlet_9, feather_1, feather_10, feather_11, feather_13, feather_16, feather_2, feather_20, feather_4, feather_7, feather_8, feather_9, flower_1, flower_10, flower_11, flower_13, flower_18, flower_2, flower_20, flower_4, flower_7, flower_8, flower_9, goblet_1, goblet_10, goblet_11, goblet_15, goblet_2, goblet_20, goblet_4, goblet_7, goblet_8, goblet_9, sand_1, sand_10, sand_11, sand_13, sand_2, sand_20, sand_4, sand_7, sand_8, sand_9, sand_27, goblet_26, feather_28, circlet_29, sands_28, flower_28, flower_30, feather_30, sands_30, goblet_30, circlet_30, feather_31, circlet_28, flower_33, feather_33, sand_33, goblet_33, circlet_33, flower_34, feather_34, sand_34, goblet_34, circlet_5, sand_35, circlet_36, goblet_36, sand_36, feather_36, flower_36, circlet_2, circlet_37, feather_40 } from './my_artifacts.js';
+import { circlet_10, circlet_11, circlet_12, circlet_13, circlet_20, circlet_23, circlet_3, circlet_4, circlet_25, circlet_7, circlet_8, circlet_9, feather_1, feather_10, feather_11, feather_13, feather_16, feather_2, feather_20, feather_4, feather_7, feather_8, feather_9, flower_1, flower_10, flower_11, flower_13, flower_18, flower_2, flower_20, flower_4, flower_7, flower_8, flower_9, goblet_1, goblet_10, goblet_11, goblet_15, goblet_2, goblet_20, goblet_4, goblet_7, goblet_8, goblet_9, sand_1, sand_10, sand_11, sand_13, sand_2, sand_20, sand_4, sand_7, sand_8, sand_9, sand_27, goblet_26, feather_28, circlet_29, sands_28, flower_28, flower_30, feather_30, sands_30, goblet_30, circlet_30, feather_31, circlet_28, flower_33, feather_33, sand_33, goblet_33, circlet_33, flower_34, feather_34, sand_34, goblet_34, circlet_5, sand_35, circlet_36, goblet_36, sand_36, feather_36, flower_36, circlet_2, circlet_37, feather_40, circlet_41 } from './my_artifacts.js';
 import { baalE, bennBurst, cryoRes, geoRes, gorouBanner3, homNature, monaOmen, noblesse, pyroRes, saraBurst, makeShenheE, sucroseC6, sucroseSwirl, tom, ttds, xianglingC6, yoimiyaSaxi, yunjinBurst } from './traits.js';
-import { amosR2, rustR5, stringlessR2 } from './bows.js';
+import { amosR2, rustR5, skywardHarpR1, stringlessR2 } from './bows.js';
 import { deathmatch1, jadeSpear, theCatchR5, homa, wavebreakerR3, lithic1 } from './polearms.js';
 import { geoResShred, lapidus, lisaA2, raidenC2, shenheBurst, superConduct, vvShred } from './debuffs.js';
 import { cryoMelt, pyroVape } from './amplifiers.js';
 import { overloaded, swirl, superConducted } from './reactions.js';
-import { redhorn, wolfs } from './claymore.js';
+import { redhorn, serpentSpine, wolfs } from './claymore.js';
 
 import { output } from './output.js';
 import { setCurrentEnemy } from './enemy.js';
@@ -190,20 +192,12 @@ export const yoimiya_xingqiu_sara_zhongli = () => {
             debuffs,
             duration: firedanceAction.duration
         }),
-        {
-            char: {
-                name: "sara"
-            },
-            hits: [],
-            delay: 3
-        },
-        {
-            char: {
-                name: "sara"
-            },
-            hits: [],
-            delay: 3
-        },
+        sara.subjugationAction({
+            weapon: skywardHarpR1,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [{ atk: 386, critRate: 0.381, critDmg: 0.264, elemDmg: 0.587, atkPct: 0.2 }]
+        }),
         zhongli.lapidusAction()
     ])}`);
 };
@@ -482,6 +476,12 @@ export const hutao_xingqiu_sara_zhongli = () => {
             duration: afterlifeAction.duration,
             debuffs,
         }),
+        sara.subjugationAction({
+            weapon: skywardHarpR1,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [{ atk: 386, critRate: 0.381, critDmg: 0.264, elemDmg: 0.587, atkPct: 0.2 }]
+        }),
         zhongli.lapidusAction()
     ])}`);
 };
@@ -618,6 +618,17 @@ export const raiden_xingqiu_sara_jean = () => {
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
         }),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+        }),
+        sara.subjugationAction({
+            weapon: skywardHarpR1,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [{ atk: 386, critRate: 0.381, critDmg: 0.264, elemDmg: 0.587, atkPct: 0.2 }]
+        }),
     ])}`);
 };
 
@@ -647,6 +658,17 @@ export const raiden_bennett_sara_jean = () => {
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+        }),
+        sara.subjugationAction({
+            weapon: skywardHarpR1,
+            buffs: [bennBurst, ...teamWide],
+            debuffs,
+            artifacts: [{ atk: 386, critRate: 0.381, critDmg: 0.264, elemDmg: 0.587, atkPct: 0.2 }]
         }),
     ])}`);
 };
@@ -678,12 +700,17 @@ export const raiden_bennett_lisa_jean = () => {
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
         }),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+        }),
     ])}`);
 };
 
 export const raiden_mona_jean_bennett = () => {
-    const teamWide = [noblesse, baalE, ttds, monaOmen];
-    const onField = [bennBurst, ...teamWide];
+    const teamWide = [noblesse, baalE];
+    const onField = [bennBurst, ttds, monaOmen, ...teamWide];
     const debuffs = [vvShred];
 
     const musouAction = raiden.musouAction({
@@ -699,6 +726,12 @@ export const raiden_mona_jean_bennett = () => {
             weapon: jadeSpear,
             buffs: teamWide,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        jean.galeAction(),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
         }),
     ])}`);
 };
@@ -738,6 +771,50 @@ export const ganyu_xiangling_bennett_zhongli = () => {
     ])}`);
 };
 
+
+export const ganyu_zhongli_jean_bennett = () => {
+    const onField = [noblesse, tom, bennBurst];
+    const debuffs = [vvShred, lapidus];
+    
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasPyro"]
+    });
+
+    const ganyuBurst = ({ elemDmg }, hit) => {
+        if (hit.stats.includes("cryo")) {
+            return {
+                elemDmg: elemDmg + 0.2
+            };
+        }
+
+        return {};
+    };
+
+    output(`Ganyu, Zhongli, Jean, Bennett: ${teamDamageDps([
+        ganyu.chargeAtkAction({
+            weapon: amosR2,
+            artifacts: [flower_11, feather_11, sand_11, goblet_11, circlet_7],
+            buffs: [...onField, ganyuBurst],
+            debuffs,
+            amps: [cryoMelt]
+        }),
+        bennett.passionAction(),
+        bennett.passionAction(),
+        bennett.passionAction(),
+        jean.galeAction(),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: onField,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+        }),
+    ])}`);
+};
+
 export const ganyu_xiangling_bennett_shenhe = () => {
     const teamWide = [noblesse, pyroRes, cryoRes];
     const onField = [bennBurst, ...teamWide];
@@ -752,7 +829,7 @@ export const ganyu_xiangling_bennett_shenhe = () => {
         stats: ["hasPyro"]
     });
 
-    const shenheE = makeShenheE(7, 4200, true);
+    const shenheE = makeShenheE(7, 4000, true);
 
     output(`Ganyu, Xiangling, Bennett, Shenhe: ${teamDamageDps([
         ganyu.chargeAtkAction({
@@ -760,7 +837,6 @@ export const ganyu_xiangling_bennett_shenhe = () => {
             artifacts: [flower_11, feather_11, sand_11, goblet_11, circlet_7],
             buffs: [...onField, shenheE],
             debuffs,
-            duration: 4,
             amps: [cryoMelt]
         }),
         shenhe.springAction({
@@ -800,15 +876,23 @@ export const ganyu_shenhe_jean_bennett = () => {
         stats: ["hasPyro"]
     });
 
-    const shenheE = makeShenheE(7, 4200, true);
+    const shenheE = makeShenheE(7, 4000, true);
+    const ganyuBurst = ({ elemDmg }, hit) => {
+        if (hit.stats.includes("cryo")) {
+            return {
+                elemDmg: elemDmg + 0.2
+            };
+        }
+
+        return {};
+    };
 
     output(`Ganyu, Shenhe, Jean, Bennett: ${teamDamageDps([
         ganyu.chargeAtkAction({
             weapon: amosR2,
             artifacts: [flower_11, feather_11, sand_11, goblet_11, circlet_7],
-            buffs: [...onField, shenheE],
+            buffs: [...onField, ganyuBurst, shenheE],
             debuffs,
-            duration: 4,
             amps: [cryoMelt]
         }),
         shenhe.springAction({
@@ -827,6 +911,11 @@ export const ganyu_shenhe_jean_bennett = () => {
         bennett.passionAction(),
         bennett.passionAction(),
         jean.galeAction(),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: onField,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+        }),
     ])}`);
 };
 
@@ -1077,6 +1166,12 @@ export const xiao_jean_albedo_zhongli = () => {
         }),
         zhongli.lapidusAction(),
         jean.galeAction(),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+        }),
     ])}`);
 };
 
@@ -1097,6 +1192,12 @@ export const xiao_jean_bennett_zhongli = () => {
         bennett.passionAction(),
         bennett.passionAction(),
         jean.galeAction(),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+        }),
         zhongli.lapidusAction()
     ])}`);
 };
@@ -1137,6 +1238,12 @@ export const xiao_jean_fischl_zhongli = () => {
         }),
         zhongli.lapidusAction(),
         jean.galeAction(),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+        }),
     ])}`);
 };
 
@@ -1951,5 +2058,36 @@ export const rosaria_shenhe_jean_bennett = () => {
         confessionAction,
         bennett.passionAction(),
         jean.galeAction(),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: buffs,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+        }),
+    ])}`);
+};
+
+export const diluc_xingqiu_bennett_zhongli = () => {
+    const teamWide = [tom, noblesse, pyroRes];
+    const onField = [bennBurst, ...teamWide];
+    const debuffs = [lapidus];
+
+    const comboAction = diluc.comboAction({
+        weapon: serpentSpine,
+        artifacts: [flower_7, feather_7, sand_4, goblet_4, circlet_41],
+        buffs: onField,
+        debuffs,
+        amps: [pyroVape],
+    });
+
+    output(`Diluc, Xingqiu, Bennett, Zhong Li: ${teamDamageDps([
+        comboAction,
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: teamWide,
+            debuffs,
+        }),
+        bennett.passionAction(),
+        zhongli.lapidusAction()
     ])}`);
 };

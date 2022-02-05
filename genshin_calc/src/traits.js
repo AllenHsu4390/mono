@@ -75,6 +75,7 @@ export const xianglingC6 = ({ elemDmg }, hit) => {
         elemDmg: elemDmg + (hit.stats.includes("pyro") ? 0.15 : 0)
     };
 };
+
 export const yoimiyaSaxi = ({ atk, baseAtk, name }) => {
     return {
         atk: atk + (baseAtk * ((name === "yoimiya") ? 0 : 0.10))

@@ -400,6 +400,15 @@ export const feather_40 = {
     atkPct: 0.041
 };
 
+export const circlet_41 = {
+    type: "tom",
+    critDmg: 0.622,
+    critRate: 0.07,
+    hpPct: 0.099,
+    atk: 49,
+    elemMast: 16
+};
+
 // yoimiya
 export const flower_4 = {
     type: "shime",
@@ -459,7 +468,7 @@ export const flower_7 = {
 
 export const feather_7 = {
     type: "cwof",
-    atk: 258,
+    atk: 311,
     hpPct: 0.099,
     hp: 239,
     def: 19,
