@@ -169,11 +169,6 @@ export const sucrose = {
     name: "sucrose",
 };
 
-export const jean = {
-    element: "anemo",
-    name: "jean",
-};
-
 export const gorou = {
     element: "geo",
     name: "gorou",
@@ -245,5 +240,34 @@ export const diluc = {
     baseDef: 692,
     recharge: 1,
     critRate: 0.194,
+    critDmg: 0.5
+};
+
+
+
+export const jean = {
+    element: "anemo",
+    name: "jean",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 12965,
+    baseAtk: 211,
+    baseDef: 678,
+    recharge: 1,
+    critRate: 0.05,
+    critDmg: 0.5
+};
+
+export const sara = {
+    element: "electro",
+    name: "sara",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 8481,
+    baseAtk: 173,
+    baseDef: 556,
+    atkPct: 0.18,
+    recharge: 1,
+    critRate: 0.05,
     critDmg: 0.5
 };

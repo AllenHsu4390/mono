@@ -16,7 +16,7 @@ export const serpentSpine = ({ baseAtk, critRate, elemDmg }) => {
         critRate: critRate + 0.251,
         elemDmg: elemDmg + 0.40
     }
-}
+};
 
 export const redhorn = ({ baseAtk, critDmg, defPct }) => {
     return {
@@ -25,4 +25,12 @@ export const redhorn = ({ baseAtk, critDmg, defPct }) => {
         critDmg: critDmg + 0.882,
         defPct: defPct + .28
     }
-}
+};
+
+export const rainslasher = ({ baseAtk, elemMast }) => {
+    return {
+        name: "rainslasher",
+        baseAtk: baseAtk + 475,
+        elemMast: elemMast + 151,
+    }
+}; 
