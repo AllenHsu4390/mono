@@ -76,10 +76,10 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = []) => {
     return comboHits(N5X3, traits, debuffs, amps, transforms);
 };
 
-export const musouAction = ({ weapon, artifacts, buffs = [], debuffs, amps = [], transforms, hitStats }) => {
+export const musouAction = ({ weapon, artifacts, buffs = [], debuffs = [], amps = [], transforms, hitStats }) => {
     return {
         char: stats(raiden, weapon, artifacts),
-        hits: hits(buffs, debuffs, amps, transforms, hitStats),
+        hits: hits(buffs, [...debuffs], amps, transforms, hitStats),
         duration: 7,
         cooldown: 18,
         delay: 2
@@ -97,7 +97,7 @@ export const omenAction = ({ weapon, artifacts, buffs = [], debuffs, amps = [], 
 const artifacts = [flower_9, feather_40, sand_9, goblet_9, circlet_9];
 
 const nationalTeam = [bennBurst, noblesse, pyroRes, baalE];
-const buffTeam = [bennBurst, noblesse, baalE, ttds, monaOmen];
+const buffTeam = [bennBurst, noblesse, baalE, saraBurst];
 
 export const char = raiden;
 
@@ -108,16 +108,16 @@ export const print = () => {
     const buffTeamHard = comboHits(N3CAX2_N2CAX2, buffTeam, [vvShred]);
 
     console.log("National Team");
-    console.log(`Jade r1 3NA5 spam: ${damageDps(stats(char, jadeSpear, artifacts), nationalTeamEasy, 7, 11)}`);
-    console.log(`Catch r5 3NA5 spam: ${damageDps(stats(char, theCatchR5, artifacts), nationalTeamEasy, 7, 11)}`);
-    console.log(`Homa r1 3NA5 spam: ${damageDps(stats(char, homa, artifacts), nationalTeamEasy, 7, 11)}`);
-    console.log(`Wavebreaker 3NA5 spam: ${damageDps(stats(char, wavebreakerR3, artifacts), nationalTeamEasy, 7, 11)}`);
+    console.log(`Jade r1 3NA5 spam: ${damageDps(stats(char, jadeSpear, artifacts), nationalTeamEasy)}`);
+    console.log(`Catch r5 3NA5 spam: ${damageDps(stats(char, theCatchR5, artifacts), nationalTeamEasy)}`);
+    console.log(`Homa r1 3NA5 spam: ${damageDps(stats(char, homa, artifacts), nationalTeamEasy)}`);
+    console.log(`Wavebreaker 3NA5 spam: ${damageDps(stats(char, wavebreakerR3, artifacts), nationalTeamEasy)}`);
     console.log("");
     console.log("Buff Team");
-    console.log(`Jade r1 spam: ${damageDps(stats(char, jadeSpear, artifacts), buffTeamEasy, 7, 11)}`);
-    console.log(`Catch r5 spam: ${damageDps(stats(char, theCatchR5, artifacts), buffTeamEasy, 7, 11)}`);
-    console.log(`Homa r1 spam: ${damageDps(stats(char, homa, artifacts), buffTeamEasy, 7, 11)}`);
-    console.log(`Wavebreaker spam: ${damageDps(stats(char, favoniusLance, artifacts), buffTeamEasy, 7, 11)}`);
+    console.log(`Jade r1 spam: ${damageDps(stats(char, jadeSpear, artifacts), buffTeamEasy)}`);
+    console.log(`Catch r5 spam: ${damageDps(stats(char, theCatchR5, artifacts), buffTeamEasy)}`);
+    console.log(`Homa r1 spam: ${damageDps(stats(char, homa, artifacts), buffTeamEasy)}`);
+    console.log(`Wavebreaker spam: ${damageDps(stats(char, wavebreakerR3, artifacts), buffTeamEasy)}`);
 
     /*
     console.log("");
