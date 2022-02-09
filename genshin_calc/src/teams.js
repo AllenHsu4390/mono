@@ -44,7 +44,7 @@ export const yoimiya_xingqiu_fischl_bennett = () => {
     const firedanceAction = yoimiya.fireDanceAction({
         weapon: rustR5,
         artifacts: yoimiyaArtifacts,
-        buffs: onField,
+        buffs: [noblesse, pyroRes, bennBurst],
         amps: [yoimiya.icdPyroVape],
         transforms: [yoimiya.icdOverloaded],
     });
@@ -54,7 +54,6 @@ export const yoimiya_xingqiu_fischl_bennett = () => {
             weapon: sacSword,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
-            duration: firedanceAction.duration
         }), fischl.ozAction({
             weapon: stringlessR2,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
@@ -73,7 +72,6 @@ export const yoimiya_xingqiu_fischl_bennett = () => {
             weapon: stringlessR2,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
             buffs: teamWide,
-            duration: firedanceAction.duration
         })
     ])}`);
 };
@@ -111,7 +109,6 @@ export const yoimiya_fischl_bennett_zhongli = () => {
             weapon: stringlessR2,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
             buffs: teamWide,
-            duration: firedanceAction.duration
         })
     ])}`);
 };
@@ -136,12 +133,35 @@ export const yoimiya_xingqiu_bennett_zhongli = () => {
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
             debuffs,
-            duration: firedanceAction.duration
         }),
         bennett.passionAction(),
         zhongli.lapidusAction()
     ])}`);
 };
+
+export const yoimiya_xingqiu_yunjin_bennett = () => {
+    const teamWide = [tom, pyroRes, yoimiyaSaxi];
+    const onField = [bennBurst, yunjinBurst, ...teamWide];
+
+    const firedanceAction = yoimiya.fireDanceAction({
+        weapon: rustR5,
+        artifacts: yoimiyaArtifacts,
+        buffs: onField,
+        amps: [yoimiya.icdPyroVape],
+    });
+
+    output(`Yoimiya, Xingqiu, Yunjin, Bennett: ${teamDamageDps([
+        firedanceAction,
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: teamWide,
+        }),
+        yunjin.bannerAction(),
+        bennett.passionAction(),
+    ])}`);
+};
+
 
 export const yoimiya_xingqiu_yunjin_zhongli = () => {
     const teamWide = [tom, yoimiyaSaxi];
@@ -163,7 +183,7 @@ export const yoimiya_xingqiu_yunjin_zhongli = () => {
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
             debuffs,
-            duration: firedanceAction.duration
+            
         }),
         yunjin.bannerAction(),
         zhongli.lapidusAction()
@@ -190,7 +210,7 @@ export const yoimiya_xingqiu_sara_zhongli = () => {
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: onField,
             debuffs,
-            duration: firedanceAction.duration
+            
         }),
         sara.subjugationAction({
             weapon: skywardHarpR1,
@@ -223,7 +243,7 @@ export const yoimiya_xingqiu_fischl_zhongli = () => {
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
             debuffs,
-            duration: firedanceAction.duration
+            
         }), fischl.ozAction({
             weapon: stringlessR2,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
@@ -236,13 +256,15 @@ export const yoimiya_xingqiu_fischl_zhongli = () => {
             weapon: stringlessR2,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
             buffs: teamWide,
+            debuffs,
             duration: Math.floor(firedanceAction.duration / 3)
         }),
         fischl.c6Action({
             weapon: stringlessR2,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
             buffs: teamWide,
-            duration: firedanceAction.duration
+            debuffs,
+            
         })
     ])}`);
 };
@@ -267,7 +289,7 @@ export const yoimiya_xingqiu_albedo_zhongli = () => {
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
             debuffs,
-            duration: firedanceAction.duration
+            
         }),
         albedo.blossomAction({
             weapon: cinnabar,
@@ -319,7 +341,7 @@ export const yoimiya_fischl_albedo_zhongli = () => {
             weapon: stringlessR2,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
             buffs: teamWide,
-            duration: firedanceAction.duration
+            
         }),
         albedo.blossomAction({
             weapon: cinnabar,
@@ -357,7 +379,7 @@ export const yoimiya_xingqiu_sucrose_xinyan = () => {
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
             debuffs,
-            duration: firedanceAction.duration
+            
         }),
         sucrose.swirlAction(),
         {
@@ -621,7 +643,8 @@ export const raiden_xingqiu_sara_jean = () => {
         jean.breezeAction({
             weapon: sacSword,
             buffs: teamWide,
-            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
+            transforms: [swirl],
         }),
         sara.subjugationAction({
             weapon: skywardHarpR1,
@@ -632,9 +655,9 @@ export const raiden_xingqiu_sara_jean = () => {
     ])}`);
 };
 
-export const raiden_bennett_sara_jean = () => {
+export const raiden_xingqiu_bennett_jean = () => {
     const teamWide = [noblesse, baalE];
-    const onField = [saraBurst, bennBurst, ...teamWide];
+    const onField = [bennBurst, ...teamWide];
     const debuffs = [vvShred]
     
     const musouAction = raiden.musouAction({
@@ -645,7 +668,7 @@ export const raiden_bennett_sara_jean = () => {
         transforms: [raiden.icdElectroCharged],
     });
 
-    output(`Raiden, Bennett, Sara, Jean: ${teamDamageDps([
+    output(`Raiden, Xingqiu, Bennett, Jean: ${teamDamageDps([
         musouAction,
         xingqiu.raincutterAction({
             weapon: lionroarR5,
@@ -662,7 +685,43 @@ export const raiden_bennett_sara_jean = () => {
         jean.breezeAction({
             weapon: sacSword,
             buffs: teamWide,
-            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+            artifacts: [{ atk: 408, critRate: 0.366, critDmg: 0.311, elemDmg: 0.12, elemMast: 527 }],
+            transforms: [swirl],
+        }),
+        jean.sunfireAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            artifacts: [{ atk: 408, critRate: 0.366, critDmg: 0.311, elemDmg: 0.12, elemMast: 527 }],
+            transforms: [swirl, swirl, swirl],
+        }),
+    ])}`);
+};
+
+export const raiden_bennett_sara_jean = () => {
+    const teamWide = [noblesse, baalE];
+    const onField = [saraBurst, bennBurst, ...teamWide];
+    const debuffs = [vvShred]
+    
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+    });
+
+    output(`Raiden, Bennett, Sara, Jean: ${teamDamageDps([
+        musouAction,
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
+            transforms: [swirl],
         }),
         sara.subjugationAction({
             weapon: skywardHarpR1,
@@ -683,17 +742,10 @@ export const raiden_bennett_lisa_jean = () => {
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
-        transforms: [raiden.icdElectroCharged],
     });
 
     output(`Raiden, Bennett, Lisa, Jean: ${teamDamageDps([
         musouAction,
-        xingqiu.raincutterAction({
-            weapon: lionroarR5,
-            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
-            buffs: teamWide,
-            hitStats: ["hasElectro"]
-        }),
         raiden.omenAction({
             weapon: jadeSpear,
             buffs: onField,
@@ -703,7 +755,78 @@ export const raiden_bennett_lisa_jean = () => {
         jean.breezeAction({
             weapon: sacSword,
             buffs: teamWide,
-            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
+            transforms: [swirl],
+        }),
+    ])}`);
+};
+
+export const raiden_bennett_fischl_sucrose = () => {
+    const teamWide = [noblesse, baalE];
+    const onField = [ttds, bennBurst, sucroseSwirl, sucroseC6, ...teamWide];
+    const debuffs = [vvShred];
+    
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+    });
+
+    output(`Raiden, Bennett, Fischl, Sucrose: ${teamDamageDps([
+        musouAction,
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        fischl.ozAction({
+            weapon: stringlessR2,
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            buffs: [bennBurst, ...teamWide],
+            debuffs,
+        }),
+        fischl.a2Action({
+            weapon: stringlessR2,
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            buffs: teamWide,
+            debuffs,
+        }),
+        fischl.c6Action({
+            weapon: stringlessR2,
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            buffs: teamWide,
+            debuffs,
+        }),
+    ])}`);
+};
+
+export const raiden_bennett_sara_sucrose = () => {
+    const teamWide = [noblesse, baalE];
+    const onField = [bennBurst, sucroseSwirl, sucroseC6, saraBurst, ...teamWide];
+    const debuffs = [vvShred];
+    
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+    });
+
+    output(`Raiden, Bennett, Sara, Sucrose: ${teamDamageDps([
+        musouAction,
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        sara.subjugationAction({
+            weapon: skywardHarpR1,
+            buffs: [bennBurst, ...teamWide],
+            debuffs,
+            artifacts: [{ atk: 386, critRate: 0.381, critDmg: 0.264, elemDmg: 0.587, atkPct: 0.2 }]
         }),
     ])}`);
 };
@@ -731,7 +854,8 @@ export const raiden_mona_jean_bennett = () => {
         jean.breezeAction({
             weapon: sacSword,
             buffs: teamWide,
-            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
+            transforms: [swirl],
         }),
     ])}`);
 };
@@ -810,7 +934,8 @@ export const ganyu_zhongli_jean_bennett = () => {
         jean.breezeAction({
             weapon: sacSword,
             buffs: onField,
-            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
+            transforms: [swirl],
         }),
     ])}`);
 };
@@ -914,7 +1039,8 @@ export const ganyu_shenhe_jean_bennett = () => {
         jean.breezeAction({
             weapon: sacSword,
             buffs: onField,
-            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
+            transforms: [swirl],
         }),
     ])}`);
 };
@@ -1022,13 +1148,6 @@ export const eula_fischl_albedo_zhongli = () => {
             buffs: onField,
             debuffs,
         }),
-        albedo.blossomAction({
-            weapon: cinnabar,
-            buffs: teamWide,
-            debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
-        }),
-        zhongli.lapidusAction(),
         fischl.a2Action({
             weapon: stringlessR2,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
@@ -1042,7 +1161,14 @@ export const eula_fischl_albedo_zhongli = () => {
             buffs: teamWide,
             debuffs,
             duration: glacialAction.duration
-        })
+        }),
+        albedo.blossomAction({
+            weapon: cinnabar,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+        }),
+        zhongli.lapidusAction(),
     ])}`);
 };
 
@@ -1196,7 +1322,8 @@ export const xiao_jean_bennett_zhongli = () => {
             weapon: sacSword,
             buffs: teamWide,
             debuffs,
-            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
+            transforms: [swirl],
         }),
         zhongli.lapidusAction()
     ])}`);
@@ -1242,7 +1369,8 @@ export const xiao_jean_fischl_zhongli = () => {
             weapon: sacSword,
             buffs: teamWide,
             debuffs,
-            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
+            transforms: [swirl],
         }),
     ])}`);
 };
@@ -1397,7 +1525,6 @@ export const itto_raiden_albedo_gorou = () => {
         musouAction, 
         raiden.omenAction({
             weapon: jadeSpear,
-            debuffs: [lapidus],
             buffs: onField,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
         }),
@@ -2061,7 +2188,14 @@ export const rosaria_shenhe_jean_bennett = () => {
         jean.breezeAction({
             weapon: sacSword,
             buffs: buffs,
-            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }]
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
+            transforms: [swirl],
+        }),
+        jean.sunfireAction({
+            weapon: sacSword,
+            buffs: buffs,
+            artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
+            transforms: [swirl],
         }),
     ])}`);
 };

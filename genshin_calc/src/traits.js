@@ -1,12 +1,12 @@
 export const bennBurst = ({ atk, elemDmg }, hit) => {
     return {
-        atk: atk + 814,
+        atk: atk + (702 * 1.06),
         elemDmg: elemDmg + (hit.stats.includes("pyro") ? 0.15 : 0)
     };
 };
 export const saraBurst = ({ atk, critDmg }, hit) => {
     return {
-        atk: atk + 600,
+        atk: atk + 526.47,
         //critDmg: critDmg + (hit.stats.includes("electro") ? 0.6 : 0)
     };
 };

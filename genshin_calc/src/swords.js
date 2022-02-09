@@ -20,6 +20,17 @@ export const sacSword = (attr) => {
     };
 };
 
+export const ironSting = (attr) => {
+    const { baseAtk, elemMast } = attr;
+    const newBaseAtk = baseAtk + 475;
+
+    return {
+        name: "ironSting",
+        baseAtk: newBaseAtk,
+        elemMast: elemMast + 151
+    };
+};
+
 export const harbinger = (attr) => {
     const { baseAtk, critDmg, critRate } = attr;
     const newBaseAtk = baseAtk + 401;

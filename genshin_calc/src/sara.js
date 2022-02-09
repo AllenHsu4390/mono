@@ -30,7 +30,7 @@ export const subjugationAction = ({ weapon, artifacts, buffs, debuffs, amps, tra
     };
 };
 
-const artifacts = [{ atk: 386, critRate: 0.381, critDmg: 0.264, elemDmg: 0.587, atkPct: 0.2 }];
+const artifacts = [{ atk: 386, critRate: 0.408, critDmg: 0.334, elemDmg: 0.587, atkPct: 0.2 }];
 const buffs = [noblesse, bennBurst];
 const debuffs = [vvShred];
 const transforms = [];
