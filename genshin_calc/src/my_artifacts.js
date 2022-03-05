@@ -671,6 +671,7 @@ export const sand_11 = {
 
 export const goblet_11 = {
     type: "shime",
+    element: "cryo",
     elemDmg: 0.466,
     elemMast: 23,
     critRate: 0.105,
@@ -909,4 +910,41 @@ export const circlet_36 = {
     atkPct: 0.093,
     defPct: 0.175,
     elemMast: 40,
+};
+
+// yae miko
+export const flower_42 = {
+    type: "wand",
+    hp: 4780,
+    def: 37,
+    critRate: 0.105,
+    critDmg: 0.07,
+    elemMast: 21,
+};
+
+export const feather_42 = {
+    type: "shime",
+    atk: 311,
+    elemMast: 35,
+    hpPct: 0.152,
+    recharge: 0.065,
+    critRate: 0.062,
+};
+
+export const sand_42 = {
+    type: "shime",
+    elemMast: 187,
+    def: 42,
+    atk: 16,
+    critRate: 0.101,
+    atkPct: 0.041
+};
+
+export const goblet_42 = {
+    type: "shime",
+    elemMast: 187,
+    atkPct: 0.192,
+    atk: 29,
+    critRate: 0.027,
+    hp: 239,
 };

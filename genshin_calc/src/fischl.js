@@ -1,5 +1,5 @@
 import { crit, cryoMelt, pyroVape } from './amplifiers.js';
-import { amosR2, rustR1, rustR5, stringlessR2 } from './bows.js';
+import { amosR2, rustR1, rustR5, skywardHarpR1, stringlessR2 } from './bows.js';
 import { damage, damageDps } from './damage.js';
 import { lapidus } from './debuffs.js';
 import { flower_13, feather_13, sand_13, goblet_13, circlet_13, circlet_2, flower_4, sands_14, goblet_15, feather_16 } from './my_artifacts.js';
@@ -27,7 +27,7 @@ export const icdElectroCharged = (attr, hit) => {
 };
 
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 10) => {
-    return [...[4.19], ...Array(duration).fill(1.69)].map((motionValue, index) => {
+    return [4.1934, ...Array(duration).fill(1.6872)].map((motionValue, index) => {
         return {
             stats: ["electro", "skill"],
             traits,
@@ -87,13 +87,16 @@ export const ozAction = ({ weapon, artifacts, buffs, debuffs, amps = [], transfo
 
 export const print = () => {
     const pyroTeam = [bennBurst, noblesse, pyroRes];
-    const geoTeam = [tom, geoRes];
+    const geoTeam = [tom];
     const geoTeamDebuffs = [lapidus];
 
     console.log(`Stringless r5 Pyro team: ${damageDps(stats(char, stringlessR2, artifacts), hits(pyroTeam), 10)}`);
     console.log(`Stringless r5 Geo team: ${damageDps(stats(char, stringlessR2, artifacts), hits(geoTeam, geoTeamDebuffs), 10)}`);
-
+    console.log(`Skyward harp Pyro team: ${damageDps(stats(char, skywardHarpR1, artifacts), hits(pyroTeam), 10)}`);
+    console.log(`Skyward harp Geo team: ${damageDps(stats(char, skywardHarpR1, artifacts), hits(geoTeam, geoTeamDebuffs), 10)}`);
     
     console.log(`Stringless r5 Pyro team summon CRIT: ${damageDps(stats(char, stringlessR2, artifacts.concat({ critRate: 1 })), hits(pyroTeam).slice(0, 1))}`);
     console.log(`Stringless r5 Geo team summon CRIT: ${damageDps(stats(char, stringlessR2, artifacts.concat({ critRate: 1 })), hits(geoTeam, geoTeamDebuffs).slice(0, 1))}`);
+    console.log(`Skyward harp Pyro team summon CRIT: ${damageDps(stats(char, skywardHarpR1, artifacts.concat({ critRate: 1 })), hits(pyroTeam).slice(0, 1))}`);
+    console.log(`Skyward harp Geo team summon CRIT: ${damageDps(stats(char, skywardHarpR1, artifacts.concat({ critRate: 1 })), hits(geoTeam, geoTeamDebuffs).slice(0, 1))}`);
 };
