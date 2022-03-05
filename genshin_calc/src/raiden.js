@@ -86,10 +86,10 @@ export const musouAction = ({ weapon, artifacts, buffs = [], debuffs = [], amps 
     };
 };
 
-export const omenAction = ({ weapon, artifacts, buffs = [], debuffs, amps = [], transforms, hitStats }) => {
+export const omenAction = ({ weapon, artifacts, buffs = [], debuffs = [], amps = [], transforms, hitStats }) => {
     return {
         char: stats(raiden, weapon, artifacts),
-        hits: balefulOmenHits(buffs, debuffs, amps, transforms, hitStats),
+        hits: balefulOmenHits(buffs, [...debuffs], amps, transforms, hitStats),
         delay: 2
     };
 };

@@ -243,8 +243,6 @@ export const diluc = {
     critDmg: 0.5
 };
 
-
-
 export const jean = {
     element: "anemo",
     name: "jean",
@@ -269,5 +267,18 @@ export const sara = {
     atkPct: 0.18,
     recharge: 1,
     critRate: 0.05,
+    critDmg: 0.5
+};
+
+export const yae = {
+    element: "electro",
+    name: "yae",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 9151,
+    baseAtk: 300,
+    baseDef: 502,
+    recharge: 1,
+    critRate: 0.194,
     critDmg: 0.5
 };

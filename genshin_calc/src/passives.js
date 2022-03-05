@@ -102,9 +102,10 @@ export const wavebreaker = ({ elemDmg }, { stats }) => {
 
 export const skywardHarp = ({ critDmg }, { stats }) => {
     return {
-        critDmg: critDmg + 0.2
+        critDmg: critDmg + 0.20,
+        // 60% extra phys
     };
-};
+}; 
 
 export const thunderingPulse = ({ atk, elemDmg, baseAtk }, { stats, index }) => {
     return {
@@ -184,3 +185,10 @@ export const redhorn = ({ flatDmg, def }, { stats }) => {
         flatDmg: flatDmg + (stats.includes("normal") || stats.includes("charged")? (0.4 * def) : 0)
     };
 };
+
+export const solarpearl = ({ elemDmg }) => {
+    // only 6 secs, inaccurate atm
+    return {
+        elemDmg: elemDmg + 0.20
+    }
+}
