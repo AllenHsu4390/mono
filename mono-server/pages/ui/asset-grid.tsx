@@ -1,4 +1,6 @@
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, useTheme } from "@mui/material";
+import { Box } from "@mui/system";
+import Link from "next/link";
 import React from "react";
 import { AssetCard } from "./asset-card";
 
@@ -12,19 +14,34 @@ interface Props {
 }
 
 export function AssetGrid({ assets }: Props) {
+  const theme = useTheme();
   return (
     <Container
       sx={{
-        py: 8,
+        paddingY: "8px",
+        maxWidth: ["100%", "100%", theme.breakpoints.values.md],
       }}
-      maxWidth="md"
     >
-      {/* End hero unit */}
-      <Grid container spacing={4}>
-        {assets.map((asset) => (
-          <Grid item key={asset.key} xs={12} sm={6} md={4}>
-            <AssetCard src={asset.src} />
-          </Grid>
+      <Grid
+        container
+        spacing={{
+          xs: 1,
+          sm: 2,
+          md: 4,
+        }}
+      >
+        {assets.map((asset, index) => (
+          <Link href="/a" key={index}>
+            <Grid item key={asset.key} xs={4} sm={4} md={4}>
+              <Box
+                sx={{
+                  cursor: "pointer",
+                }}
+              >
+                <AssetCard {...asset} />
+              </Box>
+            </Grid>
+          </Link>
         ))}
       </Grid>
     </Container>

@@ -13,7 +13,7 @@ export function CreatorDescription({ desc }: Props) {
   return (
     <>
       <Avatar
-        alt="Remy Sharp"
+        alt="Avatar"
         src="https://source.unsplash.com/random"
         sx={{
           margin: "40px auto 40px auto",

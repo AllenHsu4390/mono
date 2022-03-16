@@ -1,7 +1,7 @@
 import Album from "./ui/album-page";
 
-const Home: NextPage = () => {
+const AlbumPage: NextPage = () => {
   return <Album />;
 };
 
-export default Home;
+export default AlbumPage;

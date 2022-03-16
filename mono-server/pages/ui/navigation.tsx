@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { styled, alpha, useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,6 +12,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { Avatar } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -54,6 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navigation() {
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -154,17 +156,37 @@ export default function Navigation() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar
+        position="sticky"
+        color="transparent"
+        sx={{
+          boxShadow: "none",
+        }}
+      >
         <Toolbar
           sx={{
-            width: ["100%", "100%", "100%", "1000px"],
+            width: ["100%", "100%", "100%", `${theme.breakpoints.values.md}px`],
             margin: "auto",
           }}
         >
           <Box sx={{ display: "flex" }}>
-            <Search>
+            <Search
+              sx={{
+                background: `${theme.palette.secondary.main}`,
+                color: `${theme.palette.secondary.contrastText}`,
+                ":hover": {
+                  background: `${theme.palette.secondary.main}`,
+                  color: `${theme.palette.secondary.contrastText}`,
+                },
+                borderRadius: 0,
+              }}
+            >
               <SearchIconWrapper>
-                <SearchIcon />
+                <SearchIcon
+                  sx={{
+                    color: `${theme.palette.secondary.dark}`,
+                  }}
+                />
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="Search…"
@@ -176,24 +198,6 @@ export default function Navigation() {
           <Box sx={{ display: "flex" }}>
             <IconButton
               size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -201,7 +205,16 @@ export default function Navigation() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <Badge badgeContent={17} color="error">
+                <Avatar
+                  alt="Avatar"
+                  src="https://source.unsplash.com/random"
+                  sx={{
+                    width: "40px",
+                    height: "40px",
+                  }}
+                />
+              </Badge>
             </IconButton>
           </Box>
         </Toolbar>
