@@ -1,20 +1,23 @@
-import Head from "next/head";
-import styles from "../../styles/Home.module.css";
-import { Asset } from "../models/pack";
+import React from "react";
 
-const getUser = (userId: string) => {
-  return {
-    name: userId + "default",
-  };
-};
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
 
-export const AssetCard = ({ userId, ratePct }: Asset) => {
-  const user = getUser(userId);
+interface Props {
+  src: string;
+}
 
+export function AssetCard({ src }: Props) {
   return (
-    <div>
-      <h1>Rate: ${ratePct}</h1>
-      <span>{user.name}</span>
-    </div>
+    <Card
+      sx={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        borderRadius: 0,
+      }}
+    >
+      <CardMedia component="img" image={src} alt="random" />
+    </Card>
   );
-};
+}
