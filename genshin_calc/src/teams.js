@@ -24,7 +24,7 @@ import * as rosaria from './rosaria.js';
 import * as diluc from './diluc.js';
 import * as yae from './yae.js';
 import { amenoma, cinnabar, harbinger, lionroarR5, sacSword } from './swords.js';
-import { circlet_10, circlet_11, circlet_12, circlet_13, circlet_20, circlet_23, circlet_3, circlet_4, circlet_25, circlet_7, circlet_8, circlet_9, feather_1, feather_10, feather_11, feather_13, feather_16, feather_2, feather_20, feather_4, feather_7, feather_8, feather_9, flower_1, flower_10, flower_11, flower_13, flower_18, flower_2, flower_20, flower_4, flower_7, flower_8, flower_9, goblet_1, goblet_10, goblet_11, goblet_15, goblet_2, goblet_20, goblet_4, goblet_7, goblet_8, goblet_9, sand_1, sand_10, sand_11, sand_13, sand_2, sand_20, sand_4, sand_7, sand_8, sand_9, sand_27, goblet_26, feather_28, circlet_29, sands_28, flower_28, flower_30, feather_30, sands_30, goblet_30, circlet_30, feather_31, circlet_28, flower_33, feather_33, sand_33, goblet_33, circlet_33, flower_34, feather_34, sand_34, goblet_34, circlet_5, sand_35, circlet_36, goblet_36, sand_36, feather_36, flower_36, circlet_2, circlet_37, feather_40, circlet_41, goblet_42, sand_42, feather_42, flower_42 } from './my_artifacts.js';
+import { circlet_10, circlet_11, circlet_12, circlet_13, circlet_20, circlet_23, circlet_3, circlet_4, circlet_25, circlet_7, circlet_8, circlet_9, feather_1, feather_10, feather_11, feather_13, feather_16, feather_2, feather_20, feather_4, feather_7, feather_8, feather_9, flower_1, flower_10, flower_11, flower_13, flower_18, flower_2, flower_20, flower_4, flower_7, flower_8, flower_9, goblet_1, goblet_10, goblet_11, goblet_15, goblet_2, goblet_20, goblet_4, goblet_43, goblet_8, goblet_9, sand_1, sand_10, sand_11, sand_13, sand_2, sand_20, sand_4, sand_7, sand_8, sand_9, sand_27, goblet_26, feather_28, circlet_29, sands_28, flower_28, flower_30, feather_30, sands_30, goblet_30, circlet_30, feather_31, circlet_28, flower_33, feather_33, sand_33, goblet_33, circlet_33, flower_34, feather_34, sand_34, goblet_34, circlet_5, sand_35, circlet_36, goblet_36, sand_36, feather_36, flower_36, circlet_2, circlet_37, feather_40, circlet_41, goblet_42, sand_42, feather_42, flower_42 } from './my_artifacts.js';
 import { baalE, bennBurst, cryoRes, geoRes, gorouBanner3, homNature, monaOmen, noblesse, pyroRes, saraBurst, makeShenheE, sucroseC6, sucroseSwirl, tom, ttds, xianglingC6, yoimiyaSaxi, yunjinBurst } from './traits.js';
 import { amosR2, rustR5, skywardHarpR1, stringlessR2 } from './bows.js';
 import { deathmatch1, jadeSpear, theCatchR5, homa, wavebreakerR3, lithic1 } from './polearms.js';
@@ -542,7 +542,7 @@ export const hutao_xingqiu_albedo_zhongli = () => {
 
     const afterlifeAction = hutao.afterlifeAction({
         weapon: homa,
-        artifacts: [flower_18, feather_13, sand_7, goblet_7, circlet_25],
+        artifacts: [flower_18, feather_13, sand_7, goblet_43, circlet_25],
         buffs: onField,
         debuffs,
         amps: [hutao.icdPyroVape]
@@ -580,7 +580,7 @@ export const hutao_xingqiu_yae_zhongli = () => {
 
     const afterlifeAction = hutao.afterlifeAction({
         weapon: homa,
-        artifacts: [flower_18, feather_13, sand_7, goblet_7, circlet_25],
+        artifacts: [flower_18, feather_13, sand_7, goblet_43, circlet_25],
         buffs: onField,
         debuffs,
         amps: [hutao.icdPyroVape],
@@ -614,7 +614,7 @@ export const hutao_yae_albedo_zhongli = () => {
 
     const afterlifeAction = hutao.afterlifeAction({
         weapon: homa,
-        artifacts: [flower_18, feather_13, sand_7, goblet_7, circlet_25],
+        artifacts: [flower_18, feather_13, sand_7, goblet_43, circlet_25],
         buffs: onField,
         debuffs,
     });
@@ -651,7 +651,7 @@ export const hutao_xingqiu_fischl_zhongli = () => {
 
     const afterlifeAction = hutao.afterlifeAction({
         weapon: homa,
-        artifacts: [flower_18, feather_13, sand_7, goblet_7, circlet_25],
+        artifacts: [flower_18, feather_13, sand_7, goblet_43, circlet_25],
         buffs: onField,
         debuffs,
         amps: [hutao.icdPyroVape],
@@ -698,7 +698,7 @@ export const hutao_xingqiu_sara_zhongli = () => {
 
     const afterlifeAction = hutao.afterlifeAction({
         weapon: homa,
-        artifacts: [flower_18, feather_13, sand_7, goblet_7, circlet_25],
+        artifacts: [flower_18, feather_13, sand_7, goblet_43, circlet_25],
         buffs: onField,
         debuffs,
         amps: [hutao.icdPyroVape]
@@ -730,7 +730,7 @@ export const hutao_xingqiu_sucrose_xinyan = () => {
     
     const afterlifeAction = hutao.afterlifeAction({
         weapon: homa,
-        artifacts: [flower_18, feather_13, sand_7, goblet_7, circlet_25],
+        artifacts: [flower_18, feather_13, sand_7, goblet_43, circlet_25],
         buffs: onField,
         debuffs,
         amps: [hutao.icdPyroVape]

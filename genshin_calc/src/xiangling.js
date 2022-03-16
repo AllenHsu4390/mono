@@ -51,7 +51,7 @@ export const char = xiangling;
 
 const cr_circ = circlet_12;
 const cd_circ = circlet_2;
-const artifacts = [flower_17, feather_2, sand_19, goblet_2];
+const artifacts = [flower_17, feather_2, sand_19, goblet_7];
 const atk_gob = {
     type: "eosf",
     atkPct: 0.387,

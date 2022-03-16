@@ -409,6 +409,16 @@ export const circlet_41 = {
     elemMast: 16
 };
 
+export const goblet_43 = {
+    type: "husk",
+    element: "pyro",
+    elemDmg: 0.466,
+    hpPct: .111,
+    atk: 31,
+    recharge: 0.11,
+    critDmg: 0.202
+};
+
 // yoimiya
 export const flower_4 = {
     type: "shime",
@@ -919,7 +929,7 @@ export const flower_42 = {
     def: 37,
     critRate: 0.105,
     critDmg: 0.07,
-    elemMast: 21,
+    elemMast: 40,
 };
 
 export const feather_42 = {

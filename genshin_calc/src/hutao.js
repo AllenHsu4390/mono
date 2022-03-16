@@ -1,6 +1,6 @@
 import { crit, pyroMelt, pyroVape } from './amplifiers.js';
 import { damageDps } from './damage.js';
-import { flower_7, feather_7, sand_7, goblet_7, circlet_7, circlet_11, circlet_6, feather_13, flower_18, circlet_25 } from './my_artifacts.js';
+import { flower_7, feather_7, sand_7, goblet_7, circlet_7, circlet_11, circlet_6, feather_13, flower_18, circlet_25, goblet_43 } from './my_artifacts.js';
 import { stats } from './stats.js';
 import { geoRes, homNature, pyroRes, sucroseC6, sucroseSwirl, tom } from './traits.js';
 import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel, homa, dragonsBane } from './polearms.js';
@@ -88,7 +88,7 @@ const normalhits = Array(3).fill([.741, .762, .964, 1.037, .526, .556, 1.358]).f
 const artifacts = [flower_7, feather_7, sand_7, goblet_7, circlet_7];
 
 const cd_artifacts = [flower_18, feather_13, sand_7, goblet_7, circlet_6];
-const cr_artifacts = [flower_18, feather_13, sand_7, goblet_7, circlet_25];
+const cr_artifacts = [flower_18, feather_13, sand_7, goblet_43, circlet_25];
 
 export const char = hutao;
 
