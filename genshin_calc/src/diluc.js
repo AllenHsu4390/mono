@@ -20,7 +20,7 @@ const enemy = {
 };
 
 const normals = [1.4185, 1.3858, 1.5626, 2.1189]
-const onslaught = [1.5104, 1.5616, 2.0608];
+const onslaught = [1.7936, 1.8544, 2.4472];
 const dawn = [3.06, .90, .90, .90, 3.06];
 
 const normalHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 10) => {
