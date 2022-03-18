@@ -4,23 +4,6 @@ import Navigation from "./navigation";
 import CompanyContact from "./company-contact";
 import { Container } from "@mui/material";
 
-const custom = {
-  palette: {
-    primary: {
-      light: "#fffffb",
-      main: "#dcedc8",
-      dark: "#aabb97",
-      contrastText: "#000000",
-    },
-    secondary: {
-      light: "#f8fdff",
-      main: "#c5cae9",
-      dark: "#9499b7",
-      contrastText: "#000000",
-    },
-  },
-};
-
 const theme = createTheme({
   palette: {
     secondary: {
@@ -32,6 +15,10 @@ const theme = createTheme({
   },
 });
 
+const user = {
+  avatarUrl: "https://source.unsplash.com/random/300×300",
+};
+
 interface Props {
   hasFooter?: boolean;
 }
@@ -40,7 +27,7 @@ const Page: React.FC<Props> = ({ hasFooter, children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Navigation />
+      <Navigation user={user} />
       <main>
         <Container
           sx={{
