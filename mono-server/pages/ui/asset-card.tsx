@@ -2,13 +2,13 @@ import React from "react";
 
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import Link from "next/link";
 
 interface Props {
   src: string;
+  isFull: boolean;
 }
 
-export function AssetCard({ src }: Props) {
+export function AssetCard({ src, isFull }: Props) {
   return (
     <Card
       sx={{
@@ -19,7 +19,15 @@ export function AssetCard({ src }: Props) {
         boxShadow: "none",
       }}
     >
-      <CardMedia component="img" image={src} alt="random"></CardMedia>
+      <CardMedia
+        sx={{
+          objectFit: "cover",
+          height: isFull ? "" : "400px",
+        }}
+        component="img"
+        image={src}
+        alt="random"
+      ></CardMedia>
     </Card>
   );
 }

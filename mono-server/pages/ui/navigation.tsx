@@ -54,7 +54,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navigation() {
+interface User {
+  avatarUrl: string;
+}
+
+interface Props {
+  user: User;
+}
+
+export default function Navigation({ user }: Props) {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -208,7 +216,7 @@ export default function Navigation() {
               <Badge badgeContent={17} color="error">
                 <Avatar
                   alt="Avatar"
-                  src="https://source.unsplash.com/random"
+                  src={user.avatarUrl}
                   sx={{
                     width: "40px",
                     height: "40px",

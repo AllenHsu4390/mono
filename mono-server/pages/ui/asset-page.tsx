@@ -1,26 +1,27 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AssetCard } from "./asset-card";
 import { Container } from "@mui/material";
 import Page from "./page";
+import { Asset } from "../models/Asset";
+import { useQuery } from "react-query";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: "#ffffff",
-      main: "#e8dfdc",
-      dark: "#b6adaa",
-      contrastText: "#000000",
-    },
-    secondary: {
-      light: "#ff7961",
-      main: "#f44336",
-      dark: "#ba000d",
-      contrastText: "#000000",
-    },
-  },
-});
+interface Props {
+  id: string;
+}
 
-export default function AssetPage() {
+export default function AssetPage({ id }: Props) {
+  const { data, status } = useQuery<Asset, Error>(["asset", id], async () => {
+    const res = await fetch(`/api/assets/${id}`);
+    return res.json();
+  });
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "error" || !data?.src) {
+    return <div>Error</div>;
+  }
+
   return (
     <Page>
       <Container
@@ -29,7 +30,7 @@ export default function AssetPage() {
         }}
         maxWidth="md"
       >
-        <AssetCard src={"https://source.unsplash.com/random"} />
+        <AssetCard src={data.src} isFull={true} />
       </Container>
     </Page>
   );

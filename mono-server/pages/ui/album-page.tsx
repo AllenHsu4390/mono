@@ -4,27 +4,13 @@ import Page from "./page";
 
 const creator = {
   desc: "Hi, I'm a creator. I make cool things. Check out my work!",
+  avatarUrl: "https://source.unsplash.com/random?t=19239",
 };
-
-const assets = Array(10)
-  .fill(1)
-  .map((_, index) => {
-    return index + 1;
-  })
-  .map((i) => {
-    return {
-      key: `${i}`,
-      src: "https://source.unsplash.com/random",
-    };
-  });
-
 export default function AlbumPage() {
   return (
     <Page hasFooter={true}>
-      <>
-        <CreatorProfile creator={creator} />
-        <AssetGrid assets={assets} />
-      </>
+      <CreatorProfile creator={creator} />
+      <AssetGrid />
     </Page>
   );
 }

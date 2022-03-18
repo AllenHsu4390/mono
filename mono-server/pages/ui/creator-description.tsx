@@ -7,14 +7,15 @@ import Avatar from "@mui/material/Avatar";
 
 interface Props {
   desc: string;
+  avatarUrl: string;
 }
 
-export function CreatorDescription({ desc }: Props) {
+export function CreatorDescription({ avatarUrl, desc }: Props) {
   return (
     <>
       <Avatar
         alt="Avatar"
-        src="https://source.unsplash.com/random"
+        src={avatarUrl}
         sx={{
           margin: "40px auto 40px auto",
           width: "200px",

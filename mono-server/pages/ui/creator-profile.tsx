@@ -1,10 +1,7 @@
-import { Box, Container } from "@mui/material";
 import React from "react";
+import { Box, Container } from "@mui/material";
+import { Creator } from "../models/Creator";
 import { CreatorDescription } from "./creator-description";
-
-interface Creator {
-  desc: string;
-}
 
 interface Props {
   creator: Creator;
@@ -20,7 +17,7 @@ export function CreatorProfile({ creator }: Props) {
       }}
     >
       <Container maxWidth="sm">
-        <CreatorDescription desc={creator.desc} />
+        <CreatorDescription {...creator} />
       </Container>
     </Box>
   );
