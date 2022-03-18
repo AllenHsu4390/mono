@@ -189,7 +189,7 @@ export default function Navigation() {
                 />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder="Search"
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>

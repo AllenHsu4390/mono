@@ -1,7 +1,7 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Navigation from "./navigation";
-import { Contact } from "./contact";
+import CompanyContact from "./company-contact";
 import { Container } from "@mui/material";
 
 const custom = {
@@ -51,7 +51,7 @@ const Page: React.FC<Props> = ({ hasFooter, children }) => {
           {children}
         </Container>
       </main>
-      {hasFooter ? <Contact /> : null}
+      {hasFooter ? <CompanyContact /> : null}
     </ThemeProvider>
   );
 };
