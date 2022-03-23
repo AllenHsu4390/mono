@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import AssetPage from "../ui/asset-page";
+import AssetPage from "../../ui/asset-page";
 
 const AssetNextPage: NextPage = () => {
   const router = useRouter();

@@ -17,10 +17,12 @@
     "node-fetch": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-infinite-scroller": "^1.2.5",
     "react-query": "^3.34.16"
   },
   "devDependencies": {
     "@types/node": "^17.0.14",
+    "@types/react-infinite-scroller": "^1.2.2",
     "eslint": "8.5.0",
     "eslint-config-next": "12.0.7",
     "typescript": "^4.5.5"

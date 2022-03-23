@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Asset } from "../../models/Asset";
+import { Asset } from "../../../models/Asset";
 
 const getRandomNum = () => Math.floor(Math.random() * 206);
 
