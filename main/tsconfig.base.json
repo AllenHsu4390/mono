@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@main/genshin-calc": ["libs/genshin-calc/src/index.ts"],
       "@main/models": ["libs/models/src/index.ts"],
       "@main/ui": ["libs/ui/src/index.ts"]
     }

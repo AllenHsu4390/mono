@@ -1,0 +1,23 @@
+{
+  "root": "libs/genshin-calc",
+  "sourceRoot": "libs/genshin-calc/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/genshin-calc/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/genshin-calc"],
+      "options": {
+        "jestConfig": "libs/genshin-calc/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
