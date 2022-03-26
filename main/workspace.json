@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "main-server": "apps/main-server",
+    "main-server-e2e": "apps/main-server-e2e",
+    "models": "libs/models",
+    "ui": "libs/ui"
+  }
+}
