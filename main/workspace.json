@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "genshin-calc": "libs/genshin-calc",
     "main-server": "apps/main-server",
     "main-server-e2e": "apps/main-server-e2e",
     "models": "libs/models",

@@ -1,0 +1,13 @@
+{
+  "name": "genshin-calc",
+  "version": "0.0.0",
+  "description": "genshin calculator",
+  "main": "src/lib/index.js",
+  "scripts": {
+    "teams": "node src/lib/index.js teams",
+    "start": "node src/lib/index.js"
+  },
+  "author": "allen",
+  "license": "MIT",
+  "type": "module"
+}
