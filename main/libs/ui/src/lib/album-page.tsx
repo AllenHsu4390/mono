@@ -6,9 +6,9 @@ import { useQuery } from 'react-query';
 
 export default function AlbumPage() {
   const { data, status } = useQuery<Creator, Error>(
-    ['creator', '10'],
+    ['creator', '0'],
     async () => {
-      const res = await fetch(`/api/creators/${10}`);
+      const res = await fetch(`/api/creators/${0}`);
       return res.json();
     }
   );
