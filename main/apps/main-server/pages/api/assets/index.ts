@@ -1,40 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Assets } from '@main/models';
-
-const getRandomNum = () => Math.floor(Math.random() * 206);
+import { environment } from '@main/environment';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Assets>
 ) {
-  const { assetIds }: { assetIds: string[] } = req.body;
-  let numbers;
-  let prev = getRandomNum();
-  let next: number | undefined = getRandomNum();
+  const db = environment().db;
+  const { pageId } = req.query;
 
-  if (next > 200) {
-    next = undefined;
+  if (Array.isArray(pageId)) {
+    res.status(401);
+    return;
   }
 
-  if (assetIds) {
-    numbers = assetIds;
-  } else {
-    numbers = Array(10)
-      .fill(0)
-      .map(() => `${getRandomNum()}`);
-  }
-  res.status(200).json({
-    assets: numbers.map((number) => {
-      return {
-        id: number,
-        src: `https://source.unsplash.com/collection/${number}`,
-      };
-    }),
-    pagination: {
-      prev: `${prev}`,
-      next: `${next}`,
-      total: 100,
-    },
-  });
-  return res;
+  res.status(200).json(await new db.Assets(pageId).get());
+  return;
 }

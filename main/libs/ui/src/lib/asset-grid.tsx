@@ -7,8 +7,8 @@ import { AssetCard } from './asset-card';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Error } from '@main/models';
 
-const fetchAssets = async ({ pageParam = 1 }) => {
-  const response = await fetch(`/api/assets`);
+const fetchAssets = async ({ pageParam = 0 }) => {
+  const response = await fetch(`/api/assets?pageId=${pageParam}`);
   return response.json();
 };
 
@@ -17,7 +17,6 @@ export function AssetGrid() {
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery<Assets, Error>('assets', fetchAssets, {
       getNextPageParam: (lastPage, pages) => {
-        console.log(lastPage.pagination.next);
         if (typeof lastPage.pagination.next === 'undefined') return undefined;
         if (typeof lastPage.pagination.total === 'undefined') return undefined;
         if (lastPage.pagination.next) return lastPage.pagination.next;
