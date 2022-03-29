@@ -14,6 +14,6 @@ export default async function handler(
     return;
   }
 
-  res.status(200).json(await new db.Assets(pageId).get());
+  res.status(200).json(await db.get.assets(pageId));
   return;
 }

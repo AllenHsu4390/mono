@@ -8,5 +8,5 @@ export default async function handler(
   res: NextApiResponse<Users | Error>
 ) {
   const db = environment().db;
-  res.status(200).json(await new db.Users('0').get());
+  res.status(200).json(await db.get.users('0'));
 }

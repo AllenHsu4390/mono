@@ -70,4 +70,25 @@ export const db: Db = new Map<Keys, Values>([
   ['Users', users],
 ]);
 
-export const dbGet = async (key: Keys, id: string) => db.get(key)![Number(id)];
+export const dbGet = {
+  asset: (id: string): Asset => {
+    const dbId = Number(id) - ASSET_INDEX_OFFSET;
+    return db.get('Asset')![dbId] as Asset;
+  },
+  assets: (id: string): Assets => {
+    const dbId = Number(id);
+    return db.get('Assets')![dbId] as Assets;
+  },
+  user: (id: string): User => {
+    const dbId = Number(id);
+    return db.get('User')![dbId] as User;
+  },
+  users: (id: string): Users => {
+    const dbId = Number(id);
+    return db.get('Users')![dbId] as Users;
+  },
+  creator: (id: string): Creator => {
+    const dbId = Number(id);
+    return db.get('Creator')![dbId] as Creator;
+  },
+};

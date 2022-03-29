@@ -14,6 +14,6 @@ export default async function handler(
       message: 'Something went wrong',
     });
   } else {
-    res.status(200).json(await new db.Creator(id).get());
+    res.status(200).json(await db.get.creator(id));
   }
 }
