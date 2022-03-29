@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Users } from '@main/models';
 import { Error } from '@main/models';
+import { auth } from '@main/auth';
 import { environment } from '@main/environment';
 
 export default async function handler(
@@ -8,5 +9,6 @@ export default async function handler(
   res: NextApiResponse<Users | Error>
 ) {
   const db = environment().db;
-  res.status(200).json(await db.get.users('0'));
+  const userId = auth().identity.userId('asdfasdfasdfasdf');
+  res.status(200).json(await db.get.users(userId));
 }
