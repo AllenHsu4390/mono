@@ -9,11 +9,14 @@ export default async function handler(
 ) {
   const { id } = req.query;
   const db = environment().db;
-  if (typeof id !== 'string') {
-    res.status(403).json({
-      message: 'Something went wrong',
-    });
-  } else {
+  try {
+    if (typeof id !== 'string') {
+      throw {
+        message: 'Something went wrong',
+      };
+    }
     res.status(200).json(await db.get.creator(id));
+  } catch (e) {
+    res.status(403).json(e);
   }
 }

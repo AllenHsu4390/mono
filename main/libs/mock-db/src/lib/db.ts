@@ -59,11 +59,11 @@ const assets = Array(ASSETS_SIZE)
   });
 
 type Keys = 'Assets' | 'User' | 'Creator' | 'Asset' | 'Users';
-type Values = Asset[] | Assets[] | Creator[] | User[] | Users[];
+type Values = Asset | Assets | Creator | User | Users;
 
-export type Db = Map<Keys, Values>;
+export type Db = Map<Keys, Values[]>;
 
-export const db: Db = new Map<Keys, Values>([
+export const db: Db = new Map<Keys, Values[]>([
   ['Assets', assets],
   ['User', user],
   ['Creator', creator],
@@ -72,24 +72,34 @@ export const db: Db = new Map<Keys, Values>([
 ]);
 
 export const dbGet = {
-  asset: (id: string): Asset => {
+  asset: async (id: string): Promise<Asset> => {
     const dbId = Number(id) - ASSET_INDEX_OFFSET;
     return db.get('Asset')![dbId] as Asset;
   },
-  assets: (id: string): Assets => {
+  assets: async (id: string): Promise<Assets> => {
     const dbId = Number(id);
     return db.get('Assets')![dbId] as Assets;
   },
-  user: (id: string): User => {
+  user: async (id: string): Promise<User> => {
     const dbId = Number(id);
     return db.get('User')![dbId] as User;
   },
-  users: (id: string): Users => {
+  users: async (id: string): Promise<Users> => {
     const dbId = Number(id);
     return db.get('Users')![dbId] as Users;
   },
-  creator: (id: string): Creator => {
+  creator: async (id: string): Promise<Creator> => {
     const dbId = Number(id);
     return db.get('Creator')![dbId] as Creator;
+  },
+};
+
+export const dbSave = {
+  user: async (user: User): Promise<void> => {
+    const userData = db.get('User')!;
+    if (userData[Number(user.id)]) {
+      userData[Number(user.id)] = user;
+    }
+    userData.push(user);
   },
 };

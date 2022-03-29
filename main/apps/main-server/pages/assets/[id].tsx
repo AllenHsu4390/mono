@@ -1,8 +1,25 @@
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { AssetPage } from '@main/ui';
+import { AssetPage, LoginPage } from '@main/ui';
 
-const AssetNextPage: NextPage = () => {
+interface Props {
+  isLoggedIn: boolean;
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const idKey = req.cookies.idKey;
+  return {
+    props: {
+      isLoggedIn: !!idKey,
+    },
+  };
+};
+
+const AssetNextPage: NextPage<Props> = ({ isLoggedIn }) => {
+  if (!isLoggedIn) {
+    return <LoginPage />;
+  }
+
   const router = useRouter();
   const { id } = router.query;
 
