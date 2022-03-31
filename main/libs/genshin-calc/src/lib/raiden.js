@@ -8,6 +8,7 @@ import { lisaA2, raidenC2, vvShred } from './debuffs.js';
 import { electroCharged, overloaded } from './reactions.js';
 import { raiden } from './my_characters.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam } from './team.js';
 
 const enemy = {
     lvl: 90,
@@ -52,6 +53,7 @@ const comboHits = (combo, traits = [], debuffs = [], amps = [], transforms = [])
             amplifiers: [crit],
             motionValue: motionValue + resolveBonus(index, 60),
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms,
             stats: ["burst", "electro"]
@@ -66,6 +68,7 @@ export const balefulOmenHits = (traits = [], debuffs = [], amps = [], transforms
             amplifiers: [crit],
             motionValue,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms,
             stats: ["skill", "electro"]

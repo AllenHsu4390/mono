@@ -8,6 +8,7 @@ import { stats } from './stats.js';
 import { bennBurst, dionaC6, geoRes, homNature, noblesse, pyroRes, sucroseC6, sucroseSwirl, tom, xianglingC6, yunjinBurst } from './traits.js';
 import { yoimiya } from './my_characters.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam } from './team.js';
 
 export const char = yoimiya;
 
@@ -56,6 +57,7 @@ export const hits = (traits, debuffs, amps, transforms, stats = []) => {
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -66,6 +68,7 @@ export const hits = (traits, debuffs, amps, transforms, stats = []) => {
             amplifiers: [crit],
             motionValue,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
         };
     }));

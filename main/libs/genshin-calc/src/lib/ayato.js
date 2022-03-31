@@ -7,6 +7,7 @@ import { circlet_13, circlet_44, circlet_45, feather_44, flower_44, goblet_44, s
 import { bennBurst, yunjinBurst } from './traits.js';
 import {  vvShred } from './debuffs.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam } from './team.js';
 
 export const char = ayato;
 
@@ -44,6 +45,7 @@ export const kyoukaHits = (traits = [], debuffs = [], amps = [], transforms = []
                 motionValue,
                 index,
                 enemy: getCurrentEnemy(),
+                team: getCurrentTeam(),
                 debuffs,
                 transforms
             };
@@ -62,6 +64,7 @@ export const suiyuuHits = (traits = [], debuffs = [], amps = [], transforms = []
                 motionValue,
                 index,
                 enemy: getCurrentEnemy(),
+                team: getCurrentTeam(),
                 debuffs,
                 transforms
             };

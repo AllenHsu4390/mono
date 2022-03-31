@@ -8,6 +8,7 @@ import { lapidus } from './debuffs.js';
 import { xiao } from './my_characters.js';
 import { swirl } from './reactions.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam } from './team.js';
 
 export const char = xiao;
 
@@ -47,6 +48,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = []) => {
             transforms,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs
         };
     });
@@ -69,6 +71,7 @@ const normalhits = Array(3).fill([.407, .407, .841, 1.013, .566, .566, 1.057, 1.
         amplifiers: [crit],
         motionValue,
         enemy: getCurrentEnemy(),
+        team: getCurrentTeam(),
         debuffs: [lapidus]
     };
 });

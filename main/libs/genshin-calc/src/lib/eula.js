@@ -6,6 +6,7 @@ import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 import { flower_10, feather_10, sand_10, goblet_10, circlet_10, circlet_23 } from './my_artifacts.js';
 import { eula } from './my_characters.js';
 import { stats } from './stats.js';
+import { getCurrentTeam } from './team.js';
 import { baalE, bennBurst, cryoRes, geoRes, homNature, noblesse, pyroRes, makeShenheE, tom, ttds } from './traits.js';
 
 const enemy = {
@@ -29,6 +30,7 @@ const burstHit = (stacks = 13, traits = [], debuffs = [], amps = [], transforms 
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             transforms,
             debuffs: [...debuffs, icetide]
         };
@@ -44,6 +46,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             transforms,
             debuffs
         };
@@ -57,6 +60,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             transforms,
             debuffs
         };

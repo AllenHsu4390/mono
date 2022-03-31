@@ -5,6 +5,7 @@ import { jean } from "./my_characters.js";
 import { overloaded, swirl } from "./reactions.js";
 import { stats } from "./stats.js";
 import { ironSting, sacSword } from "./swords.js";
+import { getCurrentTeam } from "./team.js";
 import { bennBurst, noblesse } from "./traits.js";
 
 const breezeHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
@@ -16,6 +17,7 @@ const breezeHits = (traits = [], debuffs = [], amps = [], transforms = [], stats
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -31,6 +33,7 @@ const sunfireHits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -52,6 +55,7 @@ const sunfirePyroHits = (traits = [], debuffs = [], amps = [], transforms = [], 
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };

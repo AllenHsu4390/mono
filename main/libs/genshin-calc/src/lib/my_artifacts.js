@@ -777,7 +777,7 @@ export const flower_20 = {
     type: "glad",
     hp: 3967,
     hpPct: 0.041,
-    defPct: 0.124,
+    defPct: 0.175,
     critDmg: 0.187,
     critRate: 0.054
 };

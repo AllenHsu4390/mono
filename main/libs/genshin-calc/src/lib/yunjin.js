@@ -5,8 +5,10 @@ import { getCurrentEnemy } from "./enemy.js";
 import { circlet_4, feather_4, flower_4, goblet_26, sand_27 } from "./my_artifacts.js";
 import { yoimiya, yunjin } from "./my_characters.js";
 import { stats } from "./stats.js";
+import { getCurrentTeam } from "./team.js";
 import { yunjinBurst } from "./traits.js";
 
+export const char = yunjin;
 
 const bannerHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
     return Array(duration).fill(0.50).map((motionValue, index) => {
@@ -17,6 +19,7 @@ const bannerHits = (traits = [], debuffs = [], amps = [], transforms = [], stats
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
