@@ -23,7 +23,16 @@ const runGuards = (res: NextApiResponse, user: User) => {
   guards.forEach((g) => g(res, user));
 };
 
-const schema = (body: any): User => {
+const postSchema = (body: any): User => {
+  return {
+    email: body.email || '',
+    id: 'aasdfsadfasdf',
+    avatarUrl: 'https://source.unsplash.com/random/300x300',
+    isLoggedIn: true,
+  };
+};
+
+const putSchema = (body: any): User => {
   return {
     isLoggedIn: body.isLoggedIn || false,
     avatarUrl: body.avatarUrl || false,
@@ -33,9 +42,9 @@ const schema = (body: any): User => {
 };
 
 const me = {
-  post: async (req, res: NextApiResponse<User | Error | OK>) => {
+  put: async (req, res: NextApiResponse<User | Error | OK>) => {
     const db = environment().db;
-    const { isLoggedIn, avatarUrl }: User = schema(req.body);
+    const { isLoggedIn, avatarUrl }: User = putSchema(req.body);
     const userId = auth().identity.userId(userFromLogin(req));
     const user = await db.get.user(userId);
     const newUser = {
@@ -45,6 +54,15 @@ const me = {
     };
     await db.save.user(newUser);
     runGuards(res, newUser);
+    res.status(200).json({
+      ok: true,
+    });
+  },
+  post: async (req, res: NextApiResponse<User | Error | OK>) => {
+    const db = environment().db;
+    const user: User = postSchema(req.body);
+    await db.save.user(user);
+    runGuards(res, user);
     res.status(200).json({
       ok: true,
     });
@@ -72,6 +90,9 @@ export default async function handler(
   try {
     switch (true) {
       case req.method === 'POST' && id === 'me':
+        await me.put(req, res);
+        break;
+      case req.method === 'POST':
         await me.post(req, res);
         break;
       case req.method === 'GET' && id === 'me':
