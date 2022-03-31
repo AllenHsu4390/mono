@@ -6,14 +6,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Asset>
 ) {
-  const db = environment().db;
-  const { id } = req.query;
+  try {
+    const db = environment().db;
+    const { id } = req.query;
 
-  if (Array.isArray(id)) {
-    res.status(401);
-    return;
+    if (typeof id !== 'string') {
+      throw {
+        message: 'Something went wrong',
+      };
+    }
+
+    res.status(200).json(await db.get.asset(id));
+  } catch (e) {
+    res.status(403).json(e);
   }
-
-  res.status(200).json(await db.get.asset(id));
-  return;
 }

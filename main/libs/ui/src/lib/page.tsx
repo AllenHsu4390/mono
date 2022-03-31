@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Navigation from './navigation';
 import CompanyContact from './company-contact';
 import { Container } from '@mui/material';
-import { Users } from '@main/models';
+import { User } from '@main/models';
 import { useQuery } from 'react-query';
 
 const theme = createTheme({
@@ -22,8 +22,11 @@ interface Props {
 }
 
 const Page: React.FC<Props> = ({ hasFooter, children }) => {
-  const { data, status } = useQuery<Users, Error>(['users'], async () => {
-    const res = await fetch(`/api/users`);
+  const { data, status } = useQuery<User, Error>(['user'], async () => {
+    const res = await fetch(`/api/users/me`, {
+      credentials: 'same-origin',
+      method: 'GET',
+    });
     return res.json();
   });
 
@@ -35,12 +38,10 @@ const Page: React.FC<Props> = ({ hasFooter, children }) => {
     return <div>Error</div>;
   }
 
-  console.log(data);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Navigation user={data.users[0]} />
+      <Navigation user={data} />
       <main>
         <Container
           sx={{

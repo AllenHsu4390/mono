@@ -6,14 +6,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Assets>
 ) {
-  const db = environment().db;
-  const { pageId } = req.query;
+  try {
+    const db = environment().db;
+    const { pageId } = req.query;
 
-  if (Array.isArray(pageId)) {
-    res.status(401);
-    return;
+    if (typeof pageId !== 'string') {
+      throw {
+        message: 'Something went wrong',
+      };
+    }
+
+    res.status(200).json(await db.get.assets(pageId));
+  } catch (e) {
+    res.status(403).json(e);
   }
-
-  res.status(200).json(await db.get.assets(pageId));
-  return;
 }
