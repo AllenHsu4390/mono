@@ -7,6 +7,7 @@ import { overloaded } from './reactions.js';
 import { stats } from './stats.js';
 import { bennBurst, dionaC6, geoRes, homNature, noblesse, pyroRes, sucroseC6, sucroseSwirl, tom, xianglingC6, yunjinBurst } from './traits.js';
 import { yoimiya } from './my_characters.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 
 export const char = yoimiya;
 
@@ -54,7 +55,7 @@ export const hits = (traits, debuffs, amps, transforms, stats = []) => {
             amplifiers: [crit, ...amps],
             motionValue,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             debuffs,
             transforms
         };
@@ -64,7 +65,7 @@ export const hits = (traits, debuffs, amps, transforms, stats = []) => {
             traits,
             amplifiers: [crit],
             motionValue,
-            enemy,
+            enemy: getCurrentEnemy(),
             debuffs,
         };
     }));
@@ -90,15 +91,16 @@ const geoTeam = [tom, geoRes, yunjinBurst];
 const mixTeam = [tom];
 
 export const print = () => {
+    setCurrentEnemy(enemy);
 
-    const vapeOverloadPyro = hits(pyroTeam, undefined, [firedance, icdPyroVape], [icdOverloaded], ["hasHydro", "hasElectro"]);
-    const vapePyro = hits(pyroTeam, [lapidus], [firedance, icdPyroVape], [], ["hasHydro"]);
-    const overloadPyro = hits(pyroTeam, [lapidus], [firedance], [icdOverloaded], ["hasElectro"]);
-    const vapeGeo = hits(geoTeam, [lapidus], [firedance, icdPyroVape], [], ["hasHydro"]);
-    const overloadGeo = hits(geoTeam, [lapidus], [firedance], [icdOverloaded], ["hasElectro"]);
-    const vapeOverload = hits(mixTeam, [lapidus], [firedance, icdPyroVape], [icdOverloaded], ["hasHydro", "hasElectro"]);
-    const vapeMonoPyro = hits(monoPyroTeam, [], [firedance, icdPyroVape], [], ["hasHydro"]);
-    const vvVape = hits([tom, pyroRes, sucroseSwirl, sucroseC6], [vvShred], [icdPyroVape], [], ["hasHydro"]);
+    const vapeOverloadPyro = hits(pyroTeam, undefined, [firedance, icdPyroVape], [icdOverloaded]);
+    const vapePyro = hits(pyroTeam, [lapidus], [firedance, icdPyroVape], []);
+    const overloadPyro = hits(pyroTeam, [lapidus], [firedance], [icdOverloaded]);
+    const vapeGeo = hits(geoTeam, [lapidus], [firedance, icdPyroVape], []);
+    const overloadGeo = hits(geoTeam, [lapidus], [firedance], [icdOverloaded]);
+    const vapeOverload = hits(mixTeam, [lapidus], [firedance, icdPyroVape], [icdOverloaded]);
+    const vapeMonoPyro = hits(monoPyroTeam, [], [firedance, icdPyroVape], []);
+    const vvVape = hits([tom, pyroRes, sucroseSwirl, sucroseC6], [vvShred], [icdPyroVape], []);
 
     console.log("Pyro team overvape: Yoimiya, Xingqiu, Fischl, Bennett");
     console.log(`Rust r5 CR circ: ${damageDps(stats(yoimiya, rustR5, artifacts), vapeOverloadPyro, 10)}`);

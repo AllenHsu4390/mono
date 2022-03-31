@@ -437,6 +437,14 @@ export const goblet_46 = {
     atk: 45,
 };
 
+export const circlet_46 = {
+    type: "husk",
+    critRate: 0.311,
+    atkPct: 0.105,
+    elemMast: 37,
+    defPct: 0.117,
+    hp: 299,
+};
 
 // yoimiya
 export const flower_4 = {

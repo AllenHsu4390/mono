@@ -6,6 +6,7 @@ import { stats } from './stats.js';
 import { itto } from './my_characters.js';
 import { geoResShred, lapidus } from './debuffs.js';
 import { bennBurst, geoRes, gorouBanner3, noblesse } from './traits.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 
 const enemy = {
     lvl: 90,
@@ -29,7 +30,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             amplifiers: [crit, ...amps],
             motionValue,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             debuffs,
             transforms
         };
@@ -53,6 +54,7 @@ export const royalAction = ({ weapon, artifacts, buffs, debuffs, amps, transform
 const buffs = [gorouBanner3, geoRes];
 
 export const print = () => {
+    setCurrentEnemy(enemy);
     const debuffs = [geoResShred];
     const fullCombo = hits(buffs, debuffs);
     console.log(`Redhorn Damage: ${damageDps(stats(itto, redhorn, artifacts), fullCombo, 10, 0)}`);

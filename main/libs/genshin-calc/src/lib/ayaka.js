@@ -16,7 +16,7 @@ const enemy = {
     resBuff: 0,
     resDebuff: 0,
     defDebuff: 0,
-    stats: ["frozen"]
+    stats: ["hasCryo", "hasFrozen"],
 };
 
 const acen1 = ({ elemDmg }, { stats }) => {
@@ -107,7 +107,7 @@ export const chargedAtkAction = ({ weapon, artifacts, buffs, debuffs, amps, tran
     };
 };
 
-export const comboAction = ({ weapon, artifacts, buffs, debuffs, amps, transforms, hitStats, duration }) => {
+export const comboAction = ({ weapon, artifacts, buffs, debuffs, amps, transforms, hitStats = [], duration }) => {
     const actions = [
         normalAtkAction({
             weapon,
@@ -162,19 +162,19 @@ export const print = () => {
     const hits = (...params) => [...soumetsuHits(...params), ...hyoukaHits(...params), ...chargeAtkHits(...params)];
     setCurrentEnemy(enemy);
     console.log('-----Soumetsu-----');
-    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, artifacts), hits(buffs, debuffs, undefined, undefined, undefined))}`);
-    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, artifacts), hits(buffs, debuffs, undefined, undefined, undefined))}`);
-    console.log(`Festering Desire Damage: ${damageDps(stats(char, festering, artifacts), hits(buffs, debuffs, undefined, undefined, undefined))}`);
+    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, artifacts), hits(buffs, debuffs))}`);
+    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, artifacts), hits(buffs, debuffs))}`);
+    console.log(`Festering Desire Damage: ${damageDps(stats(char, festering, artifacts), hits(buffs, debuffs))}`);
     console.log('-----CRIT 1 Cut-----');
-    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs, undefined, undefined, undefined).slice(1, 2))}`);
-    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs, undefined, undefined, undefined).slice(1, 2))}`);
-    console.log(`Festering Desire Damage: ${damageDps(stats(char, festering, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs, undefined, undefined, undefined).slice(1, 2))}`);
+    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(1, 2))}`);
+    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(1, 2))}`);
+    console.log(`Festering Desire Damage: ${damageDps(stats(char, festering, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(1, 2))}`);
     console.log('-----Shenhe Buff-----');
-    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, artifacts), hits([...buffs, makeShenheE(10)], [...debuffs, shenheBurst], undefined, undefined, undefined))}`);
-    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, artifacts), hits([...buffs, makeShenheE(10)], [...debuffs, shenheBurst], undefined, undefined, undefined))}`);
-    console.log(`Festering Desire Damage: ${damageDps(stats(char, festering, artifacts), hits([...buffs, makeShenheE(10)], [...debuffs, shenheBurst], undefined, undefined, undefined))}`);
+    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, artifacts), hits([...buffs, makeShenheE(10)], [...debuffs, shenheBurst]))}`);
+    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, artifacts), hits([...buffs, makeShenheE(10)], [...debuffs, shenheBurst]))}`);
+    console.log(`Festering Desire Damage: ${damageDps(stats(char, festering, artifacts), hits([...buffs, makeShenheE(10)], [...debuffs, shenheBurst]))}`);
     console.log('-----Shenhe Buff CRIT 1 Cut-----');
-    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, artifacts.concat({ critRate: 1 })), hits([...buffs, makeShenheE(1)], [...debuffs, shenheBurst], undefined, undefined, undefined).slice(1, 2))}`);
-    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, artifacts.concat({ critRate: 1 })), hits([...buffs, makeShenheE(1)], [...debuffs, shenheBurst], undefined, undefined, undefined).slice(1, 2))}`);
-    console.log(`Festering Desire Damage: ${damageDps(stats(char, festering, artifacts.concat({ critRate: 1 })), hits([...buffs, makeShenheE(1)], [...debuffs, shenheBurst], undefined, undefined, undefined).slice(1, 2))}`);
+    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, artifacts.concat({ critRate: 1 })), hits([...buffs, makeShenheE(1)], [...debuffs, shenheBurst]).slice(1, 2))}`);
+    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, artifacts.concat({ critRate: 1 })), hits([...buffs, makeShenheE(1)], [...debuffs, shenheBurst]).slice(1, 2))}`);
+    console.log(`Festering Desire Damage: ${damageDps(stats(char, festering, artifacts.concat({ critRate: 1 })), hits([...buffs, makeShenheE(1)], [...debuffs, shenheBurst]).slice(1, 2))}`);
 };

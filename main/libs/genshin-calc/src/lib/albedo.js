@@ -1,11 +1,12 @@
 import { crit } from './amplifiers.js';
 import { cinnabar, festering, harbinger } from './swords.js';
 import { damageDps } from './damage.js';
-import { flower_20, feather_20, sand_20, goblet_20, circlet_20, circlet_28,  feather_28, sands_28, flower_28, circlet_29, flower_30, feather_30, sands_30, goblet_30, circlet_30 } from './my_artifacts.js';
+import { flower_20, feather_20, sand_20, goblet_20, circlet_20, circlet_28,  feather_28, sands_28, flower_28, circlet_29, flower_30, feather_30, sands_30, goblet_30, circlet_30, circlet_46, circlet_38 } from './my_artifacts.js';
 import { stats } from './stats.js';
 import { albedo } from './my_characters.js';
 import { geoResShred, lapidus } from './debuffs.js';
 import { geoRes, gorouBanner3 } from './traits.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 
 export const char = albedo;
 
@@ -25,7 +26,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             amplifiers: [crit, ...amps],
             motionValue,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             debuffs,
             transforms
         };
@@ -40,7 +41,7 @@ export const burst = (traits = [], debuffs = [], amps = [], transforms = [], sta
             amplifiers: [crit, ...amps],
             motionValue,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             debuffs,
             transforms
         };
@@ -49,7 +50,7 @@ export const burst = (traits = [], debuffs = [], amps = [], transforms = [], sta
 
 //const artifacts = [flower_20, feather_20, sand_20, goblet_20, circlet_20];
 //const artifacts = [flower_28, feather_28, sands_28, goblet_20, circlet_29];
-const artifacts = [flower_28, feather_30, sands_30, goblet_20, circlet_29];
+const artifacts = [flower_28, feather_30, sands_30, goblet_20, circlet_38];
 //const artifacts = [flower_20, feather_30, sands_30, goblet_30, circlet_28];
 
 export const blossomAction = ({ weapon, artifacts, buffs, debuffs, amps, transforms, hitStats, duration }) => {
@@ -73,18 +74,25 @@ export const tectonicAction = ({ weapon, artifacts, buffs, debuffs, amps = [], t
 const buffs = [gorouBanner3];
 
 export const print = () => {
+    setCurrentEnemy(enemy);
+    
     const debuffs = [lapidus, geoResShred];
+    console.log(`Cinnabar Blossom Damage: ${damageDps(stats(albedo, cinnabar, artifacts), hits(buffs, debuffs, undefined, undefined, undefined, 10), 10, 0, "def")}`);
     console.log(`HOD Blossom Damage: ${damageDps(stats(albedo, harbinger, artifacts), hits(buffs, debuffs, undefined, undefined, undefined, 10), 10, 0, "def")}`);
     console.log(`Festering Blossom Damage: ${damageDps(stats(albedo, festering, artifacts), hits(buffs, debuffs, undefined, undefined, undefined, 10), 10, 0, "def")}`);
-    console.log(`Cinnabar Blossom Damage: ${damageDps(stats(albedo, cinnabar, artifacts), hits(buffs, debuffs, undefined, undefined, undefined, 10), 10, 0, "def")}`);
+    console.log("");
+    console.log("-----Without Gorou-----");
+    console.log(`Cinnabar Blossom Damage: ${damageDps(stats(albedo, cinnabar, artifacts), hits([], debuffs, undefined, undefined, undefined, 10), 10, 0, "def")}`);
+    console.log(`HOD Blossom Damage: ${damageDps(stats(albedo, harbinger, artifacts), hits([], debuffs, undefined, undefined, undefined, 10), 10, 0, "def")}`);
+    console.log(`Festering Blossom Damage: ${damageDps(stats(albedo, festering, artifacts), hits([], debuffs, undefined, undefined, undefined, 10), 10, 0, "def")}`);
 
     console.log("");
+    console.log(`Cinnabar Blossom Damage 1 Hit CRIT: ${damageDps(stats(albedo, cinnabar, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(0, 1), undefined, undefined, "def")}`);
     console.log(`HOD Blossom Damage 1 Hit CRIT: ${damageDps(stats(albedo, harbinger, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(0, 1), undefined, undefined, "def")}`);
     console.log(`Festering Blossom Damage 1 Hit CRIT: ${damageDps(stats(albedo, festering, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(0, 1), undefined, undefined, "def")}`);
-    console.log(`Cinnabar Blossom Damage 1 Hit CRIT: ${damageDps(stats(albedo, cinnabar, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(0, 1), undefined, undefined, "def")}`);
 
     console.log("");
+    console.log(`Cinnabar Burst: ${damageDps(stats(albedo, cinnabar, artifacts.concat({ critRate: 1 })), burst([geoRes, ...buffs], debuffs).slice(0, 1), undefined, undefined)}`);
     console.log(`HOD Burst: ${damageDps(stats(albedo, harbinger, artifacts.concat({ critRate: 1 })), burst([geoRes, ...buffs], debuffs).slice(0, 1), undefined, undefined)}`);
     console.log(`Festering Burst: ${damageDps(stats(albedo, festering, artifacts.concat({ critRate: 1 })), burst([geoRes, ...buffs], debuffs).slice(0, 1), undefined, undefined)}`);
-    console.log(`Cinnabar Burst: ${damageDps(stats(albedo, cinnabar, artifacts.concat({ critRate: 1 })), burst([geoRes, ...buffs], debuffs).slice(0, 1), undefined, undefined)}`);
 };

@@ -1,5 +1,4 @@
 import { crit, hydroVape } from './amplifiers.js';
-import { lionroarR5, sacSword, harbinger, blackSword } from './swords.js';
 import { damageDps } from './damage.js';
 import { flower_9, feather_9, sand_9, goblet_9, circlet_9, feather_40, circlet_39, circlet_13, goblet_15, feather_16, flower_13, sand_13, circlet_11, feather_42, sand_42, goblet_42, flower_42, sand_8, circlet_30, feather_36, flower_1, feather_1, sand_1, goblet_1, circlet_37 } from './my_artifacts.js';
 import { stats } from './stats.js';
@@ -8,6 +7,7 @@ import { yae } from './my_characters.js';
 import { mappa, oathsworn, solarpearl, widsith_atk, widsith_dmg, widsith_mast } from './catalyst.js';
 import { electroCharged, overloaded } from './reactions.js';
 import { lapidus } from './debuffs.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 
 export const char = yae;
 
@@ -33,7 +33,7 @@ export const sesshouHits = (traits = [], debuffs = [], amps = [], transforms = [
             amplifiers: [crit, ...amps],
             motionValue,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             debuffs,
             transforms
         };
@@ -48,7 +48,7 @@ export const tenkoHits = (traits = [], debuffs = [], amps = [], transforms = [],
             amplifiers: [crit, ...amps],
             motionValue,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             debuffs,
             transforms
         };
@@ -139,6 +139,8 @@ const buffs = [homNature, noblesse];
 const debuffs = [lapidus];
 
 export const print = () => {
+    setCurrentEnemy();
+    
     console.log("Total combo, electrocharged");
     //console.log(`Solar pearl: ${damageDps(stats(yae, solarpearl, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
     console.log(`Widsith Atk: ${damageDps(stats(yae, widsith_atk, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);

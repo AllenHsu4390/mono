@@ -60,7 +60,7 @@ export const yoimiya_xingqiu_fischl_bennett = () => {
         }),
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
             transforms: [fischl.icdElectroCharged]
         }),
@@ -68,13 +68,13 @@ export const yoimiya_xingqiu_fischl_bennett = () => {
         bennett.passionAction(),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             duration: Math.floor(firedanceAction.duration / 3)
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
         })
     ])}`);
@@ -153,7 +153,7 @@ export const yoimiya_fischl_bennett_zhongli = () => {
         firedanceAction,
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
             debuffs,
         }),
@@ -161,13 +161,13 @@ export const yoimiya_fischl_bennett_zhongli = () => {
         zhongli.lapidusAction(),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             duration: Math.floor(firedanceAction.duration / 3)
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
         })
     ])}`);
@@ -391,7 +391,7 @@ export const yoimiya_xingqiu_fischl_zhongli = () => {
         }),
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
             debuffs,
             transforms: [fischl.icdElectroCharged]
@@ -399,14 +399,14 @@ export const yoimiya_xingqiu_fischl_zhongli = () => {
         zhongli.lapidusAction(),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
             duration: Math.floor(firedanceAction.duration / 3)
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
             
@@ -501,24 +501,24 @@ export const yoimiya_fischl_albedo_zhongli = () => {
 
     output(`Yoimiya, Fischl, Albedo, Zhong Li: ${teamDamageDps([
         firedanceAction, {
-            char: stats(fischl.char, stringlessR2, [flower_13, feather_16, sand_13, goblet_15, circlet_13]),
+            char: stats(fischl.char, stringlessR2, [flower_13, feather_16, sand_13, goblet_15, circlet_45]),
             hits: fischl.hits(teamWide, debuffs),
         },
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
         }),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             duration: Math.floor(firedanceAction.duration / 3)
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             
         }),
@@ -704,20 +704,20 @@ export const hutao_xingqiu_fischl_zhongli = () => {
         }),
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
         }),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
             debuffs,
             duration: 10
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
             debuffs,
             duration: 10
@@ -800,13 +800,21 @@ export const raiden_xingqiu_xiangling_bennett = () => {
         transforms: [raiden.icdElectroCharged],
     });
 
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasPyro"]
+    });
+
     output(`Raiden, Xingqiu, Xiangling, Bennett: ${teamDamageDps([
         musouAction,
         xingqiu.raincutterAction({
             weapon: lionroarR5,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
-            buffs: teamWide,
-            hitStats: ["hasElectro"]
+            buffs: teamWide
         }),
         xiangling.pyronadoAction({
             weapon: theCatchR5,
@@ -844,14 +852,22 @@ export const raiden_xingqiu_yoimiya_zhongli = () => {
         amps: [yoimiya.icdPyroVape]
     });
 
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasPyro"]
+    });
+
     output(`Raiden, Xingqiu, Yoimiya, Zhongli: ${teamDamageDps([
         musouAction,
         firedanceAction,
         xingqiu.raincutterAction({
             weapon: lionroarR5,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
-            buffs: teamWide,
-            hitStats: ["hasElectro"]
+            buffs: teamWide
         }),
         raiden.omenAction({
             weapon: jadeSpear,
@@ -876,13 +892,21 @@ export const raiden_xingqiu_sara_jean = () => {
         transforms: [raiden.icdElectroCharged],
     });
 
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasPyro"]
+    });
+
     output(`Raiden, Xingqiu, Sara, Jean: ${teamDamageDps([
         musouAction,
         xingqiu.raincutterAction({
             weapon: lionroarR5,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
-            buffs: teamWide,
-            hitStats: ["hasElectro"]
+            buffs: teamWide
         }),
         raiden.omenAction({
             weapon: jadeSpear,
@@ -916,13 +940,21 @@ export const raiden_xingqiu_bennett_fischl = () => {
         transforms: [raiden.icdElectroCharged],
     });
 
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasPyro"]
+    });
+
     output(`Raiden, Xingqiu, Bennett, Fischl: ${teamDamageDps([
         musouAction,
         xingqiu.raincutterAction({
             weapon: lionroarR5,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
-            buffs: teamWide,
-            hitStats: ["hasElectro"]
+            buffs: teamWide
         }),
         raiden.omenAction({
             weapon: jadeSpear,
@@ -931,17 +963,17 @@ export const raiden_xingqiu_bennett_fischl = () => {
         }),
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: [bennBurst, ...teamWide],
         }),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
         }),
     ])}`);
@@ -960,13 +992,21 @@ export const raiden_xingqiu_bennett_jean = () => {
         transforms: [raiden.icdElectroCharged],
     });
 
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasPyro"]
+    });
+
     output(`Raiden, Xingqiu, Bennett, Jean: ${teamDamageDps([
         musouAction,
         xingqiu.raincutterAction({
             weapon: lionroarR5,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
-            buffs: teamWide,
-            hitStats: ["hasElectro"]
+            buffs: teamWide
         }),
         raiden.omenAction({
             weapon: jadeSpear,
@@ -1088,19 +1128,19 @@ export const raiden_bennett_fischl_sucrose = () => {
         }),
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: [bennBurst, ...teamWide],
             debuffs,
         }),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
         }),
@@ -1492,20 +1532,20 @@ export const eula_fischl_albedo_zhongli = () => {
         glacialAction, 
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
             debuffs,
         }),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
             duration: Math.floor(glacialAction.duration / 3)
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
             duration: glacialAction.duration
@@ -1613,7 +1653,7 @@ export const eula_fischl_lisa_diona = () => {
         char: stats(eula.char, wolfs, [flower_10, feather_10, sand_10, goblet_10, circlet_23]),
         hits: eula.hits(onField, debuffs)
     }, {
-        char: stats(fischl.char, stringlessR2, [flower_13, feather_16, sand_13, goblet_15, circlet_13]),
+        char: stats(fischl.char, stringlessR2, [flower_13, feather_16, sand_13, goblet_15, circlet_45]),
         hits: fischl.hits(teamWide, debuffs)
     }], duration, downtime)}`);
 };
@@ -1695,19 +1735,19 @@ export const xiao_jean_fischl_zhongli = () => {
         baneAction, 
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
         }),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs: [vvShred, ...debuffs],
             duration: baneAction.duration
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs: [vvShred, ...debuffs],
             duration: baneAction.duration
@@ -1822,19 +1862,19 @@ export const xingqiu_xiangling_bennett_fischl = () => {
         }),
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
             transforms: [electroCharged]
         }),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             transforms: [electroCharged]
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             transforms: [electroCharged]
         }),
@@ -1974,7 +2014,7 @@ export const itto_fischl_albedo_gorou = () => {
 
     const ozAction = fischl.ozAction({
         weapon: stringlessR2,
-        artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+        artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
         buffs: onField,
         debuffs,
     });
@@ -1990,14 +2030,14 @@ export const itto_fischl_albedo_gorou = () => {
         }),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs: [vvShred, ...debuffs],
             duration: royalAction.duration
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs: [vvShred, ...debuffs],
             duration: royalAction.duration
@@ -2107,7 +2147,7 @@ export const ayaka_mona_venti_diona = () => {
         resBuff: 0,
         resDebuff: 0,
         defDebuff: 0,
-        stats: ["frozen"]
+        stats: ["hasFrozen"]
     });
     const soumetsuAction = ayaka.soumetsuAction({
         weapon: amenoma,
@@ -2149,7 +2189,7 @@ export const ayaka_mona_venti_shenhe = () => {
         resBuff: 0,
         resDebuff: 0,
         defDebuff: 0,
-        stats: ["frozen"]
+        stats: ["hasFrozen"]
     });
     const soumetsuAction = ayaka.soumetsuAction({
         weapon: amenoma,
@@ -2210,7 +2250,7 @@ export const ayaka_kokomi_venti_shenhe = () => {
         resBuff: 0,
         resDebuff: 0,
         defDebuff: 0,
-        stats: ["frozen"]
+        stats: ["hasFrozen"]
     });
     const soumetsuAction = ayaka.soumetsuAction({
         weapon: amenoma,
@@ -2271,7 +2311,7 @@ export const ayaka_mona_diona_shenhe = () => {
         resBuff: 0,
         resDebuff: 0,
         defDebuff: 0,
-        stats: ["frozen"]
+        stats: ["hasFrozen"]
     });
 
     const soumetsuAction = ayaka.soumetsuAction({
@@ -2394,7 +2434,7 @@ export const ayaka_mona_bennett_shenhe = () => {
         resBuff: 0,
         resDebuff: 0,
         defDebuff: 0,
-        stats: ["frozen"]
+        stats: ["hasFrozen"]
     });
 
     const soumetsuAction = ayaka.soumetsuAction({
@@ -2520,7 +2560,7 @@ export const ayaka_mona_zhongli_shenhe = () => {
         resBuff: 0,
         resDebuff: 0,
         defDebuff: 0,
-        stats: ["frozen"]
+        stats: ["hasFrozen"]
     });
 
     const soumetsuAction = ayaka.soumetsuAction({
@@ -2879,20 +2919,20 @@ export const ayato_yae_albedo_zhongli = () => {
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             duration: 17,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         yae.sesshouAction({
             weapon: widsith_mast,
@@ -2916,6 +2956,104 @@ export const ayato_yae_albedo_zhongli = () => {
     ])}`);
 };
 
+export const ayato_yae_albedo_gorou = () => {
+    const teamWide = [gorouBanner3, homNature];
+    const onField = [geoRes, yunjinBurst, ...teamWide];
+    const debuffs = [geoResShred];
+
+    output(`Ayato, Yae, Albedo, Gorou: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        yae.sesshouAction({
+            weapon: widsith_mast,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: teamWide,
+            transforms: [yae.icdElectroCharged]
+        }),
+        albedo.blossomAction({
+            weapon: cinnabar,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+        }),
+        albedo.tectonicAction({
+            weapon: cinnabar,
+            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            buffs: onField,
+            debuffs,
+        }),
+    ])}`);
+};
+
+export const ayato_yae_albedo_xingqiu = () => {
+    const teamWide = [homNature];
+    const onField = [geoRes, ...teamWide];
+    const debuffs = [geoResShred];
+
+    output(`Ayato, Yae, Albedo, Xingqiu: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        yae.sesshouAction({
+            weapon: widsith_mast,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: teamWide,
+            transforms: [yae.icdElectroCharged]
+        }),
+        albedo.blossomAction({
+            weapon: cinnabar,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+        }),
+        albedo.tectonicAction({
+            weapon: cinnabar,
+            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            buffs: onField,
+            debuffs,
+        }),
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: teamWide,
+            debuffs,
+        }),
+    ])}`);
+};
+
 export const ayato_yae_albedo_yunjin = () => {
     const teamWide = [homNature];
     const onField = [geoRes, yunjinBurst, ...teamWide];
@@ -2926,20 +3064,20 @@ export const ayato_yae_albedo_yunjin = () => {
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             duration: 17,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         yae.sesshouAction({
             weapon: widsith_mast,
@@ -2973,38 +3111,38 @@ export const ayato_fischl_albedo_yunjin = () => {
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             duration: 17,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
             debuffs,
             transforms: [fischl.icdElectroCharged]
         }),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
             duration: Math.floor(17 / 3)
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
         }),
@@ -3024,6 +3162,42 @@ export const ayato_fischl_albedo_yunjin = () => {
     ])}`);
 };
 
+export const ayato_yae_yunjin_zhongli = () => {
+    const teamWide = [tom];
+    const onField = [...teamWide];
+    const debuffs = [lapidus, geoRes];
+
+    output(`Ayato, Yae, Yunjin, Zhong Li: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        yae.sesshouAction({
+            weapon: widsith_mast,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: teamWide,
+            debuffs,
+            transforms: [yae.icdElectroCharged]
+        }),
+        zhongli.lapidusAction(),
+        yunjin.bannerAction(),
+    ])}`);
+};
 
 export const ayato_yae_fischl_zhongli = () => {
     const teamWide = [tom];
@@ -3035,20 +3209,20 @@ export const ayato_yae_fischl_zhongli = () => {
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             duration: 17,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         yae.sesshouAction({
             weapon: widsith_mast,
@@ -3059,20 +3233,20 @@ export const ayato_yae_fischl_zhongli = () => {
         }),
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
             debuffs,
         }),
         fischl.a2Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
             duration: Math.floor(17 / 3)
         }),
         fischl.c6Action({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
         }),
@@ -3090,31 +3264,31 @@ export const ayato_fischl_bennett_jean = () => {
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             duration: 17,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         fischl.ozAction({
             weapon: stringlessR2,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: onField,
             debuffs,
         }),
         fischl.a2Action({
             weapon: skywardHarpR1,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
             duration: Math.floor(17 / 3)
         }),
         fischl.c6Action({
             weapon: skywardHarpR1,
-            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_13],
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
         }),
@@ -3137,6 +3311,31 @@ export const ayato_fischl_bennett_jean = () => {
     ])}`);
 };
 
+export const ayato_yunjin_bennett_zhongli = () => {
+    const teamWide = [noblesse];
+    const onField = [yunjinBurst, bennBurst, ...teamWide];
+    const debuffs = [lapidus];
+
+    output(`Ayato, Yunjin, Bennett, Zhongli: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        bennett.passionAction(),
+        yunjin.bannerAction(),
+        zhongli.lapidusAction(),
+    ])}`);
+};
+
 export const ayato_yunjin_bennett_jean = () => {
     const teamWide = [noblesse];
     const onField = [yunjinBurst, bennBurst, ...teamWide];
@@ -3147,14 +3346,14 @@ export const ayato_yunjin_bennett_jean = () => {
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             duration: 17,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         bennett.passionAction(),
         yunjin.bannerAction(),
@@ -3186,14 +3385,14 @@ export const ayato_xiangling_bennett_zhongli = () => {
             weapon: skywardBlade,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
             duration: 17,
             buffs: onField,
             debuffs,
-            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_45]
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
         xiangling.pyronadoAction({
             weapon: theCatchR5,

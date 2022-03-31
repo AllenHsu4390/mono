@@ -7,6 +7,7 @@ import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel, theCatchR5, favon
 import { lisaA2, raidenC2, vvShred } from './debuffs.js';
 import { electroCharged, overloaded } from './reactions.js';
 import { raiden } from './my_characters.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 
 const enemy = {
     lvl: 90,
@@ -50,7 +51,7 @@ const comboHits = (combo, traits = [], debuffs = [], amps = [], transforms = [])
             traits,
             amplifiers: [crit],
             motionValue: motionValue + resolveBonus(index, 60),
-            enemy: enemy,
+            enemy: getCurrentEnemy(),
             debuffs,
             transforms,
             stats: ["burst", "electro"]
@@ -64,7 +65,7 @@ export const balefulOmenHits = (traits = [], debuffs = [], amps = [], transforms
             traits,
             amplifiers: [crit],
             motionValue,
-            enemy,
+            enemy: getCurrentEnemy(),
             debuffs,
             transforms,
             stats: ["skill", "electro"]
@@ -102,6 +103,7 @@ const buffTeam = [bennBurst, noblesse, baalE, saraBurst];
 export const char = raiden;
 
 export const print = () => {
+    setCurrentEnemy(enemy);
     const nationalTeamEasy = comboHits(N5X3, nationalTeam, [], [], [icdElectroCharged]);
     const nationalTeamHard = comboHits(N3CAX2_N2CAX2, nationalTeam, [], [], [icdElectroCharged]);
     const buffTeamEasy = comboHits(N5X3, buffTeam, [vvShred]);

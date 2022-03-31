@@ -2,8 +2,8 @@ import { crit } from './amplifiers.js';
 import { damageDps } from './damage.js';
 import { stats } from './stats.js';
 import { ayato } from './my_characters.js';
-import { amenoma, blackSword, harbinger, skywardBlade } from './swords.js';
-import { circlet_44, circlet_45, feather_44, flower_44, goblet_44, sand_44 } from './my_artifacts.js';
+import { amenoma, blackSword, harbinger, lionroarR5, skywardBlade } from './swords.js';
+import { circlet_13, circlet_44, circlet_45, feather_44, flower_44, goblet_44, sand_44 } from './my_artifacts.js';
 import { bennBurst, yunjinBurst } from './traits.js';
 import {  vvShred } from './debuffs.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
@@ -90,27 +90,33 @@ const hyperBuffs = [bennBurst, yunjinBurst];
 const debuffs = [vvShred];
 
 const cd_artifacts = [flower_44, feather_44, sand_44, goblet_44, circlet_44];
-const cr_artifacts = [flower_44, feather_44, sand_44, goblet_44, circlet_45];
+const cr_artifacts = [flower_44, feather_44, sand_44, goblet_44, circlet_13];
 
 export const print = () => {
     const hits = (buffs, debuffs, amps, transforms, hitStats, duration) => [
         ...suiyuuHits(buffs, debuffs, amps, transforms, hitStats),
         ...kyoukaHits(buffs, debuffs, amps, transforms, hitStats, duration)
     ];
-    setCurrentEnemy(enemy);
+    setCurrentEnemy({...enemy, stats: ["hasElectro"]});
     console.log('-----Kyouka Base-----');
-    console.log(`Black blade Damage: ${damageDps(stats(char, blackSword, cd_artifacts), hits(buffs, debuffs, undefined, undefined, undefined), 6)}`);
+    console.log(`Black blade Damage: ${damageDps(stats(char, blackSword, cd_artifacts), hits(buffs, debuffs), 6)}`);
     console.log(`Skyward blade Damage: ${damageDps(stats(char, skywardBlade, cr_artifacts), hits(buffs, debuffs, undefined, undefined, undefined, 17), 6)}`);
-    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, cd_artifacts), hits(buffs, debuffs, undefined, undefined, undefined), 6)}`);
-    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, cr_artifacts), hits(buffs, debuffs, undefined, undefined, undefined), 6)}`);
+    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, cd_artifacts), hits(buffs, debuffs), 6)}`);
+    console.log(`Lions roar Damage: ${damageDps(stats(char, lionroarR5, cr_artifacts), hits(buffs, debuffs), 6)}`);
+
+    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, cr_artifacts), hits(buffs, debuffs), 6)}`);
     console.log('-----Kyouka Hyper-----');
-    console.log(`Black blade Damage: ${damageDps(stats(char, blackSword, cd_artifacts), hits(hyperBuffs, debuffs, undefined, undefined, undefined), 6)}`);
+    console.log(`Black blade Damage: ${damageDps(stats(char, blackSword, cd_artifacts), hits(hyperBuffs, debuffs), 6)}`);
     console.log(`Skyward blade Damage: ${damageDps(stats(char, skywardBlade, cr_artifacts), hits(hyperBuffs, debuffs, undefined, undefined, undefined, 17), 6)}`);
-    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, cd_artifacts), hits(hyperBuffs, debuffs, undefined, undefined, undefined), 6)}`);
-    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, cr_artifacts), hits(hyperBuffs, debuffs, undefined, undefined, undefined), 6)}`);
+    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, cd_artifacts), hits(hyperBuffs, debuffs), 6)}`);
+    console.log(`Lions roar Damage: ${damageDps(stats(char, lionroarR5, cr_artifacts), hits(hyperBuffs, debuffs), 6)}`);
+
+    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, cr_artifacts), hits(hyperBuffs, debuffs), 6)}`);
     console.log('-----CRIT 1 Kyouka Hyper-----');
-    console.log(`Black blade Damage: ${damageDps(stats(char, blackSword, cd_artifacts.concat({ critRate: 1 })), kyoukaHits(hyperBuffs, debuffs, undefined, undefined, undefined).slice(0, 1))}`);
-    console.log(`Skyward blade Damage: ${damageDps(stats(char, skywardBlade, cr_artifacts.concat({ critRate: 1 })), kyoukaHits(hyperBuffs, debuffs, undefined, undefined, undefined).slice(0, 1))}`);
-    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, cd_artifacts.concat({ critRate: 1 })), kyoukaHits(hyperBuffs, debuffs, undefined, undefined, undefined).slice(0, 1))}`);
-    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, cr_artifacts.concat({ critRate: 1 })), kyoukaHits(hyperBuffs, debuffs, undefined, undefined, undefined).slice(0, 1))}`);
+    console.log(`Black blade Damage: ${damageDps(stats(char, blackSword, cd_artifacts.concat({ critRate: 1 })), kyoukaHits(hyperBuffs, debuffs).slice(0, 1))}`);
+    console.log(`Skyward blade Damage: ${damageDps(stats(char, skywardBlade, cr_artifacts.concat({ critRate: 1 })), kyoukaHits(hyperBuffs, debuffs).slice(0, 1))}`);
+    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, cd_artifacts.concat({ critRate: 1 })), kyoukaHits(hyperBuffs, debuffs).slice(0, 1))}`);
+    console.log(`Lions roar: ${damageDps(stats(char, lionroarR5, cd_artifacts.concat({ critRate: 1 })), kyoukaHits(hyperBuffs, debuffs).slice(0, 1))}`);
+
+    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, cr_artifacts.concat({ critRate: 1 })), kyoukaHits(hyperBuffs, debuffs).slice(0, 1))}`);
 };

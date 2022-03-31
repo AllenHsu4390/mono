@@ -8,7 +8,7 @@ import { lapidus, vvShred } from './debuffs.js';
 import { overloaded } from './reactions.js';
 import { diluc } from './my_characters.js';
 import { rainslasher, redhorn, serpentSpine, wolfs } from './claymore.js';
-import { setCurrentEnemy } from './enemy.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 
 const enemy = {
     lvl: 90,
@@ -29,7 +29,7 @@ const normalHits = (traits = [], debuffs = [], amps = [], transforms = [], stats
             traits,
             amplifiers: [crit, ...amps],
             motionValue,
-            enemy,
+            enemy: getCurrentEnemy(),
             index,
             debuffs,
             transforms,
@@ -44,7 +44,7 @@ const onslaughtHits = (traits = [], debuffs = [], amps = [], transforms = [], st
             traits,
             amplifiers: [crit, ...amps],
             motionValue,
-            enemy,
+            enemy: getCurrentEnemy(),
             index,
             debuffs,
             transforms,
@@ -59,7 +59,7 @@ const dawnHits = (traits = [], debuffs = [], amps = [], transforms = [], stats =
             traits,
             amplifiers: [crit, ...amps],
             motionValue,
-            enemy,
+            enemy: getCurrentEnemy(),
             index,
             debuffs,
             transforms,
@@ -106,8 +106,8 @@ const artifacts = [flower_7, feather_7, sand_4, goblet_4, circlet_41];
 export const char = diluc;
 
 export const print = () => {
-    const vapeHits = comboHits([tom, noblesse, bennBurst, pyroRes], [lapidus], [pyroVape]);
     setCurrentEnemy(enemy);
+    const vapeHits = comboHits([tom, noblesse, bennBurst, pyroRes], [lapidus], [pyroVape]);
     console.log("Vape Combo");
     console.log(`Wolfs: ${damageDps(stats(char, wolfs, artifacts), vapeHits)}`);
     console.log(`Rainslasher: ${damageDps(stats(char, rainslasher, artifacts), vapeHits)}`);
