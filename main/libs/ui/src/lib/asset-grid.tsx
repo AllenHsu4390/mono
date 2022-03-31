@@ -1,11 +1,12 @@
+import React from 'react';
 import { Container, Grid, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { Assets } from '@main/models';
 import { AssetCard } from './asset-card';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Error } from '@main/models';
+import Link from 'next/link';
 
 const fetchAssets = async ({ pageParam = 0 }) => {
   const response = await fetch(`/api/assets?pageId=${pageParam}`);
@@ -47,7 +48,7 @@ export function AssetGrid() {
             : data.pages.map((page) =>
                 page.assets.map((asset) => (
                   <Grid item key={asset.id} xs={4} sm={4} md={4}>
-                    <a href={`/assets/${asset.id}`} key={asset.id}>
+                    <Link href={`/assets/${asset.id}`} key={asset.id}>
                       <Box
                         sx={{
                           cursor: 'pointer',
@@ -55,7 +56,7 @@ export function AssetGrid() {
                       >
                         <AssetCard {...asset} isFull={false} />
                       </Box>
-                    </a>
+                    </Link>
                   </Grid>
                 ))
               )}
