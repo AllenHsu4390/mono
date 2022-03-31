@@ -42,8 +42,8 @@ export const whiteTassel = ({ elemDmg }, { stats }) => {
     return {};
 };
 
-export const rainslasher = ({ elemDmg }, { stats }) => {
-    if (stats.includes("hasHydro") || stats.includes("hasElectro")) {
+export const rainslasher = ({ elemDmg }, { enemy }) => {
+    if (enemy.stats.includes("hasHydro") || enemy.stats.includes("hasElectro")) {
         return {
             elemDmg: elemDmg + .36
         };
@@ -52,8 +52,8 @@ export const rainslasher = ({ elemDmg }, { stats }) => {
     return {};
 };
 
-export const dragonsBane = ({ elemDmg }, { stats }) => {
-    if (stats.includes("hasHydro") || stats.includes("hasPyro")) {
+export const dragonsBane = ({ elemDmg }, { enemy }) => {
+    if (enemy.stats.includes("hasHydro") || enemy.stats.includes("hasPyro")) {
         return {
             elemDmg: elemDmg + .36
         };
@@ -62,8 +62,8 @@ export const dragonsBane = ({ elemDmg }, { stats }) => {
     return {};
 };
 
-export const lionroar = ({ elemDmg }, { stats }) => {
-    if (stats.includes("hasElectro") || stats.includes("hasPyro")) {
+export const lionroar = ({ elemDmg }, { enemy }) => {
+    if (enemy.stats.includes("hasElectro") || enemy.stats.includes("hasPyro")) {
         return {
             elemDmg: elemDmg + .36
         };

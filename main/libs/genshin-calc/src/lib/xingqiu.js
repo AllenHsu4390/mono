@@ -5,16 +5,9 @@ import { flower_1, feather_1, sand_1, goblet_1, circlet_2, circlet_3, circlet_12
 import { stats } from './stats.js';
 import { bennBurst, noblesse, pyroRes, baalE } from './traits.js';
 import { xingqiu } from './my_characters.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 
 export const char = xingqiu;
-
-const enemy = {
-    lvl: 90,
-    res: 0.10,
-    resBuff: 0,
-    resDebuff: 0,
-    defDebuff: 0
-};
 
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
     return Array(Math.floor(Math.min(15, duration) * 4)).fill(1.03).map((motionValue, index) => {
@@ -24,23 +17,28 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             amplifiers: [crit, ...amps],
             motionValue,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             debuffs,
             transforms
         };
     });
 };
 
-const fatalRainScreen = [3.02, 3.44].map((motionValue, index) => {
-    const c4 = () => 1.5;
-
-    return {
-        traits: [bennBurst, noblesse, pyroRes],
-        amplifiers: [crit, ...(index === 0 ? [hydroVape] : []), c4],
-        motionValue,
-        stats: ["skill", "hydro", "hasElectro"]
-    };
-});
+const fatalRainScreenHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
+    return [3.02, 3.44].map((motionValue, index) => {
+        const c4 = () => 1.5;
+    
+        return {
+            traits: [...traits],
+            debuffs,
+            transforms,
+            amplifiers: [crit, ...(index === 0 ? [hydroVape] : []), c4, ...amps],
+            motionValue,
+            stats: ["skill", "hydro", ...stats],
+            enemy: getCurrentEnemy(),
+        };
+    });
+};
 
 export const raincutterAction = ({ weapon, artifacts, buffs, debuffs, amps = [], transforms, hitStats, duration }) => {
     return {
@@ -55,18 +53,27 @@ const artifacts = [flower_1, feather_9, sand_1, goblet_1, circlet_37];
 
 export const print = () => {
     // console.log(stats(xingqiu, lionroarR5, artifacts));
+    
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro"]
+    });
 
     console.log("Total raincutter");
-    console.log(`Lion's roar: ${damageDps(stats(xingqiu, lionroarR5, artifacts), hits([noblesse, pyroRes, baalE], undefined, undefined, undefined, ["hasElectro"]), 15)}`);
+    console.log(`Lion's roar: ${damageDps(stats(xingqiu, lionroarR5, artifacts), hits([noblesse, pyroRes, baalE]), 15)}`);
     console.log(`Sac sword: ${damageDps(stats(xingqiu, sacSword, artifacts), hits([noblesse, pyroRes, baalE]), 15)}`);
     console.log(`HOD: ${damageDps(stats(xingqiu, harbinger, artifacts), hits([noblesse, pyroRes, baalE]), 15)}`);
     console.log(`Black sword: ${damageDps(stats(xingqiu, blackSword, artifacts), hits([noblesse, pyroRes, baalE]), 15)}`);
 
     console.log("Total rainscreen");
-    console.log(`Sac sword: ${damageDps(stats(xingqiu, sacSword, artifacts), fatalRainScreen)}`);
-    console.log(`Lion's roar: ${damageDps(stats(xingqiu, lionroarR5, artifacts), fatalRainScreen)}`);
-    console.log(`HOD: ${damageDps(stats(xingqiu, harbinger, artifacts), fatalRainScreen)}`);
-    console.log(`Black sword: ${damageDps(stats(xingqiu, blackSword, artifacts), fatalRainScreen)}`);
+    console.log(`Sac sword: ${damageDps(stats(xingqiu, sacSword, artifacts), fatalRainScreenHits([noblesse, pyroRes, baalE]))}`);
+    console.log(`Lion's roar: ${damageDps(stats(xingqiu, lionroarR5, artifacts), fatalRainScreenHits([noblesse, pyroRes, baalE]))}`);
+    console.log(`HOD: ${damageDps(stats(xingqiu, harbinger, artifacts), fatalRainScreenHits([noblesse, pyroRes, baalE]))}`);
+    console.log(`Black sword: ${damageDps(stats(xingqiu, blackSword, artifacts), fatalRainScreenHits([noblesse, pyroRes, baalE]))}`);
 
     /* 
     console.log("");

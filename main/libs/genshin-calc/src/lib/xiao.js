@@ -7,6 +7,7 @@ import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel, homa } from './po
 import { lapidus } from './debuffs.js';
 import { xiao } from './my_characters.js';
 import { swirl } from './reactions.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 
 export const char = xiao;
 
@@ -45,7 +46,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = []) => {
             motionValue,
             transforms,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             debuffs
         };
     });
@@ -67,7 +68,7 @@ const normalhits = Array(3).fill([.407, .407, .841, 1.013, .566, .566, 1.057, 1.
         stats: ["anemo", "normal"],
         amplifiers: [crit],
         motionValue,
-        enemy,
+        enemy: getCurrentEnemy(),
         debuffs: [lapidus]
     };
 });
@@ -75,6 +76,7 @@ const normalhits = Array(3).fill([.407, .407, .841, 1.013, .566, .566, 1.057, 1.
 const artifacts = [flower_8, feather_34, sand_27, goblet_8, circlet_8];
 
 export const print = () => {
+    setCurrentEnemy(enemy);
     const debuffs = [lapidus];
     const plungehits = hits([tom, geoRes], debuffs, undefined, [swirl]);
 

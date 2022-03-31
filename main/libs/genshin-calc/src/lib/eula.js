@@ -2,6 +2,7 @@ import { crit, pyroVape } from './amplifiers.js';
 import { serpentSpine, wolfs } from './claymore.js';
 import { damageDps } from './damage.js';
 import { icetide, lapidus, lisaA2, shenheBurst, superConduct } from './debuffs.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 import { flower_10, feather_10, sand_10, goblet_10, circlet_10, circlet_23 } from './my_artifacts.js';
 import { eula } from './my_characters.js';
 import { stats } from './stats.js';
@@ -12,7 +13,7 @@ const enemy = {
     res: 0.30,
     resBuff: 0,
     resDebuff: 0,
-    defDebuff: 0
+    defDebuff: 0,
 };
 
 const glacialIllu = (stacks) => {
@@ -27,7 +28,7 @@ const burstHit = (stacks = 13, traits = [], debuffs = [], amps = [], transforms 
             amplifiers: [crit, ...amps],
             motionValue,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             transforms,
             debuffs: [...debuffs, icetide]
         };
@@ -42,7 +43,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             amplifiers: [crit, ...amps],
             motionValue,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             transforms,
             debuffs
         };
@@ -55,7 +56,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             amplifiers: [crit],
             motionValue,
             index,
-            enemy,
+            enemy: getCurrentEnemy(),
             transforms,
             debuffs
         };
@@ -141,6 +142,7 @@ const xinyanTeam = [tom, baalE, xinyanFervor];
 export const char = eula;
 
 export const print = () => {
+    setCurrentEnemy(enemy);
     const geoTeamHits = hits(geoTeam, [lapidus, superConduct]);
     const pyroTeamHits =  hits(pyroTeam, [superConduct, xinyanC4], undefined, undefined, ["pyro"]);
     const cryoTeamHits =  hits(cryoTeam, [lapidus, superConduct, shenheBurst]);

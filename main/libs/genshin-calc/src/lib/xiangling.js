@@ -6,13 +6,15 @@ import { stats } from './stats.js';
 import { bennBurst, noblesse, pyroRes, baalE } from './traits.js';
 import { overloaded } from './reactions.js';
 import { xiangling } from './my_characters.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 
 const enemy = {
     lvl: 90,
     res: 0.10,
     resBuff: 0,
     resDebuff: 0,
-    defDebuff: 0
+    defDebuff: 0,
+    stats: ["hasPyro", "hasHydro"]
 };
 
 const pyronado = Array(11).fill(2.13);
@@ -23,7 +25,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], hitS
             traits,
             amplifiers: [crit],
             motionValue,
-            enemy,
+            enemy: getCurrentEnemy(),
             stats: ["burst", "pyro"]
         };
     }).concat(pyronado.map((motionValue) => {
@@ -31,7 +33,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], hitS
             traits,
             amplifiers: [crit, ...amps],
             motionValue,
-            enemy,
+            enemy: getCurrentEnemy(),
             stats: ["burst", "pyro"],
             transforms
         };
@@ -61,10 +63,11 @@ const atk_gob = {
     elemMast: 37,
 };
 const artifacts2 = [flower_2, feather_2, sand_2, atk_gob, circlet_6];
-const vapeHits = hits([bennBurst, noblesse, pyroRes, baalE], [], [pyroVape]);
-const overVapeHits = hits([bennBurst, noblesse, pyroRes, baalE], [], [pyroVape], [overloaded]);
 
 export const print = () => {
+    setCurrentEnemy(enemy);
+    const vapeHits = hits([bennBurst, noblesse, pyroRes, baalE], [], [pyroVape]);
+    const overVapeHits = hits([bennBurst, noblesse, pyroRes, baalE], [], [pyroVape], [overloaded]);
     console.log("Vape");
     console.log(`Catch r5 CR circ: ${damageDps(stats(char, theCatchR5, artifacts.concat(cr_circ)), vapeHits, 14, 6)}`);
     console.log(`Deathmatch (1 enemy) CD circ: ${damageDps(stats(char, deathmatch1, artifacts.concat(cd_circ)), vapeHits, 14, 6)}`);

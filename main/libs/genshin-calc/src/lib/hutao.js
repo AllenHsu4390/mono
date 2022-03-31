@@ -7,13 +7,15 @@ import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel, homa, dragonsBane
 import { lapidus, vvShred } from './debuffs.js';
 import { overloaded } from './reactions.js';
 import { hutao } from './my_characters.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 
 const enemy = {
     lvl: 90,
     res: 0.10,
     resBuff: 0,
     resDebuff: 0,
-    defDebuff: 0
+    defDebuff: 0,
+    stats: "hasHydro",
 };
 
 export const afterlife = (attr) => { 
@@ -54,11 +56,11 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = []) => {
             traits,
             amplifiers: [crit, ...amps],
             motionValue,
-            enemy,
+            enemy: getCurrentEnemy(),
             index,
             debuffs,
             transforms,
-            stats: [motionValue === .741 ? "normal": "charge", "pyro", "hasHydro"]
+            stats: [motionValue === .741 ? "normal": "charge", "pyro"]
         };
     });
 };
@@ -80,7 +82,8 @@ const normalhits = Array(3).fill([.741, .762, .964, 1.037, .526, .556, 1.358]).f
         motionValue,
         index,
         debuffs: [lapidus],
-        stats: ["normal", "pyro", "hasHydro"]
+        stats: ["normal", "pyro"],
+        enemy: getCurrentEnemy()
     };
 });
 
@@ -93,6 +96,7 @@ const cr_artifacts = [flower_18, feather_13, sand_7, goblet_43, circlet_25];
 export const char = hutao;
 
 export const print = () => {
+    setCurrentEnemy(enemy);
     const vapeHits = hits([afterlife, geoRes, tom, homNature], [lapidus], [icdPyroVape]);
     const overVapeHits = hits([afterlife, tom], [lapidus], [icdPyroVape], [icdOverloaded]);
     const vvVapeHits = hits([afterlife, tom, pyroRes, sucroseSwirl, sucroseC6], [vvShred], [icdPyroVape]);

@@ -2,7 +2,8 @@ import { crit, cryoMelt, pyroVape } from './amplifiers.js';
 import { amosR2, rustR1, rustR5, skywardHarpR1, stringlessR2 } from './bows.js';
 import { damage, damageDps } from './damage.js';
 import { lapidus } from './debuffs.js';
-import { flower_13, feather_13, sand_13, goblet_13, circlet_13, circlet_2, flower_4, sands_14, goblet_15, feather_16 } from './my_artifacts.js';
+import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { flower_13, feather_13, sand_13, goblet_13, circlet_13, circlet_2, flower_4, sands_14, goblet_15, feather_16, circlet_45 } from './my_artifacts.js';
 import { fischl } from './my_characters.js';
 import { electroCharged } from './reactions.js';
 import { stats } from './stats.js';
@@ -36,12 +37,12 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             motionValue,
             index,
             debuffs,
-            enemy
+            enemy: getCurrentEnemy(),
         };
     });
 };
 
-const artifacts = [flower_13, feather_16, sand_13, goblet_15, circlet_13];
+const artifacts = [flower_13, feather_16, sand_13, goblet_15, circlet_45];
 
 export const a2Action = ({ weapon, artifacts, buffs, debuffs, amps = [], transforms, hitStats = [], duration }) => {
     return {
@@ -51,10 +52,10 @@ export const a2Action = ({ weapon, artifacts, buffs, debuffs, amps = [], transfo
                 stats: ["electro", ...hitStats],
                 traits: buffs,
                 transforms,
-                amplifiers: [crit],
+                amplifiers: [crit, ...amps],
                 motionValue,
                 debuffs,
-                enemy
+                enemy: getCurrentEnemy()
             };
         })
     };
@@ -68,7 +69,7 @@ export const c6Action = ({ weapon, artifacts, buffs, debuffs, amps = [], transfo
                 stats: ["electro", ...hitStats],
                 traits: buffs,
                 transforms,
-                amplifiers: [crit],
+                amplifiers: [crit, ...amps],
                 motionValue,
                 debuffs,
                 enemy
@@ -86,6 +87,7 @@ export const ozAction = ({ weapon, artifacts, buffs, debuffs, amps = [], transfo
 };
 
 export const print = () => {
+    setCurrentEnemy(enemy);
     const pyroTeam = [bennBurst, noblesse, pyroRes];
     const geoTeam = [tom];
     const geoTeamDebuffs = [lapidus];

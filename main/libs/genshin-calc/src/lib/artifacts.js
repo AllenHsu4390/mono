@@ -24,9 +24,9 @@ export const cwof2 = (attr) => {
     };
 };
 
-export const cwof4 = ({ elemDmg, reactDmg }, { stats }) => {
-    const isVapeMelt = stats.includes("pyro") && (stats.includes("hasHydro") || stats.includes("hasCryo"));
-    const isOverload = stats.includes("pyro") && stats.includes("hasElectro");
+export const cwof4 = ({ elemDmg, reactDmg }, { stats, enemy }) => {
+    const isVapeMelt = stats.includes("pyro") && (enemy.stats.includes("hasHydro") || enemy.stats.includes("hasCryo"));
+    const isOverload = stats.includes("pyro") && enemy.stats.includes("hasElectro");
     return {
         elemDmg: elemDmg + (stats.includes("pyro") ? 0.075 : 0),
         reactDmg: reactDmg + (isVapeMelt ? 0.15 : isOverload ? 0.40 : 0)
@@ -114,11 +114,10 @@ export const bliz2 = () => {
     };
 };
 
-export const bliz4 = ({ critRate }, hit) => {
-    const stats = hit.enemy && hit.enemy.stats;
-    const isFrozen = stats && stats.includes("frozen");
-    const hasCryo = stats && stats.includes("hasCryo");
+export const bliz4 = ({ critRate }, { enemy }) => {
+    const hasFrozen = enemy.stats.includes("hasFrozen");
+    const hasCryo = enemy.stats.includes("hasCryo");
     return {
-        critRate: critRate + (isFrozen ? 0.40 : hasCryo ? 0.20 : 0)
+        critRate: critRate + (hasFrozen ? 0.40 : hasCryo ? 0.20 : 0)
     };
 };
