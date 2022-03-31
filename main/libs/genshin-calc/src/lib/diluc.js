@@ -9,6 +9,7 @@ import { overloaded } from './reactions.js';
 import { diluc } from './my_characters.js';
 import { rainslasher, redhorn, serpentSpine, wolfs } from './claymore.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam } from './team.js';
 
 const enemy = {
     lvl: 90,
@@ -30,6 +31,7 @@ const normalHits = (traits = [], debuffs = [], amps = [], transforms = [], stats
             amplifiers: [crit, ...amps],
             motionValue,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             index,
             debuffs,
             transforms,
@@ -45,6 +47,7 @@ const onslaughtHits = (traits = [], debuffs = [], amps = [], transforms = [], st
             amplifiers: [crit, ...amps],
             motionValue,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             index,
             debuffs,
             transforms,
@@ -60,6 +63,7 @@ const dawnHits = (traits = [], debuffs = [], amps = [], transforms = [], stats =
             amplifiers: [crit, ...amps],
             motionValue,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             index,
             debuffs,
             transforms,

@@ -97,10 +97,11 @@ export const print = (command, searches = []) => {
             break;
         case 'teams':
             if (searches.length > 0) {
-                Object.keys(teams)
-                .filter((key) => searches.filter((search) => key.includes(search)).length === searches.length)
-                .reduce((foundMap, teamKey) => foundMap.set(teamKey, teams[teamKey]), new Map())
-                .forEach((team) => team());
+                Object
+                    .keys(teams)
+                    .filter((key) => searches.filter((search) => key.includes(search)).length === searches.length)
+                    .reduce((foundMap, teamKey) => foundMap.set(teamKey, teams[teamKey]), new Map())
+                    .forEach((team) => team());
                 break;
             }
             yoimiya_xingqiu_bennett_zhongli();

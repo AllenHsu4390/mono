@@ -6,6 +6,7 @@ import { circlet_2, circlet_33, circlet_36, circlet_5, feather_1, feather_33, fe
 import { rosaria } from './my_characters.js';
 import { deathmatch1, dragonsBane, homa, kitain, lithic1, wavebreakerR3 } from './polearms.js';
 import { stats } from './stats.js';
+import { getCurrentTeam } from './team.js';
 import { bennBurst, cryoRes, makeShenheE, noblesse, pyroRes, ttds } from './traits.js';
 
 const confessionHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
@@ -17,6 +18,7 @@ const confessionHits = (traits = [], debuffs = [], amps = [], transforms = [], s
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -32,6 +34,7 @@ const terminationHits = (traits = [], debuffs = [], amps = [], transforms = [], 
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };

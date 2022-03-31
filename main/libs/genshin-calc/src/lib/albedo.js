@@ -1,12 +1,13 @@
 import { crit } from './amplifiers.js';
 import { cinnabar, festering, harbinger } from './swords.js';
 import { damageDps } from './damage.js';
-import { flower_20, feather_20, sand_20, goblet_20, circlet_20, circlet_28,  feather_28, sands_28, flower_28, circlet_29, flower_30, feather_30, sands_30, goblet_30, circlet_30, circlet_46, circlet_38 } from './my_artifacts.js';
+import { flower_20, feather_20, sand_20, goblet_20, circlet_20, circlet_28,  feather_28, sands_28, flower_28, circlet_29, flower_30, feather_30, sands_30, goblet_30, circlet_30, circlet_46, circlet_38, feather_31 } from './my_artifacts.js';
 import { stats } from './stats.js';
 import { albedo } from './my_characters.js';
 import { geoResShred, lapidus } from './debuffs.js';
-import { geoRes, gorouBanner3 } from './traits.js';
+import { geoRes, gorouBanner } from './traits.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam, setCurrentTeam } from './team.js';
 
 export const char = albedo;
 
@@ -27,6 +28,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -42,6 +44,7 @@ export const burst = (traits = [], debuffs = [], amps = [], transforms = [], sta
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -50,7 +53,7 @@ export const burst = (traits = [], debuffs = [], amps = [], transforms = [], sta
 
 //const artifacts = [flower_20, feather_20, sand_20, goblet_20, circlet_20];
 //const artifacts = [flower_28, feather_28, sands_28, goblet_20, circlet_29];
-const artifacts = [flower_28, feather_30, sands_30, goblet_20, circlet_38];
+const artifacts = [flower_28, feather_31, sands_30, goblet_20, circlet_38];
 //const artifacts = [flower_20, feather_30, sands_30, goblet_30, circlet_28];
 
 export const blossomAction = ({ weapon, artifacts, buffs, debuffs, amps, transforms, hitStats, duration }) => {
@@ -71,10 +74,13 @@ export const tectonicAction = ({ weapon, artifacts, buffs, debuffs, amps = [], t
     };
 };
 
-const buffs = [gorouBanner3];
+const buffs = [gorouBanner];
 
 export const print = () => {
     setCurrentEnemy(enemy);
+    setCurrentTeam({
+        chars: [{ element: "geo" }, { element: "geo" }, { element: "geo" }]
+    })
     
     const debuffs = [lapidus, geoResShred];
     console.log(`Cinnabar Blossom Damage: ${damageDps(stats(albedo, cinnabar, artifacts), hits(buffs, debuffs, undefined, undefined, undefined, 10), 10, 0, "def")}`);

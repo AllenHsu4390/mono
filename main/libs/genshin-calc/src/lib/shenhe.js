@@ -7,6 +7,7 @@ import { ayaka, shenhe } from './my_characters.js';
 import { wavebreakerR3 } from './polearms.js';
 import { stats } from './stats.js';
 import { amenoma, harbinger } from './swords.js';
+import { getCurrentTeam } from './team.js';
 import { cryoRes, makeShenheE, noblesse, ttds } from './traits.js';
 
 const springHit = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
@@ -18,6 +19,7 @@ const springHit = (traits = [], debuffs = [], amps = [], transforms = [], stats 
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -34,6 +36,7 @@ const divineHits = (traits = [], debuffs = [], amps = [], transforms = [], stats
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -89,6 +92,7 @@ const quillHits = (traits = [], debuffs = [], amps = [], transforms = [], stats 
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };

@@ -82,12 +82,13 @@ export const yoimiyaSaxi = ({ atk, baseAtk, name }) => {
     };
 };
 
-export const gorouBanner3 = ({ elemDmg, def, baseDef, critDmg }, hit) => {
+export const gorouBanner = ({ elemDmg, def, baseDef, critDmg }, { stats, team }) => {
+    const geoCount = team.chars.filter((char) => char.element === "geo").length;
     // c6
     return {
-        def: def + 391.7 + (baseDef * 0.25),
-        elemDmg: elemDmg + (hit.stats.includes("geo") ? 0.15 : 0),
-        critDmg: critDmg + (hit.stats.includes("geo") ? 0.4 : 0)
+        def: def + (geoCount > 0 ? (391.7 + (baseDef * 0.25)) : 0),
+        elemDmg: elemDmg + ((geoCount > 2 && stats.includes("geo")) ? 0.15 : 0),
+        critDmg: critDmg + ((geoCount > 2 && stats.includes("geo")) ? 0.4 : 0)
     };
 };
 
