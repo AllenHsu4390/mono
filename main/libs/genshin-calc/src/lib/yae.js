@@ -114,8 +114,25 @@ const recharge_sand  = {
     elemMast: 56,
     critDmg: 0.062,
     hpPct: 0.047,
-};;
-const artifacts = [flower_42, feather_36, sand_42, goblet_42, circlet_11];[flower_13, feather_16, sand_13, goblet_15, circlet_13];[flower_1, feather_1, sand_1, goblet_1, circlet_37];
+};
+const elec_goblet = {
+    type: "shime",
+    elemDmg: 0.466,
+    element: "electro",
+    atkPct: 0.192,
+    atk: 29,
+    critRate: 0.027,
+    hp: 239,
+};
+const atk_circlet  = {
+    type: "wand",
+    atkPct: 0.466,
+    critRate: 0.101,
+    defPct: 0.131,
+    def: 39,
+    hp: 568,
+};
+const artifacts = [flower_42, feather_1, sand_42, goblet_42, circlet_11];[flower_13, feather_16, sand_13, goblet_15, circlet_13];[flower_1, feather_1, sand_1, goblet_1, circlet_37];
 const transforms = [icdElectroCharged];
 
 const buffs = [homNature, noblesse];

@@ -154,6 +154,19 @@ export const ganyu = {
     critDmg: 0.788
 };
 
+export const ayato = {
+    type: "hydro",
+    name: "ayato",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 12101,
+    baseAtk: 264,
+    baseDef: 678,
+    recharge: 1,
+    critRate: 0.05,
+    critDmg: 0.788
+};
+
 export const zhongli = {
     element: "geo",
     name: "zhongli"

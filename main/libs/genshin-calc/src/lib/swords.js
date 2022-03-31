@@ -74,10 +74,21 @@ export const cinnabar = (attr) => {
 
 export const blackSword = (attr) => {
     const { baseAtk, critRate } = attr;
-    const newBaseAtk = baseAtk + 449;
+    const newBaseAtk = baseAtk + 510;
     return {
-        name: "blacksword",
+        name: "blackSword",
         baseAtk: newBaseAtk,
-        critRate: critRate + 0.25
+        critRate: critRate + 0.276
+    };
+};
+
+export const skywardBlade = (attr) => {
+    const { baseAtk, critRate, recharge } = attr;
+    const newBaseAtk = baseAtk + 608;
+    return {
+        name: "skywardBlade",
+        baseAtk: newBaseAtk,
+        critRate: critRate + 0.04,
+        recharge: recharge + .551
     };
 };
