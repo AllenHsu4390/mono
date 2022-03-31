@@ -7,6 +7,7 @@ import { circlet_33, feather_33, flower_33, goblet_33, sand_33 } from './my_arti
 import { cryoRes, noblesse, makeShenheE, ttds } from './traits.js';
 import { shenheBurst, vvShred } from './debuffs.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam } from './team.js';
 
 export const char = ayaka;
 
@@ -40,6 +41,7 @@ export const soumetsuHits = (traits = [], debuffs = [], amps = [], transforms = 
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -55,6 +57,7 @@ export const normalAtkHits = (traits = [], debuffs = [], amps = [], transforms =
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -70,6 +73,7 @@ export const chargeAtkHits = (traits = [], debuffs = [], amps = [], transforms =
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -85,6 +89,7 @@ export const hyoukaHits = (traits = [], debuffs = [], amps = [], transforms = []
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };

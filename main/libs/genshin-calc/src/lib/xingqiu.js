@@ -6,6 +6,7 @@ import { stats } from './stats.js';
 import { bennBurst, noblesse, pyroRes, baalE } from './traits.js';
 import { xingqiu } from './my_characters.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam } from './team.js';
 
 export const char = xingqiu;
 
@@ -18,6 +19,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -36,6 +38,7 @@ const fatalRainScreenHits = (traits = [], debuffs = [], amps = [], transforms = 
             motionValue,
             stats: ["skill", "hydro", ...stats],
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
         };
     });
 };

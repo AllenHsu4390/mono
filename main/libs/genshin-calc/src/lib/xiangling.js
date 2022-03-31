@@ -7,6 +7,7 @@ import { bennBurst, noblesse, pyroRes, baalE } from './traits.js';
 import { overloaded } from './reactions.js';
 import { xiangling } from './my_characters.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam } from './team.js';
 
 const enemy = {
     lvl: 90,
@@ -26,6 +27,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], hitS
             amplifiers: [crit],
             motionValue,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             stats: ["burst", "pyro"]
         };
     }).concat(pyronado.map((motionValue) => {
@@ -34,6 +36,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], hitS
             amplifiers: [crit, ...amps],
             motionValue,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             stats: ["burst", "pyro"],
             transforms
         };

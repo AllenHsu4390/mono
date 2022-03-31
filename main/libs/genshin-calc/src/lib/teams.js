@@ -24,9 +24,10 @@ import * as rosaria from './rosaria.js';
 import * as diluc from './diluc.js';
 import * as ayato from './ayato.js';
 import * as yae from './yae.js';
+import * as mona from './mona.js';
 import { amenoma, cinnabar, harbinger, lionroarR5, sacSword, skywardBlade, blackSword } from './swords.js';
-import { circlet_10, circlet_11, circlet_12, circlet_13, circlet_20, circlet_23, circlet_3, circlet_4, circlet_25, circlet_7, circlet_8, circlet_9, feather_1, feather_10, feather_11, feather_13, feather_16, feather_2, feather_20, feather_4, feather_7, feather_8, feather_9, flower_1, flower_10, flower_11, flower_13, flower_18, flower_2, flower_20, flower_4, flower_7, flower_8, flower_9, goblet_1, goblet_10, goblet_11, goblet_15, goblet_2, goblet_20, goblet_4, goblet_43, goblet_8, goblet_9, sand_1, sand_10, sand_11, sand_13, sand_2, sand_20, sand_4, sand_7, sand_8, sand_9, sand_27, goblet_26, feather_28, circlet_29, sands_28, flower_28, flower_30, feather_30, sands_30, goblet_30, circlet_30, feather_31, circlet_28, flower_33, feather_33, sand_33, goblet_33, circlet_33, flower_34, feather_34, sand_34, goblet_34, circlet_5, sand_35, circlet_36, goblet_36, sand_36, feather_36, flower_36, circlet_2, circlet_37, feather_40, circlet_41, goblet_42, sand_42, feather_42, flower_42, circlet_44, circlet_45, feather_44, flower_44, goblet_44, sand_44 } from './my_artifacts.js';
-import { baalE, bennBurst, cryoRes, geoRes, gorouBanner3, homNature, monaOmen, noblesse, pyroRes, saraBurst, makeShenheE, sucroseC6, sucroseSwirl, tom, ttds, xianglingC6, yoimiyaSaxi, yunjinBurst } from './traits.js';
+import { circlet_10, circlet_11, circlet_12, circlet_13, circlet_20, circlet_23, circlet_3, circlet_4, circlet_25, circlet_7, circlet_8, circlet_9, feather_1, feather_10, feather_11, feather_13, feather_16, feather_2, feather_20, feather_4, feather_7, feather_8, feather_9, flower_1, flower_10, flower_11, flower_13, flower_18, flower_2, flower_20, flower_4, flower_7, flower_8, flower_9, goblet_1, goblet_10, goblet_11, goblet_15, goblet_2, goblet_20, goblet_4, goblet_43, goblet_8, goblet_9, sand_1, sand_10, sand_11, sand_13, sand_2, sand_20, sand_4, sand_7, sand_8, sand_9, sand_27, goblet_26, feather_28, circlet_29, sands_28, flower_28, flower_30, feather_30, sands_30, goblet_30, circlet_30, feather_31, circlet_28, flower_33, feather_33, sand_33, goblet_33, circlet_33, flower_34, feather_34, sand_34, goblet_34, circlet_5, sand_35, circlet_36, goblet_36, sand_36, feather_36, flower_36, circlet_2, circlet_37, feather_40, circlet_41, goblet_42, sand_42, feather_42, flower_42, circlet_44, circlet_45, feather_44, flower_44, goblet_44, sand_44, circlet_38 } from './my_artifacts.js';
+import { baalE, bennBurst, cryoRes, geoRes, gorouBanner, homNature, monaOmen, noblesse, pyroRes, saraBurst, makeShenheE, sucroseC6, sucroseSwirl, tom, ttds, xianglingC6, yoimiyaSaxi, yunjinBurst } from './traits.js';
 import { amosR2, rustR5, skywardHarpR1, stringlessR2 } from './bows.js';
 import { deathmatch1, jadeSpear, theCatchR5, homa, wavebreakerR3, lithic1 } from './polearms.js';
 import { geoResShred, lapidus, lisaA2, raidenC2, shenheBurst, superConduct, vvShred } from './debuffs.js';
@@ -37,6 +38,7 @@ import { redhorn, serpentSpine, wolfs } from './claymore.js';
 import { output } from './output.js';
 import { setCurrentEnemy } from './enemy.js';
 import { widsith, widsith_dmg, widsith_mast } from './catalyst.js';
+import { setCurrentTeam } from './team.js';
 
 const yoimiyaArtifacts = [flower_4, feather_4, sand_35, goblet_26, circlet_4];
 
@@ -269,11 +271,11 @@ export const yoimiya_yae_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -474,11 +476,11 @@ export const yoimiya_xingqiu_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -526,11 +528,11 @@ export const yoimiya_fischl_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -596,11 +598,11 @@ export const hutao_xingqiu_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -667,11 +669,11 @@ export const hutao_yae_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -1231,6 +1233,7 @@ export const raiden_mona_jean_bennett = () => {
             artifacts: [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387 }],
             transforms: [swirl],
         }),
+        mona.stellarisAction(),
     ])}`);
 };
 
@@ -1459,7 +1462,7 @@ export const eula_raiden_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         raiden.omenAction({
             weapon: jadeSpear,
@@ -1554,7 +1557,7 @@ export const eula_fischl_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         zhongli.lapidusAction(),
     ])}`);
@@ -1676,7 +1679,7 @@ export const xiao_jean_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         zhongli.lapidusAction(),
         jean.galeAction(),
@@ -1796,7 +1799,7 @@ export const xiao_raiden_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         zhongli.lapidusAction()
     ])}`);
@@ -1934,15 +1937,19 @@ export const xingqiu_xiangling_bennett_sucrose = () => {
 };
 
 export const itto_raiden_albedo_gorou = () => {
-    const teamWide = [gorouBanner3];
+    const teamWide = [gorouBanner];
     const onField = [geoRes, ...teamWide];
     const debuffs = [geoResShred];
+
+    setCurrentTeam({
+        chars: [itto.char, albedo.char, gorou.char, raiden.char]
+    })
 
     const royalAction = itto.royalAction({
         weapon: redhorn,
         debuffs,
         buffs: onField,
-        artifacts: [flower_20, feather_31, sands_28, goblet_30, circlet_28]
+        artifacts: [flower_20, feather_30, sands_28, goblet_30, circlet_28]
     });
 
     const musouAction = raiden.musouAction({
@@ -1963,22 +1970,26 @@ export const itto_raiden_albedo_gorou = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         gorou.bannerAction()
     ])}`);
 };
 
 export const itto_xingqiu_albedo_gorou = () => {
-    const teamWide = [gorouBanner3];
+    const teamWide = [gorouBanner];
     const onField = [geoRes, ...teamWide];
     const debuffs = [geoResShred];
+
+    setCurrentTeam({
+        chars: [itto.char, albedo.char, gorou.char, xingqiu.char]
+    });
 
     const royalAction = itto.royalAction({
         weapon: redhorn,
         debuffs,
         buffs: onField,
-        artifacts: [flower_20, feather_31, sands_28, goblet_30, circlet_28]
+        artifacts: [flower_20, feather_30, sands_28, goblet_30, circlet_28]
     });
 
     const raincutterAction = xingqiu.raincutterAction({
@@ -1995,21 +2006,26 @@ export const itto_xingqiu_albedo_gorou = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         gorou.bannerAction(),
     ])}`);
 };
 
 export const itto_fischl_albedo_gorou = () => {
-    const teamWide = [gorouBanner3];
+    const teamWide = [gorouBanner];
     const onField = [geoRes, ...teamWide];
     const debuffs = [geoResShred];
+
+    setCurrentTeam({
+        chars: [itto.char, albedo.char, gorou.char, fischl.char]
+    });
+
     const royalAction = itto.royalAction({
         weapon: redhorn,
         debuffs,
         buffs: onField,
-        artifacts: [flower_20, feather_31, sands_28, goblet_30, circlet_28],
+        artifacts: [flower_20, feather_30, sands_28, goblet_30, circlet_28],
     });
 
     const ozAction = fischl.ozAction({
@@ -2026,7 +2042,7 @@ export const itto_fischl_albedo_gorou = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         fischl.a2Action({
             weapon: stringlessR2,
@@ -2047,15 +2063,19 @@ export const itto_fischl_albedo_gorou = () => {
 };
 
 export const itto_bennett_albedo_gorou = () => {
-    const teamWide = [gorouBanner3, noblesse];
+    const teamWide = [gorouBanner, noblesse];
     const onField = [geoRes, bennBurst, ...teamWide];
     const debuffs = [geoResShred];
+
+    setCurrentTeam({
+        chars: [itto.char, albedo.char, gorou.char, bennett.char]
+    });
 
     const royalAction = itto.royalAction({
         weapon: redhorn,
         debuffs,
         buffs: onField,
-        artifacts: [flower_20, feather_31, sands_28, goblet_30, circlet_28]
+        artifacts: [flower_20, feather_30, sands_28, goblet_30, circlet_28]
     });
 
     output(`Itto, Bennett, Albedo, Gorou: ${teamDamageDps([
@@ -2064,7 +2084,7 @@ export const itto_bennett_albedo_gorou = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         gorou.bannerAction(),
         bennett.passionAction(),
@@ -2073,15 +2093,19 @@ export const itto_bennett_albedo_gorou = () => {
 };
 
 export const itto_zhongli_albedo_gorou = () => {
-    const teamWide = [gorouBanner3, tom];
+    const teamWide = [gorouBanner, tom];
     const onField = [geoRes, ...teamWide];
     const debuffs = [geoResShred, lapidus];
+
+    setCurrentTeam({
+        chars: [itto.char, albedo.char, gorou.char, zhongli.char]
+    });
 
     const royalAction = itto.royalAction({
         weapon: redhorn,
         debuffs,
         buffs: onField,
-        artifacts: [flower_20, feather_31, sands_28, goblet_30, circlet_28]
+        artifacts: [flower_20, feather_30, sands_28, goblet_30, circlet_28]
     });
 
     output(`Itto, Zhongli, Albedo, Gorou: ${teamDamageDps([
@@ -2090,57 +2114,14 @@ export const itto_zhongli_albedo_gorou = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         gorou.bannerAction(),
         zhongli.lapidusAction(),
     ])}`);
 };
 
-export const itto_mona_albedo_gorou = () => {
-    const teamWide = [gorouBanner3, tom, monaOmen];
-    const onField = [geoRes, ...teamWide];
-    const debuffs = [geoResShred];
-
-    const royalAction = itto.royalAction({
-        weapon: redhorn,
-        debuffs,
-        buffs: onField,
-        artifacts: [flower_20, feather_31, sands_28, goblet_30, circlet_28]
-    });
-
-    output(`Itto, Mona, Albedo, Gorou: ${teamDamageDps([
-        royalAction,
-        albedo.blossomAction({
-            weapon: cinnabar,
-            buffs: teamWide,
-            debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
-        }),
-        gorou.bannerAction(),
-    ])}`);
-};
-
-export const itto_mona_gorou_lisa = () => {
-    const teamWide = [gorouBanner3, tom, monaOmen];
-    const onField = [geoRes, ttds, ...teamWide];
-    const debuffs = [geoResShred, lisaA2];
-
-    const royalAction = itto.royalAction({
-        weapon: redhorn,
-        debuffs,
-        buffs: onField,
-        artifacts: [flower_20, feather_31, sands_28, goblet_30, circlet_28]
-    });
-
-    output(`Itto, Mona, Lisa, Gorou: ${teamDamageDps([
-        royalAction,
-        gorou.bannerAction(),
-    ])}`);
-};
-
 export const ayaka_mona_venti_diona = () => {
-
     setCurrentEnemy({
         lvl: 90,
         res: 0.10,
@@ -2236,7 +2217,8 @@ export const ayaka_mona_venti_shenhe = () => {
             buffs: teamWide,
             debuffs
         }),
-        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide })
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
+        mona.stellarisAction(),
     ])}`);
 };
 
@@ -2358,6 +2340,7 @@ export const ayaka_mona_diona_shenhe = () => {
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             debuffs
         }),
+        mona.stellarisAction(),
         shenhe.baseQuillAction({ duration: 5, debuffs, teamWide })
     ])}`);
 };
@@ -2481,6 +2464,7 @@ export const ayaka_mona_bennett_shenhe = () => {
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             debuffs
         }),
+        mona.stellarisAction(),
         bennett.passionAction(),
         bennett.passionAction(),
     ])}`);
@@ -2607,6 +2591,7 @@ export const ayaka_mona_zhongli_shenhe = () => {
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             debuffs
         }),
+        mona.stellarisAction(),
         zhongli.lapidusAction()
     ])}`);
 };
@@ -2784,11 +2769,11 @@ export const yae_xingqiu_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -2870,11 +2855,11 @@ export const yae_yoimiya_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -2944,11 +2929,11 @@ export const ayato_yae_albedo_zhongli = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -2956,10 +2941,59 @@ export const ayato_yae_albedo_zhongli = () => {
     ])}`);
 };
 
-export const ayato_yae_albedo_gorou = () => {
-    const teamWide = [gorouBanner3, homNature];
+export const ayato_yunjin_albedo_gorou = () => {
+    const teamWide = [gorouBanner, homNature];
     const onField = [geoRes, yunjinBurst, ...teamWide];
     const debuffs = [geoResShred];
+
+    setCurrentTeam({
+        chars: [ayato.char, albedo.char, gorou.char, yunjin.char]
+    });
+
+    output(`Ayato, Yunjin, Albedo, Gorou: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        albedo.blossomAction({
+            weapon: cinnabar,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
+        }),
+        albedo.tectonicAction({
+            weapon: cinnabar,
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
+            buffs: onField,
+            debuffs,
+        }),
+        yunjin.bannerAction()
+    ])}`);
+};
+
+export const ayato_yae_albedo_gorou = () => {
+    const teamWide = [gorouBanner, homNature];
+    const onField = [geoRes, ...teamWide];
+    const debuffs = [geoResShred];
+
+    setCurrentTeam({
+        chars: [ayato.char, albedo.char, gorou.char, yae.char]
+    });
 
     output(`Ayato, Yae, Albedo, Gorou: ${teamDamageDps([
         ayato.suiyuuAction({
@@ -2991,11 +3025,11 @@ export const ayato_yae_albedo_gorou = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -3004,8 +3038,8 @@ export const ayato_yae_albedo_gorou = () => {
 
 export const ayato_yae_albedo_xingqiu = () => {
     const teamWide = [homNature];
-    const onField = [geoRes, ...teamWide];
-    const debuffs = [geoResShred];
+    const onField = [...teamWide];
+    const debuffs = [];
 
     output(`Ayato, Yae, Albedo, Xingqiu: ${teamDamageDps([
         ayato.suiyuuAction({
@@ -3037,11 +3071,11 @@ export const ayato_yae_albedo_xingqiu = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -3089,11 +3123,11 @@ export const ayato_yae_albedo_yunjin = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -3150,11 +3184,11 @@ export const ayato_fischl_albedo_yunjin = () => {
             weapon: cinnabar,
             buffs: teamWide,
             debuffs,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29]
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         albedo.tectonicAction({
             weapon: cinnabar,
-            artifacts: [flower_28, feather_30, sands_30, goblet_20, circlet_29],
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38],
             buffs: onField,
             debuffs,
         }),
@@ -3164,8 +3198,8 @@ export const ayato_fischl_albedo_yunjin = () => {
 
 export const ayato_yae_yunjin_zhongli = () => {
     const teamWide = [tom];
-    const onField = [...teamWide];
-    const debuffs = [lapidus, geoRes];
+    const onField = [geoRes, ...teamWide];
+    const debuffs = [lapidus, geoResShred];
 
     output(`Ayato, Yae, Yunjin, Zhong Li: ${teamDamageDps([
         ayato.suiyuuAction({
@@ -3254,9 +3288,54 @@ export const ayato_yae_fischl_zhongli = () => {
     ])}`);
 };
 
+export const ayato_yae_bennett_jean = () => {
+    const teamWide = [noblesse];
+    const onField = [bennBurst, ...teamWide];
+    const debuffs = [vvShred];
+
+    output(`Ayato, Yae, Bennett, Jean: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        yae.sesshouAction({
+            weapon: widsith_mast,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: teamWide,
+            debuffs,
+            transforms: [yae.icdElectroCharged]
+        }),
+        bennett.passionAction(),
+        jean.breezeAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [{ atk: 408, critRate: 0.366, critDmg: 0.311, elemDmg: 0.12, elemMast: 527 }],
+            transforms: [swirl],
+        }),
+        jean.sunfireAction({
+            weapon: sacSword,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [{ atk: 408, critRate: 0.366, critDmg: 0.311, elemDmg: 0.12, elemMast: 527 }],
+            transforms: [overloaded, swirl],
+            amps: [pyroVape]
+        }),
+    ])}`);
+};
+
 export const ayato_fischl_bennett_jean = () => {
     const teamWide = [noblesse];
-    const onField = [yunjinBurst, bennBurst, ...teamWide];
+    const onField = [bennBurst, ...teamWide];
     const debuffs = [vvShred];
 
     output(`Ayato, Fischl, Bennett, Jean: ${teamDamageDps([

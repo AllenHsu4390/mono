@@ -5,8 +5,11 @@ import { flower_20, feather_20, sand_20, goblet_20, circlet_20, circlet_28,  fea
 import { stats } from './stats.js';
 import { itto } from './my_characters.js';
 import { geoResShred, lapidus } from './debuffs.js';
-import { bennBurst, geoRes, gorouBanner3, noblesse } from './traits.js';
+import { bennBurst, geoRes, gorouBanner, noblesse } from './traits.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam, setCurrentTeam } from './team.js';
+
+export const char = itto;
 
 const enemy = {
     lvl: 90,
@@ -31,6 +34,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -39,7 +43,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
 
 const circ = circlet_28;circlet_29;circlet_38;
 
-const artifacts = [flower_20, feather_31, sands_28, goblet_30, circlet_28];
+const artifacts = [flower_20, feather_30, sands_28, goblet_30, circlet_28];
 
 export const royalAction = ({ weapon, artifacts, buffs, debuffs, amps, transforms, hitStats, duration }) => {
     return {
@@ -51,10 +55,13 @@ export const royalAction = ({ weapon, artifacts, buffs, debuffs, amps, transform
     };
 };
 
-const buffs = [gorouBanner3, geoRes];
+const buffs = [gorouBanner, geoRes];
 
 export const print = () => {
     setCurrentEnemy(enemy);
+    setCurrentTeam({
+        chars: [{ element: "geo" }, { element: "geo" }, { element: "geo" }]
+    })
     const debuffs = [geoResShred];
     const fullCombo = hits(buffs, debuffs);
     console.log(`Redhorn Damage: ${damageDps(stats(itto, redhorn, artifacts), fullCombo, 10, 0)}`);

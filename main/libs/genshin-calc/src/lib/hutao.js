@@ -8,6 +8,7 @@ import { lapidus, vvShred } from './debuffs.js';
 import { overloaded } from './reactions.js';
 import { hutao } from './my_characters.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam } from './team.js';
 
 const enemy = {
     lvl: 90,
@@ -57,6 +58,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = []) => {
             amplifiers: [crit, ...amps],
             motionValue,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             index,
             debuffs,
             transforms,
@@ -83,7 +85,8 @@ const normalhits = Array(3).fill([.741, .762, .964, 1.037, .526, .556, 1.358]).f
         index,
         debuffs: [lapidus],
         stats: ["normal", "pyro"],
-        enemy: getCurrentEnemy()
+        enemy: getCurrentEnemy(),
+        team: getCurrentTeam(),
     };
 });
 

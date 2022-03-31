@@ -5,6 +5,7 @@ import { vvShred } from "./debuffs.js";
 import { getCurrentEnemy } from "./enemy.js";
 import { sara } from "./my_characters.js";
 import { stats } from "./stats.js";
+import { getCurrentTeam } from "./team.js";
 import { bennBurst, noblesse } from "./traits.js";
 
 const subjugationHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
@@ -16,6 +17,7 @@ const subjugationHits = (traits = [], debuffs = [], amps = [], transforms = [], 
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };

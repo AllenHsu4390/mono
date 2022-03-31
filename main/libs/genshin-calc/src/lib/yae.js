@@ -8,6 +8,7 @@ import { mappa, oathsworn, solarpearl, widsith_atk, widsith_dmg, widsith_mast } 
 import { electroCharged, overloaded } from './reactions.js';
 import { lapidus } from './debuffs.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
+import { getCurrentTeam } from './team.js';
 
 export const char = yae;
 
@@ -34,6 +35,7 @@ export const sesshouHits = (traits = [], debuffs = [], amps = [], transforms = [
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };
@@ -49,6 +51,7 @@ export const tenkoHits = (traits = [], debuffs = [], amps = [], transforms = [],
             motionValue,
             index,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
             debuffs,
             transforms
         };

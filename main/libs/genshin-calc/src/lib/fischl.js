@@ -7,6 +7,7 @@ import { flower_13, feather_13, sand_13, goblet_13, circlet_13, circlet_2, flowe
 import { fischl } from './my_characters.js';
 import { electroCharged } from './reactions.js';
 import { stats } from './stats.js';
+import { getCurrentTeam } from './team.js';
 import { bennBurst, geoRes, homNature, noblesse, pyroRes, tom } from './traits.js';
 
 export const char = fischl;
@@ -38,6 +39,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
             index,
             debuffs,
             enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
         };
     });
 };
@@ -55,7 +57,8 @@ export const a2Action = ({ weapon, artifacts, buffs, debuffs, amps = [], transfo
                 amplifiers: [crit, ...amps],
                 motionValue,
                 debuffs,
-                enemy: getCurrentEnemy()
+                enemy: getCurrentEnemy(),
+                team: getCurrentTeam(),
             };
         })
     };
@@ -72,7 +75,8 @@ export const c6Action = ({ weapon, artifacts, buffs, debuffs, amps = [], transfo
                 amplifiers: [crit, ...amps],
                 motionValue,
                 debuffs,
-                enemy
+                enemy: getCurrentEnemy(),
+                team: getCurrentTeam(),
             };
         })
     };
