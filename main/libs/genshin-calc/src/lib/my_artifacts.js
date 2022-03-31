@@ -419,6 +419,25 @@ export const goblet_43 = {
     critDmg: 0.202
 };
 
+export const flower_46 = {
+    type: "eosf",
+    hp: 4780,
+    recharge: 0.052,
+    elemMast: 58,
+    critRate: 0.113,
+    critDmg: 0.078,
+};
+
+export const goblet_46 = {
+    type: "shime",
+    elemMast: 187,
+    critRate: 0.035,
+    critDmg: 0.187,
+    hpPct: 0.053,
+    atk: 45,
+};
+
+
 // yoimiya
 export const flower_4 = {
     type: "shime",
@@ -957,4 +976,59 @@ export const goblet_42 = {
     atk: 29,
     critRate: 0.027,
     hp: 239,
+};
+
+// ayato
+export const flower_44 = {
+    type: "glad",
+    hp: 4780,
+    atk: 14,
+    hpPct: 0.087,
+    critDmg: 0.148,
+    critRate: 0.124
+};
+
+export const feather_44 = {
+    type: "glad",
+    atk: 311,
+    rechage: 0.065,
+    elemMast: 33,
+    critDmg: 0.303,
+    hpPct: 0.041
+};
+
+export const sand_44 = {
+    type: "glad",
+    atkPct: .466,
+    elemMast: 65,
+    def: 23,
+    critRate: 0.105,
+    critDmg: 0.148,
+};
+
+export const goblet_44 = {
+    type: "eosf",
+    elemDmg: 0.466,
+    defPct: .182,
+    atk: 31,
+    critRate: 0.101,
+    recharge: 0.065,
+};
+
+export const circlet_44 = {
+    type: "glad",
+    critDmg: 0.622,
+    critRate: 0.031,
+    atkPct: 0.099,
+    atk: 60,
+    defPct: 0.073
+};
+
+export const circlet_45 = {
+    type: "glad",
+    critRate: 0.311,
+    defPct: 0.131,
+    atk: 27,
+    critDmg: 0.132,
+    recharge: 0.091
 };

@@ -182,7 +182,22 @@ export const cinnabar = ({ flatDmg, def }, { stats }) => {
 
 export const redhorn = ({ flatDmg, def }, { stats }) => {
     return {
-        flatDmg: flatDmg + (stats.includes("normal") || stats.includes("charged")? (0.4 * def) : 0)
+        flatDmg: flatDmg + (stats.includes("normal") || stats.includes("charged") ? (0.4 * def) : 0)
+    };
+};
+
+export const blackSword = (attr, { stats }) => {
+    const { elemDmg } = attr;
+    return {
+        elemDmg: elemDmg + (stats.includes("normal") || stats.includes("charged") ? 0.2 : 0)
+    };
+};
+
+export const skywardBlade = (attr, { stats }) => {
+    const { atk, flatDmg } = attr;
+    return {
+        // attack speed increased by 12%
+        flatDmg: flatDmg + (stats.includes("normal") || stats.includes("charged") ? (0.2 * atk) : 0)
     };
 };
 

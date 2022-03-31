@@ -1,7 +1,7 @@
 import { crit, hydroVape } from './amplifiers.js';
 import { lionroarR5, sacSword, harbinger, blackSword } from './swords.js';
 import { damageDps } from './damage.js';
-import { flower_1, feather_1, sand_1, goblet_1, circlet_2, circlet_3, circlet_12, feather_2, circlet_37 } from './my_artifacts.js';
+import { flower_1, feather_1, sand_1, goblet_1, circlet_2, circlet_3, circlet_12, feather_2, circlet_37, feather_9 } from './my_artifacts.js';
 import { stats } from './stats.js';
 import { bennBurst, noblesse, pyroRes, baalE } from './traits.js';
 import { xingqiu } from './my_characters.js';
@@ -51,7 +51,7 @@ export const raincutterAction = ({ weapon, artifacts, buffs, debuffs, amps = [],
     };
 };
 
-const artifacts = [flower_1, feather_1, sand_1, goblet_1, circlet_37];
+const artifacts = [flower_1, feather_9, sand_1, goblet_1, circlet_37];
 
 export const print = () => {
     // console.log(stats(xingqiu, lionroarR5, artifacts));
