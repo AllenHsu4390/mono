@@ -266,10 +266,10 @@ export const sands_28 = {
 export const circlet_28 = {
     type: "husk",
     critRate: 0.311,
-    hp: 269,
-    def: 0.058,
-    elemMast: 63,
-    hp: 0.099
+    critDmg: 0.062,
+    def: 60,
+    hp: 747,
+    recharge: 0.045,
 };
 
 export const circlet_29 = {
@@ -444,6 +444,14 @@ export const circlet_46 = {
     elemMast: 37,
     defPct: 0.117,
     hp: 299,
+};
+
+export const circlet_47 = {
+    type: "eosf",
+    atkPct: 0.099,
+    critRate: 0.062,
+    def: 56,
+    hp: 209,
 };
 
 // yoimiya
