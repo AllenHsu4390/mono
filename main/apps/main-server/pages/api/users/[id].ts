@@ -11,10 +11,10 @@ interface OK {
 
 const setSession = (res: NextApiResponse, user: User) => {
   const cookieValue = user.isLoggedIn
-    ? 'idKey=asdfasdfsadfasdfasdfasdf; Secure; Path=/; Max-Age=2592000; HttpOnly;'
-    : 'idKey=deleted; Secure; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;';
+    ? 'idKey=asdfasdfsadfasdfasdfasdf; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;'
+    : 'idKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;';
 
-  res.setHeader('set-cookie', cookieValue);
+  res.setHeader('Set-Cookie', cookieValue);
 };
 
 const guards: ((res: NextApiResponse, user: User) => void)[] = [setSession];

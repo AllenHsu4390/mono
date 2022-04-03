@@ -47,7 +47,7 @@ const Page: React.FC<Props> = ({ hasFooter, children }) => {
           sx={{
             paddingY: '8px',
           }}
-          maxWidth="md"
+          maxWidth="lg"
         >
           {children}
         </Container>

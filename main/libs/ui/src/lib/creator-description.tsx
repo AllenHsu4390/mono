@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
 
 interface Props {
   desc: string;
@@ -17,9 +17,9 @@ export function CreatorDescription({ avatarUrl, desc }: Props) {
         alt="Avatar"
         src={avatarUrl}
         sx={{
-          margin: "40px auto 40px auto",
-          width: "200px",
-          height: "200px",
+          margin: '40px auto 40px auto',
+          width: '150px',
+          height: '150px',
         }}
       />
       <Typography variant="h5" align="center" color="text.secondary" paragraph>
