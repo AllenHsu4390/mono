@@ -135,6 +135,7 @@ const atk_circlet  = {
     def: 39,
     hp: 568,
 };
+// 
 const artifacts = [flower_42, feather_1, sand_42, goblet_42, circlet_11];[flower_13, feather_16, sand_13, goblet_15, circlet_13];[flower_1, feather_1, sand_1, goblet_1, circlet_37];
 const transforms = [icdElectroCharged];
 
@@ -142,7 +143,7 @@ const buffs = [homNature, noblesse];
 const debuffs = [lapidus];
 
 export const print = () => {
-    setCurrentEnemy();
+    setCurrentEnemy(enemy);
     
     console.log("Total combo, electrocharged");
     //console.log(`Solar pearl: ${damageDps(stats(yae, solarpearl, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);

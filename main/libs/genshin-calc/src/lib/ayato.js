@@ -4,7 +4,7 @@ import { stats } from './stats.js';
 import { ayato } from './my_characters.js';
 import { amenoma, blackSword, harbinger, lionroarR5, skywardBlade } from './swords.js';
 import { circlet_13, circlet_44, circlet_45, feather_44, flower_44, goblet_44, sand_44 } from './my_artifacts.js';
-import { bennBurst, yunjinBurst } from './traits.js';
+import { bennBurst, noblesse, yunjinBurst } from './traits.js';
 import {  vvShred } from './debuffs.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 import { getCurrentTeam } from './team.js';
@@ -89,7 +89,7 @@ export const kyoukaAction = ({ weapon, artifacts, buffs, debuffs, amps, transfor
 };
 
 const buffs = [];
-const hyperBuffs = [bennBurst, yunjinBurst];
+const hyperBuffs = [bennBurst, yunjinBurst, noblesse];
 const debuffs = [vvShred];
 
 const cd_artifacts = [flower_44, feather_44, sand_44, goblet_44, circlet_44];
