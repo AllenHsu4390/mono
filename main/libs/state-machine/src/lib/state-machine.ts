@@ -20,7 +20,7 @@ export const stateMachine: StateMachine = {
   },
 };
 
-interface State {
+export interface State {
   method: string;
   path: string;
   links: string[];

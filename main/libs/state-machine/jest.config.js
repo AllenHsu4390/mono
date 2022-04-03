@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'middleware',
+  displayName: 'state-machine',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/middleware',
+  coverageDirectory: '../../coverage/libs/state-machine',
 };

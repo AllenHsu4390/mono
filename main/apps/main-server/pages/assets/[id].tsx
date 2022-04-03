@@ -16,12 +16,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 };
 
 const AssetNextPage: NextPage<Props> = ({ isLoggedIn }) => {
+  const router = useRouter();
+  const { id } = router.query;
+
   if (!isLoggedIn) {
     return <LoginPage />;
   }
-
-  const router = useRouter();
-  const { id } = router.query;
 
   if (!id || typeof id !== 'string') {
     return <div>Error</div>;

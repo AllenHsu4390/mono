@@ -2,12 +2,15 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { Error, User } from '@main/models';
 import { auth } from '@main/auth';
 import { environment } from '@main/environment';
+import { allLinks, State } from '@main/state-machine';
 
 const userFromLogin = (req: NextApiRequest) => 'sdfasdfasdfasdf';
 
-interface OK {
+type OK = {
   ok: true;
-}
+} & State;
+
+type UserRes = User & State;
 
 const setSession = (res: NextApiResponse, user: User) => {
   const cookieValue = user.isLoggedIn
@@ -42,7 +45,7 @@ const putSchema = (body: any): User => {
 };
 
 const me = {
-  put: async (req, res: NextApiResponse<User | Error | OK>) => {
+  update: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
     const db = environment().db;
     const { isLoggedIn, avatarUrl }: User = putSchema(req.body);
     const userId = auth().identity.userId(userFromLogin(req));
@@ -56,18 +59,20 @@ const me = {
     runGuards(res, newUser);
     res.status(200).json({
       ok: true,
+      ...allLinks.get('POST:/api/users/me'),
     });
   },
-  post: async (req, res: NextApiResponse<User | Error | OK>) => {
+  create: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
     const db = environment().db;
     const user: User = postSchema(req.body);
     await db.save.user(user);
     runGuards(res, user);
     res.status(200).json({
       ok: true,
+      ...allLinks.get('POST:/api/users'),
     });
   },
-  get: async (req, res: NextApiResponse<User | Error | OK>) => {
+  read: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
     const { idKey } = req.cookies;
     if (!idKey) {
       throw {
@@ -78,25 +83,28 @@ const me = {
     const userId = auth().identity.userId(idKey);
     const user = await db.get.user(userId);
     runGuards(res, user);
-    res.status(200).json(user);
+    res.status(200).json({
+      ...user,
+      ...allLinks.get('GET:/api/users/me'),
+    });
   },
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<User | Error | OK>
+  res: NextApiResponse<(User & State) | Error | OK>
 ) {
   const { id } = req.query;
   try {
     switch (true) {
       case req.method === 'POST' && id === 'me':
-        await me.put(req, res);
+        await me.update(req, res);
         break;
       case req.method === 'POST':
-        await me.post(req, res);
+        await me.create(req, res);
         break;
       case req.method === 'GET' && id === 'me':
-        await me.get(req, res);
+        await me.read(req, res);
         break;
       default:
         throw {

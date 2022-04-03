@@ -18,9 +18,9 @@
       "@main/auth": ["libs/auth/src/index.ts"],
       "@main/environment": ["libs/environment/src/index.ts"],
       "@main/genshin-calc": ["libs/genshin-calc/src/index.ts"],
-      "@main/middleware": ["libs/middleware/src/index.ts"],
       "@main/mock-db": ["libs/mock-db/src/index.ts"],
       "@main/models": ["libs/models/src/index.ts"],
+      "@main/state-machine": ["libs/state-machine/src/index.ts"],
       "@main/ui": ["libs/ui/src/index.ts"]
     }
   },
