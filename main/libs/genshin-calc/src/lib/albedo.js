@@ -60,8 +60,7 @@ export const blossomAction = ({ weapon, artifacts, buffs, debuffs, amps, transfo
     return {
         char: stats(albedo, weapon, artifacts),
         hits: hits(buffs, debuffs, amps, transforms, hitStats, duration),
-        hitStat: "def",
-        duration
+        hitStat: "def"
     };
 };
 
