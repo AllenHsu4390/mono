@@ -1,24 +1,37 @@
 import { AssetCard } from './asset-card';
 import { Container } from '@mui/material';
 import Page from './page';
-import { Asset } from '@main/models';
+import { Asset, Creator } from '@main/models';
 import { useQuery } from 'react-query';
 
 interface Props {
-  id: string;
+  creatorId: string;
+  assetId: string;
 }
 
-export default function AssetPage({ id }: Props) {
-  const { data, status } = useQuery<Asset, Error>(['asset', id], async () => {
-    const res = await fetch(`/api/assets/${id}`);
-    return res.json();
-  });
+interface Response {
+  asset: Asset;
+  creator: Creator;
+}
+
+export default function AssetPage({ assetId, creatorId }: Props) {
+  const { data, status } = useQuery<Response, Error>(
+    ['asset', assetId],
+    async () => {
+      const asset = await (await fetch(`/api/assets/${assetId}`)).json();
+      const creator = await (await fetch(`/api/creators/${0}`)).json();
+      return {
+        asset,
+        creator,
+      };
+    }
+  );
 
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
 
-  if (status === 'error' || !data?.src) {
+  if (status === 'error' || !data?.asset.src || !data?.creator) {
     return <div>Error</div>;
   }
 
@@ -30,7 +43,7 @@ export default function AssetPage({ id }: Props) {
         }}
         maxWidth="md"
       >
-        <AssetCard src={data.src} isFull={true} />
+        <AssetCard asset={data.asset} creator={data.creator} isFull={true} />
       </Container>
     </Page>
   );

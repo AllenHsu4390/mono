@@ -12,6 +12,7 @@ const user: User[] = [
     id: '0',
     avatarUrl: 'https://source.unsplash.com/random/300x300',
     email: 'someguy@someemail.com',
+    isLoggedIn: true,
   },
 ];
 
@@ -46,8 +47,8 @@ const assetChunks = _.chunk(asset, 10);
 const assets = Array(ASSETS_SIZE)
   .fill(0)
   .map((_, i) => {
-    let next: number = i + 1;
-    let prev: number = i - 1;
+    const next: number = i + 1;
+    const prev: number = i - 1;
     return {
       assets: assetChunks[i],
       pagination: {
@@ -74,29 +75,29 @@ export const db: Db = new Map<Keys, Values[]>([
 export const dbGet = {
   asset: async (id: string): Promise<Asset> => {
     const dbId = Number(id) - ASSET_INDEX_OFFSET;
-    return db.get('Asset')![dbId] as Asset;
+    return db.get('Asset')[dbId] as Asset;
   },
   assets: async (id: string): Promise<Assets> => {
     const dbId = Number(id);
-    return db.get('Assets')![dbId] as Assets;
+    return db.get('Assets')[dbId] as Assets;
   },
   user: async (id: string): Promise<User> => {
     const dbId = Number(id);
-    return db.get('User')![dbId] as User;
+    return db.get('User')[dbId] as User;
   },
   users: async (id: string): Promise<Users> => {
     const dbId = Number(id);
-    return db.get('Users')![dbId] as Users;
+    return db.get('Users')[dbId] as Users;
   },
   creator: async (id: string): Promise<Creator> => {
     const dbId = Number(id);
-    return db.get('Creator')![dbId] as Creator;
+    return db.get('Creator')[dbId] as Creator;
   },
 };
 
 export const dbSave = {
   user: async (user: User): Promise<void> => {
-    const userData = db.get('User')!;
+    const userData = db.get('User');
     if (userData[Number(user.id)]) {
       userData[Number(user.id)] = user;
     }

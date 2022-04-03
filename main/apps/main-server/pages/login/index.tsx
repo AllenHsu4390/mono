@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
+import { LoginPage } from '@main/ui';
 
 const Home: NextPage = () => {
-  return <div>404 Not found</div>;
+  return <LoginPage />;
 };
 
 export default Home;
