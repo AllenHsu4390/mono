@@ -101,6 +101,11 @@ export const print = () => {
         ...suiyuuHits(buffs, debuffs, amps, transforms, hitStats),
         ...kyoukaHits(buffs, debuffs, amps, transforms, hitStats, duration)
     ];
+    const hits2E = (buffs, debuffs, amps, transforms, hitStats, duration) => [
+        ...suiyuuHits(buffs, debuffs, amps, transforms, hitStats),
+        ...kyoukaHits(buffs, debuffs, amps, transforms, hitStats, duration),
+        ...kyoukaHits(buffs, debuffs, amps, transforms, hitStats, 15)
+    ];
     setCurrentEnemy({...enemy, stats: ["hasElectro"]});
     console.log('-----Kyouka Base-----');
     console.log(`Black blade Damage: ${damageDps(stats(char, blackSword, cd_artifacts), hits(buffs, debuffs), 6)}`);
@@ -108,6 +113,12 @@ export const print = () => {
     console.log(`HOD Damage: ${damageDps(stats(char, harbinger, cd_artifacts), hits(buffs, debuffs), 6)}`);
     console.log(`Lions roar Damage: ${damageDps(stats(char, lionroarR5, cr_artifacts), hits(buffs, debuffs), 6)}`);
     console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, cr_artifacts), hits(buffs, debuffs), 6)}`);
+    console.log('-----Kyouka Base 2 rotations-----');
+    console.log(`Black blade Damage: ${damageDps(stats(char, blackSword, cd_artifacts), hits2E(buffs, debuffs), 18)}`);
+    console.log(`Skyward blade Damage: ${damageDps(stats(char, skywardBlade, cr_artifacts), hits2E(buffs, debuffs, undefined, undefined, undefined, 17), 18)}`);
+    console.log(`HOD Damage: ${damageDps(stats(char, harbinger, cd_artifacts), hits2E(buffs, debuffs), 18)}`);
+    console.log(`Lions roar Damage: ${damageDps(stats(char, lionroarR5, cr_artifacts), hits2E(buffs, debuffs), 18)}`);
+    console.log(`Amenoma Damage: ${damageDps(stats(char, amenoma, cr_artifacts), hits2E(buffs, debuffs), 18)}`);
     console.log('-----Kyouka Hyper-----');
     console.log(`Black blade Damage: ${damageDps(stats(char, blackSword, cd_artifacts), hits(hyperBuffs, hyperDebuffs), 6)}`);
     console.log(`Skyward blade Damage: ${damageDps(stats(char, skywardBlade, cr_artifacts), hits(hyperBuffs, hyperDebuffs, undefined, undefined, undefined, 17), 6)}`);

@@ -3081,7 +3081,6 @@ export const ayato_yunjin_albedo_gorou = () => {
         }),
         ayato.kyoukaAction({
             weapon: skywardBlade,
-            buffs: onField,
             debuffs,
             artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
         }),
@@ -3438,7 +3437,7 @@ export const ayato_yae_bennett_sara = () => {
         yae.sesshouAction({
             weapon: widsith_mast,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
-            buffs: [...teamWide, saraBurst],
+            buffs: [...teamWide],
             debuffs,
             transforms: [yae.icdElectroCharged]
         }),
@@ -3449,6 +3448,37 @@ export const ayato_yae_bennett_sara = () => {
             debuffs,
             artifacts: [{ atk: 386, critRate: 0.381, critDmg: 0.264, elemDmg: 0.587, atkPct: 0.2 }]
         }),
+    ])}`);
+};
+
+export const ayato_yae_bennett_sucrose = () => {
+    const teamWide = [noblesse, sucroseSwirl];
+    const onField = [bennBurst, sucroseC6, ...teamWide];
+    const debuffs = [vvShred];
+
+    output(`Ayato, Yae, Bennett, Sucrose: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        yae.sesshouAction({
+            weapon: widsith_mast,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: [...teamWide],
+            debuffs,
+            transforms: [yae.icdElectroCharged]
+        }),
+        bennett.passionAction(),
+        sucrose.swirlAction(),
     ])}`);
 };
 
@@ -3813,6 +3843,31 @@ export const ayato_mona_yae_jean = () => {
             artifacts: [{ atk: 408, critRate: 0.366, critDmg: 0.311, elemDmg: 0.12, elemMast: 527 }],
             transforms: [swirl],
         }),
+    ])}`);
+};
+
+export const ayato_mona_yunjin_bennett = () => {
+    const teamWide = [noblesse];
+    const onField = [yunjinBurst, bennBurst, monaOmen, ...teamWide];
+    const debuffs = [];
+
+    output(`Ayato, Mona, Yunjin, Bennett: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_44, circlet_13]
+        }),
+        bennett.passionAction(),
+        yunjin.bannerAction(),
+        mona.stellarisAction(),
     ])}`);
 };
 
