@@ -27,7 +27,7 @@ const icdOverloaded = (attr, hit) => {
 };
 
 export const icdElectroCharged = (attr, hit) => {
-    if (hit.index % 2 === 0) {
+    if (hit.index % 3 === 0) {
         return electroCharged(attr, hit);
     } else {
         return 0;
@@ -113,16 +113,16 @@ export const print = () => {
     const buffTeamHard = comboHits(N3CAX2_N2CAX2, buffTeam, [vvShred]);
 
     console.log("National Team");
-    console.log(`Jade r1 3NA5 spam: ${damageDps(stats(char, jadeSpear, artifacts), nationalTeamEasy)}`);
-    console.log(`Catch r5 3NA5 spam: ${damageDps(stats(char, theCatchR5, artifacts), nationalTeamEasy)}`);
-    console.log(`Homa r1 3NA5 spam: ${damageDps(stats(char, homa, artifacts), nationalTeamEasy)}`);
-    console.log(`Wavebreaker 3NA5 spam: ${damageDps(stats(char, wavebreakerR3, artifacts), nationalTeamEasy)}`);
+    console.log(`Jade r1 3NA5 spam: ${damageDps(stats(char, jadeSpear, artifacts), nationalTeamEasy, 6)}`);
+    console.log(`Catch r5 3NA5 spam: ${damageDps(stats(char, theCatchR5, artifacts), nationalTeamEasy, 6)}`);
+    console.log(`Homa r1 3NA5 spam: ${damageDps(stats(char, homa, artifacts), nationalTeamEasy, 6)}`);
+    console.log(`Wavebreaker 3NA5 spam: ${damageDps(stats(char, wavebreakerR3, artifacts), nationalTeamEasy, 6)}`);
     console.log("");
     console.log("Buff Team");
-    console.log(`Jade r1 spam: ${damageDps(stats(char, jadeSpear, artifacts), buffTeamEasy)}`);
-    console.log(`Catch r5 spam: ${damageDps(stats(char, theCatchR5, artifacts), buffTeamEasy)}`);
-    console.log(`Homa r1 spam: ${damageDps(stats(char, homa, artifacts), buffTeamEasy)}`);
-    console.log(`Wavebreaker spam: ${damageDps(stats(char, wavebreakerR3, artifacts), buffTeamEasy)}`);
+    console.log(`Jade r1 spam: ${damageDps(stats(char, jadeSpear, artifacts), buffTeamEasy, 6)}`);
+    console.log(`Catch r5 spam: ${damageDps(stats(char, theCatchR5, artifacts), buffTeamEasy, 6)}`);
+    console.log(`Homa r1 spam: ${damageDps(stats(char, homa, artifacts), buffTeamEasy, 6)}`);
+    console.log(`Wavebreaker spam: ${damageDps(stats(char, wavebreakerR3, artifacts), buffTeamEasy, 6)}`);
 
     /*
     console.log("");

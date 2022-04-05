@@ -28,6 +28,12 @@ export const lisaA2 = (enemy) => {
     };
 };
 
+export const xingqiuC2 = (enemy, hit) => {
+    return {
+        resDebuff: enemy.resDebuff + (hit.stats.includes("hydro") ? 0.15 : 0)
+    };
+}; 
+
 export const vvShred = (enemy) => {
     return {
         resDebuff: enemy.resDebuff + 0.40

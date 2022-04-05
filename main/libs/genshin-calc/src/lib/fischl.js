@@ -21,14 +21,14 @@ const enemy = {
 };
 
 export const icdElectroCharged = (attr, hit) => {
-    if (hit.index % 2 === 0) {
+    if (hit.index % 3 === 0) {
         return electroCharged(attr, hit);
     } else {
         return 0;
     }
 };
 
-export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 10) => {
+export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 12) => {
     return [4.1934, ...Array(duration).fill(1.6872)].map((motionValue, index) => {
         return {
             stats: ["electro", "skill"],

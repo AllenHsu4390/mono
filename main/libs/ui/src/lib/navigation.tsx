@@ -185,7 +185,7 @@ export default function Navigation({ user }: Props) {
       >
         <Toolbar
           sx={{
-            width: ['100%', '100%', '100%', `${theme.breakpoints.values.md}px`],
+            width: ['100%', '100%', '100%', `${theme.breakpoints.values.lg}px`],
             margin: 'auto',
           }}
         >

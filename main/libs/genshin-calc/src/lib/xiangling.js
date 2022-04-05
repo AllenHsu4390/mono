@@ -18,9 +18,23 @@ const enemy = {
     stats: ["hasPyro", "hasHydro"]
 };
 
-const pyronado = Array(11).fill(2.13);
+export const pyronadoSpinHits = (traits = [], debuffs = [], amps = [], transforms = [], hitStats = [], duration = 11) => {
+    const pyronado = Array(duration).fill(2.13);
+    return pyronado.map((motionValue) => {
+        return {
+            traits,
+            amplifiers: [crit, ...amps],
+            motionValue,
+            enemy: getCurrentEnemy(),
+            team: getCurrentTeam(),
+            debuffs,
+            stats: ["burst", "pyro", ...hitStats],
+            transforms
+        };
+    });
+};
 
-export const hits = (traits = [], debuffs = [], amps = [], transforms = [], hitStats) => {
+export const pyronadoHits = (traits = [], debuffs = [], amps = [], transforms = [], hitStats = []) => {
     return [1.37, 1.67, 2.08].map((motionValue) => {
         return {
             traits,
@@ -28,27 +42,35 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], hitS
             motionValue,
             enemy: getCurrentEnemy(),
             team: getCurrentTeam(),
-            stats: ["burst", "pyro"]
+            debuffs,
+            stats: ["burst", "pyro", ...hitStats]
         };
-    }).concat(pyronado.map((motionValue) => {
-        return {
-            traits,
-            amplifiers: [crit, ...amps],
-            motionValue,
-            enemy: getCurrentEnemy(),
-            team: getCurrentTeam(),
-            stats: ["burst", "pyro"],
-            transforms
-        };
-    }));
+    });
 };
 
-export const pyronadoAction = ({ weapon, artifacts, buffs = [], debuffs, amps = [], transforms, hitStats }) => {
+export const pyronadoAction = ({ weapon, artifacts, buffs = [], debuffs, amps = [], transforms = [], hitStats = [], duration }) => {
+    const hits = [
+        ...pyronadoHits(buffs, debuffs, amps, transforms, hitStats, duration),
+        ...pyronadoSpinHits(buffs, debuffs, amps, transforms, hitStats, duration)
+    ];
+
     return {
         char: stats(xiangling, weapon, artifacts),
-        hits: hits(buffs, debuffs, amps, transforms, hitStats),
+        hits,
         cooldown: 20,
         delay: 2,
+    };
+};
+
+export const pyronadoSpinAction = ({ weapon, artifacts, buffs = [], debuffs, amps = [], transforms = [], hitStats = [], duration }) => {
+    const hits = [
+        ...pyronadoSpinHits(buffs, debuffs, amps, transforms, hitStats, duration)
+    ];
+
+    return {
+        char: stats(xiangling, weapon, artifacts),
+        hits,
+        cooldown: 20,
     };
 };
 

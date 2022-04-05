@@ -8,6 +8,8 @@ import { ironSting, sacSword } from "./swords.js";
 import { getCurrentTeam } from "./team.js";
 import { bennBurst, noblesse } from "./traits.js";
 
+export const char = jean;
+
 const breezeHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
     return [6.7968, 1.2544].map((motionValue, index) => {
         return {
@@ -91,17 +93,21 @@ const buffs = [bennBurst, noblesse];
 const debuffs = [];
 const transforms = [swirl];
 
-const sunfireOvervapeTest = (start) => {
+const sunfireOvervapeTest = (start, hits) => {
     const swirlHits = sunfireHits(buffs, debuffs, undefined, transforms, undefined);
     const motionValue = damage(start, swirlHits.slice(0, 1));
-    return [start, sunfirePyroHits(buffs, debuffs, [pyroVape], [overloaded, swirl], undefined, undefined, motionValue)];
+    return [start, sunfirePyroHits(buffs, debuffs, [pyroVape], [overloaded, swirl], undefined, undefined, motionValue).slice(0, hits)];
 };
+
 
 export const print = () => {
     console.log('-----Breeze damage-----');
     console.log(`Sac sword: ${damageDps(stats(jean, sacSword, artifacts), breezeHits(buffs, debuffs, undefined, transforms, undefined))}`);
     console.log(`Iron sting: ${damageDps(stats(jean, ironSting, artifacts), breezeHits(buffs, debuffs, undefined, transforms, undefined))}`);
     console.log('-----Sunfire overvape damage-----');
-    console.log(`Sac sword: ${damageDps(...sunfireOvervapeTest(stats(jean, sacSword, artifacts)))}`);
-    console.log(`Iron sting: ${damageDps(...sunfireOvervapeTest(stats(jean, ironSting, artifacts)))}`);
+    console.log(`Sac sword: ${damageDps(...sunfireOvervapeTest(stats(jean, sacSword, artifacts)), 8)}`);
+    console.log(`Iron sting: ${damageDps(...sunfireOvervapeTest(stats(jean, ironSting, artifacts)), 8)}`);
+    console.log('-----Sunfire overvape damage 1 HIT-----');
+    console.log(`Sac sword: ${damageDps(...sunfireOvervapeTest(stats(jean, sacSword, artifacts), 1))}`);
+    console.log(`Iron sting: ${damageDps(...sunfireOvervapeTest(stats(jean, ironSting, artifacts), 1))}`);
 };

@@ -4,11 +4,15 @@ import Page from './page';
 import { Creator } from '@main/models';
 import { useQuery } from 'react-query';
 
-export default function AlbumPage() {
+interface Props {
+  creatorId: string;
+}
+
+export default function AlbumPage({ creatorId }: Props) {
   const { data, status } = useQuery<Creator, Error>(
-    ['creator', '0'],
+    ['creator', creatorId],
     async () => {
-      const res = await fetch(`/api/creators/${0}`);
+      const res = await fetch(`/api/creators/${creatorId}`);
       return res.json();
     }
   );
@@ -24,7 +28,7 @@ export default function AlbumPage() {
   return (
     <Page hasFooter={true}>
       <CreatorProfile creator={data} />
-      <AssetGrid />
+      <AssetGrid creator={data} />
     </Page>
   );
 }
