@@ -21,7 +21,7 @@ const enemy = {
 };
 
 export const icdElectroCharged = (attr, hit) => {
-    if (hit.index % 2 === 0) {
+    if (hit.index % 3 === 0) {
         return electroCharged(attr, hit);
     } else {
         return 0;
