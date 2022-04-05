@@ -3,7 +3,7 @@ import { damageDps } from './damage.js';
 import { stats } from './stats.js';
 import { ayato } from './my_characters.js';
 import { amenoma, blackSword, harbinger, lionroarR5, skywardBlade } from './swords.js';
-import { circlet_13, circlet_44, circlet_45, feather_44, flower_44, goblet_44, sand_44 } from './my_artifacts.js';
+import { circlet_13, circlet_44, circlet_45, feather_44, flower_44, goblet_44, goblet_48, goblet_49, sand_44 } from './my_artifacts.js';
 import { bennBurst, noblesse, yunjinBurst } from './traits.js';
 import {  vvShred } from './debuffs.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
@@ -93,8 +93,8 @@ const debuffs = [];
 const hyperBuffs = [bennBurst, yunjinBurst, noblesse];
 const hyperDebuffs = [vvShred];
 
-const cd_artifacts = [flower_44, feather_44, sand_44, goblet_44, circlet_44];
-const cr_artifacts = [flower_44, feather_44, sand_44, goblet_44, circlet_13];
+const cd_artifacts = [flower_44, feather_44, sand_44, goblet_48, circlet_44];
+const cr_artifacts = [flower_44, feather_44, sand_44, goblet_48, circlet_13];
 
 export const print = () => {
     const hits = (buffs, debuffs, amps, transforms, hitStats, duration) => [

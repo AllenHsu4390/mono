@@ -1,6 +1,6 @@
 import { crit, hydroVape } from './amplifiers.js';
 import { damageDps } from './damage.js';
-import { flower_9, feather_9, sand_9, goblet_9, circlet_9, feather_40, circlet_39, circlet_13, goblet_15, feather_16, flower_13, sand_13, circlet_11, feather_42, sand_42, goblet_42, flower_42, sand_8, circlet_30, feather_36, flower_1, feather_1, sand_1, goblet_1, circlet_37 } from './my_artifacts.js';
+import { flower_9, feather_9, sand_9, goblet_9, circlet_9, feather_40, circlet_39, circlet_13, goblet_15, feather_16, flower_13, sand_13, circlet_11, feather_42, sand_42, goblet_42, flower_42, sand_8, circlet_30, feather_36, flower_1, feather_1, sand_1, goblet_1, circlet_37, flower_47, goblet_13, circlet_48, sand_48 } from './my_artifacts.js';
 import { stats } from './stats.js';
 import { bennBurst, noblesse, pyroRes, baalE, homNature, ttds } from './traits.js';
 import { yae } from './my_characters.js';
@@ -94,7 +94,7 @@ export const icdOverloaded = (attr, hit) => {
 };
 
 export const icdElectroCharged = (attr, hit) => {
-    if (hit.index % 2 === 0) {
+    if (hit.index % 3 === 0) {
         return electroCharged(attr, hit);
     } else {
         return 0;
@@ -136,7 +136,7 @@ const atk_circlet  = {
     hp: 568,
 };
 // 
-const artifacts = [flower_42, feather_1, sand_42, goblet_42, circlet_11];[flower_13, feather_16, sand_13, goblet_15, circlet_13];[flower_1, feather_1, sand_1, goblet_1, circlet_37];
+const artifacts = [flower_42, feather_1, sand_48, goblet_42, circlet_11];[flower_47, feather_1, sand_8, goblet_13, circlet_48];
 const transforms = [icdElectroCharged];
 
 const buffs = [];

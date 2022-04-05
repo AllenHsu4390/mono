@@ -8,6 +8,8 @@ import { ironSting, sacSword } from "./swords.js";
 import { getCurrentTeam } from "./team.js";
 import { bennBurst, noblesse } from "./traits.js";
 
+export const char = jean;
+
 const breezeHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
     return [6.7968, 1.2544].map((motionValue, index) => {
         return {

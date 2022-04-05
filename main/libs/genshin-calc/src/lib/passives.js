@@ -189,7 +189,7 @@ export const redhorn = ({ flatDmg, def }, { stats }) => {
 export const blackSword = (attr, { stats }) => {
     const { elemDmg } = attr;
     return {
-        elemDmg: elemDmg + (stats.includes("normal") || stats.includes("charged") ? 0.2 : 0)
+        elemDmg: elemDmg + (stats.includes("normal") || stats.includes("charged") ? 0.25 : 0)
     };
 };
 

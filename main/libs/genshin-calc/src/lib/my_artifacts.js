@@ -12,7 +12,7 @@ export const flower_1 = {
 export const feather_1 = {
     type: "eosf",
     atk: 311,
-    def: 21,
+    def: 37,
     elemMast: 21,
     critDmg: 0.194,
     critRate: 0.078
@@ -448,10 +448,58 @@ export const circlet_46 = {
 
 export const circlet_47 = {
     type: "eosf",
+    critDmg: 0.622,
     atkPct: 0.099,
     critRate: 0.062,
     def: 56,
     hp: 209,
+};
+
+export const flower_47 = {
+    type: "eosf",
+    hp: 4780,
+    atk: 18,
+    def: 37,
+    critRate: 0.031,
+    critDmg: 0.187,
+};
+
+export const circlet_48 = {
+    type: "shime",
+    critRate: 0.311,
+    elemMast: 44,
+    hp: 478,
+    atkPct: 0.169,
+    recharge: 0.065
+};
+
+export const sand_48 = {
+    type: "shime",
+    atkPct: 0.466,
+    critRate: 0.074,
+    recharge: 0.214,
+    hp: 568,
+    atk: 18,
+};
+
+export const goblet_48 = {
+    type: "eosf",
+    element: "hydro",
+    elemDmg: 0.466,
+    atkPct: 0.175,
+    critDmg: 0.117,
+    critRate: 0.039,
+    elemMast: 16,
+};
+
+export const goblet_49 = {
+    type: "wand",
+    element: "hydro",
+    elemDmg: 0.466,
+    hp: 538,
+    critDmg: 0.078,
+    critRate: 0.109,
+    def: 35,
 };
 
 // yoimiya
@@ -764,11 +812,11 @@ export const sand_13 = {
 export const goblet_13 = {
     type: "nobl",
     element: "electro",
-    elemDmg: 0.387,
+    elemDmg: 0.466,
     atk: 14,
     atkPct: 0.093,
     recharge: 0.104,
-    critDmg: 0.054,
+    critDmg: 0.132,
 };
 
 export const circlet_13 = {
