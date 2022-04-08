@@ -49,3 +49,7 @@ const collect = (map: Map<string, State>, states: StateMachine) => {
 };
 
 export const allLinks: Map<string, State> = collect(new Map(), stateMachine);
+
+export const isValidEdge = (state: State, nextPath: string) => {
+  return state.links.includes(nextPath);
+};

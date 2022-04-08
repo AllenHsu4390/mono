@@ -12,11 +12,7 @@ const user: User[] = [
     id: '0',
     avatarUrl: 'https://source.unsplash.com/random/300x300',
     email: 'someguy@someemail.com',
-<<<<<<< HEAD
-    isLoggedIn: false,
-=======
     isLoggedIn: true,
->>>>>>> main
   },
 ];
 

@@ -12,7 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { Avatar } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import { User } from '@main/models';
 
 const Search = styled('div')(({ theme }) => ({
@@ -22,13 +22,7 @@ const Search = styled('div')(({ theme }) => ({
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
   width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -190,29 +184,9 @@ export default function Navigation({ user }: Props) {
           }}
         >
           <Box sx={{ display: 'flex' }}>
-            <Search
-              sx={{
-                background: `${theme.palette.secondary.main}`,
-                color: `${theme.palette.secondary.contrastText}`,
-                ':hover': {
-                  background: `${theme.palette.secondary.main}`,
-                  color: `${theme.palette.secondary.contrastText}`,
-                },
-                borderRadius: 0,
-              }}
-            >
-              <SearchIconWrapper>
-                <SearchIcon
-                  sx={{
-                    color: `${theme.palette.secondary.dark}`,
-                  }}
-                />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search"
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </Search>
+            <Typography variant="h3" color="text.primary">
+              CREATOR NETWORK
+            </Typography>
           </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: 'flex' }}>

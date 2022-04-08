@@ -1,12 +1,13 @@
-import { AssetCard } from './asset-card';
-import { Container } from '@mui/material';
-import Page from './page';
-import { Asset, Creator } from '@main/models';
 import { useQuery } from 'react-query';
+import { Container } from '@mui/material';
+import { Asset, Creator } from '@main/models';
+import Page from '../_base/page';
+import { AssetCard } from './card';
+import { AssetCardSkeleton } from './skeleton';
 
 interface Props {
-  creatorId: string;
-  assetId: string;
+  creatorId?: string;
+  assetId?: string;
 }
 
 interface Response {
@@ -27,23 +28,25 @@ export default function AssetPage({ assetId, creatorId }: Props) {
     }
   );
 
-  if (status === 'loading') {
-    return <div>Loading...</div>;
-  }
-
-  if (status === 'error' || !data?.asset.src || !data?.creator) {
-    return <div>Error</div>;
-  }
+  const shouldShowSkeleton =
+    status === 'loading' ||
+    status === 'error' ||
+    !data?.asset.src ||
+    !data?.creator;
 
   return (
-    <Page>
+    <Page hasNavigation={true} hasFooter={true}>
       <Container
         sx={{
           paddingY: '8px',
         }}
         maxWidth="md"
       >
-        <AssetCard asset={data.asset} creator={data.creator} isFull={true} />
+        {shouldShowSkeleton ? (
+          <AssetCardSkeleton isFull={true} />
+        ) : (
+          <AssetCard asset={data.asset} creator={data.creator} isFull={true} />
+        )}
       </Container>
     </Page>
   );

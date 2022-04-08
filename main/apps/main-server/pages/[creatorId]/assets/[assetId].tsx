@@ -6,15 +6,14 @@ const AssetNextPage: NextPage = () => {
   const router = useRouter();
   const { creatorId, assetId } = router.query;
 
-  if (!assetId || typeof assetId !== 'string') {
-    return <div>Error</div>;
-  }
-
-  if (!creatorId || typeof creatorId !== 'string') {
-    return <div>Error</div>;
-  }
-
-  return <AssetPage assetId={assetId} creatorId={creatorId} />;
+  return (
+    <AssetPage
+      assetId={!assetId || typeof assetId !== 'string' ? undefined : assetId}
+      creatorId={
+        !creatorId || typeof creatorId !== 'string' ? undefined : creatorId
+      }
+    />
+  );
 };
 
 export default AssetNextPage;

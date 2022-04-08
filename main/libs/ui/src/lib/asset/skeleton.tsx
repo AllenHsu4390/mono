@@ -1,13 +1,12 @@
-import React from 'react';
-
 import Card from '@mui/material/Card';
-import { CardHeader, Skeleton } from '@mui/material';
+import { CardHeader, Skeleton, useTheme } from '@mui/material';
 
 interface Props {
   isFull: boolean;
 }
 
 export function AssetCardSkeleton({ isFull }: Props) {
+  const theme = useTheme();
   return (
     <Card
       sx={{
@@ -19,7 +18,10 @@ export function AssetCardSkeleton({ isFull }: Props) {
       }}
     >
       <Skeleton
-        sx={{ width: '240px', height: isFull ? '' : '400px' }}
+        sx={{
+          width: isFull ? theme.breakpoints.values.lg : '240px',
+          height: isFull ? theme.breakpoints.values.sm : '400px',
+        }}
         variant="rectangular"
       />
       <CardHeader
@@ -29,7 +31,7 @@ export function AssetCardSkeleton({ isFull }: Props) {
         }}
         avatar={
           <Skeleton
-            animation="wave"
+            animation="pulse"
             variant="circular"
             width={40}
             height={40}
@@ -37,7 +39,7 @@ export function AssetCardSkeleton({ isFull }: Props) {
         }
         title={
           <Skeleton
-            animation="wave"
+            animation="pulse"
             height={16}
             width="90%"
             sx={{
@@ -48,7 +50,7 @@ export function AssetCardSkeleton({ isFull }: Props) {
         }
         subheader={
           <Skeleton
-            animation="wave"
+            animation="pulse"
             sx={{
               width: '60%',
               height: '16px',
