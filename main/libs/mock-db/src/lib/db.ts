@@ -52,7 +52,7 @@ const assets = Array(ASSETS_SIZE)
     return {
       assets: assetChunks[i],
       pagination: {
-        next: next > assetChunks.length ? undefined : `${next}`,
+        next: next >= assetChunks.length ? undefined : `${next}`,
         prev: prev < 0 ? undefined : `${prev}`,
         total: ASSET_SIZE,
       },

@@ -10,20 +10,28 @@ import { AssetsGridSkeleton } from './skeleton';
 import { CreatorProfileSkeleton } from '../creator/skeleton';
 
 interface Props {
-  creatorId?: string;
+  creatorUrl: string;
 }
 
-export default function AlbumPage({ creatorId }: Props) {
-  const { data, status } = useQuery<Creator, Error>(
-    ['creator', creatorId],
-    async () => {
-      const res = await fetch(`/api/creators/${creatorId}`);
-      return res.json();
+interface CreatorResponse {
+  links: [
+    {
+      rel: 'assets';
+      url: string;
     }
-  );
+  ];
+}
 
-  const shouldShowSkeleton =
-    status === 'loading' || status === 'error' || !data;
+export default function AlbumPage({ creatorUrl }: Props) {
+  const { data, isLoading, isError } = useQuery<
+    Creator & CreatorResponse,
+    Error
+  >(creatorUrl, async () => {
+    const res = await fetch(creatorUrl);
+    return res.json();
+  });
+
+  const shouldShowSkeleton = isLoading || isError || !data;
 
   if (shouldShowSkeleton) {
     return (
@@ -34,10 +42,15 @@ export default function AlbumPage({ creatorId }: Props) {
     );
   }
 
+  const { links } = data;
+
   return (
     <Page hasFooter={true} hasNavigation={true}>
       <CreatorProfile creator={data} />
-      <AssetsGrid creator={data} />
+      <AssetsGrid
+        creator={data}
+        assetsUrl={links.find((link) => link.rel === 'assets')?.url || '/404'}
+      />
     </Page>
   );
 }

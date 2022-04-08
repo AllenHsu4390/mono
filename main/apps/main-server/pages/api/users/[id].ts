@@ -1,16 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Error, User } from '@main/models';
+import { Error, Response, User } from '@main/models';
 import { auth } from '@main/auth';
 import { environment } from '@main/environment';
-import { allLinks, State } from '@main/state-machine';
 
 const userFromLogin = (req: NextApiRequest) => 'sdfasdfasdfasdf';
 
 type OK = {
   ok: true;
-} & State;
+} & Response;
 
-type UserRes = User & State;
+type UserRes = User & Response;
 
 const setSession = (res: NextApiResponse, user: User) => {
   const cookieValue = user.isLoggedIn
@@ -59,7 +58,7 @@ const me = {
     runGuards(res, newUser);
     res.status(200).json({
       ok: true,
-      ...allLinks.get('POST:/api/users/me'),
+      links: [],
     });
   },
   create: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
@@ -69,7 +68,7 @@ const me = {
     runGuards(res, user);
     res.status(200).json({
       ok: true,
-      ...allLinks.get('POST:/api/users'),
+      links: [],
     });
   },
   read: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
@@ -85,14 +84,14 @@ const me = {
     runGuards(res, user);
     res.status(200).json({
       ...user,
-      ...allLinks.get('GET:/api/users/me'),
+      links: [],
     });
   },
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<(User & State) | Error | OK>
+  res: NextApiResponse<(User & Response) | Error | OK>
 ) {
   const { id } = req.query;
   try {

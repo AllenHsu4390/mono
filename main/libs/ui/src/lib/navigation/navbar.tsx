@@ -14,6 +14,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Avatar, Typography } from '@mui/material';
 import { User } from '@main/models';
+import { Title } from './title';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -184,9 +185,7 @@ export default function Navigation({ user }: Props) {
           }}
         >
           <Box sx={{ display: 'flex' }}>
-            <Typography variant="h3" color="text.primary">
-              CREATOR NETWORK
-            </Typography>
+            <Title />
           </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: 'flex' }}>

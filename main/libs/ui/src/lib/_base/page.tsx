@@ -35,10 +35,7 @@ interface Props {
 
 const Page: React.FC<Props> = ({ hasFooter, children, hasNavigation }) => {
   const { data, status } = useQuery<User, Error>(['user'], async () => {
-    const res = await fetch(`/api/users/me`, {
-      credentials: 'same-origin',
-      method: 'GET',
-    });
+    const res = await fetch(`/api/users/me`);
     return res.json();
   });
 
