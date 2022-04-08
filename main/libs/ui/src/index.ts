@@ -1,4 +1,4 @@
-import AlbumPage from './lib/assets/page';
+import AlbumPage from './lib/album/page';
 import AssetPage from './lib/asset/page';
 import LoginPage from './lib/login/page';
 

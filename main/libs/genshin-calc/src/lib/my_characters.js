@@ -79,13 +79,14 @@ export const yoimiya = {
 export const hutao = {
     element: "pyro",
     name: "hutao",
-    lvl: 80,
-    lvlMax: 80,
-    baseHp: 13721,
-    baseAtk: 94,
+    lvl: 90,
+    lvlMax: 90,
+    baseHp: 15552,
+    baseAtk: 106,
+    baseDef: 876,
     recharge: 1,
     critRate: 0.05,
-    critDmg: 0.788,
+    critDmg: 0.884,
     elemDmg: 0,
 };
 

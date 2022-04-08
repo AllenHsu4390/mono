@@ -17,10 +17,10 @@ interface Response {
 
 export default function AssetPage({ assetId, creatorId }: Props) {
   const { data, status } = useQuery<Response, Error>(
-    ['asset', assetId],
+    ['asset', assetId, creatorId],
     async () => {
       const asset = await (await fetch(`/api/assets/${assetId}`)).json();
-      const creator = await (await fetch(`/api/creators/${0}`)).json();
+      const creator = await (await fetch(`/api/creators/${creatorId}`)).json();
       return {
         asset,
         creator,

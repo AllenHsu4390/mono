@@ -32,27 +32,21 @@ export const afterlife = (attr) => {
     };
 };
 
-export const albedoBonus = () => {
-    return (attr, hit) => {
-        return (hit.index % 4 === 0) ? 9000 : 0;
-    };
-};
-
 export const icdPyroVape = (attr, { motionValue, index }) => {
-    return (motionValue === 2.148 || index % 3 === 0) ? pyroVape(attr) : 1.0;
+    return (motionValue === 2.4256 || index % 3 === 0) ? pyroVape(attr) : 1.0;
 };
 
 export const icdPyroMelt = (attr, { motionValue, index }) => {
-    return (motionValue === 2.148 || index % 3 === 0) ? pyroMelt(attr) : 1.0;
+    return (motionValue === 2.4256 || index % 3 === 0) ? pyroMelt(attr) : 1.0;
 };
 
 export const icdOverloaded = (attr, { motionValue, index }) => {
-    return (motionValue === 2.148 || index % 3 === 0) ? overloaded(attr) : 0;
+    return (motionValue === 2.4256 || index % 3 === 0) ? overloaded(attr) : 0;
 };
 
 export const hits = (traits = [], debuffs = [], amps = [], transforms = []) => {
     // NC NC NC NC NC NC NC NC NC NC  // 0 4
-    return Array(9).fill([.741, 2.148]).flat().concat([0.96, 0.96]).map((motionValue, index) => {
+    return Array(9).fill([.8365, 2.4256]).flat().concat([0.96, 0.96]).map((motionValue, index) => {
         return {
             traits,
             amplifiers: [crit, ...amps],
@@ -62,7 +56,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = []) => {
             index,
             debuffs,
             transforms,
-            stats: [motionValue === .741 ? "normal": "charge", "pyro"]
+            stats: [motionValue === .8365 ? "normal": "charge", "pyro"]
         };
     });
 };
@@ -76,19 +70,6 @@ export const afterlifeAction = ({ weapon, artifacts, buffs = [], debuffs, amps =
         delay: 2
     };
 };
-
-const normalhits = Array(3).fill([.741, .762, .964, 1.037, .526, .556, 1.358]).flat().map((motionValue, index) => {
-    return {
-        traits: [afterlife, geoRes, tom, homNature],
-        amplifiers: [crit, icdPyroVape],
-        motionValue,
-        index,
-        debuffs: [lapidus],
-        stats: ["normal", "pyro"],
-        enemy: getCurrentEnemy(),
-        team: getCurrentTeam(),
-    };
-});
 
 
 const artifacts = [flower_7, feather_7, sand_7, goblet_7, circlet_7];

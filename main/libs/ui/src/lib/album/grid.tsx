@@ -4,29 +4,36 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { CardActionArea, Container, Grid } from '@mui/material';
 import { Assets, Creator } from '@main/models';
 import { Error } from '@main/models';
-import Link from 'next/link';
 import { AssetCard } from '../asset/card';
 import { AssetCardSkeleton } from '../asset/skeleton';
-
-const fetchAssets = async ({ pageParam = 0 }) => {
-  const response = await fetch(`/api/assets?pageId=${pageParam}`);
-  return response.json();
-};
+import Link from '../link';
 
 interface Props {
   creator: Creator;
+  assetsUrl: string;
 }
 
-export const AssetsGrid: React.FC<Props> = ({ creator }) => {
+interface AssetsResponse {
+  links: {
+    rel: 'next' | 'asset';
+    url: string;
+  }[];
+}
+
+export const AssetsGrid: React.FC<Props> = ({ creator, assetsUrl }) => {
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-    useInfiniteQuery<Assets, Error>('assets', fetchAssets, {
-      getNextPageParam: (lastPage, pages) => {
-        if (typeof lastPage.pagination.next === 'undefined') return undefined;
-        if (typeof lastPage.pagination.total === 'undefined') return undefined;
-        if (lastPage.pagination.next) return lastPage.pagination.next;
-        return undefined;
+    useInfiniteQuery<Assets & AssetsResponse, Error>(
+      assetsUrl,
+      async ({ pageParam: nextUrl = assetsUrl }: { pageParam?: string }) => {
+        const response = await fetch(nextUrl);
+        return response.json();
       },
-    });
+      {
+        getNextPageParam: (lastPage): undefined | string => {
+          return lastPage.links.find((l) => l.rel === 'next')?.url;
+        },
+      }
+    );
 
   const assetPages = data?.pages || [];
   const shouldShowSkeleton =
@@ -48,11 +55,14 @@ export const AssetsGrid: React.FC<Props> = ({ creator }) => {
           }}
         >
           {[
-            ...assetPages.map((page: Assets) =>
-              page.assets.map((asset) => (
+            ...assetPages.map((page: Assets & AssetsResponse) =>
+              page.assets.map((asset, index) => (
                 <Grid item key={asset.id} xs={12} sm={4} md={4} lg={3}>
                   <Link
-                    href={`/${creator.id}/assets/${asset.id}`}
+                    to={
+                      page.links.filter((l) => l.rel === 'asset')[index].url ||
+                      '/404'
+                    }
                     key={asset.id}
                   >
                     <CardActionArea>

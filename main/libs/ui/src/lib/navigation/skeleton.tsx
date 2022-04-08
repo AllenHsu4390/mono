@@ -2,7 +2,8 @@ import { useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import { Skeleton, Typography } from '@mui/material';
+import { Skeleton } from '@mui/material';
+import { Title } from './title';
 
 export default function Navigation() {
   const theme = useTheme();
@@ -23,9 +24,7 @@ export default function Navigation() {
           }}
         >
           <Box sx={{ display: 'flex' }}>
-            <Typography variant="h3" color="text.primary">
-              CREATOR NETWORK
-            </Typography>
+            <Title />
           </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: 'flex' }}>
