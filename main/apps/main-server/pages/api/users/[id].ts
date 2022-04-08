@@ -2,12 +2,15 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { Error, User } from '@main/models';
 import { auth } from '@main/auth';
 import { environment } from '@main/environment';
+import { allLinks, State } from '@main/state-machine';
 
 const userFromLogin = (req: NextApiRequest) => 'sdfasdfasdfasdf';
 
-interface OK {
+type OK = {
   ok: true;
-}
+} & State;
+
+type UserRes = User & State;
 
 const setSession = (res: NextApiResponse, user: User) => {
   const cookieValue = user.isLoggedIn
@@ -23,7 +26,16 @@ const runGuards = (res: NextApiResponse, user: User) => {
   guards.forEach((g) => g(res, user));
 };
 
-const schema = (body: any): User => {
+const postSchema = (body: any): User => {
+  return {
+    email: body.email || '',
+    id: 'aasdfsadfasdf',
+    avatarUrl: 'https://source.unsplash.com/random/300x300',
+    isLoggedIn: true,
+  };
+};
+
+const putSchema = (body: any): User => {
   return {
     isLoggedIn: body.isLoggedIn || false,
     avatarUrl: body.avatarUrl || false,
@@ -33,9 +45,9 @@ const schema = (body: any): User => {
 };
 
 const me = {
-  post: async (req, res: NextApiResponse<User | Error | OK>) => {
+  update: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
     const db = environment().db;
-    const { isLoggedIn, avatarUrl }: User = schema(req.body);
+    const { isLoggedIn, avatarUrl }: User = putSchema(req.body);
     const userId = auth().identity.userId(userFromLogin(req));
     const user = await db.get.user(userId);
     const newUser = {
@@ -47,9 +59,20 @@ const me = {
     runGuards(res, newUser);
     res.status(200).json({
       ok: true,
+      ...allLinks.get('POST:/api/users/me'),
     });
   },
-  get: async (req, res: NextApiResponse<User | Error | OK>) => {
+  create: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
+    const db = environment().db;
+    const user: User = postSchema(req.body);
+    await db.save.user(user);
+    runGuards(res, user);
+    res.status(200).json({
+      ok: true,
+      ...allLinks.get('POST:/api/users'),
+    });
+  },
+  read: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
     const { idKey } = req.cookies;
     if (!idKey) {
       throw {
@@ -60,22 +83,28 @@ const me = {
     const userId = auth().identity.userId(idKey);
     const user = await db.get.user(userId);
     runGuards(res, user);
-    res.status(200).json(user);
+    res.status(200).json({
+      ...user,
+      ...allLinks.get('GET:/api/users/me'),
+    });
   },
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<User | Error | OK>
+  res: NextApiResponse<(User & State) | Error | OK>
 ) {
   const { id } = req.query;
   try {
     switch (true) {
       case req.method === 'POST' && id === 'me':
-        await me.post(req, res);
+        await me.update(req, res);
+        break;
+      case req.method === 'POST':
+        await me.create(req, res);
         break;
       case req.method === 'GET' && id === 'me':
-        await me.get(req, res);
+        await me.read(req, res);
         break;
       default:
         throw {

@@ -35,19 +35,19 @@ export const icdElectroCharged = (attr, hit) => {
 };
 
 const resolveBonus = (index, stacks) => {
-    return stacks * (index === 0 ? 0.0622 : 0.0116);
+    return stacks * (index === 0 ? 0.07 : 0.0131);
 };
 
-const N5 = [.707, 0.694, 0.85, .488, 0.489, 1.168];
-const N1CA = [.707, .973, 1.175];
-const NA3CA = [.707, 0.694, 0.85, .973, 1.175];
+const N5 = [.7982, .7842, .9602, .5511, .5526, 1.3192];
+const N1CA = [.7982, .973, 1.3267];
+const NA3CA = [.7982, .7842, .9602, .973, 1.3267];
 const N3CAX3_N1CA = [Array(3).fill(NA3CA), N1CA].flat();
-const N1CAX5 = [Array(5).fill([0.85, .973, 1.175])].flat();
-const N3CAX2_N2CAX2 = [Array(2).fill(NA3CA), Array(2).fill([.707, 0.694, .973, 1.175])].flat();
+const N1CAX5 = [Array(5).fill([.9602, .973, 1.3267])].flat();
+const N3CAX2_N2CAX2 = [Array(2).fill(NA3CA), Array(2).fill([.7982, .7842, 1.099, 1.3267])].flat();
 const N5X3 = Array(3).fill(N5);
 
 const comboHits = (combo, traits = [], debuffs = [], amps = [], transforms = []) => {
-    return [6.41].concat(combo).flat().map((motionValue, index) => {
+    return [7.2144].concat(combo).flat().map((motionValue, index) => {
         return {
             traits,
             amplifiers: [crit],

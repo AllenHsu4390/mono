@@ -1,0 +1,23 @@
+{
+  "root": "libs/state-machine",
+  "sourceRoot": "libs/state-machine/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/state-machine/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/state-machine"],
+      "options": {
+        "jestConfig": "libs/state-machine/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

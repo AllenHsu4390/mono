@@ -1,12 +1,12 @@
 import React from 'react';
-import { CardActionArea, Container, Grid, useTheme } from '@mui/material';
 import { useInfiniteQuery } from 'react-query';
-import { Assets, Creator } from '@main/models';
-import { AssetCard } from './asset-card';
 import InfiniteScroll from 'react-infinite-scroller';
+import { CardActionArea, Container, Grid } from '@mui/material';
+import { Assets, Creator } from '@main/models';
 import { Error } from '@main/models';
 import Link from 'next/link';
-import { AssetCardSkeleton } from './asset-card-skeleton';
+import { AssetCard } from '../asset/card';
+import { AssetCardSkeleton } from '../asset/skeleton';
 
 const fetchAssets = async ({ pageParam = 0 }) => {
   const response = await fetch(`/api/assets?pageId=${pageParam}`);
@@ -17,7 +17,7 @@ interface Props {
   creator: Creator;
 }
 
-export const AssetGrid: React.FC<Props> = ({ creator }) => {
+export const AssetsGrid: React.FC<Props> = ({ creator }) => {
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery<Assets, Error>('assets', fetchAssets, {
       getNextPageParam: (lastPage, pages) => {
@@ -29,6 +29,8 @@ export const AssetGrid: React.FC<Props> = ({ creator }) => {
     });
 
   const assetPages = data?.pages || [];
+  const shouldShowSkeleton =
+    isLoading || isError || !data || assetPages.length === 0;
 
   return (
     <Container
@@ -64,7 +66,7 @@ export const AssetGrid: React.FC<Props> = ({ creator }) => {
                 </Grid>
               ))
             ),
-            ...(isLoading || isError || !data
+            ...(shouldShowSkeleton
               ? new Array(4).fill(null).map((_, index) => (
                   <Grid item key={index} xs={12} sm={4} md={4} lg={3}>
                     <AssetCardSkeleton isFull={false} />

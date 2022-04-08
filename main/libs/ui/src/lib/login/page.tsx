@@ -1,5 +1,5 @@
-import { Button, Container } from '@mui/material';
-import Page from './page';
+import { Button } from '@mui/material';
+import Page from '../_base/page';
 
 export default function LoginPage() {
   const login = async () => {
