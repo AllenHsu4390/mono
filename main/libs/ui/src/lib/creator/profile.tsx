@@ -1,23 +1,8 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  IconButton,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
 import { Creator } from '@main/models';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import {
-  ChatBubbleOutline,
-  ChatBubbleOutlined,
-  FavoriteBorderOutlined,
-  FavoriteRounded,
-} from '@mui/icons-material';
 import { FollowButton } from '../follow/button';
 import { MessageButton } from '../message/button';
+import { CreatorProfileBase } from './base';
 
 interface Props {
   creator: Creator;
@@ -26,14 +11,8 @@ interface Props {
 export function CreatorProfile({ creator }: Props) {
   const { avatarUrl, desc } = creator;
   return (
-    <Box
-      sx={{
-        bgcolor: 'background.paper',
-        pt: 8,
-        pb: 6,
-      }}
-    >
-      <Container maxWidth="sm">
+    <CreatorProfileBase
+      description={
         <Typography
           variant="h5"
           align="center"
@@ -42,6 +21,8 @@ export function CreatorProfile({ creator }: Props) {
         >
           {desc}
         </Typography>
+      }
+      avatar={
         <Avatar
           alt="Avatar"
           src={avatarUrl}
@@ -51,18 +32,9 @@ export function CreatorProfile({ creator }: Props) {
             height: '150px',
           }}
         />
-        <Stack
-          sx={{
-            pt: 2,
-          }}
-          direction="row"
-          spacing={2}
-          justifyContent="center"
-        >
-          <FollowButton />
-          <MessageButton />
-        </Stack>
-      </Container>
-    </Box>
+      }
+      follow={<FollowButton />}
+      message={<MessageButton />}
+    />
   );
 }

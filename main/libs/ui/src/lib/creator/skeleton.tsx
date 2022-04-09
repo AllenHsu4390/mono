@@ -1,35 +1,34 @@
 import { Box, Button, Container, Skeleton, Stack } from '@mui/material';
 import { FollowButtonSkeleton } from '../follow/skeleton';
 import { MessageButtonSkeleton } from '../message/skeleton';
+import { CreatorProfileBase } from './base';
 
 export function CreatorProfileSkeleton() {
   return (
-    <Box
-      sx={{
-        bgcolor: 'background.paper',
-        pt: 8,
-        pb: 6,
-      }}
-    >
-      <Container maxWidth="sm">
-        <Skeleton
-          animation="pulse"
-          sx={{
-            width: '100%',
-            height: '16px',
-            marginBottom: '6px',
-            borderRadius: 0,
-          }}
-        />
-        <Skeleton
-          animation="pulse"
-          sx={{
-            width: '80%',
-            height: '16px',
-            marginBottom: '6px',
-            borderRadius: 0,
-          }}
-        />
+    <CreatorProfileBase
+      description={
+        <>
+          <Skeleton
+            animation="pulse"
+            sx={{
+              width: '100%',
+              height: '16px',
+              marginBottom: '6px',
+              borderRadius: 0,
+            }}
+          />
+          <Skeleton
+            animation="pulse"
+            sx={{
+              width: '80%',
+              height: '16px',
+              marginBottom: '6px',
+              borderRadius: 0,
+            }}
+          />
+        </>
+      }
+      avatar={
         <Skeleton
           animation="pulse"
           variant="circular"
@@ -39,18 +38,9 @@ export function CreatorProfileSkeleton() {
             height: '150px',
           }}
         />
-        <Stack
-          sx={{
-            pt: 4,
-          }}
-          direction="row"
-          spacing={2}
-          justifyContent="center"
-        >
-          <FollowButtonSkeleton />
-          <MessageButtonSkeleton />
-        </Stack>
-      </Container>
-    </Box>
+      }
+      follow={<FollowButtonSkeleton />}
+      message={<MessageButtonSkeleton />}
+    />
   );
 }

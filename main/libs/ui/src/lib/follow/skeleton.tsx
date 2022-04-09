@@ -1,17 +1,14 @@
 import { FavoriteBorderOutlined } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
+import { IconButton, Skeleton } from '@mui/material';
 
 export const FollowButtonSkeleton = () => {
   return (
-    <IconButton
-      size="large"
-      aria-label="follow creator"
-      aria-controls="creator-follow"
-      aria-haspopup="true"
-      color="inherit"
-      disabled={true}
-    >
-      <FavoriteBorderOutlined fontSize="large" />
-    </IconButton>
+    <Skeleton
+      animation="pulse"
+      sx={{
+        width: '100px',
+        height: '40px',
+      }}
+    />
   );
 };
