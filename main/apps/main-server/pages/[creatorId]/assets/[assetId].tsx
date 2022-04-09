@@ -8,10 +8,8 @@ const AssetNextPage: NextPage = () => {
 
   return (
     <AssetPage
-      assetId={!assetId || typeof assetId !== 'string' ? undefined : assetId}
-      creatorId={
-        !creatorId || typeof creatorId !== 'string' ? undefined : creatorId
-      }
+      assetUrl={`/api/assets/${assetId}`}
+      creatorUrl={`/api/creators/${creatorId}`}
     />
   );
 };

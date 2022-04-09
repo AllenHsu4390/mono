@@ -23,7 +23,7 @@ export function AssetCard({ asset, creator, isFull }: Props) {
       <CardMedia
         sx={{
           objectFit: 'cover',
-          height: isFull ? '' : '400px',
+          height: isFull ? '' : '300px',
         }}
         component="img"
         image={asset.src}

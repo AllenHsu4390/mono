@@ -6,21 +6,35 @@ import { AssetCard } from './card';
 import { AssetCardSkeleton } from './skeleton';
 
 interface Props {
-  creatorId?: string;
-  assetId?: string;
+  assetUrl: string;
+  creatorUrl: string;
+}
+
+interface AssetResponse {
+  links: {
+    rel: string;
+    url: string;
+  }[];
+}
+
+interface CreatorResponse {
+  links: {
+    rel: string;
+    url: string;
+  }[];
 }
 
 interface Response {
-  asset: Asset;
-  creator: Creator;
+  asset: Asset & AssetResponse;
+  creator: Creator & CreatorResponse;
 }
 
-export default function AssetPage({ assetId, creatorId }: Props) {
+export default function AssetPage({ assetUrl, creatorUrl }: Props) {
   const { data, status } = useQuery<Response, Error>(
-    ['asset', assetId, creatorId],
+    ['asset', assetUrl, creatorUrl],
     async () => {
-      const asset = await (await fetch(`/api/assets/${assetId}`)).json();
-      const creator = await (await fetch(`/api/creators/${creatorId}`)).json();
+      const asset = await (await fetch(assetUrl)).json();
+      const creator = await (await fetch(creatorUrl)).json();
       return {
         asset,
         creator,
@@ -38,7 +52,8 @@ export default function AssetPage({ assetId, creatorId }: Props) {
     <Page hasNavigation={true} hasFooter={true}>
       <Container
         sx={{
-          paddingY: '8px',
+          pt: 16,
+          pb: 10,
         }}
         maxWidth="md"
       >

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import InfiniteScroll from 'react-infinite-scroller';
 import { CardActionArea, Container, Grid } from '@mui/material';
@@ -39,19 +39,23 @@ export const AssetsGrid: React.FC<Props> = ({ creator, assetsUrl }) => {
   const shouldShowSkeleton =
     isLoading || isError || !data || assetPages.length === 0;
 
+  const loadMore = () => {
+    fetchNextPage();
+  };
+
   return (
     <Container
       sx={{
         paddingY: '8px',
       }}
     >
-      <InfiniteScroll hasMore={hasNextPage} loadMore={(_) => fetchNextPage()}>
+      <InfiniteScroll hasMore={hasNextPage} loadMore={loadMore}>
         <Grid
           container
           spacing={{
-            xs: 1,
-            sm: 2,
-            md: 3,
+            xs: 2,
+            sm: 3,
+            md: 4,
           }}
         >
           {[

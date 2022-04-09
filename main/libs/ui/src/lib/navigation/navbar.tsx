@@ -1,54 +1,19 @@
 import * as React from 'react';
-import { styled, alpha, useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
+import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { Avatar, Typography } from '@mui/material';
+import { Avatar } from '@mui/material';
 import { User } from '@main/models';
 import { Title } from './title';
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  width: '100%',
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
+import { HideOnScroll } from './scroll';
+import { AppBar } from './appbar';
 
 interface Props {
   user: User;
@@ -170,50 +135,42 @@ export default function Navigation({ user }: Props) {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        position="sticky"
-        color="transparent"
+    <AppBar>
+      <Toolbar
         sx={{
-          boxShadow: 'none',
+          width: ['100%', '100%', '100%', `${theme.breakpoints.values.lg}px`],
+          margin: 'auto',
         }}
       >
-        <Toolbar
-          sx={{
-            width: ['100%', '100%', '100%', `${theme.breakpoints.values.lg}px`],
-            margin: 'auto',
-          }}
-        >
-          <Box sx={{ display: 'flex' }}>
-            <Title />
-          </Box>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: 'flex' }}>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <Avatar
-                  alt="Avatar"
-                  src={user.avatarUrl}
-                  sx={{
-                    width: '40px',
-                    height: '40px',
-                  }}
-                />
-              </Badge>
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
+        <Box sx={{ display: 'flex' }}>
+          <Title />
+        </Box>
+        <Box sx={{ flexGrow: 1 }} />
+        <Box sx={{ display: 'flex' }}>
+          <IconButton
+            size="large"
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="inherit"
+          >
+            <Badge badgeContent={17} color="error">
+              <Avatar
+                alt="Avatar"
+                src={user.avatarUrl}
+                sx={{
+                  width: '40px',
+                  height: '40px',
+                }}
+              />
+            </Badge>
+          </IconButton>
+        </Box>
+      </Toolbar>
       {renderMobileMenu}
       {renderMenu}
-    </Box>
+    </AppBar>
   );
 }
