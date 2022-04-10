@@ -1,9 +1,13 @@
-import { Button } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import Page from '../_base/page';
 
-export default function LoginPage() {
+interface Props {
+  loginUrl: string;
+}
+
+export default function LoginPage({ loginUrl }: Props) {
   const login = async () => {
-    const response = await fetch('/api/users/me', {
+    const response = await fetch(loginUrl, {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'same-origin',
       method: 'POST',
@@ -15,9 +19,5 @@ export default function LoginPage() {
       window.location.href = '/';
     }
   };
-  return (
-    <Page>
-      <Button onClick={login}>Login</Button>
-    </Page>
-  );
+  return <Button onClick={login}>Login</Button>;
 }

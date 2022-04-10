@@ -6,7 +6,12 @@ const AssetNextPage: NextPage = () => {
   const router = useRouter();
   const { creatorId } = router.query;
 
-  return <AlbumPage creatorUrl={`/api/creators/${creatorId}`} />;
+  return (
+    <AlbumPage
+      userUrl={`/api/users/me`}
+      creatorUrl={`/api/creators/${creatorId}`}
+    />
+  );
 };
 
 export default AssetNextPage;

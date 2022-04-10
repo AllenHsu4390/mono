@@ -11,6 +11,7 @@ import { CreatorProfileSkeleton } from '../creator/skeleton';
 
 interface Props {
   creatorUrl: string;
+  userUrl: string;
 }
 
 interface CreatorResponse {
@@ -22,7 +23,7 @@ interface CreatorResponse {
   ];
 }
 
-export default function AlbumPage({ creatorUrl }: Props) {
+export default function AlbumPage({ creatorUrl, userUrl }: Props) {
   const { data, isLoading, isError } = useQuery<
     Creator & CreatorResponse,
     Error
@@ -35,7 +36,7 @@ export default function AlbumPage({ creatorUrl }: Props) {
 
   if (shouldShowSkeleton) {
     return (
-      <Page hasFooter={true} hasNavigation={true}>
+      <Page hasFooter={true} hasNavigation={true} userUrl={userUrl}>
         <CreatorProfileSkeleton />
         <AssetsGridSkeleton />;
       </Page>
@@ -45,7 +46,7 @@ export default function AlbumPage({ creatorUrl }: Props) {
   const { links } = data;
 
   return (
-    <Page hasFooter={true} hasNavigation={true}>
+    <Page hasFooter={true} hasNavigation={true} userUrl={userUrl}>
       <CreatorProfile creator={data} />
       <AssetsGrid
         creator={data}

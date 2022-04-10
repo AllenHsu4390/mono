@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest, NextFetchEvent } from 'next/server';
 import { allLinks, isValidEdge } from '@main/state-machine';
 
-const redirectLocal = (req: NextRequest, newPathname: string) => {
+export const redirectLocal = (req: NextRequest, newPathname: string) => {
   const nextUrl = req.nextUrl;
   const url = nextUrl.clone();
   const newUrl = url.clone();
@@ -39,7 +39,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
     case pathname.split('/')[1] === 'api':
       return res;
     case !idKey:
-      return redirectLocal(req, '/login');
+      return redirectLocal(req, '/users/login');
     case pathname === '/':
       return redirectLocal(req, '/0');
     default:

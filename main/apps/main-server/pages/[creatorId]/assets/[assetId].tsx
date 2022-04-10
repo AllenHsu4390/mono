@@ -8,6 +8,7 @@ const AssetNextPage: NextPage = () => {
 
   return (
     <AssetPage
+      userUrl={`/api/users/me`}
       assetUrl={`/api/assets/${assetId}`}
       creatorUrl={`/api/creators/${creatorId}`}
     />
