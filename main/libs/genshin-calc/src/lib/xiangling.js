@@ -90,6 +90,13 @@ const atk_gob = {
 const artifacts2 = [flower_2, feather_2, sand_2, atk_gob, circlet_6];
 
 export const print = () => {
+    const hits = (traits = [], debuffs = [], amps = [], transforms = [], hitStats = []) => {
+        return [
+            ...pyronadoHits(traits, debuffs, amps, transforms, hitStats),
+            ...pyronadoSpinHits(traits, debuffs, amps, transforms, hitStats),
+        ];
+    };
+
     setCurrentEnemy(enemy);
     const vapeHits = hits([bennBurst, noblesse, pyroRes, baalE], [], [pyroVape]);
     const overVapeHits = hits([bennBurst, noblesse, pyroRes, baalE], [], [pyroVape], [overloaded]);

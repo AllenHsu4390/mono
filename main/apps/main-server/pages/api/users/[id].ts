@@ -37,7 +37,7 @@ const postSchema = (body: any): User => {
 const putSchema = (body: any): User => {
   return {
     isLoggedIn: body.isLoggedIn || false,
-    avatarUrl: body.avatarUrl || false,
+    avatarUrl: 'static',
     id: 'static',
     email: 'static',
   };
@@ -68,7 +68,20 @@ const me = {
     runGuards(res, user);
     res.status(200).json({
       ok: true,
-      links: [],
+      links: [
+        {
+          rel: 'logout',
+          url: '/users/logout',
+        },
+        {
+          rel: 'new-album',
+          url: '/albums/new',
+        },
+        {
+          rel: 'edit-account',
+          url: '/users/edit',
+        },
+      ],
     });
   },
   read: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
@@ -84,7 +97,20 @@ const me = {
     runGuards(res, user);
     res.status(200).json({
       ...user,
-      links: [],
+      links: [
+        {
+          rel: 'logout',
+          url: '/users/logout',
+        },
+        {
+          rel: 'new-album',
+          url: '/albums/new',
+        },
+        {
+          rel: 'edit-account',
+          url: '/users/edit',
+        },
+      ],
     });
   },
 };

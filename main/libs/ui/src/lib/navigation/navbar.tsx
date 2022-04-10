@@ -6,57 +6,52 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Avatar } from '@mui/material';
 import { User } from '@main/models';
 import { Title } from './title';
-import { HideOnScroll } from './scroll';
 import { AppBar } from './appbar';
+import Link from '../link';
+
+interface UserResponse {
+  links: {
+    rel: 'new-album' | 'logout' | 'login' | 'edit-account';
+    url: string;
+  }[];
+}
 
 interface Props {
-  user: User;
+  user: User & UserResponse;
 }
+
+const menuLabel = (rel: string) => {
+  switch (rel) {
+    case 'new-album':
+      return 'Create Album';
+    case 'logout':
+      return 'Logout';
+    case 'login':
+      return 'Login';
+    case 'edit-account':
+      return 'Settings';
+    default:
+      return '';
+  }
+};
+
+const menuOrder = ['new-album', 'edit-account', 'logout', 'login'];
 
 export default function Navigation({ user }: Props) {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const logout = async () => {
-    const response = await fetch('/api/users/me', {
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'same-origin',
-      method: 'POST',
-      body: JSON.stringify({
-        isSignedIn: false,
-      }),
-    });
-    if (response.ok) {
-      window.location.href = '/';
-    }
   };
 
   const menuId = 'primary-search-account-menu';
@@ -64,7 +59,7 @@ export default function Navigation({ user }: Props) {
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'right',
       }}
       id={menuId}
@@ -76,61 +71,13 @@ export default function Navigation({ user }: Props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={logout}>Log out</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      {user.links
+        .sort((a, b) => menuOrder.indexOf(a.rel) - menuOrder.indexOf(b.rel))
+        .map((l) => (
+          <MenuItem key={l.url}>
+            <Link to={l.url}>{menuLabel(l.rel)}</Link>
+          </MenuItem>
+        ))}
     </Menu>
   );
 
@@ -156,7 +103,7 @@ export default function Navigation({ user }: Props) {
             onClick={handleProfileMenuOpen}
             color="inherit"
           >
-            <Badge badgeContent={17} color="error">
+            <Badge badgeContent={7} color="error">
               <Avatar
                 alt="Avatar"
                 src={user.avatarUrl}
@@ -169,7 +116,6 @@ export default function Navigation({ user }: Props) {
           </IconButton>
         </Box>
       </Toolbar>
-      {renderMobileMenu}
       {renderMenu}
     </AppBar>
   );

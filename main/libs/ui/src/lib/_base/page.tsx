@@ -35,16 +35,42 @@ theme.typography.h3 = {
 interface Props {
   hasFooter?: boolean;
   hasNavigation?: boolean;
+  userUrl: string;
 }
 
-const Page: React.FC<Props> = ({ hasFooter, children, hasNavigation }) => {
-  const { data, status } = useQuery<User, Error>(['user'], async () => {
-    const res = await fetch(`/api/users/me`);
-    return res.json();
-  });
+interface UserResponse {
+  links: {
+    rel: 'new-album' | 'logout' | 'login' | 'edit-account';
+    url: string;
+  }[];
+}
 
-  const shouldShowSkeleton =
-    status === 'loading' || status === 'error' || !data;
+const Page: React.FC<Props> = ({
+  hasFooter,
+  children,
+  hasNavigation,
+  userUrl,
+}) => {
+  const { data, isError, isLoading, error } = useQuery<
+    User & UserResponse,
+    Error & UserResponse
+  >(
+    ['user'],
+    async () => {
+      const res = await fetch(userUrl);
+
+      if (res.status >= 400) {
+        throw await res.json();
+      }
+
+      return await res.json();
+    },
+    {
+      retry: 0,
+    }
+  );
+
+  const shouldShowSkeleton = isLoading || isError || !data || error;
 
   return (
     <ThemeProvider theme={theme}>

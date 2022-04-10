@@ -8,6 +8,7 @@ import { AssetCardSkeleton } from './skeleton';
 interface Props {
   assetUrl: string;
   creatorUrl: string;
+  userUrl: string;
 }
 
 interface AssetResponse {
@@ -29,7 +30,7 @@ interface Response {
   creator: Creator & CreatorResponse;
 }
 
-export default function AssetPage({ assetUrl, creatorUrl }: Props) {
+export default function AssetPage({ assetUrl, creatorUrl, userUrl }: Props) {
   const { data, status } = useQuery<Response, Error>(
     ['asset', assetUrl, creatorUrl],
     async () => {
@@ -49,7 +50,7 @@ export default function AssetPage({ assetUrl, creatorUrl }: Props) {
     !data?.creator;
 
   return (
-    <Page hasNavigation={true} hasFooter={true}>
+    <Page hasNavigation={true} hasFooter={true} userUrl={userUrl}>
       <Container
         sx={{
           pt: 16,
