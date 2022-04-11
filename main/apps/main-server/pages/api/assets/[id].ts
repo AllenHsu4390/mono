@@ -1,13 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Asset } from '@main/models';
-import { environment } from '@main/environment';
+import { Asset, Response } from '@main/models';
+import { getAsset } from '@main/rest';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Asset>
+  res: NextApiResponse<Asset & Response>
 ) {
   try {
-    const db = environment().db;
     const { id } = req.query;
 
     if (typeof id !== 'string') {
@@ -16,7 +15,7 @@ export default async function handler(
       };
     }
 
-    res.status(200).json(await db.get.asset(id));
+    res.status(200).json(await getAsset(id));
   } catch (e) {
     res.status(403).json(e);
   }

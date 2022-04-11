@@ -7,17 +7,11 @@ import { Error } from '@main/models';
 import { AssetCard } from '../asset/card';
 import { AssetCardSkeleton } from '../asset/skeleton';
 import Link from '../link';
+import { AssetsResponse } from '@main/rest';
 
 interface Props {
   creator: Creator;
   assetsUrl: string;
-}
-
-interface AssetsResponse {
-  links: {
-    rel: 'next' | 'asset';
-    url: string;
-  }[];
 }
 
 export const AssetsGrid: React.FC<Props> = ({ creator, assetsUrl }) => {

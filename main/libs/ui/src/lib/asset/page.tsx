@@ -1,56 +1,18 @@
-import { useQuery } from 'react-query';
 import { Container } from '@mui/material';
-import { Asset, Creator } from '@main/models';
+import { Asset, Creator, User } from '@main/models';
 import Page from '../_base/page';
 import { AssetCard } from './card';
-import { AssetCardSkeleton } from './skeleton';
+import { AssetResponse, CreatorResponse, UserResponse } from '@main/rest';
 
 interface Props {
-  assetUrl: string;
-  creatorUrl: string;
-  userUrl: string;
-}
-
-interface AssetResponse {
-  links: {
-    rel: string;
-    url: string;
-  }[];
-}
-
-interface CreatorResponse {
-  links: {
-    rel: string;
-    url: string;
-  }[];
-}
-
-interface Response {
   asset: Asset & AssetResponse;
   creator: Creator & CreatorResponse;
+  user: User & UserResponse;
 }
 
-export default function AssetPage({ assetUrl, creatorUrl, userUrl }: Props) {
-  const { data, status } = useQuery<Response, Error>(
-    ['asset', assetUrl, creatorUrl],
-    async () => {
-      const asset = await (await fetch(assetUrl)).json();
-      const creator = await (await fetch(creatorUrl)).json();
-      return {
-        asset,
-        creator,
-      };
-    }
-  );
-
-  const shouldShowSkeleton =
-    status === 'loading' ||
-    status === 'error' ||
-    !data?.asset.src ||
-    !data?.creator;
-
+export default function AssetPage({ asset, creator, user }: Props) {
   return (
-    <Page hasNavigation={true} hasFooter={true} userUrl={userUrl}>
+    <Page hasNavigation={true} hasFooter={true} user={user}>
       <Container
         sx={{
           pt: 16,
@@ -58,11 +20,7 @@ export default function AssetPage({ assetUrl, creatorUrl, userUrl }: Props) {
         }}
         maxWidth="md"
       >
-        {shouldShowSkeleton ? (
-          <AssetCardSkeleton isFull={true} />
-        ) : (
-          <AssetCard asset={data.asset} creator={data.creator} isFull={true} />
-        )}
+        <AssetCard asset={asset} creator={creator} isFull={true} />
       </Container>
     </Page>
   );

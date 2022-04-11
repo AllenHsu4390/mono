@@ -1,14 +1,16 @@
+import { User } from '@main/models';
+import { UserResponse } from '@main/rest';
 import Page from '../_base/page';
 
 import { NewAssetsGrid } from './grid';
 
 interface Props {
-  userUrl: string;
+  user: User & UserResponse;
 }
 
-export default function NewAlbumPage({ userUrl }: Props) {
+export default function NewAlbumPage({ user }: Props) {
   return (
-    <Page hasFooter={true} hasNavigation={true} userUrl={userUrl}>
+    <Page hasFooter={true} hasNavigation={true} user={user}>
       <NewAssetsGrid />
     </Page>
   );

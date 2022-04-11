@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Error, Response, User } from '@main/models';
 import { auth } from '@main/auth';
-import { environment } from '@main/environment';
+import { getUser, saveUser } from '@main/rest';
 
 const userFromLogin = (req: NextApiRequest) => 'sdfasdfasdfasdf';
 
@@ -17,12 +17,6 @@ const setSession = (res: NextApiResponse, user: User) => {
     : 'idKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;';
 
   res.setHeader('Set-Cookie', cookieValue);
-};
-
-const guards: ((res: NextApiResponse, user: User) => void)[] = [setSession];
-
-const runGuards = (res: NextApiResponse, user: User) => {
-  guards.forEach((g) => g(res, user));
 };
 
 const postSchema = (body: any): User => {
@@ -45,44 +39,26 @@ const putSchema = (body: any): User => {
 
 const me = {
   update: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
-    const db = environment().db;
     const { isLoggedIn, avatarUrl }: User = putSchema(req.body);
     const userId = auth().identity.userId(userFromLogin(req));
-    const user = await db.get.user(userId);
+    const user = await getUser(userId);
     const newUser = {
       ...user,
       isLoggedIn,
       avatarUrl,
     };
-    await db.save.user(newUser);
-    runGuards(res, newUser);
+    await saveUser(user);
+    setSession(res, newUser);
     res.status(200).json({
       ok: true,
       links: [],
     });
   },
   create: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
-    const db = environment().db;
     const user: User = postSchema(req.body);
-    await db.save.user(user);
-    runGuards(res, user);
-    res.status(200).json({
-      ok: true,
-      links: [
-        {
-          rel: 'logout',
-          url: '/users/logout',
-        },
-        {
-          rel: 'new-album',
-          url: '/albums/new',
-        },
-        {
-          rel: 'edit-account',
-          url: '/users/edit',
-        },
-      ],
-    });
+    const userResponse = await saveUser(user);
+    setSession(res, user);
+    res.status(200).json(userResponse);
   },
   read: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
     const { idKey } = req.cookies;
@@ -91,27 +67,10 @@ const me = {
         message: 'Authentication failed',
       };
     }
-    const db = environment().db;
     const userId = auth().identity.userId(idKey);
-    const user = await db.get.user(userId);
-    runGuards(res, user);
-    res.status(200).json({
-      ...user,
-      links: [
-        {
-          rel: 'logout',
-          url: '/users/logout',
-        },
-        {
-          rel: 'new-album',
-          url: '/albums/new',
-        },
-        {
-          rel: 'edit-account',
-          url: '/users/edit',
-        },
-      ],
-    });
+    const user = await getUser(userId);
+    setSession(res, user);
+    res.status(200).json(user);
   },
 };
 

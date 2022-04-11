@@ -1,56 +1,25 @@
-import { useQuery } from 'react-query';
-
-import { Creator } from '@main/models';
+import { Creator, User } from '@main/models';
 
 import Page from '../_base/page';
 import { CreatorProfile } from '../creator/profile';
 
 import { AssetsGrid } from './grid';
-import { AssetsGridSkeleton } from './skeleton';
-import { CreatorProfileSkeleton } from '../creator/skeleton';
+import { CreatorResponse, UserResponse } from '@main/rest';
 
 interface Props {
-  creatorUrl: string;
-  userUrl: string;
+  creator: Creator & CreatorResponse;
+  user: User & UserResponse;
 }
 
-interface CreatorResponse {
-  links: [
-    {
-      rel: 'assets';
-      url: string;
-    }
-  ];
-}
-
-export default function AlbumPage({ creatorUrl, userUrl }: Props) {
-  const { data, isLoading, isError } = useQuery<
-    Creator & CreatorResponse,
-    Error
-  >(creatorUrl, async () => {
-    const res = await fetch(creatorUrl);
-    return res.json();
-  });
-
-  const shouldShowSkeleton = isLoading || isError || !data;
-
-  if (shouldShowSkeleton) {
-    return (
-      <Page hasFooter={true} hasNavigation={true} userUrl={userUrl}>
-        <CreatorProfileSkeleton />
-        <AssetsGridSkeleton />;
-      </Page>
-    );
-  }
-
-  const { links } = data;
-
+export default function AlbumPage({ creator, user }: Props) {
   return (
-    <Page hasFooter={true} hasNavigation={true} userUrl={userUrl}>
-      <CreatorProfile creator={data} />
+    <Page hasFooter={true} hasNavigation={true} user={user}>
+      <CreatorProfile creator={creator} />
       <AssetsGrid
-        creator={data}
-        assetsUrl={links.find((link) => link.rel === 'assets')?.url || '/404'}
+        creator={creator}
+        assetsUrl={
+          creator.links.find((link) => link.rel === 'assets')?.url || '/404'
+        }
       />
     </Page>
   );

@@ -9,6 +9,7 @@
     "middleware": "libs/middleware",
     "mock-db": "libs/mock-db",
     "models": "libs/models",
+    "rest": "libs/rest",
     "state-machine": "libs/state-machine",
     "ui": "libs/ui"
   }
