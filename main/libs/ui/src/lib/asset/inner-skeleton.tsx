@@ -11,8 +11,8 @@ export const InnerSkeleton: React.FC<Props> = ({ isFull }) => {
     <>
       <Skeleton
         sx={{
-          width: isFull ? theme.breakpoints.values.lg : '240px',
-          height: isFull ? theme.breakpoints.values.sm : '300px',
+          width: isFull ? theme.breakpoints.values.lg : '100%',
+          height: isFull ? theme.breakpoints.values.sm : '16rem',
         }}
         variant="rectangular"
       />
@@ -35,7 +35,7 @@ export const InnerSkeleton: React.FC<Props> = ({ isFull }) => {
             height={16}
             width="90%"
             sx={{
-              marginBottom: '6px',
+              marginBottom: '0.4rem',
               borderRadius: 0,
             }}
           />
@@ -45,8 +45,8 @@ export const InnerSkeleton: React.FC<Props> = ({ isFull }) => {
             animation="pulse"
             sx={{
               width: '60%',
-              height: '16px',
-              marginBottom: '6px',
+              height: '1rem',
+              marginBottom: '0.4rem',
               borderRadius: 0,
             }}
           />

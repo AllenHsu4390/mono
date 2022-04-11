@@ -4,11 +4,7 @@ import { AssetCardSkeleton } from '../asset/skeleton';
 
 export const AssetsGridSkeleton: React.FC = () => {
   return (
-    <Container
-      sx={{
-        paddingY: '8px',
-      }}
-    >
+    <Container>
       <Grid
         container
         spacing={{

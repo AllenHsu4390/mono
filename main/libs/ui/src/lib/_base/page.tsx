@@ -23,7 +23,7 @@ const theme = createTheme({
 
 theme.typography.h3 = {
   fontSize: '1.2rem',
-  '@media (min-width:600px)': {
+  [theme.breakpoints.up('sm')]: {
     fontSize: '1.5rem',
   },
   [theme.breakpoints.up('md')]: {
@@ -50,7 +50,7 @@ const Page: React.FC<Props> = ({
       <main>
         <Container
           sx={{
-            paddingY: '8px',
+            paddingY: '0.5rem',
           }}
           maxWidth="lg"
         >

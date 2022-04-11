@@ -8,11 +8,22 @@ import { AssetCard } from '../asset/card';
 import { AssetCardSkeleton } from '../asset/skeleton';
 import Link from '../link';
 import { AssetsResponse } from '@main/rest';
+import { identity } from 'lodash';
 
 interface Props {
   creator: Creator;
   assetsUrl: string;
 }
+
+const Column: React.FC<{
+  key: string;
+}> = ({ children, key }) => {
+  return (
+    <Grid item key={key} xs={12} sm={4} md={4} lg={3}>
+      {children}
+    </Grid>
+  );
+};
 
 export const AssetsGrid: React.FC<Props> = ({ creator, assetsUrl }) => {
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
@@ -38,52 +49,40 @@ export const AssetsGrid: React.FC<Props> = ({ creator, assetsUrl }) => {
   };
 
   return (
-    <Container
-      sx={{
-        paddingY: '8px',
-      }}
-    >
-      <InfiniteScroll hasMore={hasNextPage} loadMore={loadMore}>
-        <Grid
-          container
-          spacing={{
-            xs: 2,
-            sm: 3,
-            md: 4,
-          }}
-        >
-          {[
-            ...assetPages.map((page: Assets & AssetsResponse) =>
-              page.assets.map((asset, index) => (
-                <Grid item key={asset.id} xs={12} sm={4} md={4} lg={3}>
-                  <Link
-                    to={
-                      page.links.filter((l) => l.rel === 'asset')[index].url ||
-                      '/404'
-                    }
-                    key={asset.id}
-                  >
-                    <CardActionArea>
-                      <AssetCard
-                        asset={asset}
-                        creator={creator}
-                        isFull={false}
-                      />
-                    </CardActionArea>
-                  </Link>
-                </Grid>
+    <InfiniteScroll hasMore={hasNextPage} loadMore={loadMore}>
+      <Grid
+        container
+        spacing={{
+          xs: 2,
+          sm: 3,
+          md: 4,
+        }}
+      >
+        {[
+          ...assetPages.map((page: Assets & AssetsResponse) =>
+            page.assets.map((asset, index) => (
+              <Column key={asset.id}>
+                <Link
+                  to={
+                    page.links.filter((l) => l.rel === 'asset')[index].url ||
+                    '/404'
+                  }
+                  key={asset.id}
+                >
+                  <AssetCard asset={asset} creator={creator} isFull={false} />
+                </Link>
+              </Column>
+            ))
+          ),
+          ...(shouldShowSkeleton
+            ? new Array(4).fill(null).map((_, index) => (
+                <Column key={`${index}`}>
+                  <AssetCardSkeleton isFull={false} />
+                </Column>
               ))
-            ),
-            ...(shouldShowSkeleton
-              ? new Array(4).fill(null).map((_, index) => (
-                  <Grid item key={index} xs={12} sm={4} md={4} lg={3}>
-                    <AssetCardSkeleton isFull={false} />
-                  </Grid>
-                ))
-              : []),
-          ]}
-        </Grid>
-      </InfiniteScroll>
-    </Container>
+            : []),
+        ]}
+      </Grid>
+    </InfiniteScroll>
   );
 };

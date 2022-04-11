@@ -1,7 +1,14 @@
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import { Asset, Creator } from '@main/models';
-import { Avatar, CardContent, CardHeader, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  Typography,
+} from '@mui/material';
 import { useState } from 'react';
 import { InnerSkeleton } from './inner-skeleton';
 
@@ -15,13 +22,13 @@ export function AssetCard({ asset, creator, isFull }: Props) {
   const [isLoading, setIsLoading] = useState(true);
 
   const loadingSkeleton = (
-    <div
-      style={{
+    <Box
+      sx={{
         display: `${isLoading ? 'initial' : 'none'}`,
       }}
     >
       <InnerSkeleton isFull={isFull} />
-    </div>
+    </Box>
   );
 
   return (
@@ -35,15 +42,15 @@ export function AssetCard({ asset, creator, isFull }: Props) {
       }}
     >
       {loadingSkeleton}
-      <div
-        style={{
+      <CardActionArea
+        sx={{
           display: `${isLoading ? 'none' : 'initial'}`,
         }}
       >
         <CardMedia
           sx={{
             objectFit: 'cover',
-            height: isFull ? '' : '300px',
+            height: isFull ? '' : '16rem',
           }}
           component="img"
           image={asset.src}
@@ -52,7 +59,7 @@ export function AssetCard({ asset, creator, isFull }: Props) {
         ></CardMedia>
         <CardHeader
           sx={{
-            padding: '16px 4px 4px',
+            padding: '1rem 0.3rem 0.3rem',
           }}
           avatar={<Avatar alt={creator.id} src={creator.avatarUrl} />}
           title={
@@ -64,14 +71,14 @@ export function AssetCard({ asset, creator, isFull }: Props) {
         />
         <CardContent
           sx={{
-            padding: '4px',
+            padding: '0.3rem',
           }}
         >
           <Typography variant="body2" color="text.secondary" component="p">
             {'Why this is some dank stuff? Let me tell you...'}
           </Typography>
         </CardContent>
-      </div>
+      </CardActionArea>
     </Card>
   );
 }

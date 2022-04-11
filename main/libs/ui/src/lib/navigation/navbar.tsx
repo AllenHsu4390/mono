@@ -96,14 +96,17 @@ export default function Navigation({ user }: Props) {
             aria-haspopup="true"
             onClick={handleProfileMenuOpen}
             color="inherit"
+            sx={{
+              borderRadius: 0,
+            }}
           >
             <Badge badgeContent={7} color="error">
               <Avatar
                 alt="Avatar"
                 src={user.avatarUrl}
                 sx={{
-                  width: '40px',
-                  height: '40px',
+                  width: '2.5rem',
+                  height: '2.5rem',
                 }}
               />
             </Badge>

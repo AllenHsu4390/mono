@@ -1,28 +1,18 @@
 import { Copyright } from '@mui/icons-material';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import React from 'react';
 
 export default function CompanyContact() {
   return (
-    <Box
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
       sx={{
-        bgcolor: 'background.paper',
-        margin: 'auto',
-        width: '400px',
-        textAlign: 'center',
+        my: '3rem',
       }}
-      component="footer"
     >
-      <Typography variant="subtitle1" color="text.secondary" component="p">
-        <Copyright
-          sx={{
-            margin: '4px',
-            display: 'inline-block',
-            verticalAlign: '-10px',
-          }}
-        />
-        {`Creator Network ${new Date().getFullYear()}`}
-      </Typography>
-    </Box>
+      {`© Creator Network ${new Date().getFullYear()}`}
+    </Typography>
   );
 }
