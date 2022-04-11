@@ -9,6 +9,9 @@ export const MessageButton = () => {
       aria-controls="creator-chat"
       aria-haspopup="true"
       color="inherit"
+      sx={{
+        borderRadius: 0,
+      }}
     >
       <ChatBubbleOutline fontSize="large" />
     </IconButton>

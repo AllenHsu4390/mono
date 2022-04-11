@@ -25,8 +25,8 @@ export default function Navigation() {
             animation="pulse"
             variant="circular"
             sx={{
-              width: '40px',
-              height: '40px',
+              width: '2.5rem',
+              height: '2.5rem',
             }}
           />
         </Box>

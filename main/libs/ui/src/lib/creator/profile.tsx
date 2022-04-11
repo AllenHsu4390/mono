@@ -27,9 +27,9 @@ export function CreatorProfile({ creator }: Props) {
           alt="Avatar"
           src={avatarUrl}
           sx={{
-            margin: '40px auto 40px auto',
-            width: '150px',
-            height: '150px',
+            margin: '4rem auto 4rem auto',
+            width: '10rem',
+            height: '10rem',
           }}
         />
       }

@@ -6,8 +6,8 @@ export const FollowButtonSkeleton = () => {
     <Skeleton
       animation="pulse"
       sx={{
-        width: '100px',
-        height: '40px',
+        width: '6rem',
+        height: '2.5rem',
       }}
     />
   );

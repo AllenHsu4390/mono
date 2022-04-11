@@ -9,6 +9,9 @@ export const FollowButton = () => {
       aria-controls="creator-follow"
       aria-haspopup="true"
       color="inherit"
+      sx={{
+        borderRadius: 0,
+      }}
     >
       <FavoriteBorderOutlined fontSize="large" />
     </IconButton>

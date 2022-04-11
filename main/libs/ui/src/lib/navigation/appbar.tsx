@@ -10,7 +10,7 @@ export const AppBar: React.FC = ({ children }) => {
           position="fixed"
           sx={{
             boxShadow: 'none',
-            height: '100px',
+            height: '6rem',
             background: `${theme.palette.background.default}`,
           }}
         >

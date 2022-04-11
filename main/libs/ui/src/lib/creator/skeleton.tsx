@@ -12,8 +12,8 @@ export function CreatorProfileSkeleton() {
             animation="pulse"
             sx={{
               width: '100%',
-              height: '16px',
-              marginBottom: '6px',
+              height: '1rem',
+              marginBottom: '0.4rem',
               borderRadius: 0,
             }}
           />
@@ -21,8 +21,8 @@ export function CreatorProfileSkeleton() {
             animation="pulse"
             sx={{
               width: '80%',
-              height: '16px',
-              marginBottom: '6px',
+              height: '1rem',
+              marginBottom: '0.4rem',
               borderRadius: 0,
             }}
           />
@@ -33,9 +33,9 @@ export function CreatorProfileSkeleton() {
           animation="pulse"
           variant="circular"
           sx={{
-            margin: '40px auto 40px auto',
-            width: '150px',
-            height: '150px',
+            margin: '4rem auto 4rem auto',
+            width: '10rem',
+            height: '10rem',
           }}
         />
       }
