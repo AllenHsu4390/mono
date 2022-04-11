@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 
 // generate mocks
 const ASSET_SIZE = 100;
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 4;
 const ASSETS_SIZE = ASSET_SIZE / PAGE_SIZE;
 export const ASSET_INDEX_OFFSET = 354;
 
