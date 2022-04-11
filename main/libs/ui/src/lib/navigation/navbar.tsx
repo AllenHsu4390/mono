@@ -11,13 +11,7 @@ import { User } from '@main/models';
 import { Title } from './title';
 import { AppBar } from './appbar';
 import Link from '../link';
-
-interface UserResponse {
-  links: {
-    rel: 'new-album' | 'logout' | 'login' | 'edit-account';
-    url: string;
-  }[];
-}
+import { UserResponse } from '@main/rest';
 
 interface Props {
   user: User & UserResponse;
