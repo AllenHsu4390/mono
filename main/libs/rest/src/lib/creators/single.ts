@@ -11,7 +11,7 @@ export const getCreator = async (
     links: [
       {
         rel: 'assets',
-        url: '/api/assets?pageId=0',
+        url: `/api/assets?creatorId=${id}&pageId=1`,
       },
     ],
   };

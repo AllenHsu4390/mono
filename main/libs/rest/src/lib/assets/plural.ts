@@ -1,24 +1,23 @@
 import { environment } from '@main/environment';
-import { Assets } from '@main/models';
-import { AssetsResponse } from '../responses';
+import { Assets, Response } from '@main/models';
 
 export const getAssets = async (
+  creatorId: string,
   pageId: string
-): Promise<Assets & AssetsResponse> => {
+): Promise<Assets & Response> => {
   const db = environment().db;
-  const assets = await db.get.assets(pageId);
+  const assets = await db.get.assets(creatorId, pageId);
 
   const links = [
     ...assets.assets.map((a) => ({
       rel: 'asset',
-      url: `/0/assets/${a.id}`,
+      url: `/${creatorId}/assets/${a.id}`,
     })),
-
     ...(assets.pagination.next
       ? [
           {
             rel: 'next',
-            url: `/api/assets?pageId=${assets.pagination.next}`,
+            url: `/api/assets?creatorId=${creatorId}&pageId=${assets.pagination.next}`,
           },
         ]
       : []),

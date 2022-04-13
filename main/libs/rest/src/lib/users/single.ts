@@ -9,6 +9,10 @@ export const getUser = async (userId: string): Promise<User & UserResponse> => {
     ...user,
     links: [
       {
+        rel: 'follows',
+        url: '/1',
+      },
+      {
         rel: 'logout',
         url: '/users/logout',
       },
@@ -30,6 +34,10 @@ export const saveUser = async (user: User): Promise<User & UserResponse> => {
   return {
     ...user,
     links: [
+      {
+        rel: 'follows',
+        url: '/1',
+      },
       {
         rel: 'logout',
         url: '/users/logout',

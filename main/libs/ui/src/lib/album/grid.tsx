@@ -15,11 +15,9 @@ interface Props {
   assetsUrl: string;
 }
 
-const Column: React.FC<{
-  key: string;
-}> = ({ children, key }) => {
+const Column: React.FC = ({ children }) => {
   return (
-    <Grid item key={key} xs={12} sm={4} md={4} lg={3}>
+    <Grid item xs={12} sm={4} md={4} lg={3}>
       {children}
     </Grid>
   );

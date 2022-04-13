@@ -34,15 +34,17 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const nextUrl = req.nextUrl;
   const pathname = nextUrl.pathname;
   const res = NextResponse.next();
-
-  switch (true) {
-    case pathname.split('/')[1] === 'api':
-      return res;
-    case !idKey:
-      return redirectLocal(req, '/users/login');
-    case pathname === '/':
-      return redirectLocal(req, '/0');
-    default:
-      return res;
+  try {
+    switch (true) {
+      case pathname.split('/')[1] === 'api':
+        return res;
+      case !idKey:
+        return redirectLocal(req, '/users/login');
+      default:
+        return res;
+    }
+  } catch (e) {
+    console.log(e);
+    return redirectLocal(req, '/404');
   }
 }

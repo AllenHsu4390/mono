@@ -1,6 +1,6 @@
 export interface UserResponse {
   links: {
-    rel: 'new-album' | 'logout' | 'login' | 'edit-account';
+    rel: 'new-album' | 'logout' | 'login' | 'edit-account' | 'follows';
     url: string;
   }[];
 }

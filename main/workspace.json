@@ -10,6 +10,7 @@
     "mock-db": "libs/mock-db",
     "models": "libs/models",
     "rest": "libs/rest",
+    "sql-database": "libs/sql-database",
     "state-machine": "libs/state-machine",
     "ui": "libs/ui"
   }
