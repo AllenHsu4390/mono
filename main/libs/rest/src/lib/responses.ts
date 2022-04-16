@@ -1,6 +1,6 @@
 export interface UserResponse {
   links: {
-    rel: 'new-album' | 'logout' | 'login' | 'edit-account';
+    rel: 'new-album' | 'logout' | 'login' | 'edit-account' | 'follows';
     url: string;
   }[];
 }
@@ -11,12 +11,21 @@ export interface CreatorResponse {
   }[];
 }
 export interface AssetResponse {
-  links: [];
+  links: {
+    rel: 'like' | 'like-count';
+    url: string;
+  }[];
 }
 
 export interface AssetsResponse {
   links: {
     rel: 'next' | 'asset';
+    url: string;
+  }[];
+}
+export interface FollowsResponse {
+  links: {
+    rel: 'next' | 'follow';
     url: string;
   }[];
 }

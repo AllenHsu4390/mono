@@ -34,7 +34,6 @@ export async function getServerSideProps({ params, req }) {
     props,
   };
 }
-
 const Album: NextPage<Props> = ({ user, creator }) => {
   return <AlbumPage user={user} creator={creator} />;
 };

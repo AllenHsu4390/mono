@@ -5,4 +5,8 @@ export * from './lib/Error';
 export * from './lib/Pagination';
 export * from './lib/User';
 export * from './lib/Users';
+export * from './lib/Follow';
+export * from './lib/Follows';
+export * from './lib/LikesCount';
+export * from './lib/Like';
 export * from './lib/Response';

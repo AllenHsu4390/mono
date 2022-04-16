@@ -11,6 +11,12 @@ const user: User[] = [
   {
     id: '0',
     avatarUrl: 'https://source.unsplash.com/random/300x300',
+    email: 'someguy111@someemail.com',
+    isLoggedIn: true,
+  },
+  {
+    id: '1',
+    avatarUrl: 'https://source.unsplash.com/random/300x300',
     email: 'someguy@someemail.com',
     isLoggedIn: true,
   },
@@ -18,7 +24,7 @@ const user: User[] = [
 
 const users: Users[] = [
   {
-    users: [user[0]],
+    users: [user[1]],
     pagination: {
       total: 1,
     },
@@ -28,6 +34,11 @@ const users: Users[] = [
 const creator: Creator[] = [
   {
     id: '0',
+    desc: "Hi, I'm a creator. I make cool things. Check out my work!",
+    avatarUrl: 'https://source.unsplash.com/random/500x500',
+  },
+  {
+    id: '1',
     desc: "Hi, I'm a creator. I make cool things. Check out my work!",
     avatarUrl: 'https://source.unsplash.com/random/500x500',
   },

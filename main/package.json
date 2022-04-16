@@ -17,6 +17,7 @@
     "@nrwl/next": "13.9.5",
     "core-js": "^3.6.5",
     "lodash": "^4.17.21",
+    "mysql2": "^2.3.3",
     "next": "12.1.0",
     "node-fetch": "^3.2.3",
     "react": "17.0.2",
@@ -24,7 +25,8 @@
     "react-infinite-scroller": "^1.2.5",
     "react-query": "^3.34.16",
     "regenerator-runtime": "0.13.7",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "typeorm": "^0.3.5"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "11.7.2",

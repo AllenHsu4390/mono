@@ -7,7 +7,13 @@ export default async function handler(
   res: NextApiResponse<Assets & Response>
 ) {
   try {
-    const { pageId } = req.query;
+    const { pageId, creatorId } = req.query;
+
+    if (typeof creatorId !== 'string') {
+      throw {
+        message: 'Something went wrong',
+      };
+    }
 
     if (typeof pageId !== 'string') {
       throw {
@@ -15,7 +21,7 @@ export default async function handler(
       };
     }
 
-    res.status(200).json(await getAssets(pageId));
+    res.status(200).json(await getAssets(creatorId, pageId));
   } catch (e) {
     res.status(403).json(e);
   }
