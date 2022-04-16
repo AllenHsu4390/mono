@@ -1,6 +1,6 @@
 import { Box, Button, Container, Skeleton, Stack } from '@mui/material';
-import { FollowButtonSkeleton } from '../follow/skeleton';
-import { MessageButtonSkeleton } from '../message/skeleton';
+import { FollowButtonSkeleton } from '../../element/follow/skeleton';
+import { MessageButtonSkeleton } from '../../element/message/skeleton';
 import { CreatorProfileBase } from './base';
 
 export function CreatorProfileSkeleton() {

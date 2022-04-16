@@ -12,7 +12,8 @@ export class Asset extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne((type) => Creator, (creator) => creator.assets) creator: Creator;
+  @ManyToOne('Creator', 'assets')
+  creator: Creator;
 
   @Column()
   src: string;

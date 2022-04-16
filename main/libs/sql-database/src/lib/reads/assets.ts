@@ -1,6 +1,7 @@
 import { Assets } from '@main/models';
 import { connectToDatabase } from '../db';
 import { Asset } from '../entity/asset';
+import { createCursor, createSkip } from '../pagination';
 
 const PAGE_SIZE = 4;
 
@@ -10,28 +11,21 @@ export const getAssets = async (
 ): Promise<Assets> => {
   const db = await connectToDatabase();
   const page = Number(pageId);
-  const skip = (page - 1) * PAGE_SIZE;
   const creatorId = Number(id);
-  const [assets, total] = await db
-    .createQueryBuilder()
-    .select('asset')
-    .from(Asset, 'asset')
-    .where('asset.creatorId = :creatorId', { creatorId })
-    .take(PAGE_SIZE)
-    .skip(skip)
-    .getManyAndCount();
-  const pageCount = total / PAGE_SIZE + 1;
-  const next = page + 1;
-  const prev = page - 1;
+  const [assets, total] = await db.getRepository(Asset).findAndCount({
+    where: {
+      creator: {
+        id: creatorId,
+      },
+    },
+    skip: createSkip(page, PAGE_SIZE),
+    take: PAGE_SIZE,
+  });
   return {
     assets: assets.map((a) => ({
       id: `${a.id}`,
       src: a.src,
     })),
-    pagination: {
-      total,
-      next: next <= pageCount ? `${next}` : undefined,
-      prev: prev > 0 ? `${prev}` : undefined,
-    },
+    pagination: createCursor(page, PAGE_SIZE, total),
   };
 };

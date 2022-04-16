@@ -1,5 +1,4 @@
-import { Button, Container } from '@mui/material';
-import Page from '../_base/page';
+import { Button } from '@mui/material';
 
 interface Props {
   loginUrl: string;

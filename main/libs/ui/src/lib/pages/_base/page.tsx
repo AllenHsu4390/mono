@@ -1,6 +1,6 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Navigation from '../navigation/navbar';
+import Navigation from '../../block/navigation';
 import CompanyContact from './company-contact';
 import { Container } from '@mui/material';
 import { User } from '@main/models';

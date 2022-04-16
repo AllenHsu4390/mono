@@ -6,6 +6,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Asset } from './asset';
+import { Follow } from './follow';
 
 @Entity()
 export class Creator extends BaseEntity {
@@ -13,10 +14,17 @@ export class Creator extends BaseEntity {
   id: number;
 
   @Column()
+  name: string;
+
+  @Column()
   description: string;
 
   @Column()
   avatarUrl: string;
 
-  @OneToMany((type) => Asset, (asset) => asset.creator) assets: Asset[];
+  @OneToMany('Asset', 'creator')
+  assets: Asset[];
+
+  @OneToMany('Follow', 'creator')
+  follows: Follow[];
 }

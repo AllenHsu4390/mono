@@ -16,15 +16,22 @@ interface Props {
   asset: Asset;
   creator: Creator;
   isFull: boolean;
+  isPreloaded?: boolean;
 }
 
-export function AssetCard({ asset, creator, isFull }: Props) {
+export function AssetCard({
+  asset,
+  creator,
+  isFull,
+  isPreloaded = false,
+}: Props) {
   const [isLoading, setIsLoading] = useState(true);
+  const showSkeleton = isLoading && !isPreloaded;
 
   const loadingSkeleton = (
     <Box
       sx={{
-        display: `${isLoading ? 'initial' : 'none'}`,
+        display: `${showSkeleton ? 'initial' : 'none'}`,
       }}
     >
       <InnerSkeleton isFull={isFull} />
@@ -44,7 +51,7 @@ export function AssetCard({ asset, creator, isFull }: Props) {
       {loadingSkeleton}
       <CardActionArea
         sx={{
-          display: `${isLoading ? 'none' : 'initial'}`,
+          display: `${showSkeleton ? 'none' : 'initial'}`,
         }}
       >
         <CardMedia

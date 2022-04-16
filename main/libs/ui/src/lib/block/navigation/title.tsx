@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import Link from '../link';
+import Link from '../../element/link';
 
 export const Title = () => {
   return (

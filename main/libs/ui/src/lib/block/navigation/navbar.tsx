@@ -10,7 +10,7 @@ import { Avatar } from '@mui/material';
 import { User } from '@main/models';
 import { Title } from './title';
 import { AppBar } from './appbar';
-import Link from '../link';
+import Link from '../../element/link';
 import { UserResponse } from '@main/rest';
 
 interface Props {

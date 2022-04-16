@@ -1,7 +1,4 @@
-import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
-import { Creator } from '@main/models';
-import { FollowButton } from '../follow/button';
-import { MessageButton } from '../message/button';
+import { Box, Container, Stack } from '@mui/material';
 import React from 'react';
 
 interface Props {

@@ -13,6 +13,7 @@ export const getCreator = async (id) => {
   return {
     id: `${creator.id}`,
     avatarUrl: creator.avatarUrl,
+    name: creator.name,
     desc: creator.description,
   };
 };

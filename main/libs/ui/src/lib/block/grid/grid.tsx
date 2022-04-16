@@ -1,21 +1,20 @@
 import React from 'react';
 import { useInfiniteQuery } from 'react-query';
 import InfiniteScroll from 'react-infinite-scroller';
-import { CardActionArea, Container, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { Assets, Creator } from '@main/models';
 import { Error } from '@main/models';
 import { AssetCard } from '../asset/card';
 import { AssetCardSkeleton } from '../asset/skeleton';
-import Link from '../link';
+import Link from '../../element/link';
 import { AssetsResponse } from '@main/rest';
-import { identity } from 'lodash';
 
 interface Props {
   creator: Creator;
   assetsUrl: string;
 }
 
-const Column: React.FC = ({ children }) => {
+const Item: React.FC = ({ children }) => {
   return (
     <Grid item xs={12} sm={4} md={4} lg={3}>
       {children}
@@ -59,7 +58,7 @@ export const AssetsGrid: React.FC<Props> = ({ creator, assetsUrl }) => {
         {[
           ...assetPages.map((page: Assets & AssetsResponse) =>
             page.assets.map((asset, index) => (
-              <Column key={asset.id}>
+              <Item key={asset.id}>
                 <Link
                   to={
                     page.links.filter((l) => l.rel === 'asset')[index].url ||
@@ -69,14 +68,14 @@ export const AssetsGrid: React.FC<Props> = ({ creator, assetsUrl }) => {
                 >
                   <AssetCard asset={asset} creator={creator} isFull={false} />
                 </Link>
-              </Column>
+              </Item>
             ))
           ),
           ...(shouldShowSkeleton
             ? new Array(4).fill(null).map((_, index) => (
-                <Column key={`${index}`}>
+                <Item key={`${index}`}>
                   <AssetCardSkeleton isFull={false} />
-                </Column>
+                </Item>
               ))
             : []),
         ]}

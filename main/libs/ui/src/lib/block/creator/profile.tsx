@@ -1,7 +1,7 @@
-import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import { Creator } from '@main/models';
-import { FollowButton } from '../follow/button';
-import { MessageButton } from '../message/button';
+import { FollowButton } from '../../element/follow/button';
+import { MessageButton } from '../../element/message/button';
 import { CreatorProfileBase } from './base';
 
 interface Props {
