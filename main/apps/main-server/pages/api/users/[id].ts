@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Error, Response, User } from '@main/models';
 import { auth } from '@main/auth';
-import { getUser, saveUser } from '@main/rest';
+import { getUser } from '@main/rest';
 
-const userFromLogin = (req: NextApiRequest) => 'sdfasdfasdfasdf';
+const userFromLogin = (req: NextApiRequest) => req.cookies.idKey;
 
 type OK = {
   ok: true;
@@ -13,19 +13,10 @@ type UserRes = User & Response;
 
 const setSession = (res: NextApiResponse, user: User) => {
   const cookieValue = user.isLoggedIn
-    ? 'idKey=asdfasdfsadfasdfasdfasdf; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;'
-    : 'idKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;';
+    ? `idKey=${user.id}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`
+    : `idKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;`;
 
   res.setHeader('Set-Cookie', cookieValue);
-};
-
-const postSchema = (body: any): User => {
-  return {
-    email: body.email || '',
-    id: 'aasdfsadfasdf',
-    avatarUrl: 'https://source.unsplash.com/random/300x300',
-    isLoggedIn: true,
-  };
 };
 
 const putSchema = (body: any): User => {
@@ -47,18 +38,11 @@ const me = {
       isLoggedIn,
       avatarUrl,
     };
-    await saveUser(user);
     setSession(res, newUser);
     res.status(200).json({
       ok: true,
       links: [],
     });
-  },
-  create: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
-    const user: User = postSchema(req.body);
-    const userResponse = await saveUser(user);
-    setSession(res, user);
-    res.status(200).json(userResponse);
   },
   read: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
     const { idKey } = req.cookies;
@@ -83,9 +67,6 @@ export default async function handler(
     switch (true) {
       case req.method === 'POST' && id === 'me':
         await me.update(req, res);
-        break;
-      case req.method === 'POST':
-        await me.create(req, res);
         break;
       case req.method === 'GET' && id === 'me':
         await me.read(req, res);

@@ -1,9 +1,10 @@
 import { connectToDatabase } from '../db';
 import { Creator } from '../entity/creator';
+import { decode, encode } from '../hash';
 
-export const getCreator = async (id) => {
+export const getCreator = async (id: string) => {
   const db = await connectToDatabase();
-  const creatorId = Number(id);
+  const creatorId = decode(id);
   const creator = await db
     .createQueryBuilder()
     .select('creator')
@@ -11,7 +12,7 @@ export const getCreator = async (id) => {
     .where('creator.id = :creatorId', { creatorId })
     .getOne();
   return {
-    id: `${creator.id}`,
+    id: encode(creator.id),
     avatarUrl: creator.avatarUrl,
     name: creator.name,
     desc: creator.description,

@@ -1,6 +1,7 @@
 import { Follows } from '@main/models';
 import { connectToDatabase } from '../db';
 import { Follow } from '../entity/follow';
+import { decode, encode } from '../hash';
 import { createCursor, createSkip } from '../pagination';
 
 const PAGE_SIZE = 20;
@@ -11,7 +12,7 @@ export const getFollows = async (
 ): Promise<Follows> => {
   const db = await connectToDatabase();
   const page = Number(pageId);
-  const userId = Number(id);
+  const userId = decode(id);
 
   const [follows, total] = await db.getRepository(Follow).findAndCount({
     where: {
@@ -25,10 +26,10 @@ export const getFollows = async (
   });
   return {
     follows: follows.map((f) => ({
-      id: `${f.id}`,
+      id: encode(f.id),
       creator: {
         name: f.creator.name,
-        id: `${f.creator.id}`,
+        id: encode(f.creator.id),
         avatarUrl: f.creator.avatarUrl,
         desc: f.creator.description,
       },
