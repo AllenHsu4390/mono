@@ -1,5 +1,6 @@
 const decrypt = (encryptedKey: string) => {
-  return '1';
+  // add real encryption
+  return encryptedKey;
 };
 
 interface Identity {

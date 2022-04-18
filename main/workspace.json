@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "auth": "libs/auth",
+    "cache": "libs/cache",
     "environment": "libs/environment",
     "genshin-calc": "libs/genshin-calc",
     "main-server": "apps/main-server",

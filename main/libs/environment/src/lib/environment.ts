@@ -1,5 +1,6 @@
 import { Assets, User, Asset, Creator, Follows, Like } from '@main/models';
 import { db as sqlDb } from '@main/sql-database';
+import { cache } from '@main/cache';
 
 interface Database {
   get: {
@@ -15,8 +16,18 @@ interface Database {
   };
 }
 
+interface Cache {
+  get: {
+    likesCount(assetId: string, dbGet: () => Promise<number>): Promise<number>;
+  };
+  save: {
+    like(assetId: string, dbSave: () => Promise<void>): Promise<void>;
+  };
+}
+
 interface Environment {
   db: Database;
+  cache: Cache;
 }
 
 export function environment(): Environment {
@@ -25,5 +36,6 @@ export function environment(): Environment {
       get: sqlDb.get,
       save: sqlDb.save,
     },
+    cache,
   };
 }

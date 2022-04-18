@@ -7,7 +7,7 @@ interface OK {
   ok: true;
 }
 
-const userFromLogin = (req: NextApiRequest) => 'sdfasdfasdfasdf';
+const userFromLogin = (req: NextApiRequest) => req.cookies.idKey;
 
 export default async function handler(
   req: NextApiRequest,
