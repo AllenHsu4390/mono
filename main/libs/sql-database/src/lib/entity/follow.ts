@@ -21,6 +21,12 @@ export class Follow extends BaseEntity {
   creator: Creator;
 
   @Column()
+  creatorId: number;
+
+  @Column()
+  userId: number;
+
+  @Column()
   createdAt: Date;
 
   @BeforeInsert()

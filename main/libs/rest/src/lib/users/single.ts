@@ -5,39 +5,14 @@ import { UserResponse } from '../responses';
 export const getUser = async (userId: string): Promise<User & UserResponse> => {
   const db = environment().db;
   const user = await db.get.user(userId);
+  const follows = await db.get.follows(userId, '1');
   return {
     ...user,
     links: [
-      {
+      ...follows.follows.map((f): UserResponse['links'][0] => ({
         rel: 'follows',
-        url: '/1',
-      },
-      {
-        rel: 'logout',
-        url: '/users/logout',
-      },
-      {
-        rel: 'new-album',
-        url: '/albums/new',
-      },
-      {
-        rel: 'edit-account',
-        url: '/users/edit',
-      },
-    ],
-  };
-};
-
-export const saveUser = async (user: User): Promise<User & UserResponse> => {
-  const db = environment().db;
-  await db.save.user(user);
-  return {
-    ...user,
-    links: [
-      {
-        rel: 'follows',
-        url: '/1',
-      },
+        url: `/${f.creator.id}`,
+      })),
       {
         rel: 'logout',
         url: '/users/logout',

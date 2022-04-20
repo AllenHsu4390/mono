@@ -15,7 +15,9 @@ const getLikesCount = async (
     const value = await dbGet();
     memoryCache.set(key, value, DEFAULT_TTL);
   }
-  return memoryCache.get(key);
+
+  // guaranteed
+  return memoryCache.get(key) as number;
 };
 
 const saveLikesCount = async (assetId: string, dbSave: () => Promise<void>) => {

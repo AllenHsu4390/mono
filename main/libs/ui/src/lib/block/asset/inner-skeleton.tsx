@@ -16,42 +16,44 @@ export const InnerSkeleton: React.FC<Props> = ({ isFull }) => {
         }}
         variant="rectangular"
       />
-      <CardHeader
-        sx={{
-          paddingLeft: 0,
-          paddingRight: 0,
-        }}
-        avatar={
-          <Skeleton
-            animation="pulse"
-            variant="circular"
-            width={40}
-            height={40}
-          />
-        }
-        title={
-          <Skeleton
-            animation="pulse"
-            height={16}
-            width="90%"
-            sx={{
-              marginBottom: '0.4rem',
-              borderRadius: 0,
-            }}
-          />
-        }
-        subheader={
-          <Skeleton
-            animation="pulse"
-            sx={{
-              width: '60%',
-              height: '1rem',
-              marginBottom: '0.4rem',
-              borderRadius: 0,
-            }}
-          />
-        }
-      />
+      {isFull ? (
+        <CardHeader
+          sx={{
+            paddingLeft: 0,
+            paddingRight: 0,
+          }}
+          avatar={
+            <Skeleton
+              animation="pulse"
+              variant="circular"
+              width={40}
+              height={40}
+            />
+          }
+          title={
+            <Skeleton
+              animation="pulse"
+              height={16}
+              width="90%"
+              sx={{
+                marginBottom: '0.4rem',
+                borderRadius: 0,
+              }}
+            />
+          }
+          subheader={
+            <Skeleton
+              animation="pulse"
+              sx={{
+                width: '60%',
+                height: '1rem',
+                marginBottom: '0.4rem',
+                borderRadius: 0,
+              }}
+            />
+          }
+        />
+      ) : null}
     </>
   );
 };

@@ -502,6 +502,15 @@ export const goblet_49 = {
     def: 35,
 };
 
+export const feather_49 = {
+    type: "eosf",
+    atk: 311,
+    atkPct: 0.099,
+    critDmg: 0.07,
+    critRate: 0.117,
+    hp: 418,
+};
+
 // yoimiya
 export const flower_4 = {
     type: "shime",
