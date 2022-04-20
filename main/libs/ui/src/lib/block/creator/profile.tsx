@@ -1,4 +1,4 @@
-import { Avatar, Typography } from '@mui/material';
+import { Avatar, Stack, Typography } from '@mui/material';
 import { Creator } from '@main/models';
 import { FollowButton } from '../../element/follow/button';
 import { MessageButton } from '../../element/message/button';
@@ -15,11 +15,17 @@ export function CreatorProfile({ creator }: Props) {
       description={
         <Typography
           variant="h5"
-          align="center"
           color="text.secondary"
           paragraph
+          sx={{
+            padding: '1rem',
+          }}
         >
           {desc}
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
+          facilis! Nobis culpa quod doloremque in soluta? Natus, nihil, aut
+          omnis, fuga adipisci delectus vero harum magni nam nobis sapiente
+          laudantium.
         </Typography>
       }
       avatar={
@@ -27,14 +33,17 @@ export function CreatorProfile({ creator }: Props) {
           alt="Avatar"
           src={avatarUrl}
           sx={{
-            margin: '4rem auto 4rem auto',
             width: '10rem',
             height: '10rem',
           }}
         />
       }
-      follow={<FollowButton />}
-      message={<MessageButton />}
+      controls={
+        <Stack direction="row" spacing={2} justifyContent="center">
+          {<FollowButton />}
+          {<MessageButton />}
+        </Stack>
+      }
     />
   );
 }

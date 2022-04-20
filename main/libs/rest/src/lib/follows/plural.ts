@@ -9,7 +9,7 @@ export const getFollows = async (
   const db = environment().db;
   const follows = await db.get.follows(userId, pageId);
   const links = [
-    ...follows.follows.map((f) => ({
+    ...follows.follows.map((f): FollowsResponse['links'][0] => ({
       rel: 'follow',
       url: `/${f.creator.id}`,
     })),
@@ -25,5 +25,5 @@ export const getFollows = async (
   return {
     ...follows,
     links,
-  } as Follows & FollowsResponse;
+  };
 };

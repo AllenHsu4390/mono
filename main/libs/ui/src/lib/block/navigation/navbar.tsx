@@ -6,12 +6,13 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { Avatar } from '@mui/material';
+import { Avatar, Container, Typography } from '@mui/material';
 import { User } from '@main/models';
 import { Title } from './title';
 import { AppBar } from './appbar';
 import Link from '../../element/link';
 import { UserResponse } from '@main/rest';
+import { FavoriteBorder, FavoriteBorderOutlined } from '@mui/icons-material';
 
 interface Props {
   user: User & UserResponse;
@@ -87,6 +88,32 @@ export default function Navigation({ user }: Props) {
           <Title />
         </Box>
         <Box sx={{ flexGrow: 1 }} />
+        <Box sx={{ display: 'flex' }}>
+          <Container
+            sx={{
+              color: theme.palette.primary.dark,
+              borderRadius: '0.3rem',
+              padding: '0.2rem',
+            }}
+          >
+            <FavoriteBorder
+              fontSize="small"
+              sx={{
+                verticalAlign: 'middle',
+              }}
+            />
+            <Typography
+              sx={{
+                ml: '0.2rem',
+                display: 'inline',
+                verticalAlign: 'middle',
+              }}
+              component="p"
+            >
+              1000 SNP
+            </Typography>
+          </Container>
+        </Box>
         <Box sx={{ display: 'flex' }}>
           <IconButton
             size="large"

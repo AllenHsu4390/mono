@@ -30,8 +30,12 @@ export const connectToDatabase = async () => {
   if (isInitialized) {
     return datasource;
   }
+  await datasource.initialize();
+  if (process.env.NODE_ENV === 'development') {
+    global['datasource'] = datasource;
+  }
   isInitialized = true;
-  return await datasource.initialize();
+  return datasource;
 };
 
 export const db = {

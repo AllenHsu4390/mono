@@ -1,42 +1,53 @@
-import { Box, Container, Stack } from '@mui/material';
+import { Box, Container, Grid, Stack } from '@mui/material';
 import React from 'react';
 
 interface Props {
   description: React.ReactNode;
   avatar: React.ReactNode;
-  follow: React.ReactNode;
-  message: React.ReactNode;
+  controls: React.ReactNode;
 }
 
-export function CreatorProfileBase({
-  description,
-  avatar,
-  follow,
-  message,
-}: Props) {
+export function CreatorProfileBase({ description, avatar, controls }: Props) {
   return (
-    <Box
+    <Grid
+      container
       sx={{
         bgcolor: 'background.paper',
-        pt: 18,
-        pb: 10,
+        pt: 14,
+        pb: 8,
       }}
+      spacing={[1, 1, 2, 3]}
     >
-      <Container maxWidth="sm">
-        {description}
+      <Grid
+        item
+        md={3}
+        lg={2}
+        sx={{
+          margin: 'auto',
+        }}
+      >
         {avatar}
-        <Stack
-          sx={{
-            pt: 2,
-          }}
-          direction="row"
-          spacing={2}
-          justifyContent="center"
-        >
-          {follow}
-          {message}
-        </Stack>
-      </Container>
-    </Box>
+      </Grid>
+      <Grid
+        item
+        md={6}
+        lg={8}
+        sx={{
+          margin: 'auto',
+        }}
+      >
+        {description}
+      </Grid>
+      <Grid
+        item
+        md={3}
+        lg={2}
+        sx={{
+          margin: 'auto',
+        }}
+      >
+        {controls}
+      </Grid>
+    </Grid>
   );
 }

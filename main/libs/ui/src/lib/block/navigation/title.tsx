@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import { Wordmark } from '../../element/company/wordmark';
 import Link from '../../element/link';
 
 export const Title = () => {
@@ -11,7 +12,7 @@ export const Title = () => {
           cursor: 'pointer',
         }}
       >
-        CREATOR NETWORK
+        <Wordmark />
       </Typography>
     </Link>
   );

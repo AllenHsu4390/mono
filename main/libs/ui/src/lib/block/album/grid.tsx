@@ -16,7 +16,7 @@ interface Props {
 
 const Item: React.FC = ({ children }) => {
   return (
-    <Grid item xs={12} sm={4} md={4} lg={3}>
+    <Grid item xs={12} sm={4} md={4} lg={4}>
       {children}
     </Grid>
   );
@@ -47,14 +47,7 @@ export const AssetsGrid: React.FC<Props> = ({ creator, assetsUrl }) => {
 
   return (
     <InfiniteScroll hasMore={hasNextPage} loadMore={loadMore}>
-      <Grid
-        container
-        spacing={{
-          xs: 2,
-          sm: 3,
-          md: 4,
-        }}
-      >
+      <Grid container spacing={1}>
         {[
           ...assetPages.map((page: Assets & AssetsResponse) =>
             page.assets.map((asset, index) => (

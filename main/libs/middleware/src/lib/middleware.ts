@@ -44,7 +44,6 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
         return res;
     }
   } catch (e) {
-    console.log(e);
     return redirectLocal(req, '/404');
   }
 }
