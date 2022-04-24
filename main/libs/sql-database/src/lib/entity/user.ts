@@ -12,11 +12,14 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('varchar')
   email: string;
 
-  @Column()
+  @Column('varchar')
   avatarUrl: string;
+
+  @Column('int')
+  balance: number;
 
   @OneToMany('Follow', 'user')
   follows: Follow[];

@@ -20,13 +20,13 @@ export class Follow extends BaseEntity {
   @ManyToOne('Creator', 'follows')
   creator: Creator;
 
-  @Column()
+  @Column('int')
   creatorId: number;
 
-  @Column()
+  @Column('int')
   userId: number;
 
-  @Column()
+  @Column('datetime')
   createdAt: Date;
 
   @BeforeInsert()

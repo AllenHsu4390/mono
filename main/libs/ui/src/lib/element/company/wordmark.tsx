@@ -1,3 +1,3 @@
 export const Wordmark: React.FC = () => {
-  return <span>FOTOVERSE</span>;
+  return <span>PROMOVERSE</span>;
 };

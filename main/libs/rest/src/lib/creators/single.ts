@@ -5,7 +5,7 @@ import { CreatorResponse } from '../responses';
 export const getCreator = async (
   id: string
 ): Promise<Creator & CreatorResponse> => {
-  const db = environment().db;
+  const db = environment.db;
   return {
     ...(await db.get.creator(id)),
     links: [

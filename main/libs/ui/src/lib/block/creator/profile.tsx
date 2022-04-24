@@ -41,7 +41,6 @@ export function CreatorProfile({ creator }: Props) {
       controls={
         <Stack direction="row" spacing={2} justifyContent="center">
           {<FollowButton />}
-          {<MessageButton />}
         </Stack>
       }
     />

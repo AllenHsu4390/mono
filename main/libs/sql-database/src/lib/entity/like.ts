@@ -14,20 +14,20 @@ export class Like extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column('int')
+  userId: number;
+
+  @Column('int')
+  assetId: number;
+
+  @Column('datetime')
+  createdAt: Date;
+
   @ManyToOne('User')
   user: User;
 
   @ManyToOne('Asset')
   asset: Asset;
-
-  @Column()
-  userId: number;
-
-  @Column()
-  assetId: number;
-
-  @Column()
-  createdAt: Date;
 
   @BeforeInsert()
   addTimeStamp() {

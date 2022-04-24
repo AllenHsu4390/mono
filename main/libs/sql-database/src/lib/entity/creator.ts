@@ -13,14 +13,17 @@ export class Creator extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('text')
   description: string;
 
-  @Column()
+  @Column('varchar')
   avatarUrl: string;
+
+  @Column('int')
+  userId: number;
 
   @OneToMany('Asset', 'creator')
   assets: Asset[];

@@ -1,12 +1,12 @@
 import { crit, hydroVape } from './amplifiers.js';
 import { damageDps } from './damage.js';
-import { flower_9, feather_9, sand_9, goblet_9, circlet_9, feather_40, circlet_39, circlet_13, goblet_15, feather_16, flower_13, sand_13, circlet_11, feather_42, sand_42, goblet_42, flower_42, sand_8, circlet_30, feather_36, flower_1, feather_1, sand_1, goblet_1, circlet_37, flower_47, goblet_13, circlet_48, sand_48 } from './my_artifacts.js';
+import { flower_9, feather_9, sand_9, goblet_9, circlet_9, feather_40, circlet_39, circlet_13, goblet_15, feather_16, flower_13, sand_13, circlet_11, feather_42, sand_42, goblet_42, flower_42, sand_8, circlet_30, feather_36, flower_1, feather_1, sand_1, goblet_1, circlet_37, flower_47, goblet_13, circlet_48, sand_48, goblet_50 } from './my_artifacts.js';
 import { stats } from './stats.js';
-import { bennBurst, noblesse, pyroRes, baalE, homNature, ttds } from './traits.js';
+import { bennBurst, noblesse, pyroRes, baalE, homNature, ttds, sucroseC6 } from './traits.js';
 import { yae } from './my_characters.js';
 import { mappa, oathsworn, solarpearl, widsith_atk, widsith_dmg, widsith_mast } from './catalyst.js';
 import { electroCharged, overloaded } from './reactions.js';
-import { lapidus } from './debuffs.js';
+import { lapidus, vvShred } from './debuffs.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 import { getCurrentTeam } from './team.js';
 
@@ -136,7 +136,7 @@ const atk_circlet  = {
     hp: 568,
 };
 // 
-const artifacts = [flower_42, feather_1, sand_48, goblet_42, circlet_11];[flower_47, feather_1, sand_8, goblet_13, circlet_48];
+const artifacts = [flower_42, feather_1, sand_42, goblet_50, circlet_48];
 const transforms = [icdElectroCharged];
 
 const buffs = [];
@@ -191,11 +191,11 @@ export const print = () => {
     console.log(`Oathsworn Eye: ${damageDps(stats(yae, oathsworn, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
 
     console.log("");
-    console.log("3 totem burst (electrocharged) CRIT");
+    console.log("3 totem burst (electrocharged) buffed CRIT");
     //console.log(`Solar pearl: ${damageDps(stats(yae, solarpearl, artifacts.concat({ critRate: 1 })), tenkoHits(buffs, undefined, undefined, transforms))}`);
-    console.log(`Widsith Atk: ${damageDps(stats(yae, widsith_atk, artifacts.concat({ critRate: 1 })), tenkoHits(buffs, debuffs, undefined, [icdElectroCharged]))}`);
-    console.log(`Widsith Mast: ${damageDps(stats(yae, widsith_mast, artifacts.concat({ critRate: 1 })), tenkoHits(buffs, debuffs, undefined, [icdElectroCharged]))}`);
-    console.log(`Widsith Dmg: ${damageDps(stats(yae, widsith_dmg, artifacts.concat({ critRate: 1 })), tenkoHits(buffs, debuffs, undefined, [icdElectroCharged]))}`);
-    console.log(`Mappa Mare: ${damageDps(stats(yae, mappa, artifacts.concat({ critRate: 1 })), tenkoHits(buffs, debuffs, undefined, [icdElectroCharged]))}`);
-    console.log(`Oathsworn Eye: ${damageDps(stats(yae, oathsworn, artifacts.concat({ critRate: 1 })), tenkoHits(buffs, debuffs, undefined, [icdElectroCharged]))}`);
+    console.log(`Widsith Atk: ${damageDps(stats(yae, widsith_atk, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
+    console.log(`Widsith Mast: ${damageDps(stats(yae, widsith_mast, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
+    console.log(`Widsith Dmg: ${damageDps(stats(yae, widsith_dmg, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
+    console.log(`Mappa Mare: ${damageDps(stats(yae, mappa, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
+    console.log(`Oathsworn Eye: ${damageDps(stats(yae, oathsworn, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
 };

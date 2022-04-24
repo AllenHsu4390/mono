@@ -5,7 +5,7 @@ export const getAssets = async (
   creatorId: string,
   pageId: string
 ): Promise<Assets & Response> => {
-  const db = environment().db;
+  const db = environment.db;
   const assets = await db.get.assets(creatorId, pageId);
 
   const links = [

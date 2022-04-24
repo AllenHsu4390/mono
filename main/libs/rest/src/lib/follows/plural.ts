@@ -6,7 +6,7 @@ export const getFollows = async (
   userId: string,
   pageId: string
 ): Promise<Follows & FollowsResponse> => {
-  const db = environment().db;
+  const db = environment.db;
   const follows = await db.get.follows(userId, pageId);
   const links = [
     ...follows.follows.map((f): FollowsResponse['links'][0] => ({

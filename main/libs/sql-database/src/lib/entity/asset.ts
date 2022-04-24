@@ -15,6 +15,9 @@ export class Asset extends BaseEntity {
   @ManyToOne('Creator', 'assets')
   creator: Creator;
 
-  @Column()
+  @Column('int')
+  creatorId: number;
+
+  @Column('varchar')
   src: string;
 }

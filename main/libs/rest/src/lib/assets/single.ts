@@ -3,17 +3,22 @@ import { Asset } from '@main/models';
 import { AssetResponse } from '../responses';
 
 export const getAsset = async (id: string): Promise<Asset & AssetResponse> => {
-  const db = environment().db;
+  const db = environment.db;
+  const asset = await db.get.asset(id);
   return {
-    ...(await db.get.asset(id)),
+    ...asset,
     links: [
       {
         rel: 'like-count',
-        url: `/api/assets/${id}/likes/count`,
+        url: `/api/assets/${asset.id}/likes/count`,
       },
       {
         rel: 'like',
-        url: `/api/assets/${id}/likes`,
+        url: `/api/assets/${asset.id}/likes`,
+      },
+      {
+        rel: 'creator',
+        url: `/${asset.creator.id}`,
       },
     ],
   };

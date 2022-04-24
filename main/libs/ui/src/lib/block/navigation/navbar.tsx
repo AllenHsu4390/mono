@@ -12,7 +12,7 @@ import { Title } from './title';
 import { AppBar } from './appbar';
 import Link from '../../element/link';
 import { UserResponse } from '@main/rest';
-import { FavoriteBorder, FavoriteBorderOutlined } from '@mui/icons-material';
+import { FavoriteBorder } from '@mui/icons-material';
 
 interface Props {
   user: User & UserResponse;
@@ -20,12 +20,10 @@ interface Props {
 
 const menuLabel = (rel: string) => {
   switch (rel) {
-    case 'new-album':
-      return 'Create Album';
+    case 'new-gallery':
+      return 'My Gallery';
     case 'logout':
       return 'Logout';
-    case 'login':
-      return 'Login';
     case 'edit-account':
       return 'Settings';
     default:
@@ -33,7 +31,7 @@ const menuLabel = (rel: string) => {
   }
 };
 
-const menuOrder = ['new-album', 'edit-account', 'logout', 'login'];
+const menuOrder = ['new-gallery', 'edit-account', 'logout'];
 
 export default function Navigation({ user }: Props) {
   const theme = useTheme();
@@ -67,6 +65,7 @@ export default function Navigation({ user }: Props) {
       onClose={handleMenuClose}
     >
       {user.links
+        .filter((l) => !!menuLabel(l.rel))
         .sort((a, b) => menuOrder.indexOf(a.rel) - menuOrder.indexOf(b.rel))
         .map((l) => (
           <MenuItem key={l.url}>
@@ -127,16 +126,14 @@ export default function Navigation({ user }: Props) {
               borderRadius: 0,
             }}
           >
-            <Badge badgeContent={7} color="error">
-              <Avatar
-                alt="Avatar"
-                src={user.avatarUrl}
-                sx={{
-                  width: '2.5rem',
-                  height: '2.5rem',
-                }}
-              />
-            </Badge>
+            <Avatar
+              alt="Avatar"
+              src={user.avatarUrl}
+              sx={{
+                width: '2.5rem',
+                height: '2.5rem',
+              }}
+            />
           </IconButton>
         </Box>
       </Toolbar>

@@ -1,6 +1,13 @@
+export interface SessionResponse {
+  links: {
+    rel: 'login' | 'logout';
+    url: string;
+  }[];
+}
+
 export interface UserResponse {
   links: {
-    rel: 'new-album' | 'logout' | 'login' | 'edit-account' | 'follows';
+    rel: 'new-gallery' | 'logout' | 'edit-account' | 'follows';
     url: string;
   }[];
 }
@@ -12,7 +19,7 @@ export interface CreatorResponse {
 }
 export interface AssetResponse {
   links: {
-    rel: 'like' | 'like-count';
+    rel: 'like' | 'like-count' | 'creator';
     url: string;
   }[];
 }
