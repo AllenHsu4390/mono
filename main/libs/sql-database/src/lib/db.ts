@@ -6,11 +6,12 @@ import { User } from './entity/user';
 import { getAsset } from './reads/asset';
 import { getAssets } from './reads/assets';
 import { getCreator } from './reads/creator';
-import { getUser } from './reads/user';
+import { getUser, getUserId } from './reads/user';
 import { getFollows } from './reads/follows';
 import { Like } from './entity/like';
 import { getLikesCount } from './reads/likes';
 import { saveLike } from './writes/like';
+import { Transaction } from './entity/transaction';
 
 const datasource = new DataSource({
   type: 'mysql',
@@ -20,8 +21,7 @@ const datasource = new DataSource({
   password: 'H>c$6H2xyA`VrR{B',
   database: 'creator_network',
   synchronize: true,
-  logging: true,
-  entities: [User, Creator, Asset, Follow, Like],
+  entities: [User, Creator, Asset, Follow, Like, Transaction],
 });
 
 let isInitialized = false;
@@ -46,6 +46,7 @@ export const db = {
     assets: getAssets,
     follows: getFollows,
     likesCount: getLikesCount,
+    userId: getUserId,
   },
   save: {
     like: saveLike,

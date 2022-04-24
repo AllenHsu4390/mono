@@ -511,6 +511,16 @@ export const feather_49 = {
     hp: 418,
 };
 
+export const goblet_50 = {
+    type: "eosf",
+    element: "electro",
+    elemDmg: 0.466,
+    atk: 39,
+    critDmg: 0.225,
+    def: 16,
+    hpPct: 0.087,
+};
+
 // yoimiya
 export const flower_4 = {
     type: "shime",

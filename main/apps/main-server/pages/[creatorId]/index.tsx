@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { AlbumPage } from '@main/ui';
+import { GalleryPage } from '@main/ui';
 import { Creator, User } from '@main/models';
 import { CreatorResponse, getCreator, getUser, UserResponse } from '@main/rest';
 import { auth } from '@main/auth';
@@ -34,8 +34,9 @@ export async function getServerSideProps({ params, req }) {
     props,
   };
 }
-const Album: NextPage<Props> = ({ user, creator }) => {
-  return <AlbumPage user={user} creator={creator} />;
+
+const Gallery: NextPage<Props> = ({ user, creator }) => {
+  return <GalleryPage user={user} creator={creator} />;
 };
 
-export default Album;
+export default Gallery;

@@ -5,8 +5,8 @@ import {
   Theme,
   Typography,
   useTheme,
+  Box,
 } from '@mui/material';
-import { Box } from '@mui/system';
 import Toast from '../toast';
 
 interface Props {
@@ -30,7 +30,7 @@ const LikeButton: React.FC<Props> = ({
     fontWeight: 'bold',
     textShadow: '1px 1px 3px pink',
   };
-  const buttonBackground = 'rgba(155, 155, 155, 0.1)';
+
   return (
     <IconButton
       size="large"
@@ -38,15 +38,11 @@ const LikeButton: React.FC<Props> = ({
       aria-controls="like"
       aria-haspopup="true"
       sx={{
-        borderRadius: '0.3rem',
+        borderRadius: '0',
         position: 'relative',
         display: 'block',
         textAlign: 'center',
         padding: '1rem',
-        background: buttonBackground,
-        ':hover': {
-          background: buttonBackground,
-        },
       }}
       onClick={onClick}
     >
@@ -75,7 +71,7 @@ const LikeButton: React.FC<Props> = ({
             ...textStyle,
           }}
         >
-          240 SNP
+          60 SNP
         </Typography>
       </Box>
       <Toast

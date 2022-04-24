@@ -1,33 +1,29 @@
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-import { Asset, Creator } from '@main/models';
-import {
-  Avatar,
-  Box,
-  CardActionArea,
-  CardContent,
-  CardHeader,
-  Typography,
-} from '@mui/material';
+import { Asset } from '@main/models';
+import { Box, CardActionArea, useTheme } from '@mui/material';
 import { useState } from 'react';
 import { InnerSkeleton } from './inner-skeleton';
+import OverlapPanel from '../overlap-panel';
 
 interface Props {
   asset: Asset;
-  creator: Creator;
   isFull: boolean;
   isPreloaded?: boolean;
   actions?: React.ReactNode;
+  avatar?: React.ReactNode;
 }
 
 export function AssetCard({
   asset,
-  creator,
+  avatar,
   isFull,
   isPreloaded = false,
   actions,
 }: Props) {
+  const theme = useTheme();
   const [isLoading, setIsLoading] = useState(true);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
   const showSkeleton = isLoading && !isPreloaded;
 
   const loadingSkeleton = (
@@ -41,62 +37,64 @@ export function AssetCard({
   );
 
   const cardContent = (
-    <>
-      <CardMedia
-        sx={{
-          objectFit: 'cover',
-          height: isFull ? '' : '16rem',
-        }}
-        component="img"
-        image={asset.src}
-        alt="random"
-        onLoad={() => setIsLoading(false)}
-      ></CardMedia>
-      {isFull ? (
-        <>
-          <CardHeader
-            sx={{
-              padding: '1rem 0.3rem 0.3rem',
-            }}
-            avatar={<Avatar alt={creator.id} src={creator.avatarUrl} />}
-            title={
-              <Typography color="text.secondary">{`Creator name ✓`}</Typography>
-            }
-            subheader={
-              <Typography color="text.secondary">{`50 minutes ago`}</Typography>
-            }
-          />
-          <CardContent
-            sx={{
-              padding: '0.3rem',
-            }}
-          >
-            <Typography variant="body2" color="text.secondary" component="p">
-              {'Why this is some dank stuff? Let me tell you...'}
-            </Typography>
-          </CardContent>
-        </>
-      ) : null}
-    </>
+    <CardMedia
+      sx={{
+        height: isFull ? '40rem' : '16rem',
+        [theme.breakpoints.down('md')]: {
+          height: isFull ? '30rem' : '16rem',
+        },
+        [theme.breakpoints.down('sm')]: {
+          height: isFull ? '20rem' : '16rem',
+        },
+      }}
+      component="img"
+      image={asset.src}
+      alt="random"
+      onLoad={() => setIsLoading(false)}
+    />
   );
 
   return (
     <Card
       sx={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
         borderRadius: 0,
         boxShadow: 'none',
         position: 'relative',
+        '@media (hover: hover)': {
+          '&:hover': {
+            '& .panel': {
+              right: 0,
+            },
+          },
+        },
       }}
+      onClick={() => setIsPanelOpen(!isPanelOpen)}
     >
       {loadingSkeleton}
-      {isFull && actions ? actions : null}
       {isFull ? (
-        <Box sx={{ display: `${showSkeleton ? 'none' : 'initial'}` }}>
-          {cardContent}
-        </Box>
+        <>
+          <OverlapPanel
+            className="panel"
+            sx={{
+              position: 'absolute',
+              bottom: '0',
+              right: '-5.6rem',
+              width: '5.6rem',
+              height: '100%',
+              zIndex: 2,
+              transition: '0.1s ease-out',
+              '@media (hover: none)': {
+                right: isPanelOpen ? '0' : '-5.6rem',
+              },
+            }}
+          >
+            {isFull && avatar ? avatar : null}
+            {isFull && actions ? actions : null}
+          </OverlapPanel>
+          <Box sx={{ display: `${showSkeleton ? 'none' : 'initial'}` }}>
+            {cardContent}
+          </Box>
+        </>
       ) : (
         <CardActionArea
           sx={{ display: `${showSkeleton ? 'none' : 'initial'}` }}

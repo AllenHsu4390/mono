@@ -8,4 +8,6 @@ export * from './lib/follows/plural';
 export * from './lib/likes/count';
 export * from './lib/likes/single';
 
+export * from './lib/sessions/single';
+
 export * from './lib/responses';

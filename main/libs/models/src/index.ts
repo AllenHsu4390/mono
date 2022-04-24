@@ -10,3 +10,4 @@ export * from './lib/Follows';
 export * from './lib/LikesCount';
 export * from './lib/Like';
 export * from './lib/Response';
+export * from './lib/Session';

@@ -3,7 +3,7 @@ import NodeCache from 'node-cache';
 const DEFAULT_TTL = 3600000; // 1 hours
 
 const memoryCache = new NodeCache({
-  maxKeys: 100000,
+  maxKeys: 1000000,
 });
 
 const getLikesCount = async (

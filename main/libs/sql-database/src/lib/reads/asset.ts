@@ -9,9 +9,17 @@ export const getAsset = async (id: string) => {
     where: {
       id: assetId,
     },
+    relations: ['creator'],
   });
+  const creator = asset.creator;
   return {
     id: encode(asset.id),
+    creator: {
+      id: encode(creator.id),
+      name: creator.name,
+      desc: creator.description,
+      avatarUrl: creator.avatarUrl,
+    },
     src: asset.src,
   };
 };

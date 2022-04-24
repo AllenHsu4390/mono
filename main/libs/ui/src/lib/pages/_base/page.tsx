@@ -38,7 +38,7 @@ theme.typography.h3 = {
 interface Props {
   hasFooter?: boolean;
   hasNavigation?: boolean;
-  user: User & UserResponse;
+  user?: User & UserResponse;
 }
 
 const Page: React.FC<Props> = ({
@@ -50,13 +50,17 @@ const Page: React.FC<Props> = ({
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {hasNavigation ? <Navigation user={user} /> : null}
+      {hasNavigation && user ? <Navigation user={user} /> : null}
       <main>
         <Container
           sx={{
             paddingY: '0.5rem',
+            maxWidth: theme.breakpoints.values.lg,
+            [theme.breakpoints.down('sm')]: {
+              maxWidth: '100%',
+              paddingX: 0,
+            },
           }}
-          maxWidth="lg"
         >
           {children}
         </Container>

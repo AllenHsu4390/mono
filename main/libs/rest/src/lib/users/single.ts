@@ -3,7 +3,7 @@ import { User } from '@main/models';
 import { UserResponse } from '../responses';
 
 export const getUser = async (userId: string): Promise<User & UserResponse> => {
-  const db = environment().db;
+  const db = environment.db;
   const user = await db.get.user(userId);
   const follows = await db.get.follows(userId, '1');
   return {
@@ -18,8 +18,8 @@ export const getUser = async (userId: string): Promise<User & UserResponse> => {
         url: '/users/logout',
       },
       {
-        rel: 'new-album',
-        url: '/albums/new',
+        rel: 'new-gallery',
+        url: '/galleries/new',
       },
       {
         rel: 'edit-account',
@@ -27,4 +27,10 @@ export const getUser = async (userId: string): Promise<User & UserResponse> => {
       },
     ],
   };
+};
+
+export const getUserIdByEmail = async (email: string): Promise<string> => {
+  const db = environment.db;
+  const userId = await db.get.userId(email);
+  return userId;
 };

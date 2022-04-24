@@ -5,12 +5,11 @@ import { decode, encode } from '../hash';
 export const getCreator = async (id: string) => {
   const db = await connectToDatabase();
   const creatorId = decode(id);
-  const creator = await db
-    .createQueryBuilder()
-    .select('creator')
-    .from(Creator, 'creator')
-    .where('creator.id = :creatorId', { creatorId })
-    .getOne();
+  const creator = await db.getRepository(Creator).findOne({
+    where: {
+      id: creatorId,
+    },
+  });
   return {
     id: encode(creator.id),
     avatarUrl: creator.avatarUrl,

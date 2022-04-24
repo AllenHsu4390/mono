@@ -1,22 +1,15 @@
-import {
-  Box,
-  Container,
-  IconButton,
-  Typography,
-  useTheme,
-} from '@mui/material';
-import { Asset, Creator, LikesCount, User } from '@main/models';
+import { Container } from '@mui/material';
+import { Asset, LikesCount, User } from '@main/models';
 import Page from '../_base/page';
 import { AssetCard } from '../../block/asset/card';
-import { AssetResponse, CreatorResponse, UserResponse } from '@main/rest';
-import { FavoriteBorderOutlined } from '@mui/icons-material';
+import { AssetResponse, UserResponse } from '@main/rest';
 import { useQuery } from 'react-query';
 import { useEffect, useReducer } from 'react';
 import LikeButton from '../../element/like';
+import CreatorAvatar from '../../element/avatar';
 
 interface Props {
   asset: Asset & AssetResponse;
-  creator: Creator & CreatorResponse;
   user: User & UserResponse;
 }
 
@@ -60,7 +53,7 @@ const likesReducer = (state: State, action: Action): State => {
   }
 };
 
-export default function AssetPage({ asset, creator, user }: Props) {
+export default function AssetPage({ asset, user }: Props) {
   const [state, dispatch] = useReducer(likesReducer, {
     likes: 0,
     diff: 0,
@@ -119,38 +112,36 @@ export default function AssetPage({ asset, creator, user }: Props) {
       >
         <AssetCard
           asset={asset}
-          creator={creator}
           isFull={true}
           isPreloaded={true}
+          avatar={
+            <CreatorAvatar
+              creator={asset.creator}
+              linkTo={
+                asset.links.find((l) => l.rel === 'creator')?.url || '/404'
+              }
+            />
+          }
           actions={
-            <Box
-              sx={{
-                position: 'absolute',
-                bottom: '50%',
-                right: '0',
-                zIndex: 2,
+            <LikeButton
+              likes={state.likes}
+              onClick={async () => {
+                const likeLink = asset.links.find((l) => l.rel === 'like');
+                if (!likeLink) {
+                  throw new Error('missing like capability');
+                }
+                dispatch({
+                  type: 'sync',
+                  newLikes: state.likes + 1,
+                });
+                await fetch(likeLink.url, {
+                  method: 'POST',
+                });
               }}
-            >
-              <LikeButton
-                likes={state.likes}
-                onClick={async () => {
-                  const likeLink = asset.links.find((l) => l.rel === 'like');
-                  if (!likeLink) {
-                    throw new Error('missing like capability');
-                  }
-                  dispatch({
-                    type: 'sync',
-                    newLikes: state.likes + 1,
-                  });
-                  await fetch(likeLink.url, {
-                    method: 'POST',
-                  });
-                }}
-                showToast={state.isShowDiff && !state.isFirstLoad}
-                toastContent={state.diff > 0 && `+${Math.abs(state.diff)}`}
-                isLoading={isLoading || isError}
-              />
-            </Box>
+              showToast={state.isShowDiff && !state.isFirstLoad}
+              toastContent={state.diff > 0 && `+${Math.abs(state.diff)}`}
+              isLoading={isLoading || isError}
+            />
           }
         />
       </Container>
