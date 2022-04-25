@@ -2,7 +2,7 @@ import { Creator, User } from '@main/models';
 
 import Page from '../_base/page';
 import { CreatorProfile } from '../../block/creator/profile';
-import { AssetsGrid, GalleryCanvas } from '../../block/gallery';
+import { AssetsGrid } from '../../block/gallery';
 import { CreatorResponse, UserResponse } from '@main/rest';
 
 interface Props {

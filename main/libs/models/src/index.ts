@@ -11,3 +11,6 @@ export * from './lib/LikesCount';
 export * from './lib/Like';
 export * from './lib/Response';
 export * from './lib/Session';
+export * from './lib/Balance';
+export * from './lib/Gain';
+export * from './lib/Cost';

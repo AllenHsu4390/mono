@@ -11,6 +11,7 @@ interface Database {
     follows(userId: string, pageId: string): Promise<Follows>;
     likesCount(assetId: string): Promise<number>;
     userId(email: string): Promise<string>;
+    balance(userId: string): Promise<number>;
   };
   save: {
     like(like: Like): Promise<void>;
@@ -20,9 +21,10 @@ interface Database {
 interface Cache {
   get: {
     likesCount(assetId: string, dbGet: () => Promise<number>): Promise<number>;
+    balance(userId: string, dbGet: () => Promise<number>): Promise<number>;
   };
   save: {
-    like(assetId: string, dbSave: () => Promise<void>): Promise<void>;
+    like(like: Like, dbSave: () => Promise<void>): Promise<void>;
   };
 }
 

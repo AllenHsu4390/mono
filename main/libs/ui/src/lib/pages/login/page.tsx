@@ -1,5 +1,7 @@
+import { Container, CssBaseline, ThemeProvider } from '@mui/material';
 import LoginForm from '../../block/login-form';
-import Page from '../_base/page';
+import { theme } from '../../providers/theme';
+import CompanyContact from '../_base/company-contact';
 
 interface Props {
   loginUrl: string;
@@ -7,8 +9,23 @@ interface Props {
 
 export default function LoginPage({ loginUrl }: Props) {
   return (
-    <Page hasFooter={false}>
-      <LoginForm loginUrl={loginUrl} />
-    </Page>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <main>
+        <Container
+          sx={{
+            paddingY: '0.5rem',
+            maxWidth: theme.breakpoints.values.lg,
+            [theme.breakpoints.down('sm')]: {
+              maxWidth: '100%',
+              paddingX: 0,
+            },
+          }}
+        >
+          <LoginForm loginUrl={loginUrl} />
+        </Container>
+      </main>
+      <CompanyContact />
+    </ThemeProvider>
   );
 }

@@ -3,16 +3,16 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { Avatar, Container, Typography } from '@mui/material';
+import { Avatar, Container } from '@mui/material';
 import { User } from '@main/models';
 import { Title } from './title';
 import { AppBar } from './appbar';
 import Link from '../../element/link';
 import { UserResponse } from '@main/rest';
 import { FavoriteBorder } from '@mui/icons-material';
+import BalanceLabel from '../../element/balance';
 
 interface Props {
   user: User & UserResponse;
@@ -95,22 +95,7 @@ export default function Navigation({ user }: Props) {
               padding: '0.2rem',
             }}
           >
-            <FavoriteBorder
-              fontSize="small"
-              sx={{
-                verticalAlign: 'middle',
-              }}
-            />
-            <Typography
-              sx={{
-                ml: '0.2rem',
-                display: 'inline',
-                verticalAlign: 'middle',
-              }}
-              component="p"
-            >
-              1000 SNP
-            </Typography>
+            <BalanceLabel user={user} />
           </Container>
         </Box>
         <Box sx={{ display: 'flex' }}>

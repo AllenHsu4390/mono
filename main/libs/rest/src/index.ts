@@ -10,4 +10,6 @@ export * from './lib/likes/single';
 
 export * from './lib/sessions/single';
 
+export * from './lib/transactions/sum';
+
 export * from './lib/responses';

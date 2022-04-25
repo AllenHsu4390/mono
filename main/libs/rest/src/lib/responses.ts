@@ -7,7 +7,7 @@ export interface SessionResponse {
 
 export interface UserResponse {
   links: {
-    rel: 'new-gallery' | 'logout' | 'edit-account' | 'follows';
+    rel: 'new-gallery' | 'logout' | 'edit-account' | 'follows' | 'balance';
     url: string;
   }[];
 }

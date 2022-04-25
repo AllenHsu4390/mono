@@ -29,12 +29,14 @@ export default async function handler(
       };
     }
 
+    const like = await saveLike({
+      userId,
+      assetId: id,
+    });
+
     res.status(200).json({
       ok: true,
-      ...(await saveLike({
-        userId,
-        assetId: id,
-      })),
+      ...like,
     });
   } catch (e) {
     res.status(403).json(e);

@@ -25,6 +25,10 @@ export const getUser = async (userId: string): Promise<User & UserResponse> => {
         rel: 'edit-account',
         url: '/users/edit',
       },
+      {
+        rel: 'balance',
+        url: '/api/transactions/balance',
+      },
     ],
   };
 };

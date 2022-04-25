@@ -9,9 +9,10 @@ import { getCreator } from './reads/creator';
 import { getUser, getUserId } from './reads/user';
 import { getFollows } from './reads/follows';
 import { Like } from './entity/like';
-import { getLikesCount } from './reads/likes';
+import { getLikesCount } from './reads/likesCount';
 import { saveLike } from './writes/like';
 import { Transaction } from './entity/transaction';
+import { getBalance } from './reads/balance';
 
 const datasource = new DataSource({
   type: 'mysql',
@@ -47,6 +48,7 @@ export const db = {
     follows: getFollows,
     likesCount: getLikesCount,
     userId: getUserId,
+    balance: getBalance,
   },
   save: {
     like: saveLike,
