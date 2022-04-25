@@ -6,12 +6,12 @@ import { useQuery } from 'react-query';
 
 interface Result {
   balance: Balance | undefined;
-  refetch(): void;
+  refetchBalance(): void;
 }
 
 export const BalanceContext = createContext<Result>({
   balance: undefined,
-  refetch: noop,
+  refetchBalance: noop,
 });
 
 export const useBalance = () => {
@@ -34,7 +34,7 @@ export const BalanceProvider: React.FC<{ user: User & UserResponse }> = ({
     }
   );
   return (
-    <BalanceContext.Provider value={{ balance: data, refetch }}>
+    <BalanceContext.Provider value={{ balance: data, refetchBalance: refetch }}>
       {children}
     </BalanceContext.Provider>
   );

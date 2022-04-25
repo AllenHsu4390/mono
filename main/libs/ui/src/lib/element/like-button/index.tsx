@@ -1,7 +1,11 @@
+import { Asset } from '@main/models';
+import { AssetResponse } from '@main/rest';
 import { FavoriteBorder } from '@mui/icons-material';
 import { IconButton, Typography, useTheme, Box, Button } from '@mui/material';
 import React, { useReducer } from 'react';
 import AlertDialog from '../../block/alert';
+import { useBalance } from '../../hooks/balance';
+import { useLikeCount, useSendLike } from '../../hooks/like';
 
 interface State {
   isOpen: boolean;
@@ -34,11 +38,18 @@ const reducer = (state: State, action: Action): State => {
 };
 
 interface Props {
-  onConfirm(): void;
+  asset: Asset & AssetResponse;
 }
 
-const LikeButton: React.FC<Props> = ({ onConfirm }) => {
+const LikeButton: React.FC<Props> = ({ asset }) => {
   const theme = useTheme();
+  const { refetchBalance } = useBalance();
+  const { sendLike } = useSendLike({
+    asset,
+  });
+  const { refetchLikes } = useLikeCount({
+    asset,
+  });
   const [state, dispatch] = useReducer(reducer, {
     isOpen: false,
     isLocked: false,
@@ -72,7 +83,9 @@ const LikeButton: React.FC<Props> = ({ onConfirm }) => {
               dispatch({
                 type: 'confirm',
               });
-              await onConfirm();
+              await sendLike();
+              await refetchLikes();
+              await refetchBalance();
             }}
           >
             Snap it
