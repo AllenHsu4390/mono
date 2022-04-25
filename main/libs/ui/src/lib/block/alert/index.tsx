@@ -4,46 +4,59 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { TransitionProps } from '@mui/material/transitions';
+import { Box, DialogContentText, Zoom } from '@mui/material';
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Zoom ref={ref} {...props} />;
+});
 
 interface Props {
-  buttonContent: React.ReactNode;
+  trigger: React.ReactNode;
   title: React.ReactNode;
   content: React.ReactNode;
   actions: React.ReactNode;
+  open: boolean;
+  onClose(): void;
 }
 
 const AlertDialog: React.FC<Props> = ({
   title,
-  buttonContent,
+  trigger,
   content,
   actions,
+  open,
+  onClose,
 }) => {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        {buttonContent}
-      </Button>
+    <Box
+      sx={{
+        position: 'relative',
+      }}
+    >
+      {trigger}
       <Dialog
         open={open}
-        onClose={handleClose}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={onClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-        <DialogContent>{content}</DialogContent>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {content}
+          </DialogContentText>
+        </DialogContent>
         <DialogActions>{actions}</DialogActions>
       </Dialog>
-    </div>
+    </Box>
   );
 };
 

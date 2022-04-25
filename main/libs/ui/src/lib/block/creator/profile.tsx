@@ -1,7 +1,5 @@
-import { Avatar, Stack, Typography } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import { Creator } from '@main/models';
-import { FollowButton } from '../../element/follow/button';
-import { MessageButton } from '../../element/message/button';
 import { CreatorProfileBase } from './base';
 
 interface Props {
@@ -37,11 +35,6 @@ export function CreatorProfile({ creator }: Props) {
             height: '10rem',
           }}
         />
-      }
-      controls={
-        <Stack direction="row" spacing={2} justifyContent="center">
-          {<FollowButton />}
-        </Stack>
       }
     />
   );

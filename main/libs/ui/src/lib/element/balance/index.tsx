@@ -2,14 +2,14 @@ import { User } from '@main/models';
 import { UserResponse } from '@main/rest';
 import { FavoriteBorder } from '@mui/icons-material';
 import { Typography } from '@mui/material';
-import { useBalance } from '../../providers/balance';
+import { useBalance } from '../../hooks/balance';
 
 interface Props {
   user: User & UserResponse;
 }
 
 const BalanceLabel: React.FC<Props> = ({ user }) => {
-  const balance = useBalance();
+  const { balance } = useBalance();
   return (
     <>
       <FavoriteBorder

@@ -17,8 +17,6 @@ const CreatorAvatar: React.FC<Props> = ({ creator, linkTo }) => {
         sx={{
           width: '4rem',
           height: '4rem',
-          border: `0.14rem solid ${theme.palette.secondary.light}`,
-          boxShadow: '1px 1px 3px pink',
           margin: 'auto',
           my: '1rem',
         }}

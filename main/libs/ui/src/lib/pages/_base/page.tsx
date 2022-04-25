@@ -5,13 +5,13 @@ import CompanyContact from './company-contact';
 import { Container } from '@mui/material';
 import { User } from '@main/models';
 import { UserResponse } from '@main/rest';
-import { BalanceProvider } from '../../providers/balance';
+import { BalanceProvider } from '../../hooks/balance';
 import { theme } from '../../providers/theme';
 
 interface Props {
   hasFooter?: boolean;
   hasNavigation?: boolean;
-  user: User & UserResponse;
+  user?: User & UserResponse;
 }
 
 const Page: React.FC<Props> = ({
@@ -20,6 +20,29 @@ const Page: React.FC<Props> = ({
   hasNavigation,
   user,
 }) => {
+  if (!user) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <main>
+          <Container
+            sx={{
+              paddingY: '0.5rem',
+              maxWidth: theme.breakpoints.values.lg,
+              [theme.breakpoints.down('sm')]: {
+                maxWidth: '100%',
+                paddingX: 0,
+              },
+            }}
+          >
+            {children}
+          </Container>
+        </main>
+        {hasFooter ? <CompanyContact /> : null}
+      </ThemeProvider>
+    );
+  }
+
   return (
     <BalanceProvider user={user}>
       <ThemeProvider theme={theme}>

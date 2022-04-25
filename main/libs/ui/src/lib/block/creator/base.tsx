@@ -1,10 +1,9 @@
-import { Box, Container, Grid, Stack } from '@mui/material';
+import { Grid } from '@mui/material';
 import React from 'react';
 
 interface Props {
   description: React.ReactNode;
   avatar: React.ReactNode;
-  controls: React.ReactNode;
 }
 
 export function CreatorProfileBase({ description, avatar, controls }: Props) {
@@ -20,7 +19,7 @@ export function CreatorProfileBase({ description, avatar, controls }: Props) {
     >
       <Grid
         item
-        md={3}
+        md={2}
         lg={2}
         sx={{
           margin: 'auto',
@@ -30,23 +29,13 @@ export function CreatorProfileBase({ description, avatar, controls }: Props) {
       </Grid>
       <Grid
         item
-        md={6}
-        lg={8}
+        md={10}
+        lg={10}
         sx={{
           margin: 'auto',
         }}
       >
         {description}
-      </Grid>
-      <Grid
-        item
-        md={3}
-        lg={2}
-        sx={{
-          margin: 'auto',
-        }}
-      >
-        {controls}
       </Grid>
     </Grid>
   );

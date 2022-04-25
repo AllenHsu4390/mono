@@ -1,13 +1,15 @@
 import { Alert, Container } from '@mui/material';
 import { Asset, Cost, LikesCount } from '@main/models';
 import { AssetResponse } from '@main/rest';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useEffect, useReducer } from 'react';
-import LikeButton from '../../element/like';
+import LikeButton from '../../element/like-button';
 import CreatorAvatar from '../../element/avatar';
 import PurchaseButton from '../../element/purchase/button';
-import { useBalance } from '../../providers/balance';
-import { AssetCard } from './card';
+import { useBalance } from '../../hooks/balance';
+import { AssetCardFull } from './card-full';
+import LikeCounter from '../../element/like-counter';
+import TopupButton from '../../element/topup-button';
 
 interface Props {
   asset: Asset & AssetResponse;
@@ -60,14 +62,38 @@ const likesReducer = (state: State, action: Action): State => {
 };
 
 export default function AssetInteractable({ asset }: Props) {
-  const balance = useBalance();
+  const { balance, refetch: refetchBalance } = useBalance();
+  const mutation = useMutation(
+    async () => {
+      const likeLink = asset.links.find((l) => l.rel === 'like');
+      if (!likeLink) {
+        throw new Error('missing like capability');
+      }
+      const res = await fetch(likeLink.url, {
+        method: 'POST',
+      });
+      return res.json();
+    },
+    {
+      onError: () => {
+        dispatch({
+          type: 'error',
+        });
+      },
+    }
+  );
   const [state, dispatch] = useReducer(likesReducer, {
     likes: 0,
     diff: 0,
     isShowDiff: false,
     isFirstLoad: true,
   });
-  const { isLoading, isError, data } = useQuery<LikesCount>(
+  const {
+    isLoading,
+    isError,
+    data,
+    refetch: refetchLikes,
+  } = useQuery<LikesCount>(
     ['likes', asset.id],
     async () => {
       const countLink = asset.links.find((l) => l.rel === 'like-count');
@@ -125,9 +151,8 @@ export default function AssetInteractable({ asset }: Props) {
           {state.errorMsg}
         </Alert>
       )}
-      <AssetCard
+      <AssetCardFull
         asset={asset}
-        isFull={true}
         isPreloaded={true}
         avatar={
           <CreatorAvatar
@@ -135,42 +160,31 @@ export default function AssetInteractable({ asset }: Props) {
             linkTo={asset.links.find((l) => l.rel === 'creator')?.url || '/404'}
           />
         }
+        counter={
+          <LikeCounter
+            likes={state.likes}
+            isLoading={isLoading || isError}
+            showToast={state.isShowDiff && !state.isFirstLoad}
+            toastContent={state.diff > 0 && `+${Math.abs(state.diff)}`}
+          />
+        }
         actions={
           balance && balance.sum > Cost.Like ? (
             <LikeButton
-              likes={state.likes}
-              onClick={async () => {
+              onConfirm={async () => {
                 try {
-                  const likeLink = asset.links.find((l) => l.rel === 'like');
-                  if (!likeLink) {
-                    throw new Error('missing like capability');
-                  }
-                  dispatch({
-                    type: 'sync',
-                    newLikes: state.likes + 1,
-                  });
-                  const response = await fetch(likeLink.url, {
-                    method: 'POST',
-                  });
-                  if (response.status > 400) {
-                    throw new Error('Failed to update like');
-                  }
+                  await mutation.mutateAsync();
+                  refetchLikes();
+                  refetchBalance();
                 } catch (e) {
-                  dispatch({
-                    type: 'sync',
-                    newLikes: data?.count,
-                  });
                   dispatch({
                     type: 'error',
                   });
                 }
               }}
-              showToast={state.isShowDiff && !state.isFirstLoad}
-              toastContent={state.diff > 0 && `+${Math.abs(state.diff)}`}
-              isLoading={isLoading || isError}
             />
           ) : (
-            <PurchaseButton />
+            <TopupButton />
           )
         }
       />

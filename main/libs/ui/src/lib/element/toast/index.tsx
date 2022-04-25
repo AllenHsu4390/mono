@@ -1,4 +1,4 @@
-import { Box, SxProps, Theme, useTheme } from '@mui/material';
+import { Box, SxProps, Theme } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 interface Props {
