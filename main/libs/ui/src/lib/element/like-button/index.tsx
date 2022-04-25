@@ -1,7 +1,7 @@
 import { Asset } from '@main/models';
 import { AssetResponse } from '@main/rest';
-import { FavoriteBorder } from '@mui/icons-material';
-import { IconButton, Typography, useTheme, Box, Button } from '@mui/material';
+import { Favorite } from '@mui/icons-material';
+import { Typography, useTheme, Button } from '@mui/material';
 import React, { useReducer } from 'react';
 import AlertDialog from '../../block/alert';
 import { useBalance } from '../../hooks/balance';
@@ -42,7 +42,6 @@ interface Props {
 }
 
 const LikeButton: React.FC<Props> = ({ asset }) => {
-  const theme = useTheme();
   const { refetchBalance } = useBalance();
   const { sendLike } = useSendLike({
     asset,
@@ -93,36 +92,32 @@ const LikeButton: React.FC<Props> = ({ asset }) => {
         </>
       }
       trigger={
-        <IconButton
-          size="large"
-          aria-label="like asset"
-          aria-controls="like"
-          aria-haspopup="true"
+        <Button
+          variant="contained"
           sx={{
-            borderRadius: '0',
             textAlign: 'center',
-            padding: '1rem',
-            color: theme.palette.primary.main,
+            px: '1rem',
           }}
           onClick={handleClickOpen}
+          startIcon={
+            <Favorite
+              fontSize="small"
+              sx={{
+                verticalAlign: 'middle',
+              }}
+            />
+          }
         >
-          <FavoriteBorder
-            fontSize="small"
-            sx={{
-              verticalAlign: 'middle',
-            }}
-          />
           <Typography
             component="p"
             sx={{
-              ml: '0.2rem',
               display: 'inline',
               verticalAlign: 'middle',
             }}
           >
             60 SNP
           </Typography>
-        </IconButton>
+        </Button>
       }
     />
   );

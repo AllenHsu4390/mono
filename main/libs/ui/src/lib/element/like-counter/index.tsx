@@ -100,7 +100,7 @@ const LikeCounter: React.FC<Props> = ({ asset }) => {
       }}
     >
       <Typography>
-        {isLoading || isError || !likes ? '...' : likes.count} Snaps
+        {isLoading || isError || !likes ? '...' : likes.count} snaps
       </Typography>
       <Toast
         show={state.isShowDiff && !state.isFirstLoad}

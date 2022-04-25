@@ -70,8 +70,7 @@ export function AssetCardFull({
       <CardActions
         disableSpacing
         sx={{
-          px: 0,
-          pb: 0,
+          p: 0,
         }}
       >
         {avatar}
