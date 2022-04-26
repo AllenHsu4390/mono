@@ -14,3 +14,4 @@ export * from './lib/Session';
 export * from './lib/Balance';
 export * from './lib/Gain';
 export * from './lib/Cost';
+export * from './lib/Drop';

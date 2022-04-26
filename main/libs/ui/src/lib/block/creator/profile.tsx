@@ -30,10 +30,6 @@ export function CreatorProfile({ creator }: Props) {
           }}
         >
           {desc}
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-          facilis! Nobis culpa quod doloremque in soluta? Natus, nihil, aut
-          omnis, fuga adipisci delectus vero harum magni nam nobis sapiente
-          laudantium.
         </Typography>
       }
       avatar={

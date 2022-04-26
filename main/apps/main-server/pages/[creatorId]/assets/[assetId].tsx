@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { AssetPage } from '@main/ui';
-import { Asset, User } from '@main/models';
+import { Asset, Creator, User } from '@main/models';
 import { AssetResponse, getAsset, getUser, UserResponse } from '@main/rest';
 import { auth } from '@main/auth';
 

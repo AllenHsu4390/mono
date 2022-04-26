@@ -28,7 +28,7 @@ type Action = {
 };
 
 const verifiedInput = (state: State, action: Action): State => {
-  const email = action.email || state.password;
+  const email = action.email || state.email;
   const password = action.password || state.password;
   return {
     ...state,

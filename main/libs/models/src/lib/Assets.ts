@@ -1,5 +1,5 @@
-import { Asset } from "./Asset";
-import { Pagination } from "./Pagination";
+import { Asset } from './Asset';
+import { Pagination } from './Pagination';
 
 export interface Assets {
   assets: Asset[];

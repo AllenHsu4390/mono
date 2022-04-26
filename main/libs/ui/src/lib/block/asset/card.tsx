@@ -29,12 +29,6 @@ export function AssetCard({ asset, isPreloaded = false }: Props) {
     <CardMedia
       sx={{
         height: '16rem',
-        [theme.breakpoints.down('md')]: {
-          height: '16rem',
-        },
-        [theme.breakpoints.down('sm')]: {
-          height: '16rem',
-        },
       }}
       component="img"
       image={asset.src}
@@ -48,14 +42,6 @@ export function AssetCard({ asset, isPreloaded = false }: Props) {
       sx={{
         borderRadius: 0,
         boxShadow: 'none',
-        position: 'relative',
-        '@media (hover: hover)': {
-          '&:hover': {
-            '& .panel': {
-              right: 0,
-            },
-          },
-        },
       }}
     >
       {loadingSkeleton}

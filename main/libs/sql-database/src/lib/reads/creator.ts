@@ -9,6 +9,7 @@ export const getCreator = async (id: string) => {
     where: {
       id: creatorId,
     },
+    relations: ['user'],
   });
   return {
     id: encode(creator.id),

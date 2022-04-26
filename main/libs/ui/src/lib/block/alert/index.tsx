@@ -50,11 +50,7 @@ const AlertDialog: React.FC<Props> = ({
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {content}
-          </DialogContentText>
-        </DialogContent>
+        <DialogContent>{content}</DialogContent>
         <DialogActions>{actions}</DialogActions>
       </Dialog>
     </Box>

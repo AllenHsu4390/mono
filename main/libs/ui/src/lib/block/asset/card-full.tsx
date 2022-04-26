@@ -12,7 +12,6 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { InnerSkeleton } from './inner-skeleton';
-import { indigo } from '@mui/material/colors';
 
 interface Props {
   asset: Asset;
@@ -31,7 +30,6 @@ export function AssetCardFull({
   isPreloaded = false,
   actions,
 }: Props) {
-  const theme = useTheme();
   const [isLoading, setIsLoading] = useState(true);
   const showSkeleton = isLoading && !isPreloaded;
 
@@ -64,12 +62,6 @@ export function AssetCardFull({
           <CardMedia
             sx={{
               height: '40rem',
-              [theme.breakpoints.down('md')]: {
-                height: '30rem',
-              },
-              [theme.breakpoints.down('sm')]: {
-                height: '20rem',
-              },
             }}
             component="img"
             image={asset.src}

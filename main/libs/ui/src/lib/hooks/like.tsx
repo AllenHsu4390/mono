@@ -1,4 +1,4 @@
-import { Asset, LikesCount } from '@main/models';
+import { Asset, Drop, LikesCount } from '@main/models';
 import { AssetResponse } from '@main/rest';
 import { useMutation, useQuery } from 'react-query';
 
@@ -9,7 +9,7 @@ export const useSendLike = ({
   asset: Asset & AssetResponse;
   onError?(error: any): void;
 }) => {
-  const mutation = useMutation(
+  const mutation = useMutation<Drop & Response>(
     async () => {
       const likeLink = asset.links.find((l) => l.rel === 'like');
       if (!likeLink) {

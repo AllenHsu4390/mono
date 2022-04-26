@@ -5,16 +5,18 @@ import { Typography, Button, IconButton, useTheme } from '@mui/material';
 import React, { useReducer } from 'react';
 import AlertDialog from '../../block/alert';
 import { useBalance } from '../../hooks/balance';
+import { useDrop } from '../../hooks/drop';
 import { useLikeCount, useSendLike } from '../../hooks/like';
 
 interface State {
   isOpen: boolean;
   isLocked: boolean;
   isConfirmed?: boolean;
+  isDropped?: boolean;
 }
 
 interface Action {
-  type: 'open' | 'close' | 'confirm' | 'cancel';
+  type: 'open' | 'close' | 'confirm' | 'cancel' | 'dropped';
 }
 
 const reducer = (state: State, action: Action): State => {
@@ -40,6 +42,11 @@ const reducer = (state: State, action: Action): State => {
         isOpen: false,
         isLocked: true,
       };
+    case 'dropped':
+      return {
+        ...state,
+        isDropped: true,
+      };
     default:
       return state;
   }
@@ -51,7 +58,8 @@ interface Props {
 
 const LikeButton: React.FC<Props> = ({ asset }) => {
   const theme = useTheme();
-  const { refetchBalance } = useBalance();
+  const [_, setDrop] = useDrop();
+  const { balance, refetchBalance } = useBalance();
   const { sendLike } = useSendLike({
     asset,
   });
@@ -75,40 +83,63 @@ const LikeButton: React.FC<Props> = ({ asset }) => {
     });
   };
 
+  if (state.isDropped) {
+    alert('YOU WON');
+  }
+
+  const dialogOptions =
+    balance && balance.sum >= Cost.Like
+      ? {
+          title: 'Are you sure?',
+          content: (
+            <Typography>
+              {`This will use ${Cost.Like} SNP from your account`}
+            </Typography>
+          ),
+          actions: (
+            <>
+              <Button onClick={handleClose}>
+                {state.isConfirmed ? 'Close' : 'Cancel'}
+              </Button>
+              <Button
+                variant="contained"
+                disabled={state.isLocked}
+                onClick={async () => {
+                  dispatch({
+                    type: 'confirm',
+                  });
+                  const res = await sendLike();
+                  await refetchLikes();
+                  await refetchBalance();
+
+                  if (res.isDropped) {
+                    setDrop(res);
+                  }
+                  dispatch({
+                    type: 'close',
+                  });
+                }}
+              >
+                {state.isConfirmed ? 'Sending...' : 'Agree'}
+              </Button>
+            </>
+          ),
+        }
+      : {
+          title: "Action can't be done",
+          content: <Typography>{`Not enough SNP in your account`}</Typography>,
+          actions: (
+            <Button onClick={handleClose}>
+              {state.isConfirmed ? 'Close' : 'Cancel'}
+            </Button>
+          ),
+        };
+
   return (
     <AlertDialog
       open={state.isOpen}
       onClose={handleClose}
-      title={'Are you sure?'}
-      content={
-        <Typography>
-          {`This will use ${Cost.Like} SNP from your account`}
-        </Typography>
-      }
-      actions={
-        <>
-          <Button onClick={handleClose}>
-            {state.isConfirmed ? 'Close' : 'Cancel'}
-          </Button>
-          <Button
-            variant="contained"
-            disabled={state.isLocked}
-            onClick={async () => {
-              dispatch({
-                type: 'confirm',
-              });
-              await sendLike();
-              await refetchLikes();
-              await refetchBalance();
-              dispatch({
-                type: 'close',
-              });
-            }}
-          >
-            {state.isConfirmed ? 'Sending...' : 'Agree'}
-          </Button>
-        </>
-      }
+      {...dialogOptions}
       trigger={
         <IconButton
           onClick={handleClickOpen}

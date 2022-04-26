@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+html {
+  font-size: clamp(8px, 1.5vw, 16px);
+}

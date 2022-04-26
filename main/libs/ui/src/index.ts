@@ -14,3 +14,4 @@ export {
   FeedPage,
   ErrorPage,
 };
+export { theme } from './lib/providers/theme';

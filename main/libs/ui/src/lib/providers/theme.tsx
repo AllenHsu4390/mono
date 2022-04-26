@@ -1,6 +1,24 @@
 import { createTheme } from '@mui/material';
 import { Shadows } from '@mui/material/styles/shadows';
 
+const fontFamily = [
+  'Rubik',
+  '-apple-system',
+  'BlinkMacSystemFont',
+  '"Segoe UI"',
+  'Roboto',
+  '"Helvetica Neue"',
+  'Arial',
+  'sans-serif',
+  '"Apple Color Emoji"',
+  '"Segoe UI Emoji"',
+  '"Segoe UI Symbol"',
+].join(',');
+
+export const scaleOfBodyFontSize = (scalar: number) => {
+  return `clamp(${0.5 * scalar}rem, ${1.5 * scalar}vw, ${1 * scalar}rem)`;
+};
+
 export const theme = createTheme({
   shadows: Array(25).fill('none') as Shadows,
   palette: {
@@ -20,28 +38,6 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: [
-      'Rubik',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
+    fontFamily,
   },
 });
-
-theme.typography.h3 = {
-  fontSize: '1.2rem',
-  [theme.breakpoints.up('sm')]: {
-    fontSize: '1.5rem',
-  },
-  [theme.breakpoints.up('md')]: {
-    fontSize: '2.4rem',
-  },
-};

@@ -100,16 +100,14 @@ const LikeCounter: React.FC<Props> = ({ asset }) => {
         position: 'relative',
       }}
     >
-      <Typography variant="subtitle1">
+      <Typography>
         {isLoading || isError || !likes ? '...' : likes.count} snaps
       </Typography>
       <Toast
         show={state.isShowDiff && !state.isFirstLoad}
         content={
           state.diff > 0 && (
-            <Typography variant="subtitle1">
-              {`+${Math.abs(state.diff)}`}
-            </Typography>
+            <Typography>{`+${Math.abs(state.diff)}`}</Typography>
           )
         }
         color={theme.palette.success.main}

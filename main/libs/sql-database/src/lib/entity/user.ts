@@ -18,9 +18,6 @@ export class User extends BaseEntity {
   @Column('varchar')
   avatarUrl: string;
 
-  @Column('int')
-  balance: number;
-
   @OneToMany('Follow', 'user')
   follows: Follow[];
 }
