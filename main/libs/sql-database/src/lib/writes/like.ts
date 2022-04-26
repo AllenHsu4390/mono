@@ -14,7 +14,6 @@ export const saveLike = async ({ userId, assetId }: Like): Promise<void> => {
     if (newBalance < 0) {
       throw new Error('Balance Error: Not enough balance');
     }
-
     const dbLike = new LikeEntity();
     dbLike.userId = decode(userId);
     dbLike.assetId = decode(assetId);

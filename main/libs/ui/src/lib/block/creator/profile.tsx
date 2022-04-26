@@ -10,6 +10,16 @@ export function CreatorProfile({ creator }: Props) {
   const { avatarUrl, desc } = creator;
   return (
     <CreatorProfileBase
+      title={
+        <Typography
+          variant="h4"
+          sx={{
+            pl: '1rem',
+          }}
+        >
+          {creator.name}
+        </Typography>
+      }
       description={
         <Typography
           variant="h5"

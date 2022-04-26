@@ -25,16 +25,6 @@ const TopupButton: React.FC<Props> = () => {
           verticalAlign: 'middle',
         }}
       />
-      <Typography
-        component="p"
-        sx={{
-          ml: '0.2rem',
-          display: 'inline',
-          verticalAlign: 'middle',
-        }}
-      >
-        Get more SNP
-      </Typography>
     </IconButton>
   );
 };

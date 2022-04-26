@@ -12,7 +12,7 @@ interface Props {
 
 export default function GalleryPage({ creator, user }: Props) {
   return (
-    <Page hasFooter={true} hasNavigation={true} user={user}>
+    <Page hasNavigation={true} user={user}>
       <CreatorProfile creator={creator} />
       <AssetsGrid
         creator={creator}

@@ -4,15 +4,14 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import { Avatar, Container } from '@mui/material';
 import { User } from '@main/models';
 import { Title } from './title';
 import { AppBar } from './appbar';
 import Link from '../../element/link';
 import { UserResponse } from '@main/rest';
-import { FavoriteBorder } from '@mui/icons-material';
 import BalanceLabel from '../../element/balance';
+import ProfileMenu from '../profile-menu';
 
 interface Props {
   user: User & UserResponse;
@@ -47,15 +46,13 @@ export default function Navigation({ user }: Props) {
     setAnchorEl(null);
   };
 
-  const menuId = 'primary-search-account-menu';
   const renderMenu = (
-    <Menu
+    <ProfileMenu
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'right',
       }}
-      id={menuId}
       keepMounted
       transformOrigin={{
         vertical: 'top',
@@ -72,14 +69,14 @@ export default function Navigation({ user }: Props) {
             <Link to={l.url}>{menuLabel(l.rel)}</Link>
           </MenuItem>
         ))}
-    </Menu>
+    </ProfileMenu>
   );
 
   return (
     <AppBar>
       <Toolbar
         sx={{
-          width: ['100%', '100%', '100%', `${theme.breakpoints.values.lg}px`],
+          width: '100%',
           margin: 'auto',
         }}
       >
@@ -102,9 +99,6 @@ export default function Navigation({ user }: Props) {
           <IconButton
             size="large"
             edge="end"
-            aria-label="account of current user"
-            aria-controls={menuId}
-            aria-haspopup="true"
             onClick={handleProfileMenuOpen}
             color="inherit"
             sx={{

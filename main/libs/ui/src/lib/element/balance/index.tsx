@@ -11,24 +11,16 @@ interface Props {
 const BalanceLabel: React.FC<Props> = ({ user }) => {
   const { balance } = useBalance();
   return (
-    <>
-      <FavoriteBorder
-        fontSize="small"
-        sx={{
-          verticalAlign: 'middle',
-        }}
-      />
-      <Typography
-        component="p"
-        sx={{
-          ml: '0.2rem',
-          display: 'inline',
-          verticalAlign: 'middle',
-        }}
-      >
-        {!balance ? '...' : balance.sum} SNP
-      </Typography>
-    </>
+    <Typography
+      component="p"
+      sx={{
+        ml: '0.2rem',
+        display: 'inline',
+        verticalAlign: 'middle',
+      }}
+    >
+      Balance: {!balance ? '...' : balance.sum} SNP
+    </Typography>
   );
 };
 

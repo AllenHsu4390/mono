@@ -10,7 +10,7 @@ interface Props {
 
 export default function AssetPage({ asset, user }: Props) {
   return (
-    <Page hasNavigation={true} hasFooter={true} user={user}>
+    <Page hasNavigation={true} user={user}>
       <AssetInteractable asset={asset} />
     </Page>
   );

@@ -8,7 +8,6 @@ export default function CompanyContact() {
     <Typography
       variant="body2"
       color="text.secondary"
-      align="center"
       sx={{
         my: '3rem',
       }}

@@ -11,13 +11,28 @@ export const theme = createTheme({
     },
     primary: {
       light: '#fff',
-      main: '#222',
+      main: '#444',
       contrastText: '#fff',
     },
     background: {
       default: '#fff',
       paper: '#fff',
     },
+  },
+  typography: {
+    fontFamily: [
+      'Rubik',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
   },
 });
 

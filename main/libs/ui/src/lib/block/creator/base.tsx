@@ -4,15 +4,16 @@ import React from 'react';
 interface Props {
   description: React.ReactNode;
   avatar: React.ReactNode;
+  title: React.ReactNode;
 }
 
-export function CreatorProfileBase({ description, avatar, controls }: Props) {
+export function CreatorProfileBase({ description, avatar, title }: Props) {
   return (
     <Grid
       container
       sx={{
         bgcolor: 'background.paper',
-        pt: 14,
+        pt: 4,
         pb: 8,
       }}
       spacing={[1, 1, 2, 3]}
@@ -35,6 +36,7 @@ export function CreatorProfileBase({ description, avatar, controls }: Props) {
           margin: 'auto',
         }}
       >
+        {title}
         {description}
       </Grid>
     </Grid>

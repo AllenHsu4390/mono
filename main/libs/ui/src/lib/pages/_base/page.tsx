@@ -9,17 +9,11 @@ import { BalanceProvider } from '../../hooks/balance';
 import { theme } from '../../providers/theme';
 
 interface Props {
-  hasFooter?: boolean;
   hasNavigation?: boolean;
   user?: User & UserResponse;
 }
 
-const Page: React.FC<Props> = ({
-  hasFooter,
-  children,
-  hasNavigation,
-  user,
-}) => {
+const Page: React.FC<Props> = ({ children, hasNavigation, user }) => {
   if (!user) {
     return (
       <ThemeProvider theme={theme}>
@@ -27,7 +21,6 @@ const Page: React.FC<Props> = ({
         <main>
           <Container
             sx={{
-              paddingY: '0.5rem',
               maxWidth: theme.breakpoints.values.lg,
               [theme.breakpoints.down('sm')]: {
                 maxWidth: '100%',
@@ -38,7 +31,6 @@ const Page: React.FC<Props> = ({
             {children}
           </Container>
         </main>
-        {hasFooter ? <CompanyContact /> : null}
       </ThemeProvider>
     );
   }
@@ -51,7 +43,7 @@ const Page: React.FC<Props> = ({
         <main>
           <Container
             sx={{
-              paddingY: '0.5rem',
+              pt: 16,
               maxWidth: theme.breakpoints.values.lg,
               [theme.breakpoints.down('sm')]: {
                 maxWidth: '100%',
@@ -62,7 +54,6 @@ const Page: React.FC<Props> = ({
             {children}
           </Container>
         </main>
-        {hasFooter ? <CompanyContact /> : null}
       </ThemeProvider>
     </BalanceProvider>
   );

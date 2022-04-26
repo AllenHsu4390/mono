@@ -10,7 +10,7 @@ interface Props {
 
 export default function NewGalleryPage({ user }: Props) {
   return (
-    <Page hasFooter={true} hasNavigation={true} user={user}>
+    <Page hasNavigation={true} user={user}>
       <NewAssetsGrid />
     </Page>
   );

@@ -95,20 +95,29 @@ const LikeCounter: React.FC<Props> = ({ asset }) => {
   return (
     <Box
       sx={{
-        p: '1rem',
+        py: '1rem',
+        px: '0.5rem',
         position: 'relative',
       }}
     >
-      <Typography>
+      <Typography variant="subtitle1">
         {isLoading || isError || !likes ? '...' : likes.count} snaps
       </Typography>
       <Toast
         show={state.isShowDiff && !state.isFirstLoad}
-        content={state.diff > 0 && `+${Math.abs(state.diff)}`}
+        content={
+          state.diff > 0 && (
+            <Typography variant="subtitle1">
+              {`+${Math.abs(state.diff)}`}
+            </Typography>
+          )
+        }
         color={theme.palette.success.main}
         sx={{
-          left: '100%',
+          right: '100%',
           top: '0',
+          p: '1rem',
+          fontWeight: 'bold',
         }}
       />
     </Box>

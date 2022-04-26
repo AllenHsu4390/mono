@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TransitionProps } from '@mui/material/transitions';
-import { Box, DialogContentText, Zoom } from '@mui/material';
+import { Box, DialogContentText, Grow, Zoom } from '@mui/material';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -13,7 +13,7 @@ const Transition = React.forwardRef(function Transition(
   },
   ref: React.Ref<unknown>
 ) {
-  return <Zoom ref={ref} {...props} />;
+  return <Grow ref={ref} {...props} />;
 });
 
 interface Props {
@@ -36,6 +36,7 @@ const AlertDialog: React.FC<Props> = ({
   return (
     <Box
       sx={{
+        width: 'fit-content',
         position: 'relative',
       }}
     >

@@ -1,7 +1,7 @@
-import { Asset } from '@main/models';
+import { Asset, Cost } from '@main/models';
 import { AssetResponse } from '@main/rest';
-import { Favorite } from '@mui/icons-material';
-import { Typography, useTheme, Button } from '@mui/material';
+import { Favorite, FavoriteBorderOutlined } from '@mui/icons-material';
+import { Typography, Button, IconButton, useTheme } from '@mui/material';
 import React, { useReducer } from 'react';
 import AlertDialog from '../../block/alert';
 import { useBalance } from '../../hooks/balance';
@@ -10,6 +10,7 @@ import { useLikeCount, useSendLike } from '../../hooks/like';
 interface State {
   isOpen: boolean;
   isLocked: boolean;
+  isConfirmed?: boolean;
 }
 
 interface Action {
@@ -23,8 +24,15 @@ const reducer = (state: State, action: Action): State => {
         ...state,
         isOpen: true,
         isLocked: false,
+        isConfirmed: false,
       };
     case 'confirm':
+      return {
+        ...state,
+        isOpen: true,
+        isConfirmed: true,
+        isLocked: true,
+      };
     case 'cancel':
     case 'close':
       return {
@@ -42,6 +50,7 @@ interface Props {
 }
 
 const LikeButton: React.FC<Props> = ({ asset }) => {
+  const theme = useTheme();
   const { refetchBalance } = useBalance();
   const { sendLike } = useSendLike({
     asset,
@@ -71,10 +80,16 @@ const LikeButton: React.FC<Props> = ({ asset }) => {
       open={state.isOpen}
       onClose={handleClose}
       title={'Are you sure?'}
-      content={'This will use 60 SNP from your account'}
+      content={
+        <Typography>
+          {`This will use ${Cost.Like} SNP from your account`}
+        </Typography>
+      }
       actions={
         <>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>
+            {state.isConfirmed ? 'Close' : 'Cancel'}
+          </Button>
           <Button
             variant="contained"
             disabled={state.isLocked}
@@ -85,39 +100,36 @@ const LikeButton: React.FC<Props> = ({ asset }) => {
               await sendLike();
               await refetchLikes();
               await refetchBalance();
+              dispatch({
+                type: 'close',
+              });
             }}
           >
-            Snap it
+            {state.isConfirmed ? 'Sending...' : 'Agree'}
           </Button>
         </>
       }
       trigger={
-        <Button
-          variant="contained"
-          sx={{
-            textAlign: 'center',
-            px: '1rem',
-          }}
+        <IconButton
           onClick={handleClickOpen}
-          startIcon={
-            <Favorite
-              fontSize="small"
-              sx={{
-                verticalAlign: 'middle',
-              }}
-            />
-          }
+          sx={{
+            borderRadius: '0',
+            transition: 'color 0.5s ease',
+            color: theme.palette.primary.main,
+            ':hover': {
+              color: theme.palette.error.main,
+              background: 'initial',
+            },
+            width: '3.2rem',
+            height: '3.5rem',
+          }}
         >
-          <Typography
-            component="p"
+          <FavoriteBorderOutlined
             sx={{
-              display: 'inline',
-              verticalAlign: 'middle',
+              fontSize: '2rem',
             }}
-          >
-            60 SNP
-          </Typography>
-        </Button>
+          />
+        </IconButton>
       }
     />
   );

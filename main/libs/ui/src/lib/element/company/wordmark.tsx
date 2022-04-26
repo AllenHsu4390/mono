@@ -1,3 +1,3 @@
 export const Wordmark: React.FC = () => {
-  return <span>PROMOVERSE</span>;
+  return <span style={{ textTransform: 'uppercase' }}>Misinin</span>;
 };
