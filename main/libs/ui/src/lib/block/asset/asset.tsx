@@ -1,6 +1,6 @@
 import { Alert, Typography } from '@mui/material';
 import { Asset, Creator } from '@main/models';
-import { AssetResponse, CreatorResponse } from '@main/rest';
+import { AssetResponse } from '@main/rest';
 import LikeButton from '../../element/like-button';
 import CreatorAvatar from '../../element/avatar';
 import { AssetCardFull } from './card-full';
@@ -27,7 +27,7 @@ export default function AssetInteractable({ asset }: Props) {
         isPreloaded={true}
         avatar={
           <CreatorAvatar
-            creator={asset.creator as Creator} // creator is guarenteed. TODO make better
+            creator={asset.creator!} // creator is guarenteed. TODO make better
             linkTo={asset.links.find((l) => l.rel === 'creator')?.url || '/404'}
           />
         }
@@ -45,7 +45,7 @@ export default function AssetInteractable({ asset }: Props) {
                 },
               }}
             >
-              {asset.creator.name}
+              {asset.creator!.name}
             </Typography>
           </Link>
         }

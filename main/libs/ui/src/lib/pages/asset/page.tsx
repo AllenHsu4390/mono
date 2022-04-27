@@ -1,7 +1,7 @@
-import { Asset, Creator, User } from '@main/models';
+import { Asset, User } from '@main/models';
 import Page from '../_base/page';
 import AssetInteractable from '../../block/asset/asset';
-import { AssetResponse, CreatorResponse, UserResponse } from '@main/rest';
+import { AssetResponse, UserResponse } from '@main/rest';
 
 interface Props {
   asset: Asset & AssetResponse;
