@@ -14,20 +14,17 @@ export class Follow extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne('User', 'follows')
-  user: User;
-
-  @ManyToOne('Creator', 'follows')
-  creator: Creator;
+  @Column('int')
+  userId: number;
 
   @Column('int')
   creatorId: number;
 
-  @Column('int')
-  userId: number;
-
   @Column('datetime')
   createdAt: Date;
+
+  @ManyToOne('Creator')
+  creator: Creator;
 
   @BeforeInsert()
   addTimeStamp() {

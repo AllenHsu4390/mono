@@ -1,6 +1,10 @@
 import { AppBar as MuiAppBar, Box, useTheme } from '@mui/material';
 
-export const AppBar: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const AppBar = ({ children }: Props) => {
   const theme = useTheme();
   return (
     <Box sx={{ flexGrow: 1 }}>

@@ -16,9 +16,6 @@ export default function GalleryPage({ creator, user }: Props) {
       <CreatorProfile creator={creator} />
       <AssetsGrid
         creator={creator}
-        assetsUrl={
-          creator.links.find((link) => link.rel === 'assets')?.url || '/404'
-        }
       />
     </Page>
   );

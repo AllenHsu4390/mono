@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Grid } from '@mui/material';
 import { AssetCardSkeleton } from '../asset/skeleton';
 
-export const AssetsGridSkeleton: React.FC = () => {
+export const AssetsGridSkeleton = () => {
   return (
     <Container>
       <Grid

@@ -11,9 +11,10 @@ import { DropProvider } from '../../hooks/drop';
 interface Props {
   hasNavigation?: boolean;
   user?: User & UserResponse;
+  children?: React.ReactNode;
 }
 
-const Page: React.FC<Props> = ({ children, hasNavigation, user }) => {
+const Page = ({ children, hasNavigation, user }: Props) => {
   if (!user) {
     return (
       <ThemeProvider theme={theme}>

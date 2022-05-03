@@ -56,7 +56,7 @@ interface Props {
   asset: Asset & AssetResponse;
 }
 
-const LikeButton: React.FC<Props> = ({ asset }) => {
+const LikeButton = ({ asset }: Props) => {
   const theme = useTheme();
   const [_, setDrop] = useDrop();
   const { balance, refetchBalance } = useBalance();

@@ -16,9 +16,10 @@ export const rainbowBackground = (opacity = 0.1) => `
 interface Props {
   className?: string;
   sx?: SxProps<Theme>;
+  children?: React.ReactNode;
 }
 
-const OverlapPanel: React.FC<Props> = ({ className, sx, children }) => {
+const OverlapPanel = ({ className, sx, children }: Props) => {
   return (
     <Box
       className={className}

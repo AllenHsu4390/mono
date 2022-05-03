@@ -8,7 +8,6 @@ import {
   CardHeader,
   Stack,
   Typography,
-  useTheme,
 } from '@mui/material';
 import { useState } from 'react';
 import { InnerSkeleton } from './inner-skeleton';
@@ -61,7 +60,9 @@ export function AssetCardFull({
         <Box sx={{ display: `${showSkeleton ? 'none' : 'initial'}` }}>
           <CardMedia
             sx={{
-              height: '40rem',
+              margin: 'auto',
+              width: 'auto',
+              maxHeight: '50vh',
             }}
             component="img"
             image={asset.src}

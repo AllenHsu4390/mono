@@ -1,9 +1,7 @@
 import { Add } from '@mui/icons-material';
 import { IconButton, Typography, useTheme } from '@mui/material';
 
-interface Props {}
-
-const TopupButton: React.FC<Props> = () => {
+const TopupButton = () => {
   const theme = useTheme();
 
   return (

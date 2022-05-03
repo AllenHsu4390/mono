@@ -22,7 +22,7 @@ const datasource = new DataSource({
   password: 'H>c$6H2xyA`VrR{B',
   database: 'creator_network',
   synchronize: true,
-  entities: [User, Creator, Asset, Follow, Like, Transaction],
+  entities: [Creator, User, Asset, Follow, Like, Transaction],
 });
 
 let isInitialized = false;

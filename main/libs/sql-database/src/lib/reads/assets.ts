@@ -15,17 +15,22 @@ export const getAssets = async (
   const creatorId = decode(id);
   const [assets, total] = await db.getRepository(Asset).findAndCount({
     where: {
-      creator: {
-        id: creatorId,
-      },
+      creatorId,
     },
+    relations: ["creator"],
     skip: createSkip(page, PAGE_SIZE),
     take: PAGE_SIZE,
   });
   return {
-    assets: assets.map((a) => ({
-      id: encode(a.id),
-      src: a.src,
+    assets: assets.map(({ id, creator, src }) => ({
+      id: encode(id),
+      creator: {
+        id: encode(creator.id),
+        name: creator.name,
+        desc: creator.description,
+        avatarUrl: creator.avatarUrl,
+      },
+      src,
     })),
     pagination: createCursor(page, PAGE_SIZE, total),
   };

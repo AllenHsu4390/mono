@@ -25,14 +25,14 @@ interface Props {
   onClose(): void;
 }
 
-const AlertDialog: React.FC<Props> = ({
+const AlertDialog = ({
   title,
   trigger,
   content,
   actions,
   open,
   onClose,
-}) => {
+}: Props) => {
   return (
     <Box
       sx={{

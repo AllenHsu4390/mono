@@ -18,10 +18,15 @@ export const useBalance = () => {
   return useContext(BalanceContext);
 };
 
-export const BalanceProvider: React.FC<{ user: User & UserResponse }> = ({
+interface BalanceProviderProps {
+  user: User & UserResponse;
+  children?: React.ReactNode;
+}
+
+export const BalanceProvider = ({
   user,
   children,
-}) => {
+}: BalanceProviderProps) => {
   const { data, refetch } = useQuery<Balance>(
     ['balance', user.id],
     async () => {

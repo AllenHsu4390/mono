@@ -5,22 +5,24 @@ import { decode, encode } from '../hash';
 export const getUser = async (id: string) => {
   const db = await connectToDatabase();
   const userId = decode(id);
-  const user = await db.getRepository(User).findOne({
+  const user = await db.getRepository(User).findOneOrFail({
     where: {
       id: userId,
     },
+    relations: ['creator'],
   });
   return {
     id: encode(user.id),
-    avatarUrl: user.avatarUrl,
+    avatarUrl: user.creator.avatarUrl,
     email: user.email,
     isLoggedIn: true,
+    name: user.creator.name,
   };
 };
 
 export const getUserId = async (email: string) => {
   const db = await connectToDatabase();
-  const user = await db.getRepository(User).findOne({
+  const user = await db.getRepository(User).findOneOrFail({
     select: {
       id: true,
     },

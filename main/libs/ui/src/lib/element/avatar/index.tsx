@@ -8,7 +8,7 @@ interface Props {
   linkTo: string;
 }
 
-const CreatorAvatar: React.FC<Props> = ({ creator, linkTo }) => {
+const CreatorAvatar = ({ creator, linkTo }: Props) => {
   return (
     <Link to={linkTo}>
       <Avatar

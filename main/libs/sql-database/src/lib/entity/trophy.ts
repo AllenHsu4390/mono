@@ -24,15 +24,6 @@ export class Trophy extends BaseEntity {
   @Column('int')
   userId: number;
 
-  @ManyToOne('Transaction')
-  transaction: Transaction;
-
-  @ManyToOne('Asset')
-  asset: Asset;
-
-  @ManyToOne('User')
-  user: User;
-
   @Column('datetime')
   createdAt: Date;
 

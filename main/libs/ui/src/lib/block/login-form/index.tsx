@@ -64,7 +64,7 @@ interface Props {
   loginUrl: string;
 }
 
-const LoginForm: React.FC<Props> = ({ loginUrl }) => {
+const LoginForm = ({ loginUrl }: Props) => {
   const theme = useTheme();
   const [state, dispatch] = useReducer(reducer, {
     email: '',

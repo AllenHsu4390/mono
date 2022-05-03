@@ -17,10 +17,10 @@ interface Props {
   user: User & UserResponse;
 }
 
-const menuLabel = (rel: string) => {
+const menuLabel = (rel: string, creatorName: string) => {
   switch (rel) {
     case 'new-gallery':
-      return 'My Gallery';
+      return `${creatorName}: Edit profile`;
     case 'logout':
       return 'Logout';
     case 'edit-account':
@@ -62,11 +62,11 @@ export default function Navigation({ user }: Props) {
       onClose={handleMenuClose}
     >
       {user.links
-        .filter((l) => !!menuLabel(l.rel))
+        .filter((l) => !!menuLabel(l.rel, user.name))
         .sort((a, b) => menuOrder.indexOf(a.rel) - menuOrder.indexOf(b.rel))
         .map((l) => (
           <MenuItem key={l.url}>
-            <Link to={l.url}>{menuLabel(l.rel)}</Link>
+            <Link to={l.url}>{menuLabel(l.rel, user.name)}</Link>
           </MenuItem>
         ))}
     </ProfileMenu>

@@ -16,9 +16,7 @@ export const getFollows = async (
 
   const [follows, total] = await db.getRepository(Follow).findAndCount({
     where: {
-      user: {
-        id: userId,
-      },
+      userId,
     },
     relations: ['creator'],
     take: PAGE_SIZE,

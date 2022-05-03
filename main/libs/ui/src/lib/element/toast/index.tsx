@@ -8,7 +8,7 @@ interface Props {
   sx: SxProps<Theme>;
 }
 
-const Toast: React.FC<Props> = ({ show, color, content, sx }) => {
+const Toast = ({ show, color, content, sx }: Props) => {
   const [isVisible, setIsVisible] = useState(show);
 
   useEffect(() => {

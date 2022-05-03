@@ -27,7 +27,7 @@ export default function AssetInteractable({ asset }: Props) {
         isPreloaded={true}
         avatar={
           <CreatorAvatar
-            creator={asset.creator!} // creator is guarenteed. TODO make better
+            creator={asset.creator}
             linkTo={asset.links.find((l) => l.rel === 'creator')?.url || '/404'}
           />
         }
@@ -45,7 +45,7 @@ export default function AssetInteractable({ asset }: Props) {
                 },
               }}
             >
-              {asset.creator!.name}
+              {asset.creator.name}
             </Typography>
           </Link>
         }

@@ -12,7 +12,7 @@ export class Asset extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne('Creator', 'assets')
+  @ManyToOne('Creator')
   creator: Creator;
 
   @Column('int')

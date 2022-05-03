@@ -10,7 +10,11 @@ export const useDrop = () => {
   return React.useContext(DropContext);
 };
 
-export const DropProvider: React.FC = ({ children }) => {
+interface Props {
+  children?: React.ReactNode;
+}
+
+export const DropProvider = ({ children }: Props) => {
   const [drop, setDrop] = React.useState<Drop>({
     isDropped: false,
     assetId: '',

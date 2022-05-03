@@ -55,7 +55,7 @@ interface Props {
   asset: Asset & AssetResponse;
 }
 
-const LikeCounter: React.FC<Props> = ({ asset }) => {
+const LikeCounter = ({ asset }: Props) => {
   const theme = useTheme();
   const { isLoading, isError, likes } = useLikeCount({
     asset,

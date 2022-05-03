@@ -4,14 +4,13 @@ import {
   Card,
   CardActionArea,
   CardContent,
-  Container,
   Grid,
   Typography,
   useTheme,
 } from '@mui/material';
 import { AddBoxOutlined } from '@mui/icons-material';
 
-export const NewAssetsGrid: React.FC = () => {
+export const NewAssetsGrid = () => {
   const themes = useTheme();
   return (
     <Grid

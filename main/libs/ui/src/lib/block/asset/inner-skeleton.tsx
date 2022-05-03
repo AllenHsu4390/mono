@@ -4,7 +4,7 @@ interface Props {
   isFull: boolean;
 }
 
-export const InnerSkeleton: React.FC<Props> = ({ isFull }) => {
+export const InnerSkeleton = ({ isFull }: Props) => {
   const theme = useTheme();
 
   return (

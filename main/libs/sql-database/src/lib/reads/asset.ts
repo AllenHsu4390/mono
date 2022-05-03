@@ -1,11 +1,12 @@
 import { connectToDatabase } from '../db';
 import { Asset } from '../entity/asset';
+import { Creator } from '../entity/creator';
 import { decode, encode } from '../hash';
 
 export const getAsset = async (id: string) => {
   const db = await connectToDatabase();
   const assetId = decode(id);
-  const asset = await db.getRepository(Asset).findOne({
+  const asset = await db.getRepository(Asset).findOneOrFail({
     where: {
       id: assetId,
     },

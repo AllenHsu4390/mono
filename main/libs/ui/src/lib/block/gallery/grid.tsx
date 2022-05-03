@@ -1,20 +1,18 @@
 import React from 'react';
-import { useInfiniteQuery } from 'react-query';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Grid } from '@mui/material';
 import { Assets, Creator } from '@main/models';
-import { Error } from '@main/models';
 import { AssetCard } from '../asset/card';
 import { AssetCardSkeleton } from '../asset/skeleton';
 import Link from '../../element/link';
-import { AssetsResponse } from '@main/rest';
+import { AssetsResponse, CreatorResponse } from '@main/rest';
+import { useAssets } from '../../hooks/assets';
 
 interface Props {
-  creator: Creator;
-  assetsUrl: string;
+  creator: Creator & CreatorResponse;
 }
 
-const Item: React.FC = ({ children }) => {
+const Item = ({ children }: { children: React.ReactNode }) => {
   return (
     <Grid item xs={4} sm={4} md={4} lg={4}>
       {children}
@@ -22,24 +20,12 @@ const Item: React.FC = ({ children }) => {
   );
 };
 
-export const AssetsGrid: React.FC<Props> = ({ creator, assetsUrl }) => {
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-    useInfiniteQuery<Assets & AssetsResponse, Error>(
-      assetsUrl,
-      async ({ pageParam: nextUrl = assetsUrl }: { pageParam?: string }) => {
-        const response = await fetch(nextUrl);
-        return response.json();
-      },
-      {
-        getNextPageParam: (lastPage): undefined | string => {
-          return lastPage.links.find((l) => l.rel === 'next')?.url;
-        },
-      }
-    );
+export const AssetsGrid = ({ creator }: Props) => {
+  const { assets, isLoading, isError, hasNextPage, fetchNextPage } = useAssets(creator);
 
-  const assetPages = data?.pages || [];
+  const assetPages = assets?.pages || [];
   const shouldShowSkeleton =
-    isLoading || isError || !data || assetPages.length === 0;
+    isLoading || isError || !assets || assetPages.length === 0;
 
   const loadMore = () => {
     fetchNextPage();
