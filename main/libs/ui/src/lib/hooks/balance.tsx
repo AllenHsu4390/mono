@@ -23,10 +23,7 @@ interface BalanceProviderProps {
   children?: React.ReactNode;
 }
 
-export const BalanceProvider = ({
-  user,
-  children,
-}: BalanceProviderProps) => {
+export const BalanceProvider = ({ user, children }: BalanceProviderProps) => {
   const { data, refetch } = useQuery<Balance>(
     ['balance', user.id],
     async () => {

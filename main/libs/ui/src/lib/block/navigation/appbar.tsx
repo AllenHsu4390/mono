@@ -11,8 +11,7 @@ export const AppBar = ({ children }: Props) => {
       <MuiAppBar
         position="fixed"
         sx={{
-          boxShadow: 'none',
-          height: '6rem',
+          height: '4rem',
           borderBottom: `2px solid ${theme.palette.secondary.main}`,
           background: `${theme.palette.background.default}`,
         }}

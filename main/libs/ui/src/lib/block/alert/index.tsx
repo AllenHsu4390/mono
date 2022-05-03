@@ -1,11 +1,10 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TransitionProps } from '@mui/material/transitions';
-import { Box, DialogContentText, Grow, Zoom } from '@mui/material';
+import { Box, Grow } from '@mui/material';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {

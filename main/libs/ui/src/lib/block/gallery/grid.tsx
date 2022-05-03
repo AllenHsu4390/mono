@@ -21,7 +21,8 @@ const Item = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const AssetsGrid = ({ creator }: Props) => {
-  const { assets, isLoading, isError, hasNextPage, fetchNextPage } = useAssets(creator);
+  const { assets, isLoading, isError, hasNextPage, fetchNextPage } =
+    useAssets(creator);
 
   const assetPages = assets?.pages || [];
   const shouldShowSkeleton =

@@ -11,8 +11,9 @@ export const InnerSkeleton = ({ isFull }: Props) => {
     <>
       <Skeleton
         sx={{
-          width: isFull ? theme.breakpoints.values.lg : '100%',
-          height: isFull ? theme.breakpoints.values.sm : '16rem',
+          height: isFull ? theme.breakpoints.values.sm : '25vh',
+          margin: 'auto',
+          width: 'auto',
         }}
         variant="rectangular"
       />

@@ -14,13 +14,13 @@ import BalanceLabel from '../../element/balance';
 import ProfileMenu from '../profile-menu';
 
 interface Props {
-  user: User & UserResponse;
+  user?: User & UserResponse;
 }
 
 const menuLabel = (rel: string, creatorName: string) => {
   switch (rel) {
     case 'new-gallery':
-      return `${creatorName}: Edit profile`;
+      return `${creatorName}`;
     case 'logout':
       return 'Logout';
     case 'edit-account':
@@ -61,14 +61,20 @@ export default function Navigation({ user }: Props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {user.links
-        .filter((l) => !!menuLabel(l.rel, user.name))
-        .sort((a, b) => menuOrder.indexOf(a.rel) - menuOrder.indexOf(b.rel))
-        .map((l) => (
-          <MenuItem key={l.url}>
-            <Link to={l.url}>{menuLabel(l.rel, user.name)}</Link>
-          </MenuItem>
-        ))}
+      {user ? (
+        user.links
+          .filter((l) => !!menuLabel(l.rel, user.name))
+          .sort((a, b) => menuOrder.indexOf(a.rel) - menuOrder.indexOf(b.rel))
+          .map((l) => (
+            <MenuItem key={l.url}>
+              <Link to={l.url}>{menuLabel(l.rel, user.name)}</Link>
+            </MenuItem>
+          ))
+      ) : (
+        <MenuItem key={'/users/login'}>
+          <Link to={'/users/login'}>Login</Link>
+        </MenuItem>
+      )}
     </ProfileMenu>
   );
 
@@ -92,7 +98,7 @@ export default function Navigation({ user }: Props) {
               padding: '0.2rem',
             }}
           >
-            <BalanceLabel user={user} />
+            {user ? <BalanceLabel user={user} /> : null}
           </Container>
         </Box>
         <Box sx={{ display: 'flex' }}>
@@ -107,7 +113,7 @@ export default function Navigation({ user }: Props) {
           >
             <Avatar
               alt="Avatar"
-              src={user.avatarUrl}
+              src={user && user.avatarUrl}
               sx={{
                 width: '2.5rem',
                 height: '2.5rem',

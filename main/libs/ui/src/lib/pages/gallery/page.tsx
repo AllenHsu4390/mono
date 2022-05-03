@@ -7,16 +7,14 @@ import { CreatorResponse, UserResponse } from '@main/rest';
 
 interface Props {
   creator: Creator & CreatorResponse;
-  user: User & UserResponse;
+  user?: User & UserResponse;
 }
 
 export default function GalleryPage({ creator, user }: Props) {
   return (
     <Page hasNavigation={true} user={user}>
       <CreatorProfile creator={creator} />
-      <AssetsGrid
-        creator={creator}
-      />
+      <AssetsGrid creator={creator} />
     </Page>
   );
 }

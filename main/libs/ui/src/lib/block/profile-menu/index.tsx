@@ -3,8 +3,7 @@ import { Menu, MenuProps, styled } from '@mui/material';
 const ProfileMenu = styled((props: MenuProps) => <Menu {...props} />)(
   ({ theme }) => ({
     '& .MuiPaper-root': {
-      borderRadius: 0,
-      border: `1px solid ${theme.palette.secondary.dark}`,
+      boxShadow: `0 0.1rem 0.1rem 0.01rem ${theme.palette.secondary.dark}`,
       padding: 0,
     },
     '& .MuiMenu-list': {

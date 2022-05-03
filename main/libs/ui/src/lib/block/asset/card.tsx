@@ -28,7 +28,7 @@ export function AssetCard({ asset, isPreloaded = false }: Props) {
   const cardContent = (
     <CardMedia
       sx={{
-        height: '16rem',
+        height: '25vh',
       }}
       component="img"
       image={asset.src}
@@ -45,7 +45,11 @@ export function AssetCard({ asset, isPreloaded = false }: Props) {
       }}
     >
       {loadingSkeleton}
-      <CardActionArea sx={{ display: `${showSkeleton ? 'none' : 'initial'}` }}>
+      <CardActionArea
+        sx={{
+          display: `${showSkeleton ? 'none' : 'initial'}`,
+        }}
+      >
         {cardContent}
       </CardActionArea>
     </Card>

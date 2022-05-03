@@ -18,7 +18,7 @@ export const getAsset = async (id: string): Promise<Asset & AssetResponse> => {
       },
       {
         rel: 'creator',
-        url: `/${asset.creator.id}`,
+        url: `/galleries/${asset.creator.id}`,
       },
     ],
   };

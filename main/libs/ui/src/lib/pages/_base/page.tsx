@@ -19,8 +19,15 @@ const Page = ({ children, hasNavigation, user }: Props) => {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Navigation user={user} />
         <main>
-          <Container>{children}</Container>
+          <Container
+            sx={{
+              pt: 16,
+            }}
+          >
+            {children}
+          </Container>
         </main>
       </ThemeProvider>
     );
@@ -31,7 +38,7 @@ const Page = ({ children, hasNavigation, user }: Props) => {
       <BalanceProvider user={user}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {hasNavigation && user ? <Navigation user={user} /> : null}
+          <Navigation user={user} />
           <main>
             <Container
               sx={{

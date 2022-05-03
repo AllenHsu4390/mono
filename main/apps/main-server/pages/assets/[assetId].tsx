@@ -5,31 +5,20 @@ import { AssetResponse, getAsset, getUser, UserResponse } from '@main/rest';
 import { auth } from '@main/auth';
 
 interface Props {
-  user: User & UserResponse;
+  user: (User & UserResponse) | null;
   asset: Asset & AssetResponse;
 }
 
 export async function getServerSideProps({ params, req }) {
   const { idKey } = req.cookies;
-  const { creatorId, assetId } = params;
-  if (!idKey) {
-    throw {
-      message: 'Authentication failed',
-    };
-  }
-  if (typeof creatorId !== 'string') {
-    throw {
-      message: 'Something went wrong',
-    };
-  }
+  const { assetId } = params;
   if (typeof assetId !== 'string') {
     throw {
       message: 'Something went wrong',
     };
   }
-  const userId = auth().identity.userId(idKey);
   const asset = await getAsset(assetId);
-  const user = await getUser(userId);
+  const user = idKey ? await getUser(auth().identity.userId(idKey)) : null;
   const props: Props = {
     user,
     asset,
@@ -40,7 +29,7 @@ export async function getServerSideProps({ params, req }) {
   };
 }
 const AssetNextPage: NextPage<Props> = ({ user, asset }) => {
-  return <AssetPage user={user} asset={asset} />;
+  return <AssetPage user={user || undefined} asset={asset} />;
 };
 
 export default AssetNextPage;

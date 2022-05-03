@@ -11,7 +11,7 @@ export const getFollows = async (
   const links = [
     ...follows.follows.map((f): FollowsResponse['links'][0] => ({
       rel: 'follow',
-      url: `/${f.creator.id}`,
+      url: `/galleries/${f.creator.id}`,
     })),
   ];
 

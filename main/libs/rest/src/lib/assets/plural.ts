@@ -11,7 +11,7 @@ export const getAssets = async (
   const links = [
     ...assets.assets.map((a) => ({
       rel: 'asset',
-      url: `/${creatorId}/assets/${a.id}`,
+      url: `/assets/${a.id}`,
     })),
     ...(assets.pagination.next
       ? [

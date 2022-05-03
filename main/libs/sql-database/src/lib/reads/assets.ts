@@ -1,6 +1,7 @@
 import { Assets } from '@main/models';
 import { connectToDatabase } from '../db';
 import { Asset } from '../entity/asset';
+import { Like } from '../entity/like';
 import { decode, encode } from '../hash';
 import { createCursor, createSkip } from '../pagination';
 
@@ -17,7 +18,7 @@ export const getAssets = async (
     where: {
       creatorId,
     },
-    relations: ["creator"],
+    relations: ['creator'],
     skip: createSkip(page, PAGE_SIZE),
     take: PAGE_SIZE,
   });
