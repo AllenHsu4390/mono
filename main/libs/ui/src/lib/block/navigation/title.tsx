@@ -6,7 +6,7 @@ export const Title = () => {
   return (
     <Link to="/">
       <Typography
-        variant="h3"
+        variant="h4"
         color="text.primary"
         sx={{
           cursor: 'pointer',

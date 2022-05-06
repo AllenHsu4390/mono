@@ -4,7 +4,7 @@ interface Props {
   children: React.ReactElement;
 }
 
-export const HideOnScroll: React.FC<Props> = ({ children }) => {
+export const HideOnScroll = ({ children }: Props) => {
   const trigger = useScrollTrigger();
 
   return (

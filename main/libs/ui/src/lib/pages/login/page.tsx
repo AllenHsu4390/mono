@@ -7,7 +7,7 @@ interface Props {
 
 export default function LoginPage({ loginUrl }: Props) {
   return (
-    <Page hasFooter={false}>
+    <Page>
       <LoginForm loginUrl={loginUrl} />
     </Page>
   );

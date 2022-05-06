@@ -1,3 +1,3 @@
-export const Wordmark: React.FC = () => {
-  return <span>PROMOVERSE</span>;
+export const Wordmark = () => {
+  return <span>mezzanine</span>;
 };

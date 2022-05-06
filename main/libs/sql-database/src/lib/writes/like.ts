@@ -1,13 +1,17 @@
-import { Like } from '@main/models';
 import { connectToDatabase } from '../db';
 import { Like as LikeEntity } from '../entity/like';
-import { decode } from '../hash';
+import { decode, encode } from '../hash';
 
-export const saveLike = async ({ userId, assetId }: Like): Promise<void> => {
+export const saveLike = async (userId: string, assetId: string) => {
   const db = await connectToDatabase();
-  const dbLike = new LikeEntity();
-  dbLike.userId = decode(userId);
-  dbLike.assetId = decode(assetId);
+  const savedLike = await db.transaction(async (manager) => {
+    const dbLike = new LikeEntity();
+    dbLike.userId = decode(userId);
+    dbLike.assetId = decode(assetId);
+    return await manager.save(dbLike);
+  });
 
-  await db.manager.save(dbLike);
+  return {
+    id: encode(savedLike.id),
+  };
 };

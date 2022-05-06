@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { LikesCount, Response } from '@main/models';
-import { getLikesCount } from '@main/rest';
+import { getError, getLikesCount } from '@main/rest';
+import { ErrorResponse, LikesCountResponse } from '@main/rest-models';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<LikesCount & Response>
+  res: NextApiResponse<LikesCountResponse | ErrorResponse>
 ) {
   try {
     const { id } = req.query;
@@ -17,6 +17,7 @@ export default async function handler(
 
     res.status(200).json(await getLikesCount(id));
   } catch (e) {
-    res.status(403).json(e);
+    const error = getError(e);
+    res.status(error.status).json(error);
   }
 }

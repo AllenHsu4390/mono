@@ -6,8 +6,6 @@ import {
   Column,
   BeforeInsert,
 } from 'typeorm';
-import { User } from './user';
-import { Asset } from './asset';
 
 @Entity()
 export class Like extends BaseEntity {
@@ -22,12 +20,6 @@ export class Like extends BaseEntity {
 
   @Column('datetime')
   createdAt: Date;
-
-  @ManyToOne('User')
-  user: User;
-
-  @ManyToOne('Asset')
-  asset: Asset;
 
   @BeforeInsert()
   addTimeStamp() {

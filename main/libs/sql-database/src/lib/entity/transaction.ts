@@ -1,7 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  BeforeInsert,
+} from 'typeorm';
 
 export enum TransactionTypes {
   LIKE = 'like',
+  MINT = 'mint',
   UNKNOWN = 'unknown',
 }
 
@@ -11,7 +18,12 @@ export class Transaction extends BaseEntity {
   id: number;
 
   @Column('int')
-  userId: string;
+  userId: number;
+
+  @Column('int', {
+    nullable: true,
+  })
+  actionId: number;
 
   @Column({
     type: 'enum',
@@ -25,4 +37,12 @@ export class Transaction extends BaseEntity {
 
   @Column('int')
   debit: number;
+
+  @Column('datetime')
+  createdAt: Date;
+
+  @BeforeInsert()
+  addTimeStamp() {
+    this.createdAt = new Date();
+  }
 }

@@ -1,72 +1,56 @@
 import CssBaseline from '@mui/material/CssBaseline';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Navigation from '../../block/navigation';
-import CompanyContact from './company-contact';
 import { Container } from '@mui/material';
-import { User } from '@main/models';
-import { UserResponse } from '@main/rest';
-
-const theme = createTheme({
-  palette: {
-    secondary: {
-      light: '#fff',
-      main: '#f5f5f5',
-      contrastText: '#000000',
-    },
-    primary: {
-      light: '#fff',
-      main: '#222',
-      contrastText: '#fff',
-    },
-    background: {
-      default: '#fff',
-      paper: '#fff',
-    },
-  },
-});
-
-theme.typography.h3 = {
-  fontSize: '1.2rem',
-  [theme.breakpoints.up('sm')]: {
-    fontSize: '1.5rem',
-  },
-  [theme.breakpoints.up('md')]: {
-    fontSize: '2.4rem',
-  },
-};
+import { UserResponse } from '@main/rest-models';
+import { BalanceProvider } from '../../hooks/balance';
+import { page, theme } from '../../providers/theme';
+import { DropProvider } from '../../hooks/drop';
 
 interface Props {
-  hasFooter?: boolean;
-  hasNavigation?: boolean;
-  user?: User & UserResponse;
+  user?: UserResponse;
+  children?: React.ReactNode;
 }
 
-const Page: React.FC<Props> = ({
-  hasFooter,
-  children,
-  hasNavigation,
-  user,
-}) => {
+const Page = ({ children, user }: Props) => {
+  if (!user) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navigation user={user} />
+        <main>
+          <Container
+            sx={{
+              pt: 16,
+              maxWidth: page.maxWidth,
+            }}
+          >
+            {children}
+          </Container>
+        </main>
+      </ThemeProvider>
+    );
+  }
+
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {hasNavigation && user ? <Navigation user={user} /> : null}
-      <main>
-        <Container
-          sx={{
-            paddingY: '0.5rem',
-            maxWidth: theme.breakpoints.values.lg,
-            [theme.breakpoints.down('sm')]: {
-              maxWidth: '100%',
-              paddingX: 0,
-            },
-          }}
-        >
-          {children}
-        </Container>
-      </main>
-      {hasFooter ? <CompanyContact /> : null}
-    </ThemeProvider>
+    <DropProvider>
+      <BalanceProvider user={user}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Navigation user={user} />
+          <main>
+            <Container
+              sx={{
+                pt: 16,
+                maxWidth: page.maxWidth,
+              }}
+            >
+              {children}
+            </Container>
+          </main>
+        </ThemeProvider>
+      </BalanceProvider>
+    </DropProvider>
   );
 };
 

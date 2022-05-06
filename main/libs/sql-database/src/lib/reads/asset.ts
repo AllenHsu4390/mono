@@ -5,7 +5,7 @@ import { decode, encode } from '../hash';
 export const getAsset = async (id: string) => {
   const db = await connectToDatabase();
   const assetId = decode(id);
-  const asset = await db.getRepository(Asset).findOne({
+  const asset = await db.getRepository(Asset).findOneOrFail({
     where: {
       id: assetId,
     },

@@ -1,16 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Error, Response, User } from '@main/models';
 import { auth } from '@main/auth';
-import { getUser } from '@main/rest';
-
-type OK = {
-  ok: true;
-} & Response;
-
-type UserRes = User & Response;
+import { getError, getUser } from '@main/rest';
+import { ErrorResponse, UserResponse } from '@main/rest-models';
 
 const me = {
-  read: async (req, res: NextApiResponse<UserRes | Error | OK>) => {
+  read: async (req, res: NextApiResponse<UserResponse | ErrorResponse>) => {
     const { idKey } = req.cookies;
     if (!idKey) {
       throw {
@@ -25,7 +19,7 @@ const me = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<(User & Response) | Error | OK>
+  res: NextApiResponse<UserResponse | ErrorResponse>
 ) {
   const { id } = req.query;
   try {
@@ -39,6 +33,7 @@ export default async function handler(
         };
     }
   } catch (e) {
-    res.status(401).json(e);
+    const error = getError(e);
+    res.status(error.status).json(error);
   }
 }

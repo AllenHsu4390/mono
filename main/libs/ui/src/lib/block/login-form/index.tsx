@@ -28,7 +28,7 @@ type Action = {
 };
 
 const verifiedInput = (state: State, action: Action): State => {
-  const email = action.email || state.password;
+  const email = action.email || state.email;
   const password = action.password || state.password;
   return {
     ...state,
@@ -64,7 +64,7 @@ interface Props {
   loginUrl: string;
 }
 
-const LoginForm: React.FC<Props> = ({ loginUrl }) => {
+const LoginForm = ({ loginUrl }: Props) => {
   const theme = useTheme();
   const [state, dispatch] = useReducer(reducer, {
     email: '',

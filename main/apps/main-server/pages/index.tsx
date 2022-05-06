@@ -1,12 +1,12 @@
 import { auth } from '@main/auth';
-import { Follows, User } from '@main/models';
-import { FollowsResponse, getFollows, getUser, UserResponse } from '@main/rest';
+import { getTrend, getUser } from '@main/rest';
+import { TrendResponse, UserResponse } from '@main/rest-models';
 import { FeedPage } from '@main/ui';
 import { NextPage } from 'next';
 
 interface Props {
-  user: User & UserResponse;
-  follows: Follows & FollowsResponse;
+  user: UserResponse;
+  trend: TrendResponse;
 }
 
 export async function getServerSideProps({ req }) {
@@ -18,10 +18,10 @@ export async function getServerSideProps({ req }) {
   }
   const userId = auth().identity.userId(idKey);
   const user = await getUser(userId);
-  const follows = await getFollows(userId, '1');
+  const trend = await getTrend();
   const props: Props = {
     user,
-    follows,
+    trend,
   };
 
   return {
@@ -29,8 +29,8 @@ export async function getServerSideProps({ req }) {
   };
 }
 
-const Home: NextPage<Props> = ({ user, follows }) => {
-  return <FeedPage user={user} follows={follows} />;
+const Home: NextPage<Props> = ({ user, trend }) => {
+  return <FeedPage user={user} trend={trend} />;
 };
 
 export default Home;

@@ -3,38 +3,28 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import { Avatar, Container, Typography } from '@mui/material';
-import { User } from '@main/models';
+import { Avatar, Button, Container } from '@mui/material';
 import { Title } from './title';
 import { AppBar } from './appbar';
 import Link from '../../element/link';
-import { UserResponse } from '@main/rest';
-import { FavoriteBorder } from '@mui/icons-material';
+import BalanceLabel from '../../element/balance';
+import ProfileMenu from '../profile-menu';
+import { useSendMint } from '../../hooks/mint';
+import { useBalance } from '../../hooks/balance';
+import { page } from '../../providers/theme';
+import { UserResponse } from '@main/rest-models';
 
 interface Props {
-  user: User & UserResponse;
+  user?: UserResponse;
 }
-
-const menuLabel = (rel: string) => {
-  switch (rel) {
-    case 'new-gallery':
-      return 'My Gallery';
-    case 'logout':
-      return 'Logout';
-    case 'edit-account':
-      return 'Settings';
-    default:
-      return '';
-  }
-};
-
-const menuOrder = ['new-gallery', 'edit-account', 'logout'];
 
 export default function Navigation({ user }: Props) {
   const theme = useTheme();
+  const { sendMint } = useSendMint({
+    onError: () => console.log('mint failed'),
+  });
+  const { refetchBalance } = useBalance();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -47,15 +37,31 @@ export default function Navigation({ user }: Props) {
     setAnchorEl(null);
   };
 
-  const menuId = 'primary-search-account-menu';
+  const menuItems = user
+    ? [
+        <MenuItem key={user.links.newGallery.url}>
+          <Link to={user.links.newGallery.url}>{user.name}</Link>
+        </MenuItem>,
+        <MenuItem key={user.links.editAccount.url}>
+          <Link to={user.links.editAccount.url}>{'Settings'}</Link>
+        </MenuItem>,
+        <MenuItem key={'/users/logout'}>
+          <Link to={'/users/logout'}>{'Logout'}</Link>
+        </MenuItem>,
+      ]
+    : [
+        <MenuItem key={'/users/login'}>
+          <Link to={'/users/login'}>Login</Link>
+        </MenuItem>,
+      ];
+
   const renderMenu = (
-    <Menu
+    <ProfileMenu
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'right',
       }}
-      id={menuId}
       keepMounted
       transformOrigin={{
         vertical: 'top',
@@ -64,22 +70,15 @@ export default function Navigation({ user }: Props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {user.links
-        .filter((l) => !!menuLabel(l.rel))
-        .sort((a, b) => menuOrder.indexOf(a.rel) - menuOrder.indexOf(b.rel))
-        .map((l) => (
-          <MenuItem key={l.url}>
-            <Link to={l.url}>{menuLabel(l.rel)}</Link>
-          </MenuItem>
-        ))}
-    </Menu>
+      {menuItems}
+    </ProfileMenu>
   );
 
   return (
     <AppBar>
       <Toolbar
         sx={{
-          width: ['100%', '100%', '100%', `${theme.breakpoints.values.lg}px`],
+          width: page.maxWidth,
           margin: 'auto',
         }}
       >
@@ -95,31 +94,22 @@ export default function Navigation({ user }: Props) {
               padding: '0.2rem',
             }}
           >
-            <FavoriteBorder
-              fontSize="small"
-              sx={{
-                verticalAlign: 'middle',
-              }}
-            />
-            <Typography
-              sx={{
-                ml: '0.2rem',
-                display: 'inline',
-                verticalAlign: 'middle',
-              }}
-              component="p"
-            >
-              1000 SNP
-            </Typography>
+            {user ? (
+              <Button
+                onClick={async () => {
+                  await sendMint();
+                  await refetchBalance();
+                }}
+              >
+                <BalanceLabel user={user} />
+              </Button>
+            ) : null}
           </Container>
         </Box>
         <Box sx={{ display: 'flex' }}>
           <IconButton
             size="large"
             edge="end"
-            aria-label="account of current user"
-            aria-controls={menuId}
-            aria-haspopup="true"
             onClick={handleProfileMenuOpen}
             color="inherit"
             sx={{
@@ -128,7 +118,7 @@ export default function Navigation({ user }: Props) {
           >
             <Avatar
               alt="Avatar"
-              src={user.avatarUrl}
+              src={user && user.avatarUrl}
               sx={{
                 width: '2.5rem',
                 height: '2.5rem',

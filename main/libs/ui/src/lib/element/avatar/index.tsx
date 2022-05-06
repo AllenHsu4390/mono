@@ -1,5 +1,6 @@
-import { Creator } from '@main/models';
-import { Avatar, useTheme } from '@mui/material';
+import { Creator } from '@main/rest-models';
+import { Avatar, Stack, Typography } from '@mui/material';
+import { indigo } from '@mui/material/colors';
 import Link from '../link';
 
 interface Props {
@@ -7,20 +8,19 @@ interface Props {
   linkTo: string;
 }
 
-const CreatorAvatar: React.FC<Props> = ({ creator, linkTo }) => {
-  const theme = useTheme();
+const CreatorAvatar = ({ creator, linkTo }: Props) => {
   return (
     <Link to={linkTo}>
       <Avatar
-        alt={creator.id}
+        className="avatar"
+        alt={creator.name}
         src={creator.avatarUrl}
         sx={{
-          width: '4rem',
-          height: '4rem',
-          border: `0.14rem solid ${theme.palette.secondary.light}`,
-          boxShadow: '1px 1px 3px pink',
+          width: '3rem',
+          height: '3rem',
           margin: 'auto',
-          my: '1rem',
+          boxSizing: 'border-box',
+          border: `2px solid white`,
         }}
       />
     </Link>

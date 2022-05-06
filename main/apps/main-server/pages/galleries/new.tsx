@@ -1,11 +1,11 @@
 import { NextPage } from 'next';
 import { NewGalleryPage } from '@main/ui';
-import { User } from '@main/models';
 import { auth } from '@main/auth';
-import { getUser, UserResponse } from '@main/rest';
+import { getUser } from '@main/rest';
+import { UserResponse } from '@main/rest-models';
 
 interface Props {
-  user: User & UserResponse;
+  user: UserResponse;
 }
 
 export async function getServerSideProps({ req }) {

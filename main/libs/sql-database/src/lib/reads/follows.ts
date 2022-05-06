@@ -1,4 +1,3 @@
-import { Follows } from '@main/models';
 import { connectToDatabase } from '../db';
 import { Follow } from '../entity/follow';
 import { decode, encode } from '../hash';
@@ -6,19 +5,14 @@ import { createCursor, createSkip } from '../pagination';
 
 const PAGE_SIZE = 20;
 
-export const getFollows = async (
-  id: string,
-  pageId: string
-): Promise<Follows> => {
+export const getFollows = async (id: string, pageId: string) => {
   const db = await connectToDatabase();
   const page = Number(pageId);
   const userId = decode(id);
 
   const [follows, total] = await db.getRepository(Follow).findAndCount({
     where: {
-      user: {
-        id: userId,
-      },
+      userId,
     },
     relations: ['creator'],
     take: PAGE_SIZE,

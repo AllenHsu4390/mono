@@ -4,14 +4,16 @@ import { Creator } from './entity/creator';
 import { Follow } from './entity/follow';
 import { User } from './entity/user';
 import { getAsset } from './reads/asset';
-import { getAssets } from './reads/assets';
+import { getAssets, getTopAssets } from './reads/assets';
 import { getCreator } from './reads/creator';
 import { getUser, getUserId } from './reads/user';
 import { getFollows } from './reads/follows';
 import { Like } from './entity/like';
-import { getLikesCount } from './reads/likes';
+import { getLikesCount } from './reads/likesCount';
 import { saveLike } from './writes/like';
-import { Transaction } from './entity/transaction';
+import { Transaction, TransactionTypes } from './entity/transaction';
+import { getBalance } from './reads/balance';
+import { saveTransaction } from './writes/transaction';
 
 const datasource = new DataSource({
   type: 'mysql',
@@ -21,7 +23,7 @@ const datasource = new DataSource({
   password: 'H>c$6H2xyA`VrR{B',
   database: 'creator_network',
   synchronize: true,
-  entities: [User, Creator, Asset, Follow, Like, Transaction],
+  entities: [Creator, User, Asset, Follow, Like, Transaction],
 });
 
 let isInitialized = false;
@@ -44,11 +46,17 @@ export const db = {
     creator: getCreator,
     asset: getAsset,
     assets: getAssets,
+    topAssets: getTopAssets,
     follows: getFollows,
     likesCount: getLikesCount,
     userId: getUserId,
+    balance: getBalance,
   },
   save: {
     like: saveLike,
+    transaction: saveTransaction,
+  },
+  enums: {
+    transactionTypes: TransactionTypes,
   },
 };

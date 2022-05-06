@@ -1493,6 +1493,61 @@ export const eula_raiden_albedo_zhongli = () => {
     ])}`);
 };
 
+export const eula_yae_albedo_zhongli = () => {
+    const teamWide = [tom, homNature];
+    const onField = [geoRes, ...teamWide];
+    const debuffs = [lapidus, superConduct, geoResShred];
+
+    const glacialAction = eula.glacialAction({
+        weapon: wolfs,
+        artifacts: [flower_10, feather_10, sand_10, goblet_10, circlet_23],
+        buffs: onField,
+        debuffs,
+    });
+
+    output(`Eula, Yae, Albedo, Zhong Li: ${teamDamageDps([
+        glacialAction,
+        albedo.blossomAction({
+            weapon: cinnabar,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
+        }),
+        yae.sesshouAction({
+            weapon: widsith_mast,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: teamWide,
+            debuffs,
+        }),
+        zhongli.lapidusAction()
+    ])}`);
+};
+
+export const eula_yae_yunjin_zhongli = () => {
+    const teamWide = [tom, yunjinBurst];
+    const onField = [geoRes, ...teamWide];
+    const debuffs = [lapidus, superConduct, geoResShred];
+
+    const glacialAction = eula.glacialAction({
+        weapon: wolfs,
+        artifacts: [flower_10, feather_10, sand_10, goblet_10, circlet_23],
+        buffs: onField,
+        debuffs,
+    });
+
+    output(`Eula, Yae, Yunjin, Zhong Li: ${teamDamageDps([
+        glacialAction,
+        yae.sesshouAction({
+            weapon: widsith_mast,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yunjin.bannerAction(),
+        zhongli.lapidusAction()
+    ])}`);
+};
+
 export const eula_raiden_shenhe_zhongli = () => {
     const teamWide = [tom, baalE];
     const onField = [makeShenheE(5), ...teamWide];

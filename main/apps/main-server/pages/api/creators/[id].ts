@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Creator, Response } from '@main/models';
-import { Error } from '@main/models';
-import { getCreator } from '@main/rest';
+import { getCreator, getError } from '@main/rest';
+import { CreatorResponse, ErrorResponse } from '@main/rest-models';
 
 const typeError = (value, type) => {
   return {
@@ -11,7 +10,7 @@ const typeError = (value, type) => {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<(Creator & Response) | Error>
+  res: NextApiResponse<CreatorResponse | ErrorResponse>
 ) {
   const { id } = req.query;
   try {
@@ -21,6 +20,7 @@ export default async function handler(
 
     res.status(200).json(await getCreator(id));
   } catch (e) {
-    res.status(403).json(e);
+    const error = getError(e);
+    res.status(error.status).json(error);
   }
 }

@@ -1,16 +1,10 @@
-import { Pagination } from '@main/models';
-
 export const createSkip = (page: number, pageSize: number): number => {
   const skip = (page - 1) * pageSize;
 
   return skip;
 };
 
-export const createCursor = (
-  page: number,
-  pageSize: number,
-  total: number
-): Pagination => {
+export const createCursor = (page: number, pageSize: number, total: number) => {
   if (total === 0) {
     return {
       total: 0,

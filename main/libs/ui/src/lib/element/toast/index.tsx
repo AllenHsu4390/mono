@@ -1,4 +1,4 @@
-import { Box, SxProps, Theme, useTheme } from '@mui/material';
+import { Box, SxProps, Theme } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   sx: SxProps<Theme>;
 }
 
-const Toast: React.FC<Props> = ({ show, color, content, sx }) => {
+const Toast = ({ show, color, content, sx }: Props) => {
   const [isVisible, setIsVisible] = useState(show);
 
   useEffect(() => {

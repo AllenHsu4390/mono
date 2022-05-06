@@ -5,7 +5,7 @@ import { decode, encode } from '../hash';
 export const getCreator = async (id: string) => {
   const db = await connectToDatabase();
   const creatorId = decode(id);
-  const creator = await db.getRepository(Creator).findOne({
+  const creator = await db.getRepository(Creator).findOneOrFail({
     where: {
       id: creatorId,
     },

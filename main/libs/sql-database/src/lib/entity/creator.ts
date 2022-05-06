@@ -3,10 +3,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
-  OneToMany,
 } from 'typeorm';
-import { Asset } from './asset';
-import { Follow } from './follow';
 
 @Entity()
 export class Creator extends BaseEntity {
@@ -21,13 +18,4 @@ export class Creator extends BaseEntity {
 
   @Column('varchar')
   avatarUrl: string;
-
-  @Column('int')
-  userId: number;
-
-  @OneToMany('Asset', 'creator')
-  assets: Asset[];
-
-  @OneToMany('Follow', 'creator')
-  follows: Follow[];
 }
