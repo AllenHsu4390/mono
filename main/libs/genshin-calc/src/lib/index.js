@@ -25,7 +25,15 @@ export { getOutputString } from './output.js';
 
 var args = process.argv.slice(2);
 
-export const print = (command, searches = []) => {
+let isSorted = false;
+
+export const print = (command, restCommands = []) => {
+    const searches = restCommands.filter((s) => s !== "--sorted");
+
+    if (restCommands.length !== searches) {
+        isSorted = true;
+    }
+
     output(`-------Damage Calcs for ${command}${` ${searches.join(" ")}`}--------`);
     switch (command) {
         case 'xiangling':
@@ -108,4 +116,4 @@ export const print = (command, searches = []) => {
 };
 
 print(args[0], args.slice(1));
-console.log(getOutputString());
+console.log(getOutputString(isSorted));

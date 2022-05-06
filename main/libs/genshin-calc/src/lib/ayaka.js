@@ -33,7 +33,7 @@ const acen2 = ({ elemDmg }, { stats }) => {
 };
 
 export const soumetsuHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
-    return [2.6952].concat(Array(19).fill(1.7968)).map((motionValue, index) => {
+    return [3.0321].concat(Array(19).fill(2.0214)).map((motionValue, index) => {
         return {
             stats: ["burst", "cryo", ...stats],
             traits: [...traits, acen1],

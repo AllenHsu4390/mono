@@ -67,11 +67,13 @@ export const xingqiu = {
 export const yoimiya = {
     element: "pyro",
     name: "yoimiya",
-    lvl: 80,
-    lvlMax: 80,
-    baseAtk: 285,
+    lvl: 90,
+    lvlMax: 90,
+    hp: 10164,
+    baseAtk: 323,
+    baseDef: 615,
     recharge: 1,
-    critRate: 0.194,
+    critRate: 0.242,
     critDmg: 0.50,
     elemMast: 0,
 };
@@ -112,13 +114,13 @@ export const albedo = {
 export const itto = {
     element: "geo",
     name: "itto",
-    lvl: 80,
-    lvlMax: 80,
-    baseAtk: 299,
-    baseDef: 846,
-    baseHp: 11345,
+    lvl: 90,
+    lvlMax: 90,
+    baseAtk: 227,
+    baseDef: 959,
+    baseHp: 12858,
     recharge: 1,
-    critRate: 0.194,
+    critRate: 0.242,
     critDmg: 0.50,
     elemMast: 0,
     traits: [({ atk, def }, { stats }) => {
@@ -145,14 +147,14 @@ export const fischl = {
 export const ganyu = {
     type: "cryo",
     name: "ganyu",
-    lvl: 80,
-    lvlMax: 80,
-    baseHp: 8643,
-    baseAtk: 295,
-    baseDef: 556,
+    lvl: 90,
+    lvlMax: 90,
+    baseHp: 9797,
+    baseAtk: 335,
+    baseDef: 630,
     recharge: 1,
     critRate: 0.05,
-    critDmg: 0.788
+    critDmg: 0.884
 };
 
 export const ayato = {
@@ -219,15 +221,15 @@ export const yunjin = {
 export const ayaka = {
     element: "cryo",
     name: "ayaka",
-    lvl: 80,
-    lvlMax: 80,
-    baseHp: 11345,
-    baseAtk: 302,
-    baseDef: 692,
+    lvl: 90,
+    lvlMax: 90,
+    baseHp: 12858,
+    baseAtk: 342,
+    baseDef: 784,
     recharge: 1,
     atkPct: 0,
     critRate: 0.05,
-    critDmg: 0.788
+    critDmg: 0.884
 };
 
 export const rosaria = {

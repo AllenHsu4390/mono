@@ -66,9 +66,9 @@ export const glad2 = (attr) => {
 export const glad4 = ({ elemDmg }, hit) => {
     return {
         elemDmg: elemDmg + (
-            hit.stats.includes("weapon_sword") && 
-            hit.stats.includes("weapon_polearm") && 
-            hit.stats.includes("weapon_claymore") &&
+            hit.stats.includes("weapon_sword") || 
+            hit.stats.includes("weapon_polearm") ||  
+            hit.stats.includes("weapon_claymore") || 
             hit.stats.includes("normal") ? 0.35 : 0)
     };
 };

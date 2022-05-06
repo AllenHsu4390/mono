@@ -96,7 +96,7 @@ export const yunjinBurst = ({ flatDmg, elemDmg }, hit) => {
     // c2
     const DEF = 2200; // hard code until figure
     return {
-        flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.56 * DEF) : 0),
+        flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.661 * DEF) : 0),
         elemDmg: elemDmg + (hit.stats.includes("normal") ? 0.15 : 0),
     };
 };
