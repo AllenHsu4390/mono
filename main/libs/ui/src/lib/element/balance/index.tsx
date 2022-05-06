@@ -1,12 +1,7 @@
-import { UserResponse } from '@main/rest-models';
 import { Typography } from '@mui/material';
 import { useBalance } from '../../hooks/balance';
 
-interface Props {
-  user: UserResponse;
-}
-
-const BalanceLabel = ({ user }: Props) => {
+const BalanceLabel = () => {
   const { balance } = useBalance();
   return (
     <Typography

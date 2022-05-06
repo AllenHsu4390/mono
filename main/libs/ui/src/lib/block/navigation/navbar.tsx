@@ -14,6 +14,7 @@ import { useSendMint } from '../../hooks/mint';
 import { useBalance } from '../../hooks/balance';
 import { page } from '../../providers/theme';
 import { UserResponse } from '@main/rest-models';
+import BalanceButton from '../../element/balance-button';
 
 interface Props {
   user?: UserResponse;
@@ -21,10 +22,6 @@ interface Props {
 
 export default function Navigation({ user }: Props) {
   const theme = useTheme();
-  const { sendMint } = useSendMint({
-    onError: () => console.log('mint failed'),
-  });
-  const { refetchBalance } = useBalance();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -94,16 +91,7 @@ export default function Navigation({ user }: Props) {
               padding: '0.2rem',
             }}
           >
-            {user ? (
-              <Button
-                onClick={async () => {
-                  await sendMint();
-                  await refetchBalance();
-                }}
-              >
-                <BalanceLabel user={user} />
-              </Button>
-            ) : null}
+            {user ? <BalanceButton /> : null}
           </Container>
         </Box>
         <Box sx={{ display: 'flex' }}>

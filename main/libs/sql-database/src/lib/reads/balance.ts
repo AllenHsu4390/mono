@@ -13,5 +13,5 @@ export const getBalance = async (id: string): Promise<number> => {
     .where('transaction.userId = :id', { id: userId })
     .getRawOne();
 
-  return sum;
+  return Number(sum);
 };
