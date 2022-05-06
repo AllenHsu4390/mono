@@ -1,11 +1,10 @@
-import { Balance, User } from '@main/models';
-import { UserResponse } from '@main/rest';
+import { BalanceResponse, UserResponse } from '@main/rest-models';
 import { noop } from 'lodash';
 import { createContext, useContext } from 'react';
 import { useQuery } from 'react-query';
 
 interface Result {
-  balance: Balance | undefined;
+  balance: BalanceResponse | undefined;
   refetchBalance(): void;
 }
 
@@ -19,19 +18,19 @@ export const useBalance = () => {
 };
 
 interface BalanceProviderProps {
-  user: User & UserResponse;
+  user: UserResponse;
   children?: React.ReactNode;
 }
 
 export const BalanceProvider = ({ user, children }: BalanceProviderProps) => {
-  const { data, refetch } = useQuery<Balance>(
+  const { data, refetch } = useQuery<BalanceResponse>(
     ['balance', user.id],
     async () => {
-      const balanceLink = user.links.find((l) => l.rel === 'balance');
-      if (!balanceLink) {
+      const balanceUrl = user.links.balance.url;
+      if (!balanceUrl) {
         throw new Error('missing balance capability');
       }
-      const res = await fetch(balanceLink.url);
+      const res = await fetch(balanceUrl);
       return res.json();
     }
   );

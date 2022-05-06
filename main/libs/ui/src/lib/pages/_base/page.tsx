@@ -2,19 +2,17 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import Navigation from '../../block/navigation';
 import { Container } from '@mui/material';
-import { User } from '@main/models';
-import { UserResponse } from '@main/rest';
+import { UserResponse } from '@main/rest-models';
 import { BalanceProvider } from '../../hooks/balance';
-import { theme } from '../../providers/theme';
+import { page, theme } from '../../providers/theme';
 import { DropProvider } from '../../hooks/drop';
 
 interface Props {
-  hasNavigation?: boolean;
-  user?: User & UserResponse;
+  user?: UserResponse;
   children?: React.ReactNode;
 }
 
-const Page = ({ children, hasNavigation, user }: Props) => {
+const Page = ({ children, user }: Props) => {
   if (!user) {
     return (
       <ThemeProvider theme={theme}>
@@ -24,6 +22,7 @@ const Page = ({ children, hasNavigation, user }: Props) => {
           <Container
             sx={{
               pt: 16,
+              maxWidth: page.maxWidth,
             }}
           >
             {children}
@@ -43,6 +42,7 @@ const Page = ({ children, hasNavigation, user }: Props) => {
             <Container
               sx={{
                 pt: 16,
+                maxWidth: page.maxWidth,
               }}
             >
               {children}

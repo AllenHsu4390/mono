@@ -1,20 +1,17 @@
-import { Session } from '@main/models';
-import { SessionResponse } from '../responses';
+import { SessionResponse } from '@main/rest-models';
 
-export const getSession = async (): Promise<Session & SessionResponse> => {
-  const links: SessionResponse['links'] = [
-    {
-      rel: 'login',
-      url: '/api/login',
-    },
-    {
-      rel: 'logout',
-      url: '/api/logout',
-    },
-  ];
-
+export const getSession = async (): Promise<SessionResponse> => {
   return {
     isUsualClient: true,
-    links,
+    links: {
+      login: {
+        rel: 'login',
+        url: '/api/login',
+      },
+      logout: {
+        rel: 'logout',
+        url: '/api/logout',
+      },
+    },
   };
 };

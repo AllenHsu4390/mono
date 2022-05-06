@@ -1,17 +1,19 @@
-import { Asset, User } from '@main/models';
 import Page from '../_base/page';
 import AssetInteractable from '../../block/asset/asset';
-import { AssetResponse, UserResponse } from '@main/rest';
+import { AssetResponse, UserResponse } from '@main/rest-models';
+import { Container } from '@mui/material';
 
 interface Props {
-  asset: Asset & AssetResponse;
-  user: User & UserResponse;
+  asset: AssetResponse;
+  user: UserResponse;
 }
 
 export default function AssetPage({ asset, user }: Props) {
   return (
-    <Page hasNavigation={true} user={user}>
-      <AssetInteractable asset={asset} />
+    <Page user={user}>
+      <Container>
+        <AssetInteractable asset={asset} />
+      </Container>
     </Page>
   );
 }

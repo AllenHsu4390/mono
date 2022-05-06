@@ -1,10 +1,10 @@
 import { NextPage } from 'next';
 import { LoginPage } from '@main/ui';
-import { Session } from '@main/models';
-import { getSession, SessionResponse } from '@main/rest';
+import { getSession } from '@main/rest';
+import { SessionResponse } from '@main/rest-models';
 
 interface Props {
-  session: Session & SessionResponse;
+  session: SessionResponse;
 }
 
 export async function getServerSideProps() {
@@ -19,11 +19,7 @@ export async function getServerSideProps() {
 }
 
 const Login: NextPage<Props> = ({ session }) => {
-  return (
-    <LoginPage
-      loginUrl={session.links.find((l) => l.rel === 'login').url || '/404'}
-    />
-  );
+  return <LoginPage loginUrl={session.links.login.url} />;
 };
 
 export default Login;

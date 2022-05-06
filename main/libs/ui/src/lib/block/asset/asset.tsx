@@ -1,6 +1,4 @@
 import { Alert, Typography } from '@mui/material';
-import { Asset, Creator } from '@main/models';
-import { AssetResponse } from '@main/rest';
 import LikeButton from '../../element/like-button';
 import CreatorAvatar from '../../element/avatar';
 import { AssetCardFull } from './card-full';
@@ -8,13 +6,14 @@ import LikeCounter from '../../element/like-counter';
 import Link from '../../element/link';
 import { indigo } from '@mui/material/colors';
 import { useDrop } from '../../hooks/drop';
+import { AssetResponse } from '@main/rest-models';
 
 interface Props {
-  asset: Asset & AssetResponse;
+  asset: AssetResponse;
 }
 
 export default function AssetInteractable({ asset }: Props) {
-  const [drop, setDrop] = useDrop();
+  const [drop] = useDrop();
   return (
     <>
       {drop.isDropped && (
@@ -24,17 +23,14 @@ export default function AssetInteractable({ asset }: Props) {
       )}
       <AssetCardFull
         asset={asset}
-        isPreloaded={true}
         avatar={
           <CreatorAvatar
             creator={asset.creator}
-            linkTo={asset.links.find((l) => l.rel === 'creator')?.url || '/404'}
+            linkTo={asset.links.creator.url}
           />
         }
         avatarTitle={
-          <Link
-            to={asset.links.find((l) => l.rel === 'creator')?.url || '/404'}
-          >
+          <Link to={asset.links.creator.url}>
             <Typography
               fontWeight={'bold'}
               sx={{

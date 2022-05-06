@@ -37,10 +37,10 @@ const burstHit = (stacks = 13, traits = [], debuffs = [], amps = [], transforms 
     });
 };
 
-export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = ["physical"]) => {
+export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = []) => {
     const physHit = (motionValue, index) => {
         return {
-            stats,
+            stats: ["physical", "normal"],
             traits,
             amplifiers: [crit, ...amps],
             motionValue,

@@ -1,10 +1,9 @@
-import { User } from '@main/models';
-import { UserResponse } from '@main/rest';
+import { UserResponse } from '@main/rest-models';
 import { Typography } from '@mui/material';
 import { useBalance } from '../../hooks/balance';
 
 interface Props {
-  user: User & UserResponse;
+  user: UserResponse;
 }
 
 const BalanceLabel = ({ user }: Props) => {

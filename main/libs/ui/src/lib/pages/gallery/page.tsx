@@ -1,20 +1,18 @@
-import { Creator, User } from '@main/models';
-
 import Page from '../_base/page';
 import { CreatorProfile } from '../../block/creator/profile';
-import { AssetsGrid } from '../../block/gallery';
-import { CreatorResponse, UserResponse } from '@main/rest';
+import { Gallery } from '../../block/gallery';
+import { CreatorResponse, UserResponse } from '@main/rest-models';
 
 interface Props {
-  creator: Creator & CreatorResponse;
-  user?: User & UserResponse;
+  creator: CreatorResponse;
+  user?: UserResponse;
 }
 
 export default function GalleryPage({ creator, user }: Props) {
   return (
-    <Page hasNavigation={true} user={user}>
+    <Page user={user}>
       <CreatorProfile creator={creator} />
-      <AssetsGrid creator={creator} />
+      <Gallery creator={creator} />
     </Page>
   );
 }

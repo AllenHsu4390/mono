@@ -1,51 +1,40 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Grid } from '@mui/material';
-import { Assets, Creator } from '@main/models';
 import { AssetCard } from '../asset/card';
 import { AssetCardSkeleton } from '../asset/skeleton';
 import Link from '../../element/link';
-import { AssetsResponse, CreatorResponse } from '@main/rest';
-import { useAssets } from '../../hooks/assets';
+import { AssetsResponse } from '@main/rest-models';
 
 interface Props {
-  creator: Creator & CreatorResponse;
+  hasNextPage: boolean;
+  loadMore(page: number): void;
+  assetPages: AssetsResponse[];
+  shouldShowSkeleton: boolean;
 }
 
 const Item = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Grid item xs={4} sm={4} md={4} lg={4}>
+    <Grid item xs={12} sm={4} md={3} lg={3}>
       {children}
     </Grid>
   );
 };
 
-export const AssetsGrid = ({ creator }: Props) => {
-  const { assets, isLoading, isError, hasNextPage, fetchNextPage } =
-    useAssets(creator);
-
-  const assetPages = assets?.pages || [];
-  const shouldShowSkeleton =
-    isLoading || isError || !assets || assetPages.length === 0;
-
-  const loadMore = () => {
-    fetchNextPage();
-  };
-
+export const AssetsGrid = ({
+  hasNextPage,
+  loadMore,
+  assetPages,
+  shouldShowSkeleton,
+}: Props) => {
   return (
     <InfiniteScroll hasMore={hasNextPage} loadMore={loadMore}>
-      <Grid container spacing={{ xs: 0.5, sm: 1, md: 1 }}>
+      <Grid container spacing={0.5}>
         {[
-          ...assetPages.map((page: Assets & AssetsResponse) =>
+          ...assetPages.map((page: AssetsResponse) =>
             page.assets.map((asset, index) => (
               <Item key={asset.id}>
-                <Link
-                  to={
-                    page.links.filter((l) => l.rel === 'asset')[index].url ||
-                    '/404'
-                  }
-                  key={asset.id}
-                >
+                <Link to={page.links.asset[index].url} key={asset.id}>
                   <AssetCard asset={asset} />
                 </Link>
               </Item>

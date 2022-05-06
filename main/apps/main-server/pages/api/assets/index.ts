@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Assets, Response } from '@main/models';
-import { getAssets } from '@main/rest';
+import { getAssets, getError } from '@main/rest';
+import { AssetsResponse, ErrorResponse } from '@main/rest-models';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Assets & Response>
+  res: NextApiResponse<AssetsResponse | ErrorResponse>
 ) {
   try {
     const { pageId, creatorId } = req.query;
@@ -23,6 +23,7 @@ export default async function handler(
 
     res.status(200).json(await getAssets(creatorId, pageId));
   } catch (e) {
-    res.status(403).json(e);
+    const error = getError(e);
+    res.status(error.status).json(error);
   }
 }

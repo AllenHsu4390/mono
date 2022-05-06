@@ -1,9 +1,9 @@
+import { CreatorResponse } from '@main/rest-models';
 import { Avatar, Typography } from '@mui/material';
-import { Creator } from '@main/models';
 import { CreatorProfileBase } from './base';
 
 interface Props {
-  creator: Creator;
+  creator: CreatorResponse;
 }
 
 export function CreatorProfile({ creator }: Props) {

@@ -4,36 +4,27 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
-import { Avatar, Container } from '@mui/material';
-import { User } from '@main/models';
+import { Avatar, Button, Container } from '@mui/material';
 import { Title } from './title';
 import { AppBar } from './appbar';
 import Link from '../../element/link';
-import { UserResponse } from '@main/rest';
 import BalanceLabel from '../../element/balance';
 import ProfileMenu from '../profile-menu';
+import { useSendMint } from '../../hooks/mint';
+import { useBalance } from '../../hooks/balance';
+import { page } from '../../providers/theme';
+import { UserResponse } from '@main/rest-models';
 
 interface Props {
-  user?: User & UserResponse;
+  user?: UserResponse;
 }
-
-const menuLabel = (rel: string, creatorName: string) => {
-  switch (rel) {
-    case 'new-gallery':
-      return `${creatorName}`;
-    case 'logout':
-      return 'Logout';
-    case 'edit-account':
-      return 'Settings';
-    default:
-      return '';
-  }
-};
-
-const menuOrder = ['new-gallery', 'edit-account', 'logout'];
 
 export default function Navigation({ user }: Props) {
   const theme = useTheme();
+  const { sendMint } = useSendMint({
+    onError: () => console.log('mint failed'),
+  });
+  const { refetchBalance } = useBalance();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -45,6 +36,24 @@ export default function Navigation({ user }: Props) {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const menuItems = user
+    ? [
+        <MenuItem key={user.links.newGallery.url}>
+          <Link to={user.links.newGallery.url}>{user.name}</Link>
+        </MenuItem>,
+        <MenuItem key={user.links.editAccount.url}>
+          <Link to={user.links.editAccount.url}>{'Settings'}</Link>
+        </MenuItem>,
+        <MenuItem key={'/users/logout'}>
+          <Link to={'/users/logout'}>{'Logout'}</Link>
+        </MenuItem>,
+      ]
+    : [
+        <MenuItem key={'/users/login'}>
+          <Link to={'/users/login'}>Login</Link>
+        </MenuItem>,
+      ];
 
   const renderMenu = (
     <ProfileMenu
@@ -61,20 +70,7 @@ export default function Navigation({ user }: Props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {user ? (
-        user.links
-          .filter((l) => !!menuLabel(l.rel, user.name))
-          .sort((a, b) => menuOrder.indexOf(a.rel) - menuOrder.indexOf(b.rel))
-          .map((l) => (
-            <MenuItem key={l.url}>
-              <Link to={l.url}>{menuLabel(l.rel, user.name)}</Link>
-            </MenuItem>
-          ))
-      ) : (
-        <MenuItem key={'/users/login'}>
-          <Link to={'/users/login'}>Login</Link>
-        </MenuItem>
-      )}
+      {menuItems}
     </ProfileMenu>
   );
 
@@ -82,7 +78,7 @@ export default function Navigation({ user }: Props) {
     <AppBar>
       <Toolbar
         sx={{
-          width: '100%',
+          width: page.maxWidth,
           margin: 'auto',
         }}
       >
@@ -98,7 +94,16 @@ export default function Navigation({ user }: Props) {
               padding: '0.2rem',
             }}
           >
-            {user ? <BalanceLabel user={user} /> : null}
+            {user ? (
+              <Button
+                onClick={async () => {
+                  await sendMint();
+                  await refetchBalance();
+                }}
+              >
+                <BalanceLabel user={user} />
+              </Button>
+            ) : null}
           </Container>
         </Box>
         <Box sx={{ display: 'flex' }}>

@@ -1,9 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Balance, Error, Response, User } from '@main/models';
 import { auth } from '@main/auth';
-import { getBalance } from '@main/rest';
+import { getBalance, getError } from '@main/rest';
+import { BalanceResponse, ErrorResponse } from '@main/rest-models';
 
-const get = async (req, res: NextApiResponse<(Balance & Response) | Error>) => {
+const get = async (
+  req,
+  res: NextApiResponse<BalanceResponse | ErrorResponse>
+) => {
   const { idKey } = req.cookies;
   if (!idKey) {
     throw {
@@ -17,7 +20,7 @@ const get = async (req, res: NextApiResponse<(Balance & Response) | Error>) => {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<(Balance & Response) | Error>
+  res: NextApiResponse<BalanceResponse | ErrorResponse>
 ) {
   try {
     switch (true) {
@@ -30,6 +33,7 @@ export default async function handler(
         };
     }
   } catch (e) {
-    res.status(401).json(e);
+    const error = getError(e);
+    res.status(error.status).json(error);
   }
 }

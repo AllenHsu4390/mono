@@ -1,4 +1,3 @@
-import { Cost, Like } from '@main/models';
 import NodeCache from 'node-cache';
 
 const DEFAULT_TTL = 3600000; // 1 hours
@@ -22,20 +21,31 @@ const getLikesCount = async (
 };
 
 const saveLikesCount = async (
-  { assetId, userId }: Like,
-  dbSave: () => Promise<void>
+  assetId: string,
+  dbSave: () => Promise<{ id: string }>
 ) => {
   const key = `likes-count-{${assetId}}`;
-  const balanceKey = `balance-{${userId}}`;
   if (memoryCache.has(key)) {
     const value = Number(memoryCache.get(key));
     memoryCache.set(key, value + 1, DEFAULT_TTL);
   }
+  return await dbSave();
+};
+
+const saveBalance = async (
+  {
+    credit = 0,
+    debit = 0,
+    userId,
+  }: { credit: number; debit: number; userId: string },
+  dbSave: () => Promise<{ id: string }>
+) => {
+  const balanceKey = `balance-{${userId}}`;
   if (memoryCache.has(balanceKey)) {
     const value = Number(memoryCache.get(balanceKey));
-    memoryCache.set(balanceKey, value - Cost.Like, DEFAULT_TTL);
+    memoryCache.set(balanceKey, value + credit - debit, DEFAULT_TTL);
   }
-  await dbSave();
+  return await dbSave();
 };
 
 const getBalance = async (
@@ -58,6 +68,7 @@ export const cache = {
     balance: getBalance,
   },
   save: {
-    like: saveLikesCount,
+    likesCount: saveLikesCount,
+    balance: saveBalance,
   },
 };

@@ -1,12 +1,12 @@
 import { NextPage } from 'next';
 import { AssetPage } from '@main/ui';
-import { Asset, Creator, User } from '@main/models';
-import { AssetResponse, getAsset, getUser, UserResponse } from '@main/rest';
+import { getAsset, getUser } from '@main/rest';
 import { auth } from '@main/auth';
+import { AssetResponse, UserResponse } from '@main/rest-models';
 
 interface Props {
-  user: (User & UserResponse) | null;
-  asset: Asset & AssetResponse;
+  user: UserResponse | null;
+  asset: AssetResponse;
 }
 
 export async function getServerSideProps({ params, req }) {

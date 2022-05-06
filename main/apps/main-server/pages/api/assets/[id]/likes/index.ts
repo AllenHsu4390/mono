@@ -1,16 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Drop, Response } from '@main/models';
-import { saveLike } from '@main/rest';
+import { getError, saveLike } from '@main/rest';
 import { auth } from '@main/auth';
+import { DropResponse, ErrorResponse } from '@main/rest-models';
 
-const dropRate = ({ pctChance } = { pctChance: 0.02 }) => {
-  return Math.random() < pctChance;
-};
 const userFromLogin = (req: NextApiRequest) => req.cookies.idKey;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Drop & Response>
+  res: NextApiResponse<DropResponse | ErrorResponse>
 ) {
   try {
     const { id } = req.query;
@@ -28,19 +25,14 @@ export default async function handler(
       };
     }
 
-    const like = await saveLike({
+    const drop = await saveLike({
       userId,
       assetId: id,
     });
 
-    const isDropped = dropRate();
-
-    res.status(200).json({
-      isDropped,
-      assetId: id,
-      ...like,
-    });
+    res.status(200).json(drop);
   } catch (e) {
-    res.status(403).json(e);
+    const error = getError(e);
+    res.status(error.status).json(error);
   }
 }

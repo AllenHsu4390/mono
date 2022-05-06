@@ -1,30 +1,53 @@
 import { environment } from '@main/environment';
-import { Assets, Response } from '@main/models';
+import { AssetsResponse } from '@main/rest-models';
 
 export const getAssets = async (
   creatorId: string,
   pageId: string
-): Promise<Assets & Response> => {
+): Promise<AssetsResponse> => {
   const db = environment.db;
-  const assets = await db.get.assets(creatorId, pageId);
-
-  const links = [
-    ...assets.assets.map((a) => ({
-      rel: 'asset',
-      url: `/assets/${a.id}`,
-    })),
-    ...(assets.pagination.next
-      ? [
-          {
-            rel: 'next',
-            url: `/api/assets?creatorId=${creatorId}&pageId=${assets.pagination.next}`,
-          },
-        ]
-      : []),
-  ];
+  const { assets, pagination } = await db.get.assets(creatorId, pageId);
 
   return {
-    ...assets,
-    links,
+    assets,
+    pagination,
+    links: {
+      asset: assets.map((a) => ({
+        rel: 'asset',
+        url: `/assets/${a.id}`,
+      })),
+      ...(pagination.next
+        ? {
+            next: {
+              rel: 'next',
+              url: `/api/assets?creatorId=${creatorId}&pageId=${pagination.next}`,
+            },
+          }
+        : {}),
+    },
+  };
+};
+
+export const getTopAssets = async (pageId): Promise<AssetsResponse> => {
+  const db = environment.db;
+  const { assets, pagination } = await db.get.topAssets(pageId);
+
+  return {
+    assets,
+    pagination,
+    links: {
+      asset: assets.map((a) => ({
+        rel: 'asset',
+        url: `/assets/${a.id}`,
+      })),
+      ...(pagination.next
+        ? {
+            next: {
+              rel: 'next',
+              url: `/api/assets/top?pageId=${pagination.next}`,
+            },
+          }
+        : {}),
+    },
   };
 };

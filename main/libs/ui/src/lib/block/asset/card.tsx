@@ -1,19 +1,18 @@
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-import { Asset } from '@main/models';
-import { Box, CardActionArea, useTheme } from '@mui/material';
+import { Box, CardActionArea } from '@mui/material';
 import { useState } from 'react';
 import { InnerSkeleton } from './inner-skeleton';
+import { Asset } from '@main/rest-models';
 
 interface Props {
   asset: Asset;
   isPreloaded?: boolean;
 }
 
-export function AssetCard({ asset, isPreloaded = false }: Props) {
-  const theme = useTheme();
+export function AssetCard({ asset }: Props) {
   const [isLoading, setIsLoading] = useState(true);
-  const showSkeleton = isLoading && !isPreloaded;
+  const showSkeleton = isLoading;
 
   const loadingSkeleton = (
     <Box

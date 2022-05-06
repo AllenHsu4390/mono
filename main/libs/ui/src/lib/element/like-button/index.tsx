@@ -1,6 +1,5 @@
-import { Asset, Cost } from '@main/models';
-import { AssetResponse } from '@main/rest';
-import { Favorite, FavoriteBorderOutlined } from '@mui/icons-material';
+import { AssetResponse, Cost } from '@main/rest-models';
+import { FavoriteBorderOutlined } from '@mui/icons-material';
 import { Typography, Button, IconButton, useTheme } from '@mui/material';
 import React, { useReducer } from 'react';
 import AlertDialog from '../../block/alert';
@@ -53,7 +52,7 @@ const reducer = (state: State, action: Action): State => {
 };
 
 interface Props {
-  asset: Asset & AssetResponse;
+  asset: AssetResponse;
 }
 
 const LikeButton = ({ asset }: Props) => {
@@ -82,10 +81,6 @@ const LikeButton = ({ asset }: Props) => {
       type: 'close',
     });
   };
-
-  if (state.isDropped) {
-    alert('YOU WON');
-  }
 
   const dialogOptions =
     balance && balance.sum >= Cost.Like

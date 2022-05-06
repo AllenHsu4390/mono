@@ -1,12 +1,14 @@
-import { Assets } from '@main/models';
-import { AssetsResponse, CreatorResponse } from '@main/rest';
+import {
+  AssetsResponse,
+  CreatorResponse,
+  TrendResponse,
+} from '@main/rest-models';
 import { useInfiniteQuery } from 'react-query';
 
-
 export const useAssets = (creator: CreatorResponse) => {
-  const assetsUrl = creator.links.find((link) => link.rel === 'assets')?.url || '/404';
+  const assetsUrl = creator.links.assets.url;
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-    useInfiniteQuery<Assets & AssetsResponse, Error>(
+    useInfiniteQuery<AssetsResponse, Error>(
       assetsUrl,
       async ({ pageParam: nextUrl = assetsUrl }: { pageParam?: string }) => {
         const response = await fetch(nextUrl);
@@ -14,7 +16,31 @@ export const useAssets = (creator: CreatorResponse) => {
       },
       {
         getNextPageParam: (lastPage): undefined | string => {
-          return lastPage.links.find((l) => l.rel === 'next')?.url;
+          return lastPage.links.next?.url;
+        },
+      }
+    );
+  return {
+    assets: data,
+    isLoading,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+  };
+};
+
+export const useTopAssets = (trend: TrendResponse) => {
+  const assetsUrl = trend.links.assets.url;
+  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
+    useInfiniteQuery<AssetsResponse, Error>(
+      assetsUrl,
+      async ({ pageParam: nextUrl = assetsUrl }: { pageParam?: string }) => {
+        const response = await fetch(nextUrl);
+        return response.json();
+      },
+      {
+        getNextPageParam: (lastPage): undefined | string => {
+          return lastPage.links.next?.url;
         },
       }
     );

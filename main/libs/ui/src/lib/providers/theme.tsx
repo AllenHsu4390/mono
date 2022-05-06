@@ -41,3 +41,7 @@ export const theme = createTheme({
     fontFamily,
   },
 });
+
+export const page = {
+  maxWidth: ['100%', '100%', '100%', '90%', '90%'],
+};

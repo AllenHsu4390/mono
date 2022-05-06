@@ -1,12 +1,12 @@
 import { NextPage } from 'next';
 import { GalleryPage } from '@main/ui';
-import { Creator, User } from '@main/models';
-import { CreatorResponse, getCreator, getUser, UserResponse } from '@main/rest';
+import { getCreator, getUser } from '@main/rest';
 import { auth } from '@main/auth';
+import { CreatorResponse, UserResponse } from '@main/rest-models';
 
 interface Props {
-  user: (User & UserResponse) | null;
-  creator: Creator & CreatorResponse;
+  user: UserResponse | null;
+  creator: CreatorResponse;
 }
 
 export async function getServerSideProps({ params, req }) {

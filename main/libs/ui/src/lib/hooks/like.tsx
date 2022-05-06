@@ -1,21 +1,24 @@
-import { Asset, Drop, LikesCount } from '@main/models';
-import { AssetResponse } from '@main/rest';
+import {
+  AssetResponse,
+  DropResponse,
+  LikesCountResponse,
+} from '@main/rest-models';
 import { useMutation, useQuery } from 'react-query';
 
 export const useSendLike = ({
   asset,
   onError,
 }: {
-  asset: Asset & AssetResponse;
+  asset: AssetResponse;
   onError?(error: any): void;
 }) => {
-  const mutation = useMutation<Drop & Response>(
+  const mutation = useMutation<DropResponse>(
     async () => {
-      const likeLink = asset.links.find((l) => l.rel === 'like');
-      if (!likeLink) {
+      const likeUrl = asset.links.like.url;
+      if (!likeUrl) {
         throw new Error('missing like capability');
       }
-      const res = await fetch(likeLink.url, {
+      const res = await fetch(likeUrl, {
         method: 'POST',
       });
       return res.json();
@@ -32,20 +35,20 @@ export const useSendLike = ({
   };
 };
 
-export const useLikeCount = ({ asset }: { asset: Asset & AssetResponse }) => {
+export const useLikeCount = ({ asset }: { asset: AssetResponse }) => {
   const {
     isLoading,
     isError,
     data,
     refetch: refetchLikes,
-  } = useQuery<LikesCount>(
+  } = useQuery<LikesCountResponse>(
     ['likes', asset.id],
     async () => {
-      const countLink = asset.links.find((l) => l.rel === 'like-count');
-      if (!countLink) {
+      const countUrl = asset.links.likeCount.url;
+      if (!countUrl) {
         throw new Error('missing like-count capability');
       }
-      const res = await fetch(countLink.url);
+      const res = await fetch(countUrl);
       return res.json();
     },
     {

@@ -1,25 +1,24 @@
 import { environment } from '@main/environment';
-import { Asset } from '@main/models';
-import { AssetResponse } from '../responses';
+import { AssetResponse } from '@main/rest-models';
 
-export const getAsset = async (id: string): Promise<Asset & AssetResponse> => {
+export const getAsset = async (id: string): Promise<AssetResponse> => {
   const db = environment.db;
   const asset = await db.get.asset(id);
   return {
     ...asset,
-    links: [
-      {
+    links: {
+      likeCount: {
         rel: 'like-count',
         url: `/api/assets/${asset.id}/likes/count`,
       },
-      {
+      like: {
         rel: 'like',
         url: `/api/assets/${asset.id}/likes`,
       },
-      {
+      creator: {
         rel: 'creator',
         url: `/galleries/${asset.creator.id}`,
       },
-    ],
+    },
   };
 };

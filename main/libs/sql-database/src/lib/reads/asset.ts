@@ -1,6 +1,5 @@
 import { connectToDatabase } from '../db';
 import { Asset } from '../entity/asset';
-import { Creator } from '../entity/creator';
 import { decode, encode } from '../hash';
 
 export const getAsset = async (id: string) => {

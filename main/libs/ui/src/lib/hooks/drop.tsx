@@ -1,4 +1,4 @@
-import { Drop } from '@main/models';
+import { Drop } from '@main/rest-models';
 import { noop } from 'lodash';
 import * as React from 'react';
 

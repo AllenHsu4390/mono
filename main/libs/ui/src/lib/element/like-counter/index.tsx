@@ -1,5 +1,4 @@
-import { Asset } from '@main/models';
-import { AssetResponse } from '@main/rest';
+import { AssetResponse } from '@main/rest-models';
 import { Typography, Box, useTheme } from '@mui/material';
 import React, { useEffect, useReducer } from 'react';
 import { useLikeCount } from '../../hooks/like';
@@ -52,7 +51,7 @@ const reducer = (state: State, action: Action): State => {
 };
 
 interface Props {
-  asset: Asset & AssetResponse;
+  asset: AssetResponse;
 }
 
 const LikeCounter = ({ asset }: Props) => {
