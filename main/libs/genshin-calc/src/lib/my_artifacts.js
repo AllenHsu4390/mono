@@ -521,6 +521,15 @@ export const goblet_50 = {
     hpPct: 0.087,
 };
 
+export const flower_50 = {
+    type: "bliz",
+    hp: 4780,
+    critDmg: 0.117,
+    critRate: 0.101,
+    atk: 19,
+    def: 39,
+};
+
 // yoimiya
 export const flower_4 = {
     type: "shime",

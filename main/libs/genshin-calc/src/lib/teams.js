@@ -3058,6 +3058,70 @@ export const ayato_yae_albedo_zhongli = () => {
     ])}`);
 };
 
+export const ayato_ayaka_shenhe_diona = () => {
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasFrozen"]
+    });
+
+    const teamWide = [shenheBurst, cryoRes];
+    const onField = [...teamWide];
+    const debuffs = [vvShred];
+
+    const soumetsuAction = ayaka.soumetsuAction({
+        weapon: amenoma,
+        debuffs,
+        buffs: [makeShenheE(10), ...teamWide],
+        artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+    });
+
+    output(`Ayato, Ayaka, Shenhe, Diona: ${teamDamageDps([
+        soumetsuAction,
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [monaOmen, ...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        shenhe.springAction({
+            weapon: wavebreakerR3,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.divineAction({
+            weapon: wavebreakerR3,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.springAction({
+            weapon: wavebreakerR3,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
+    ])}`);
+};
+
 export const ayato_ayaka_shenhe_jean = () => {
     setCurrentEnemy({
         lvl: 90,
@@ -3118,7 +3182,6 @@ export const ayato_ayaka_shenhe_jean = () => {
             buffs: teamWide,
             debuffs
         }),
-        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
         jean.breezeAction({
             weapon: sacSword,
             buffs: teamWide,
