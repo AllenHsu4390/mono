@@ -1,3 +1,3 @@
-export enum Cost {
-  Like = 60,
-}
+export const Cost = {
+  Like: 60,
+};

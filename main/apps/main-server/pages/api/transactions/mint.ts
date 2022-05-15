@@ -1,13 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '@main/auth';
-import { getError, saveMint } from '@main/rest';
-import { ErrorResponse } from '@main/rest-models';
+import { getError, getUser, saveDailyTopUp } from '@main/rest';
+import { DailyTopUpResponse, ErrorResponse } from '@main/rest-models';
 
-interface OK {
-  ok: boolean;
-}
-
-const post = async (req, res: NextApiResponse<OK | ErrorResponse>) => {
+const post = async (
+  req,
+  res: NextApiResponse<DailyTopUpResponse | ErrorResponse>
+) => {
   const { idKey } = req.cookies;
   if (!idKey) {
     throw {
@@ -15,15 +14,14 @@ const post = async (req, res: NextApiResponse<OK | ErrorResponse>) => {
     };
   }
   const userId = auth().identity.userId(idKey);
-  await saveMint(userId);
-  res.status(200).json({
-    ok: true,
-  });
+  const user = await getUser(userId);
+  const topup = await saveDailyTopUp(user.dailyTopUpId, user.id);
+  res.status(200).json(topup);
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<OK | ErrorResponse>
+  res: NextApiResponse<DailyTopUpResponse | ErrorResponse>
 ) {
   try {
     switch (true) {

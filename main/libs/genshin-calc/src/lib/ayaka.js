@@ -28,12 +28,12 @@ const acen1 = ({ elemDmg }, { stats }) => {
 
 const acen2 = ({ elemDmg }, { stats }) => {
     return {
-        elemDmg: elemDmg + (stats.includes("normal") || stats.includes("charged") ? 0.30 : 0)
+        elemDmg: elemDmg + (stats.includes("normal") || stats.includes("charge") ? 0.30 : 0)
     };
 };
 
 export const soumetsuHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
-    return [2.6952].concat(Array(19).fill(1.7968)).map((motionValue, index) => {
+    return [3.0321].concat(Array(19).fill(2.0214)).map((motionValue, index) => {
         return {
             stats: ["burst", "cryo", ...stats],
             traits: [...traits, acen1],
@@ -67,7 +67,7 @@ export const normalAtkHits = (traits = [], debuffs = [], amps = [], transforms =
 export const chargeAtkHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
     return [.8718, .8718, .8718].map((motionValue, index) => {
         return {
-            stats: ["charged", "cryo", ...stats],
+            stats: ["charge", "cryo", ...stats],
             traits: [...traits, acen2],
             amplifiers: [crit, ...amps],
             motionValue,

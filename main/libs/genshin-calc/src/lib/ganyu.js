@@ -16,7 +16,7 @@ const enemy = {
 };
 
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 5) => {
-    return Array(duration).fill([2.05, 3.48]).flat().map((motionValue, index) => {
+    return Array(duration).fill([2.304, 3.9168]).flat().map((motionValue, index) => {
         return {
             stats: ["cryo", "charge", ...stats],
             traits,

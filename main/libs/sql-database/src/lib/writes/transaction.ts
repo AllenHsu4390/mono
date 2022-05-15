@@ -1,3 +1,4 @@
+import { EntityManager } from 'typeorm';
 import { connectToDatabase } from '../db';
 import { Transaction, TransactionTypes } from '../entity/transaction';
 import { decode, encode } from '../hash';
@@ -7,9 +8,10 @@ export const saveTransaction = async (
   userId: string,
   actionId: string,
   credit: number,
-  debit: number
+  debit: number,
+  manager?: EntityManager
 ): Promise<{ id: string }> => {
-  const db = await connectToDatabase();
+  const db = manager || (await connectToDatabase());
   const savedTransaction = await db.transaction(async (manager) => {
     const dbTransaction = new Transaction();
     dbTransaction.type = type;

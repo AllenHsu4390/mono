@@ -49,7 +49,7 @@ export const icdOverloaded = (attr, hit) => {
 };
 
 export const hits = (traits, debuffs, amps, transforms, stats = []) => {
-    return Array(3).fill([.563, .563,  1.08, 1.404, .7332, .7332, 1.6722]).flat().map((motionValue, index) => {
+    return Array(3).fill([.6359, .6359,  1.2199, 1.5859, .8282, .8282, 1.8887]).flat().map((motionValue, index) => {
         return {
             stats: ["pyro", "normal", ...stats],
             traits,

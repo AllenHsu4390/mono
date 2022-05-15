@@ -9,7 +9,7 @@ export const getUser = async (id: string) => {
     where: {
       id: userId,
     },
-    relations: ['creator'],
+    relations: ['creator', 'dailyTopUp'],
   });
   return {
     id: encode(user.id),
@@ -17,6 +17,7 @@ export const getUser = async (id: string) => {
     email: user.email,
     isLoggedIn: true,
     name: user.creator.name,
+    dailyTopUpId: encode(user.dailyTopUp.id),
   };
 };
 

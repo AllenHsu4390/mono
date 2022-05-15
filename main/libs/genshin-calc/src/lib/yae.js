@@ -81,7 +81,7 @@ export const comboAction = ({ weapon, artifacts, buffs, debuffs, amps = [], tran
             ...sesshouHits(buffs, debuffs, amps, transforms, hitStats, duration),
             ...tenkoHits(buffs, debuffs, amps, transforms, hitStats),
         ],
-        duration: 7,
+        duration: 5,
     };
 };
 

@@ -96,7 +96,7 @@ export const yunjinBurst = ({ flatDmg, elemDmg }, hit) => {
     // c2
     const DEF = 2200; // hard code until figure
     return {
-        flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.56 * DEF) : 0),
+        flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.661 * DEF) : 0),
         elemDmg: elemDmg + (hit.stats.includes("normal") ? 0.15 : 0),
     };
 };
@@ -108,7 +108,7 @@ export const makeShenheE = (num, ATK = 3300, hold = false) => {
             shenheQuota--;
         }
         const boost = hold ?
-            ((hit.stats.includes("normal") || hit.stats.includes("charged")) ? 0.15 : 0) :
+            ((hit.stats.includes("normal") || hit.stats.includes("charge")) ? 0.15 : 0) :
             ((hit.stats.includes("burst") || hit.stats.includes("skill")) ? 0.15 : 0);
         return {
             flatDmg: flatDmg + ((hit.stats.includes("cryo") && shenheQuota > -1) ? (0.73 * ATK) : 0),

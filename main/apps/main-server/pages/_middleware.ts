@@ -14,14 +14,13 @@ const pieceMatch = (a: string[], b: string[]) => {
   }
 
   for (let i = 0; i < a.length; i++) {
-    if (b[i][0] !== ':') {
+    if (b[i][0] === ':') {
       continue;
     }
     if (a[i] !== b[i]) {
       return false;
     }
   }
-
   return true;
 };
 
@@ -38,6 +37,7 @@ export const isPublicPath = (pathname: string) => {
     '/users/login',
     '/galleries/:creatorId',
     '/galleries/:creatorId/:assetId',
+    '/favicon.ico',
   ].find((path) => pieceMatch(pieces, path.split('/')));
 };
 

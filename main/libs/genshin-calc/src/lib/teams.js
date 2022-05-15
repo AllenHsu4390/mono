@@ -37,7 +37,7 @@ import { redhorn, serpentSpine, wolfs } from './claymore.js';
 
 import { output } from './output.js';
 import { setCurrentEnemy } from './enemy.js';
-import { widsith, widsith_dmg, widsith_mast } from './catalyst.js';
+import { widsith, widsith_dmg } from './catalyst.js';
 import { setCurrentTeam } from './team.js';
 
 const yoimiyaArtifacts = [flower_4, feather_4, sand_35, goblet_26, circlet_4];
@@ -110,8 +110,8 @@ export const yoimiya_xingqiu_yae_bennett = () => {
         }),
         firedanceAction,
         bennett.passionAction(),
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
             buffs: teamWide,
             debuffs,
@@ -142,8 +142,8 @@ export const yoimiya_xingqiu_yae_yunjin = () => {
         }),
         firedanceAction,
         yunjin.bannerAction(),
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
             buffs: teamWide,
             debuffs,
@@ -250,14 +250,13 @@ export const yoimiya_yae_yunjin_bennett = () => {
 
     output(`Yoimiya, Yae, Yunjin, Bennett: ${teamDamageDps([
         firedanceAction,
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
             buffs: teamWide,
             transforms: [yae.icdOverloaded]
         }),
         yunjin.bannerAction(),
-        zhongli.lapidusAction(),
     ])}`);
 };
 
@@ -274,8 +273,8 @@ export const yoimiya_yae_albedo_zhongli = () => {
 
     output(`Yoimiya, Yae, Albedo, Zhong Li: ${teamDamageDps([
         firedanceAction,
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
             buffs: teamWide,
             debuffs,
@@ -338,8 +337,8 @@ export const yoimiya_yae_yunjin_zhongli = () => {
 
     output(`Yoimiya, Yae, Yunjin, Zhong Li: ${teamDamageDps([
         firedanceAction,
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
             buffs: teamWide,
             debuffs,
@@ -453,8 +452,8 @@ export const yoimiya_xingqiu_yae_zhongli = () => {
             debuffs,
             
         }),
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
             buffs: teamWide,
             debuffs,
@@ -647,8 +646,8 @@ export const hutao_xingqiu_yae_zhongli = () => {
             duration: afterlifeAction.duration,
             debuffs,
         }),
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
             buffs: teamWide,
             debuffs,
@@ -672,8 +671,8 @@ export const hutao_yae_albedo_zhongli = () => {
 
     output(`Hutao, Yae, Albedo, Zhong Li: ${teamDamageDps([
         afterlifeAction,
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
             buffs: teamWide,
             debuffs,
@@ -1513,8 +1512,8 @@ export const eula_yae_albedo_zhongli = () => {
             debuffs,
             artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             debuffs,
@@ -1537,8 +1536,8 @@ export const eula_yae_yunjin_zhongli = () => {
 
     output(`Eula, Yae, Yunjin, Zhong Li: ${teamDamageDps([
         glacialAction,
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             debuffs,
@@ -2160,8 +2159,8 @@ export const itto_yae_albedo_gorou = () => {
             debuffs,
             artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             debuffs,
@@ -2961,8 +2960,8 @@ export const yae_yoimiya_albedo_zhongli = () => {
 
     output(`Yae, Yoimiya, Albedo, Zhong Li: ${teamDamageDps([
         firedanceAction,
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             debuffs,
@@ -2998,8 +2997,8 @@ export const yae_yoimiya_bennett_zhongli = () => {
 
     output(`Yae, Yoimiya, Bennett, Zhong Li: ${teamDamageDps([
         firedanceAction,
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             debuffs,
@@ -3037,7 +3036,7 @@ export const ayato_yae_albedo_zhongli = () => {
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
         yae.comboAction({
-            weapon: widsith_mast,
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             transforms: [yae.icdElectroCharged]
@@ -3056,6 +3055,70 @@ export const ayato_yae_albedo_zhongli = () => {
             debuffs,
         }),
         zhongli.lapidusAction()
+    ])}`);
+};
+
+export const ayato_ayaka_shenhe_diona = () => {
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasFrozen"]
+    });
+
+    const teamWide = [shenheBurst, cryoRes];
+    const onField = [...teamWide];
+    const debuffs = [vvShred];
+
+    const soumetsuAction = ayaka.soumetsuAction({
+        weapon: amenoma,
+        debuffs,
+        buffs: [makeShenheE(10), ...teamWide],
+        artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+    });
+
+    output(`Ayato, Ayaka, Shenhe, Diona: ${teamDamageDps([
+        soumetsuAction,
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [monaOmen, ...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        shenhe.springAction({
+            weapon: wavebreakerR3,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.divineAction({
+            weapon: wavebreakerR3,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.springAction({
+            weapon: wavebreakerR3,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
     ])}`);
 };
 
@@ -3119,7 +3182,6 @@ export const ayato_ayaka_shenhe_jean = () => {
             buffs: teamWide,
             debuffs
         }),
-        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
         jean.breezeAction({
             weapon: sacSword,
             buffs: teamWide,
@@ -3205,7 +3267,7 @@ export const ayato_yae_albedo_jean = () => {
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
         yae.comboAction({
-            weapon: widsith_mast,
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             transforms: [yae.icdElectroCharged]
@@ -3263,7 +3325,7 @@ export const ayato_yae_albedo_gorou = () => {
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
         yae.comboAction({
-            weapon: widsith_mast,
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             transforms: [yae.icdElectroCharged]
@@ -3310,7 +3372,7 @@ export const ayato_yae_albedo_yunjin = () => {
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
         yae.comboAction({
-            weapon: widsith_mast,
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             transforms: [yae.icdElectroCharged]
@@ -3360,7 +3422,7 @@ export const ayato_fischl_albedo_yunjin = () => {
         fischl.ozAction({
             weapon: skywardHarpR1,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
-            buffs: onField,
+            buffs: teamWide,
             debuffs,
             transforms: [fischl.icdElectroCharged]
         }),
@@ -3420,7 +3482,7 @@ export const ayato_yae_yunjin_zhongli = () => {
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
         yae.comboAction({
-            weapon: widsith_mast,
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             debuffs,
@@ -3428,6 +3490,48 @@ export const ayato_yae_yunjin_zhongli = () => {
         }),
         zhongli.lapidusAction(),
         yunjin.bannerAction(),
+    ])}`);
+};
+
+export const ayato_yae_sara_zhongli = () => {
+    const teamWide = [saraBurst];
+    const onField = [...teamWide];
+    const debuffs = [lapidus];
+
+    output(`Ayato, Yae, Sara, Zhong Li: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        yae.comboAction({
+            weapon: widsith_dmg,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: teamWide,
+            debuffs,
+            transforms: [yae.icdElectroCharged]
+        }),
+        zhongli.lapidusAction(),
+        sara.subjugationAction({
+            weapon: skywardHarpR1,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [{ atk: 386, critRate: 0.381, critDmg: 0.264, elemDmg: 0.587, atkPct: 0.2 }]
+        }),
     ])}`);
 };
 
@@ -3457,29 +3561,29 @@ export const ayato_yae_fischl_jean = () => {
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
         yae.comboAction({
-            weapon: widsith_mast,
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
-            buffs: [...teamWide, sucroseC6],
+            buffs: [...teamWide],
             debuffs,
         }),
         fischl.ozAction({
             weapon: skywardHarpR1,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
-            buffs: [...teamWide, sucroseC6],
+            buffs: [...teamWide],
             debuffs,
             transforms: [yae.icdElectroCharged]
         }),
         fischl.a2Action({
             weapon: skywardHarpR1,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
-            buffs: [...teamWide, sucroseC6],
+            buffs: [...teamWide],
             debuffs,
             duration: Math.floor(17 / 3)
         }),
         fischl.c6Action({
             weapon: skywardHarpR1,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
-            buffs: [...teamWide, sucroseC6],
+            buffs: [...teamWide],
             debuffs,
         }),
         jean.breezeAction({
@@ -3489,6 +3593,61 @@ export const ayato_yae_fischl_jean = () => {
             artifacts: [{ atk: 408, critRate: 0.366, critDmg: 0.311, elemDmg: 0.12, elemMast: 527 }],
             transforms: [swirl],
         }),
+    ])}`);
+};
+
+export const ayato_yae_fischl_mona = () => {
+    const teamWide = [monaOmen];
+    const onField = [...teamWide];
+    const debuffs = [];
+
+    output(`Ayato, Yae, Fischl, Mona: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        yae.comboAction({
+            weapon: widsith_dmg,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: [...teamWide],
+            debuffs,
+        }),
+        fischl.ozAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
+            buffs: [...teamWide],
+            debuffs,
+            transforms: [yae.icdElectroCharged]
+        }),
+        fischl.a2Action({
+            weapon: skywardHarpR1,
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
+            buffs: [...teamWide],
+            debuffs,
+            duration: Math.floor(17 / 3)
+        }),
+        fischl.c6Action({
+            weapon: skywardHarpR1,
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
+            buffs: [...teamWide],
+            debuffs,
+        }),
+        mona.stellarisAction(),
     ])}`);
 };
 
@@ -3518,7 +3677,7 @@ export const ayato_yae_fischl_zhongli = () => {
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
         yae.comboAction({
-            weapon: widsith_mast,
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             debuffs,
@@ -3567,7 +3726,7 @@ export const ayato_yae_bennett_sara = () => {
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
         yae.comboAction({
-            weapon: widsith_mast,
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: [...teamWide],
             debuffs,
@@ -3603,7 +3762,7 @@ export const ayato_yae_bennett_sucrose = () => {
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
         yae.comboAction({
-            weapon: widsith_mast,
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: [...teamWide],
             debuffs,
@@ -3634,7 +3793,7 @@ export const ayato_yae_bennett_xinyan = () => {
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
         yae.comboAction({
-            weapon: widsith_mast,
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: [...teamWide],
             debuffs,
@@ -3712,8 +3871,8 @@ export const ayato_yae_bennett_jean = () => {
             debuffs,
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             debuffs,
@@ -3947,8 +4106,8 @@ export const ayato_xiangling_yae_bennett = () => {
             transforms: [overloaded],
             debuffs,
         }),
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             debuffs,
@@ -3978,8 +4137,8 @@ export const ayato_mona_yae_jean = () => {
             debuffs,
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             debuffs,
@@ -4072,8 +4231,8 @@ export const ayato_xingqiu_yae_albedo = () => {
             debuffs,
             artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
         }),
-        yae.sesshouAction({
-            weapon: widsith_mast,
+        yae.comboAction({
+            weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
             buffs: teamWide,
             transforms: [yae.icdElectroCharged]

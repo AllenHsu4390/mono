@@ -19,8 +19,8 @@ const enemy = {
     defDebuff: 0
 };
 
-const c_slash = 1.5582;
-const c_final = 3.2634;
+const c_slash = 1.802;
+const c_final = 3.774;
 const ushi = 4.9152;
 
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration) => {
@@ -28,7 +28,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
 
     return combo.map((motionValue, index) => {
         return {
-            stats: [motionValue === ushi ? "skill" : "charged", "geo", ...stats],
+            stats: [motionValue === ushi ? "skill" : "charge", "geo", ...stats],
             traits,
             amplifiers: [crit, ...amps],
             motionValue,

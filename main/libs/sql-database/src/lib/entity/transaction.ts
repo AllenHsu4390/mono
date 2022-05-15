@@ -4,6 +4,7 @@ import {
   Column,
   BaseEntity,
   BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 
 export enum TransactionTypes {
@@ -14,9 +15,6 @@ export enum TransactionTypes {
 
 @Entity()
 export class Transaction extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column('int')
   userId: number;
 
@@ -38,11 +36,24 @@ export class Transaction extends BaseEntity {
   @Column('int')
   debit: number;
 
+  // default columns
+  @PrimaryGeneratedColumn()
+  id: number;
+
   @Column('datetime')
   createdAt: Date;
 
+  @Column('datetime')
+  updatedAt: Date;
+
   @BeforeInsert()
-  addTimeStamp() {
+  timeStampCreate() {
     this.createdAt = new Date();
+    this.updatedAt = new Date();
+  }
+
+  @BeforeUpdate()
+  timeStampUpdate() {
+    this.updatedAt = new Date();
   }
 }

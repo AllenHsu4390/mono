@@ -1,3 +1,4 @@
+import { Gain } from '@main/rest-models';
 import { useMutation } from 'react-query';
 
 export const useSendMint = ({ onError }: { onError?(error: any): void }) => {
@@ -17,5 +18,6 @@ export const useSendMint = ({ onError }: { onError?(error: any): void }) => {
 
   return {
     sendMint: mutation.mutateAsync,
+    creditAmount: Gain.TopUpSmall,
   };
 };
