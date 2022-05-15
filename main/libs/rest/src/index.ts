@@ -16,3 +16,5 @@ export * from './lib/sessions/single';
 
 export * from './lib/transactions/sum';
 export * from './lib/transactions/mint';
+
+export * from './lib/dailyTopUp/topup';

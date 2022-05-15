@@ -19,6 +19,8 @@ export * from './lib/trends/single';
 
 export * from './lib/users/single';
 
+export * from './lib/dailyTopUp/single';
+
 export * from './lib/cost';
 export * from './lib/gain';
 export * from './lib/pagination';

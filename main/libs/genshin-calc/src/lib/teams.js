@@ -3493,6 +3493,48 @@ export const ayato_yae_yunjin_zhongli = () => {
     ])}`);
 };
 
+export const ayato_yae_sara_zhongli = () => {
+    const teamWide = [saraBurst];
+    const onField = [...teamWide];
+    const debuffs = [lapidus];
+
+    output(`Ayato, Yae, Sara, Zhong Li: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        yae.comboAction({
+            weapon: widsith_dmg,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: teamWide,
+            debuffs,
+            transforms: [yae.icdElectroCharged]
+        }),
+        zhongli.lapidusAction(),
+        sara.subjugationAction({
+            weapon: skywardHarpR1,
+            buffs: teamWide,
+            debuffs,
+            artifacts: [{ atk: 386, critRate: 0.381, critDmg: 0.264, elemDmg: 0.587, atkPct: 0.2 }]
+        }),
+    ])}`);
+};
+
 export const ayato_yae_fischl_jean = () => {
     const teamWide = [];
     const onField = [...teamWide];
@@ -3521,27 +3563,27 @@ export const ayato_yae_fischl_jean = () => {
         yae.comboAction({
             weapon: widsith_dmg,
             artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
-            buffs: [...teamWide, sucroseC6],
+            buffs: [...teamWide],
             debuffs,
         }),
         fischl.ozAction({
             weapon: skywardHarpR1,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
-            buffs: [...teamWide, sucroseC6],
+            buffs: [...teamWide],
             debuffs,
             transforms: [yae.icdElectroCharged]
         }),
         fischl.a2Action({
             weapon: skywardHarpR1,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
-            buffs: [...teamWide, sucroseC6],
+            buffs: [...teamWide],
             debuffs,
             duration: Math.floor(17 / 3)
         }),
         fischl.c6Action({
             weapon: skywardHarpR1,
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
-            buffs: [...teamWide, sucroseC6],
+            buffs: [...teamWide],
             debuffs,
         }),
         jean.breezeAction({
@@ -3551,6 +3593,61 @@ export const ayato_yae_fischl_jean = () => {
             artifacts: [{ atk: 408, critRate: 0.366, critDmg: 0.311, elemDmg: 0.12, elemMast: 527 }],
             transforms: [swirl],
         }),
+    ])}`);
+};
+
+export const ayato_yae_fischl_mona = () => {
+    const teamWide = [monaOmen];
+    const onField = [...teamWide];
+    const debuffs = [];
+
+    output(`Ayato, Yae, Fischl, Mona: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        yae.comboAction({
+            weapon: widsith_dmg,
+            artifacts: [flower_42, feather_1, sand_42, goblet_42, circlet_11],
+            buffs: [...teamWide],
+            debuffs,
+        }),
+        fischl.ozAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
+            buffs: [...teamWide],
+            debuffs,
+            transforms: [yae.icdElectroCharged]
+        }),
+        fischl.a2Action({
+            weapon: skywardHarpR1,
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
+            buffs: [...teamWide],
+            debuffs,
+            duration: Math.floor(17 / 3)
+        }),
+        fischl.c6Action({
+            weapon: skywardHarpR1,
+            artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
+            buffs: [...teamWide],
+            debuffs,
+        }),
+        mona.stellarisAction(),
     ])}`);
 };
 

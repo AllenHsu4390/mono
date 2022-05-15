@@ -7,14 +7,13 @@ import { useSendMint } from '../../hooks/mint';
 import BalanceLabel from '../balance';
 
 const BalanceButton = () => {
-  const { sendMint } = useSendMint({
+  const { sendMint, creditAmount: credit } = useSendMint({
     onError: () => console.log('mint failed'),
   });
   const { balance, refetchBalance } = useBalance();
-
   const dialog = useConfirmDialog();
+
   const { state } = dialog;
-  const credit = Gain.TopUpMedium;
 
   const confirm = async () => {
     dialog.confirm();
@@ -27,14 +26,14 @@ const BalanceButton = () => {
     return null;
   }
 
-  const newBalance = balance.sum + Number(credit.toString());
+  const newBalance = balance.sum + credit;
   const dialogOptions = {
-    title: 'Add more SNP?',
+    title: 'Daily top-up',
     content: state.isLocked ? (
       <Typography>{`Updating Balance... Please wait`}</Typography>
     ) : (
       <Typography>
-        {`This will add ${credit} SNP to your account. New Balance will be ${newBalance} SNP`}
+        {`Daily top-up adds ${credit} SNP to your account. New Balance will be ${newBalance} SNP`}
       </Typography>
     ),
     actions: (

@@ -4,6 +4,7 @@ export interface UserResponse {
   email: string;
   name: string;
   isLoggedIn: boolean;
+  dailyTopUpId: string;
   links: {
     newGallery: {
       rel: 'new-gallery';

@@ -20,32 +20,28 @@ const getLikesCount = async (
   return memoryCache.get(key) as number;
 };
 
-const saveLikesCount = async (
-  assetId: string,
-  dbSave: () => Promise<{ id: string }>
-) => {
+const saveLikesCount = async (assetId: string) => {
   const key = `likes-count-{${assetId}}`;
   if (memoryCache.has(key)) {
     const value = Number(memoryCache.get(key));
     memoryCache.set(key, value + 1, DEFAULT_TTL);
   }
-  return await dbSave();
 };
 
-const saveBalance = async (
-  {
-    credit = 0,
-    debit = 0,
-    userId,
-  }: { credit: number; debit: number; userId: string },
-  dbSave: () => Promise<{ id: string }>
-) => {
+const saveBalance = async ({
+  credit = 0,
+  debit = 0,
+  userId,
+}: {
+  credit: number;
+  debit: number;
+  userId: string;
+}) => {
   const balanceKey = `balance-{${userId}}`;
   if (memoryCache.has(balanceKey)) {
     const value = Number(memoryCache.get(balanceKey));
     memoryCache.set(balanceKey, value + credit - debit, DEFAULT_TTL);
   }
-  return await dbSave();
 };
 
 const getBalance = async (

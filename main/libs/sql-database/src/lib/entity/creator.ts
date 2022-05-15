@@ -3,13 +3,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 
 @Entity()
 export class Creator extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column('varchar')
   name: string;
 
@@ -18,4 +17,25 @@ export class Creator extends BaseEntity {
 
   @Column('varchar')
   avatarUrl: string;
+
+  // default columns
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column('datetime')
+  createdAt: Date;
+
+  @Column('datetime')
+  updatedAt: Date;
+
+  @BeforeInsert()
+  timeStampCreate() {
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
+  }
+
+  @BeforeUpdate()
+  timeStampUpdate() {
+    this.updatedAt = new Date();
+  }
 }

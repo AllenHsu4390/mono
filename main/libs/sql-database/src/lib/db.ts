@@ -14,6 +14,9 @@ import { saveLike } from './writes/like';
 import { Transaction, TransactionTypes } from './entity/transaction';
 import { getBalance } from './reads/balance';
 import { saveTransaction } from './writes/transaction';
+import { DailyTopUp } from './entity/dailyTopUp';
+import { getDailyTopUp } from './reads/dailyTopUp';
+import { saveDailyTopUp } from './writes/dailyTopUp';
 
 const datasource = new DataSource({
   type: 'mysql',
@@ -23,7 +26,8 @@ const datasource = new DataSource({
   password: 'H>c$6H2xyA`VrR{B',
   database: 'creator_network',
   synchronize: true,
-  entities: [Creator, User, Asset, Follow, Like, Transaction],
+  logging: true,
+  entities: [Creator, User, Asset, Follow, Like, Transaction, DailyTopUp],
 });
 
 let isInitialized = false;
@@ -51,10 +55,12 @@ export const db = {
     likesCount: getLikesCount,
     userId: getUserId,
     balance: getBalance,
+    dailyTopUP: getDailyTopUp,
   },
   save: {
     like: saveLike,
     transaction: saveTransaction,
+    dailyTopUp: saveDailyTopUp,
   },
   enums: {
     transactionTypes: TransactionTypes,

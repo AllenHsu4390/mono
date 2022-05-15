@@ -9,28 +9,14 @@ export const saveLike = async (like: Like): Promise<DropResponse> => {
   const db = environment.db;
   const cache = environment.cache;
 
-  const balance = await db.get.balance(like.userId);
-  const newBalance = balance - Cost.Like;
-  if (newBalance < 0) {
-    throw new Error('Balance Error: Not enough balance');
-  }
+  await db.save.like(like.userId, like.assetId, Cost.Like);
 
-  const newLike = await cache.save.likesCount(
-    like.assetId,
-    async () => await db.save.like(like.userId, like.assetId)
-  );
-
-  await cache.save.balance(
-    { credit: 0, debit: Cost.Like, userId: like.userId },
-    async () =>
-      await db.save.transaction(
-        db.enums.transactionTypes.LIKE,
-        like.userId,
-        newLike.id,
-        0,
-        Cost.Like
-      )
-  );
+  await cache.save.likesCount(like.assetId);
+  await cache.save.balance({
+    credit: 0,
+    debit: Cost.Like,
+    userId: like.userId,
+  });
 
   const isDropped = dropRate();
   return {

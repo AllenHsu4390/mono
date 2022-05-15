@@ -1,17 +1,46 @@
 import { connectToDatabase } from '../db';
 import { Like as LikeEntity } from '../entity/like';
+import { TransactionTypes } from '../entity/transaction';
 import { decode, encode } from '../hash';
+import { getBalance } from '../reads/balance';
+import { saveTransaction } from './transaction';
 
-export const saveLike = async (userId: string, assetId: string) => {
+export const saveLike = async (
+  userId: string,
+  assetId: string,
+  debit: number
+) => {
   const db = await connectToDatabase();
-  const savedLike = await db.transaction(async (manager) => {
+
+  return await db.transaction(async (manager) => {
     const dbLike = new LikeEntity();
     dbLike.userId = decode(userId);
     dbLike.assetId = decode(assetId);
-    return await manager.save(dbLike);
-  });
+    const dbLikeSaved = await manager.save(dbLike);
 
-  return {
-    id: encode(savedLike.id),
-  };
+    const balance = await getBalance(userId, manager);
+
+    if (balance < debit) {
+      throw new Error('Not enough balance');
+    }
+
+    const likeId = encode(dbLikeSaved.id);
+    const dbTransactionSaved = await saveTransaction(
+      TransactionTypes.LIKE,
+      userId,
+      likeId,
+      0,
+      debit,
+      manager
+    );
+
+    return {
+      like: {
+        id: likeId,
+      },
+      transaction: {
+        id: dbTransactionSaved.id,
+      },
+    };
+  });
 };

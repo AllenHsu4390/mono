@@ -108,7 +108,7 @@ export const makeShenheE = (num, ATK = 3300, hold = false) => {
             shenheQuota--;
         }
         const boost = hold ?
-            ((hit.stats.includes("normal") || hit.stats.includes("charged")) ? 0.15 : 0) :
+            ((hit.stats.includes("normal") || hit.stats.includes("charge")) ? 0.15 : 0) :
             ((hit.stats.includes("burst") || hit.stats.includes("skill")) ? 0.15 : 0);
         return {
             flatDmg: flatDmg + ((hit.stats.includes("cryo") && shenheQuota > -1) ? (0.73 * ATK) : 0),

@@ -1,11 +1,12 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import Navigation from '../../block/navigation';
-import { Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { UserResponse } from '@main/rest-models';
 import { BalanceProvider } from '../../hooks/balance';
 import { page, theme } from '../../providers/theme';
 import { DropProvider } from '../../hooks/drop';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 interface Props {
   user?: UserResponse;
@@ -13,6 +14,8 @@ interface Props {
 }
 
 const Page = ({ children, user }: Props) => {
+  const { data: session } = useSession();
+
   if (!user) {
     return (
       <ThemeProvider theme={theme}>

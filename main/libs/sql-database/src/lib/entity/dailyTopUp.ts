@@ -8,16 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Trophy extends BaseEntity {
-  @Column('int')
-  transactionId: number;
-
-  @Column('int')
-  assetId: number;
-
-  @Column('int')
-  userId: number;
-
+export class DailyTopUp extends BaseEntity {
   // default columns
   @PrimaryGeneratedColumn()
   id: number;
@@ -34,8 +25,10 @@ export class Trophy extends BaseEntity {
     this.updatedAt = new Date();
   }
 
+  /*
   @BeforeUpdate()
   timeStampUpdate() {
     this.updatedAt = new Date();
   }
+  */
 }
