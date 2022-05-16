@@ -5,22 +5,21 @@ import { getSession } from '@main/rest';
 import { SessionResponse } from '@main/rest-models';
 
 interface Props {
-  session: SessionResponse;
+  sess: SessionResponse;
 }
 
 export async function getServerSideProps() {
-  const session = await getSession();
-  const props: Props = {
-    session,
-  };
-
+  const sess = await getSession();
   return {
-    props,
+    props: {
+      sess,
+    },
   };
 }
 
-const Logout: NextPage<Props> = ({ session }) => {
-  return <LogoutPage logoutUrl={session.links.logout.url} />;
+const Logout: NextPage<Props> = (props) => {
+  const { sess } = props;
+  return <LogoutPage logoutUrl={sess.links.logout.url} />;
 };
 
 export default Logout;

@@ -4,13 +4,13 @@ import { getSession } from '@main/rest';
 import { SessionResponse } from '@main/rest-models';
 
 interface Props {
-  session: SessionResponse;
+  sess: SessionResponse;
 }
 
 export async function getServerSideProps() {
-  const session = await getSession();
-  const props: Props = {
-    session,
+  const sess = await getSession();
+  const props = {
+    sess,
   };
 
   return {
@@ -18,8 +18,8 @@ export async function getServerSideProps() {
   };
 }
 
-const Login: NextPage<Props> = ({ session }) => {
-  return <LoginPage loginUrl={session.links.login.url} />;
+const Login: NextPage<Props> = ({ sess }) => {
+  return <LoginPage loginUrl={sess.links.login.url} />;
 };
 
 export default Login;

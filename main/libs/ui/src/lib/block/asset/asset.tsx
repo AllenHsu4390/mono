@@ -1,4 +1,4 @@
-import { Alert, Typography } from '@mui/material';
+import { Alert, IconButton, Typography } from '@mui/material';
 import LikeButton from '../../element/like-button';
 import CreatorAvatar from '../../element/avatar';
 import { AssetCardFull } from './card-full';

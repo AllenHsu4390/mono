@@ -1,10 +1,12 @@
-export interface UserResponse {
+export interface User {
   id: string;
   avatarUrl: string;
   email: string;
   name: string;
   isLoggedIn: boolean;
-  dailyTopUpId: string;
+}
+
+export type UserResponse = User & {
   links: {
     newGallery: {
       rel: 'new-gallery';
@@ -14,13 +16,17 @@ export interface UserResponse {
       rel: 'edit-account';
       url: string;
     };
-    follows: {
-      rel: 'follows';
-      url: string;
-    }[];
     balance: {
       rel: 'balance';
       url: string;
     };
+    me: {
+      rel: 'me';
+      url: string;
+    };
+    dailyTopUp?: {
+      rel: 'daily-top-up';
+      url: string;
+    };
   };
-}
+};

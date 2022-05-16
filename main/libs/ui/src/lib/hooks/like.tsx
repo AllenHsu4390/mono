@@ -4,6 +4,7 @@ import {
   LikesCountResponse,
 } from '@main/rest-models';
 import { useMutation, useQuery } from 'react-query';
+import { useUser } from './useUser';
 
 export const useSendLike = ({
   asset,
@@ -12,6 +13,7 @@ export const useSendLike = ({
   asset: AssetResponse;
   onError?(error: any): void;
 }) => {
+  const { user } = useUser();
   const mutation = useMutation<DropResponse>(
     async () => {
       const likeUrl = asset.links.like.url;
@@ -32,6 +34,7 @@ export const useSendLike = ({
 
   return {
     sendLike: mutation.mutateAsync,
+    isAvailable: !!user,
   };
 };
 

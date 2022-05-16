@@ -239,12 +239,5 @@ VALUES (
 INSERT INTO follow (userId, creatorId, createdAt, updatedAt)
 VALUES (@my_user, @creator_id, NOW(), NOW());
 
-
-/* Add initial mint to users */
-INSERT INTO transaction (userId, type, credit, debit, createdAt, updatedAt)
-VALUES (@my_user, 'mint', 1000, 0, NOW(), NOW());
-INSERT INTO transaction (userId, type, credit, debit, createdAt, updatedAt)
-VALUES (@creator_user, 'mint', 1000, 0, NOW(), NOW());
-
 ROLLBACK;
 COMMIT;

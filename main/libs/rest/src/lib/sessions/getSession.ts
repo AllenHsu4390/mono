@@ -1,6 +1,6 @@
 import { SessionResponse } from '@main/rest-models';
 
-export const getSession = async (): Promise<SessionResponse> => {
+export const getSession = (): SessionResponse => {
   return {
     isUsualClient: true,
     links: {

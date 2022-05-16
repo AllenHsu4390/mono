@@ -1,37 +1,35 @@
 import { connectToDatabase } from '../db';
-import { DailyTopUp } from '../entity/dailyTopUp';
 import { TransactionTypes } from '../entity/transaction';
+import { User } from '../entity/user';
 import { decode, encode } from '../hash';
 import { saveTransaction } from './transaction';
 
-const isTopUpTime = (updatedAt: Date) => {
-  const currentTime = new Date().getTime();
-  const nextTopUpTime = updatedAt.getTime() + 1 * 24 * 60 * 60 * 1000; // day hour min sec msec
+export const isTopUpTime = (updatedAt: Date) => {
+  const resetTime = new Date();
+  resetTime.setHours(24, 0, 0, 0); // midnight today
 
-  return currentTime > nextTopUpTime;
+  return resetTime.getTime() > updatedAt.getTime();
 };
 
-export const saveDailyTopUp = async (
-  id: string,
-  userId: string,
-  topUpCredit: number
-) => {
+export const saveDailyTopUp = async (userId: string, topUpCredit: number) => {
   const db = await connectToDatabase();
   await db.transaction(async (manager) => {
-    const found = await manager.getRepository(DailyTopUp).findOneOrFail({
+    const { dailyTopUp } = await manager.getRepository(User).findOneOrFail({
+      select: ['dailyTopUp'],
       where: {
-        id: decode(id),
+        id: decode(userId),
       },
+      relations: ['dailyTopUp'],
     });
 
-    if (!isTopUpTime(found.updatedAt)) {
+    if (!isTopUpTime(dailyTopUp.updatedAt)) {
       throw new Error('Already claimed daily top up');
     }
 
-    found.updatedAt = new Date();
-    const savedDailyTopUp = await manager.save(found);
+    dailyTopUp.updatedAt = new Date();
+    const savedDailyTopUp = await manager.save(dailyTopUp, {});
 
-    await saveTransaction(
+    const savedTransaction = await saveTransaction(
       TransactionTypes.MINT,
       userId,
       encode(savedDailyTopUp.id),
@@ -39,5 +37,12 @@ export const saveDailyTopUp = async (
       0,
       manager
     );
+
+    return {
+      transaction: savedTransaction,
+      dailyTopUp: {
+        id: encode(savedDailyTopUp.id),
+      },
+    };
   });
 };

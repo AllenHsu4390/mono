@@ -13,7 +13,6 @@ import { Wordmark } from '../../element/company/wordmark';
 
 interface State {
   email: string;
-  password: string;
   isLoading: boolean;
   errorMsg: string;
   isReady: boolean;
@@ -22,21 +21,23 @@ interface State {
 type Action = {
   type: 'input-changed' | 'loading' | 'error';
   email?: string;
-  password?: string;
   isLoading?: boolean;
   errorMsg?: string;
 };
 
+const emailIsValid = (email: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
 const verifiedInput = (state: State, action: Action): State => {
-  const email = action.email || state.email;
-  const password = action.password || state.password;
+  const email =
+    typeof action.email === 'undefined' ? state.email : action.email;
   return {
     ...state,
     email,
-    password,
     isLoading: false,
     errorMsg: '',
-    isReady: email.length >= 3 && password.length >= 8,
+    isReady: emailIsValid(email),
   };
 };
 
@@ -68,7 +69,6 @@ const LoginForm = ({ loginUrl }: Props) => {
   const theme = useTheme();
   const [state, dispatch] = useReducer(reducer, {
     email: '',
-    password: '',
     errorMsg: '',
     isLoading: false,
     isReady: false,
@@ -82,7 +82,6 @@ const LoginForm = ({ loginUrl }: Props) => {
         method: 'POST',
         body: JSON.stringify({
           email: state.email,
-          password: state.password,
           isLoggedIn: true,
         }),
       });
@@ -90,7 +89,7 @@ const LoginForm = ({ loginUrl }: Props) => {
         window.location.href = '/';
       }
       if (response.status > 400) {
-        throw new Error('Wrong email or password');
+        throw new Error('Wrong email');
       }
     } catch (e) {
       dispatch({
@@ -129,17 +128,14 @@ const LoginForm = ({ loginUrl }: Props) => {
         <TextField
           label="Email"
           variant="outlined"
+          type="email"
           onChange={(e) =>
-            dispatch({ type: 'input-changed', email: e.currentTarget.value })
+            dispatch({
+              type: 'input-changed',
+              email: e.target.value,
+            })
           }
-        />
-        <TextField
-          type="password"
-          label="Password"
-          variant="outlined"
-          onChange={(e) =>
-            dispatch({ type: 'input-changed', password: e.currentTarget.value })
-          }
+          onKeyUp={(e) => e.key === 'Enter' && login()}
         />
       </Stack>
       <Stack
@@ -161,18 +157,11 @@ const LoginForm = ({ loginUrl }: Props) => {
           {state.isLoading ? (
             <CircularProgress size={'1rem'} />
           ) : (
-            <Typography>Login</Typography>
+            <Typography>Continue</Typography>
           )}
         </Button>
-        <Button
-          disabled={state.isLoading}
-          variant="contained"
-          color="secondary"
-        >
-          <Typography>Sign up</Typography>
-        </Button>
       </Stack>
-      {state.errorMsg && (
+      {state.errorMsg ? (
         <Alert
           severity="error"
           sx={{
@@ -181,7 +170,17 @@ const LoginForm = ({ loginUrl }: Props) => {
         >
           {state.errorMsg}
         </Alert>
-      )}
+      ) : !state.isLoading && state.isReady ? (
+        <Alert
+          severity="info"
+          sx={{
+            mt: '3rem',
+          }}
+        >
+          We use passwordless login. With just an email address you are ready to
+          go.
+        </Alert>
+      ) : null}
     </Container>
   );
 };

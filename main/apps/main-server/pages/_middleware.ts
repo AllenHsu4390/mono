@@ -36,7 +36,8 @@ export const isPublicPath = (pathname: string) => {
     '/404',
     '/users/login',
     '/galleries/:creatorId',
-    '/galleries/:creatorId/:assetId',
+    '/assets/:assetId',
+    '/',
     '/favicon.ico',
   ].find((path) => pieceMatch(pieces, path.split('/')));
 };

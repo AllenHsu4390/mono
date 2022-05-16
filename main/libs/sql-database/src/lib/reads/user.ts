@@ -1,6 +1,7 @@
 import { connectToDatabase } from '../db';
 import { User } from '../entity/user';
 import { decode, encode } from '../hash';
+import { isTopUpTime } from '../writes/dailyTopUp';
 
 export const getUser = async (id: string) => {
   const db = await connectToDatabase();
@@ -11,13 +12,15 @@ export const getUser = async (id: string) => {
     },
     relations: ['creator', 'dailyTopUp'],
   });
+  const dailyTopUp = user.dailyTopUp;
+
   return {
     id: encode(user.id),
     avatarUrl: user.creator.avatarUrl,
     email: user.email,
     isLoggedIn: true,
     name: user.creator.name,
-    dailyTopUpId: encode(user.dailyTopUp.id),
+    hasDailyTopUp: isTopUpTime(dailyTopUp.updatedAt),
   };
 };
 
