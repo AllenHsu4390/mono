@@ -31,7 +31,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isOpen: false,
-        isLocked: true,
+        isLocked: false,
       };
     default:
       return state;

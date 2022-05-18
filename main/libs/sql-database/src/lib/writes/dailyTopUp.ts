@@ -6,8 +6,7 @@ import { saveTransaction } from './transaction';
 
 export const isTopUpTime = (updatedAt: Date) => {
   const resetTime = new Date();
-  resetTime.setHours(24, 0, 0, 0); // midnight today
-
+  resetTime.setHours(0, 0, 0, 0); // 0:00 today
   return resetTime.getTime() > updatedAt.getTime();
 };
 

@@ -1,4 +1,3 @@
-import { UserResponse } from '@main/rest-models';
 import { Typography, Button, Badge } from '@mui/material';
 import AlertDialog from '../../block/alert';
 import { useBalance } from '../../hooks/useBalance';
