@@ -6,7 +6,7 @@ type OK = {
   ok: true;
 };
 
-const setSession = (res: NextApiResponse) => {
+export const setSession = (res: NextApiResponse) => {
   const cookieValue = `idKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;`;
 
   res.setHeader('Set-Cookie', cookieValue);

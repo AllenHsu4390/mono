@@ -11,6 +11,12 @@ import { xingqiuC2 } from './debuffs.js';
 
 export const char = xingqiu;
 
+// level 90 override
+char.baseAtk = 202;
+char.atkPct = .24;
+char.lvl = 90;
+char.lvlMax = 90;
+
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
     return Array(Math.floor(Math.min(15, duration) * 4)).fill(1.03).map((motionValue, index) => {
         return {

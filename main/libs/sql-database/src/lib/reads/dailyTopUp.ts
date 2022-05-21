@@ -1,6 +1,6 @@
 import { connectToDatabase } from '../db';
 import { DailyTopUp } from '../entity/dailyTopUp';
-import { decode, encode } from '../hash';
+import { decode, encode } from '@main/hash';
 
 export const getDailyTopUp = async (id: string) => {
   const db = await connectToDatabase();

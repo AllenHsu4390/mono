@@ -12,6 +12,12 @@ import { getCurrentTeam } from './team.js';
 
 export const char = yae;
 
+// level 90 override
+char.baseAtk = 340;
+char.critRate = 0.05 + 0.192;
+char.lvl = 90;
+char.lvlMax = 90;
+
 const enemy = {
     lvl: 90,
     res: 0.10,
@@ -60,7 +66,7 @@ export const tenkoHits = (traits = [], debuffs = [], amps = [], transforms = [],
 
 export const sesshouAction = ({ weapon, artifacts, buffs, debuffs, amps = [], transforms, hitStats, duration }) => {
     return {
-        char: stats(yae, weapon, artifacts),
+        char: stats(char, weapon, artifacts),
         hits: sesshouHits(buffs, debuffs, amps, transforms, hitStats, duration),
         duration: 3
     };
@@ -68,7 +74,7 @@ export const sesshouAction = ({ weapon, artifacts, buffs, debuffs, amps = [], tr
 
 export const tenkoAction = ({ weapon, artifacts, buffs, debuffs, amps = [], transforms, hitStats, duration }) => {
     return {
-        char: stats(yae, weapon, artifacts),
+        char: stats(char, weapon, artifacts),
         hits: tenkoHits(buffs, debuffs, amps, transforms, hitStats, duration),
         duration: 3,
     };
@@ -76,7 +82,7 @@ export const tenkoAction = ({ weapon, artifacts, buffs, debuffs, amps = [], tran
 
 export const comboAction = ({ weapon, artifacts, buffs, debuffs, amps = [], transforms, hitStats, duration }) => {
     return {
-        char: stats(yae, weapon, artifacts),
+        char: stats(char, weapon, artifacts),
         hits: [
             ...sesshouHits(buffs, debuffs, amps, transforms, hitStats, duration),
             ...tenkoHits(buffs, debuffs, amps, transforms, hitStats),
@@ -146,56 +152,56 @@ export const print = () => {
     setCurrentEnemy(enemy);
     
     console.log("Total combo (electrocharged)");
-    //console.log(`Solar pearl: ${damageDps(stats(yae, solarpearl, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
-    console.log(`Widsith Atk: ${damageDps(stats(yae, widsith_atk, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
-    console.log(`Widsith Mast: ${damageDps(stats(yae, widsith_mast, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
-    console.log(`Widsith Dmg: ${damageDps(stats(yae, widsith_dmg, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
-    console.log(`Mappa Mare: ${damageDps(stats(yae, mappa, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
-    console.log(`Oathsworn Eye: ${damageDps(stats(yae, oathsworn, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
+    //console.log(`Solar pearl: ${damageDps(stats(char, solarpearl, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
+    console.log(`Widsith Atk: ${damageDps(stats(char, widsith_atk, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
+    console.log(`Widsith Mast: ${damageDps(stats(char, widsith_mast, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
+    console.log(`Widsith Dmg: ${damageDps(stats(char, widsith_dmg, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
+    console.log(`Mappa Mare: ${damageDps(stats(char, mappa, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
+    console.log(`Oathsworn Eye: ${damageDps(stats(char, oathsworn, artifacts), [...sesshouHits(buffs, debuffs, undefined, [icdElectroCharged]), ...tenkoHits(buffs, debuffs, undefined, [icdElectroCharged])], 16)}`);
 
 
     console.log("");
     console.log("3 totem skill (electrocharged), 15 hits");
-    //console.log(`Solar pearl: ${damageDps(stats(yae, solarpearl, artifacts), sesshouHits(buffs, undefined, undefined, transforms), 14)}`);
-    console.log(`Widsith Atk: ${damageDps(stats(yae, widsith_atk, artifacts), sesshouHits(buffs, debuffs, undefined, transforms), 14)}`);
-    console.log(`Widsith Mast: ${damageDps(stats(yae, widsith_mast, artifacts), sesshouHits(buffs, debuffs, undefined, transforms), 14)}`);
-    console.log(`Widsith Dmg: ${damageDps(stats(yae, widsith_dmg, artifacts), sesshouHits(buffs, debuffs, undefined, transforms), 14)}`);
-    console.log(`Mappa Mare: ${damageDps(stats(yae, mappa, artifacts), sesshouHits(buffs, debuffs, undefined, transforms), 14)}`);
-    console.log(`Oathsworn Eye: ${damageDps(stats(yae, oathsworn, artifacts), sesshouHits(buffs, debuffs, undefined, transforms), 14)}`);
+    //console.log(`Solar pearl: ${damageDps(stats(char, solarpearl, artifacts), sesshouHits(buffs, undefined, undefined, transforms), 14)}`);
+    console.log(`Widsith Atk: ${damageDps(stats(char, widsith_atk, artifacts), sesshouHits(buffs, debuffs, undefined, transforms), 14)}`);
+    console.log(`Widsith Mast: ${damageDps(stats(char, widsith_mast, artifacts), sesshouHits(buffs, debuffs, undefined, transforms), 14)}`);
+    console.log(`Widsith Dmg: ${damageDps(stats(char, widsith_dmg, artifacts), sesshouHits(buffs, debuffs, undefined, transforms), 14)}`);
+    console.log(`Mappa Mare: ${damageDps(stats(char, mappa, artifacts), sesshouHits(buffs, debuffs, undefined, transforms), 14)}`);
+    console.log(`Oathsworn Eye: ${damageDps(stats(char, oathsworn, artifacts), sesshouHits(buffs, debuffs, undefined, transforms), 14)}`);
 
     console.log("");
     console.log("3 totem skill (no reactions), 15 hits");
-    //console.log(`Solar pearl: ${damageDps(stats(yae, solarpearl, artifacts), sesshouHits(buffs, undefined, undefined), 14)}`);
-    console.log(`Widsith Atk: ${damageDps(stats(yae, widsith_atk, artifacts), sesshouHits(buffs, debuffs, undefined), 14)}`);
-    console.log(`Widsith Mast: ${damageDps(stats(yae, widsith_mast, artifacts), sesshouHits(buffs, debuffs, undefined), 14)}`);
-    console.log(`Widsith Dmg: ${damageDps(stats(yae, widsith_dmg, artifacts), sesshouHits(buffs, debuffs, undefined), 14)}`);
-    console.log(`Mappa Mare: ${damageDps(stats(yae, mappa, artifacts), sesshouHits(buffs, debuffs, undefined), 14)}`);
-    console.log(`Oathsworn Eye: ${damageDps(stats(yae, oathsworn, artifacts), sesshouHits(buffs, debuffs, undefined), 14)}`);
+    //console.log(`Solar pearl: ${damageDps(stats(char, solarpearl, artifacts), sesshouHits(buffs, undefined, undefined), 14)}`);
+    console.log(`Widsith Atk: ${damageDps(stats(char, widsith_atk, artifacts), sesshouHits(buffs, debuffs, undefined), 14)}`);
+    console.log(`Widsith Mast: ${damageDps(stats(char, widsith_mast, artifacts), sesshouHits(buffs, debuffs, undefined), 14)}`);
+    console.log(`Widsith Dmg: ${damageDps(stats(char, widsith_dmg, artifacts), sesshouHits(buffs, debuffs, undefined), 14)}`);
+    console.log(`Mappa Mare: ${damageDps(stats(char, mappa, artifacts), sesshouHits(buffs, debuffs, undefined), 14)}`);
+    console.log(`Oathsworn Eye: ${damageDps(stats(char, oathsworn, artifacts), sesshouHits(buffs, debuffs, undefined), 14)}`);
 
     console.log("");
     console.log("3 totem skill (electrocharged), 1 hit CRIT");
-    //console.log(`Solar pearl: ${damageDps(stats(yae, solarpearl, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, undefined, undefined, transforms).slice(0, 1))}`);
-    console.log(`Widsith Atk: ${damageDps(stats(yae, widsith_atk, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs, undefined, transforms).slice(0, 1))}`);
-    console.log(`Widsith Mast: ${damageDps(stats(yae, widsith_mast, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs, undefined, transforms).slice(0, 1))}`);
-    console.log(`Widsith Dmg: ${damageDps(stats(yae, widsith_dmg, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs, undefined, transforms).slice(0, 1))}`);
-    console.log(`Mappa Mare: ${damageDps(stats(yae, mappa, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs, undefined, transforms).slice(0, 1))}`);
-    console.log(`Oathsworn Eye: ${damageDps(stats(yae, oathsworn, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs, undefined, transforms).slice(0, 1))}`);
+    //console.log(`Solar pearl: ${damageDps(stats(char, solarpearl, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, undefined, undefined, transforms).slice(0, 1))}`);
+    console.log(`Widsith Atk: ${damageDps(stats(char, widsith_atk, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs, undefined, transforms).slice(0, 1))}`);
+    console.log(`Widsith Mast: ${damageDps(stats(char, widsith_mast, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs, undefined, transforms).slice(0, 1))}`);
+    console.log(`Widsith Dmg: ${damageDps(stats(char, widsith_dmg, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs, undefined, transforms).slice(0, 1))}`);
+    console.log(`Mappa Mare: ${damageDps(stats(char, mappa, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs, undefined, transforms).slice(0, 1))}`);
+    console.log(`Oathsworn Eye: ${damageDps(stats(char, oathsworn, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs, undefined, transforms).slice(0, 1))}`);
     
     console.log("");
     console.log("3 totem skill (no reactions), 1 hit CRIT");
-    //console.log(`Solar pearl: ${damageDps(stats(yae, solarpearl, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, undefined, undefined, transforms).slice(0, 1))}`);
-    console.log(`Widsith Atk: ${damageDps(stats(yae, widsith_atk, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
-    console.log(`Widsith Mast: ${damageDps(stats(yae, widsith_mast, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
-    console.log(`Widsith Dmg: ${damageDps(stats(yae, widsith_dmg, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
-    console.log(`Mappa Mare: ${damageDps(stats(yae, mappa, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
-    console.log(`Oathsworn Eye: ${damageDps(stats(yae, oathsworn, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
+    //console.log(`Solar pearl: ${damageDps(stats(char, solarpearl, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, undefined, undefined, transforms).slice(0, 1))}`);
+    console.log(`Widsith Atk: ${damageDps(stats(char, widsith_atk, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
+    console.log(`Widsith Mast: ${damageDps(stats(char, widsith_mast, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
+    console.log(`Widsith Dmg: ${damageDps(stats(char, widsith_dmg, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
+    console.log(`Mappa Mare: ${damageDps(stats(char, mappa, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
+    console.log(`Oathsworn Eye: ${damageDps(stats(char, oathsworn, artifacts.concat({ critRate: 1 })), sesshouHits(buffs, debuffs).slice(0, 1))}`);
 
     console.log("");
     console.log("3 totem burst (electrocharged) buffed CRIT");
-    //console.log(`Solar pearl: ${damageDps(stats(yae, solarpearl, artifacts.concat({ critRate: 1 })), tenkoHits(buffs, undefined, undefined, transforms))}`);
-    console.log(`Widsith Atk: ${damageDps(stats(yae, widsith_atk, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
-    console.log(`Widsith Mast: ${damageDps(stats(yae, widsith_mast, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
-    console.log(`Widsith Dmg: ${damageDps(stats(yae, widsith_dmg, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
-    console.log(`Mappa Mare: ${damageDps(stats(yae, mappa, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
-    console.log(`Oathsworn Eye: ${damageDps(stats(yae, oathsworn, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
+    //console.log(`Solar pearl: ${damageDps(stats(char, solarpearl, artifacts.concat({ critRate: 1 })), tenkoHits(buffs, undefined, undefined, transforms))}`);
+    console.log(`Widsith Atk: ${damageDps(stats(char, widsith_atk, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
+    console.log(`Widsith Mast: ${damageDps(stats(char, widsith_mast, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
+    console.log(`Widsith Dmg: ${damageDps(stats(char, widsith_dmg, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
+    console.log(`Mappa Mare: ${damageDps(stats(char, mappa, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
+    console.log(`Oathsworn Eye: ${damageDps(stats(char, oathsworn, artifacts.concat({ critRate: 1 })), tenkoHits([bennBurst, noblesse, baalE, sucroseC6], [vvShred], undefined, [icdElectroCharged]))}`);
 };

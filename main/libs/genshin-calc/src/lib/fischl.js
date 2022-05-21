@@ -20,6 +20,12 @@ const enemy = {
     defDebuff: 0
 };
 
+// level 90 override
+char.baseAtk = 244;
+char.atkPct = 0.24;
+char.lvl = 90;
+char.lvlMax = 90;
+
 export const icdElectroCharged = (attr, hit) => {
     if (hit.index % 3 === 0) {
         return electroCharged(attr, hit);

@@ -1,7 +1,7 @@
 import { connectToDatabase } from '../db';
 import { TransactionTypes } from '../entity/transaction';
 import { User } from '../entity/user';
-import { decode, encode } from '../hash';
+import { decode, encode } from '@main/hash';
 import { saveTransaction } from './transaction';
 
 export const isTopUpTime = (updatedAt: Date) => {

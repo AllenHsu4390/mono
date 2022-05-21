@@ -121,13 +121,13 @@ export const yoimiya_xingqiu_yae_bennett = () => {
 };
 
 export const yoimiya_xingqiu_yae_yunjin = () => {
-    const teamWide = [pyroRes, yoimiyaSaxi];
+    const teamWide = [yoimiyaSaxi];
     const debuffs = [xingqiuC2];
 
     const firedanceAction = yoimiya.fireDanceAction({
         weapon: rustR5,
         artifacts: yoimiyaArtifacts,
-        buffs: [pyroRes, yunjinBurst],
+        buffs: [yunjinBurst],
         debuffs,
         amps: [yoimiya.icdPyroVape],
         transforms: [yoimiya.icdOverloaded],
@@ -216,7 +216,7 @@ export const yoimiya_xingqiu_bennett_zhongli = () => {
 };
 
 export const yoimiya_xingqiu_yunjin_bennett = () => {
-    const teamWide = [tom, pyroRes, yoimiyaSaxi];
+    const teamWide = [pyroRes, yoimiyaSaxi];
     const onField = [xingqiuC2, bennBurst, yunjinBurst, ...teamWide];
 
     const firedanceAction = yoimiya.fireDanceAction({
@@ -239,7 +239,7 @@ export const yoimiya_xingqiu_yunjin_bennett = () => {
 };
 
 export const yoimiya_yae_yunjin_bennett = () => {
-    const teamWide = [tom, pyroRes, yoimiyaSaxi];
+    const teamWide = [pyroRes, yoimiyaSaxi];
     const onField = [bennBurst, yunjinBurst, ...teamWide];
 
     const firedanceAction = yoimiya.fireDanceAction({

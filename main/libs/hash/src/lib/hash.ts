@@ -11,5 +11,11 @@ export const encode = (id: number) => {
 };
 
 export const decode = (id: string) => {
-  return hasher.decode(id)[0] as number;
+  const decodedId = hasher.decode(id)[0] as number;
+
+  if (!decodedId) {
+    throw new Error('Invalid id. Decode failed');
+  }
+
+  return decodedId;
 };

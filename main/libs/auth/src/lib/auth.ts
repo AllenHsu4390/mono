@@ -1,14 +1,4 @@
-const secret = process.env.AUTH_SECRET;
-
-const decrypt = (encryptedKey: string) => {
-  // add real encryption
-  return encryptedKey.split('|')[0];
-};
-
-const encrypt = (userId: string) => {
-  // add real encryption
-  return `${userId}|${secret}`;
-};
+import { decrypt, encrypt } from '@main/crypt';
 
 interface Identity {
   userId(encryptedKey: string): string;
@@ -18,8 +8,6 @@ interface Identity {
 interface Auth {
   identity: Identity;
 }
-
-console.log(secret);
 
 export function auth(): Auth {
   return {

@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { GalleryPage } from '@main/ui';
-import { getCreator, getUser } from '@main/rest';
+import { getCreatorOrNull, getUserOrNull } from '@main/rest';
 import { auth } from '@main/auth';
 import { CreatorResponse, UserResponse } from '@main/rest-models';
 
@@ -12,19 +12,22 @@ interface Props {
 export async function getServerSideProps({ params, req }) {
   const { idKey } = req.cookies;
   const { creatorId } = params;
-  if (typeof creatorId !== 'string') {
-    throw {
-      message: 'Something went wrong',
-    };
-  }
-  const user = idKey ? await getUser(auth().identity.userId(idKey)) : null;
-  const creator = await getCreator(creatorId);
+  const user = await getUserOrNull(auth().identity.userId(idKey));
+  const creator = await getCreatorOrNull(creatorId);
   const props: Props = {
     user,
     creator,
   };
 
   return {
+    ...(!creator
+      ? {
+          redirect: {
+            permanent: false,
+            destination: '/404',
+          },
+        }
+      : {}),
     props,
   };
 }

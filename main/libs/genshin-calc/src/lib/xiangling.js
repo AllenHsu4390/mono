@@ -18,6 +18,15 @@ const enemy = {
     stats: ["hasPyro", "hasHydro"]
 };
 
+const char = xiangling;
+
+// level 90 override
+char.baseAtk = 225;
+char.elemMast = 96;
+char.lvl = 90;
+char.lvlMax = 90;
+
+
 export const pyronadoSpinHits = (traits = [], debuffs = [], amps = [], transforms = [], hitStats = [], duration = 11) => {
     const pyronado = Array(duration).fill(2.13);
     return pyronado.map((motionValue) => {
@@ -73,8 +82,6 @@ export const pyronadoSpinAction = ({ weapon, artifacts, buffs = [], debuffs, amp
         cooldown: 20,
     };
 };
-
-export const char = xiangling;
 
 const cr_circ = circlet_12;
 const cd_circ = circlet_2;

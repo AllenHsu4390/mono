@@ -82,13 +82,15 @@ const LoginForm = ({ loginUrl }: Props) => {
         method: 'POST',
         body: JSON.stringify({
           email: state.email,
-          isLoggedIn: true,
         }),
       });
-      if (response.ok) {
-        window.location.href = '/';
+
+      const loginResponse = await response.json();
+
+      if (loginResponse.magic) {
+        console.log(loginResponse.magic);
       }
-      if (response.status > 400) {
+      if (loginResponse.status > 400) {
         throw new Error('Wrong email');
       }
     } catch (e) {

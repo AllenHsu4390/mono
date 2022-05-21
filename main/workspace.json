@@ -3,8 +3,10 @@
   "projects": {
     "auth": "libs/auth",
     "cache": "libs/cache",
+    "crypt": "libs/crypt",
     "environment": "libs/environment",
     "genshin-calc": "libs/genshin-calc",
+    "hash": "libs/hash",
     "main-server": "apps/main-server",
     "main-server-e2e": "apps/main-server-e2e",
     "rest": "libs/rest",

@@ -1,6 +1,14 @@
 import { environment } from '@main/environment';
 import { AssetResponse } from '@main/rest-models';
 
+export const getAssetOrNull = async (id: string): Promise<AssetResponse> => {
+  try {
+    return await getAsset(id);
+  } catch (e) {
+    return null;
+  }
+};
+
 export const getAsset = async (id: string): Promise<AssetResponse> => {
   const db = environment.db;
   const asset = await db.get.asset(id);

@@ -1,5 +1,5 @@
 import { auth } from '@main/auth';
-import { getTrend, getUser } from '@main/rest';
+import { getTrend, getUserOrNull } from '@main/rest';
 import { TrendResponse, UserResponse } from '@main/rest-models';
 import { FeedPage } from '@main/ui';
 import { NextPage } from 'next';
@@ -11,7 +11,7 @@ interface Props {
 
 export async function getServerSideProps({ req }) {
   const { idKey } = req.cookies;
-  const user = idKey ? await getUser(auth().identity.userId(idKey)) : null;
+  const user = await getUserOrNull(auth().identity.userId(idKey));
   const trend = await getTrend();
   const props: Props = {
     user,

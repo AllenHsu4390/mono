@@ -6,7 +6,6 @@ import { UserResponse } from '@main/rest-models';
 import { BalanceProvider } from '../../hooks/useBalance';
 import { page, theme } from '../../providers/theme';
 import { DropProvider } from '../../hooks/drop';
-import { useSession, signIn, signOut } from 'next-auth/react';
 import { UserProvider } from '../../hooks/useUser';
 
 interface Props {
@@ -70,8 +69,6 @@ const LoggedOutPage = ({ children }: LoggedOutPageProps) => {
 };
 
 const Page = ({ children, user }: Props) => {
-  const { data: session } = useSession();
-
   if (!user) {
     return <LoggedOutPage>{children}</LoggedOutPage>;
   }

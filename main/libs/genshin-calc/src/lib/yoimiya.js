@@ -2,7 +2,7 @@ import { crit, pyroVape, pyroMelt } from './amplifiers.js';
 import { amosR2, rustR1, rustR5, skywardHarpR1, thunderingPulseR1 } from './bows.js';
 import { damage, damageDps } from './damage.js';
 import { lapidus, vvShred } from './debuffs.js';
-import { flower_4, feather_4, sand_4, goblet_4, circlet_4, circlet_5, circlet_6, flower_13, circlet_13, flower_7, feather_7, circlet_2, feather_16, sand_8, sand_27, goblet_26, sand_35 } from './my_artifacts.js';
+import { flower_4, feather_4, sand_4, goblet_4, circlet_4, circlet_5, circlet_6, flower_13, circlet_13, flower_7, feather_7, circlet_2, feather_16, sand_8, sand_27, goblet_26, sand_35, circlet_44 } from './my_artifacts.js';
 import { overloaded } from './reactions.js';
 import { stats } from './stats.js';
 import { bennBurst, dionaC6, geoRes, homNature, noblesse, pyroRes, sucroseC6, sucroseSwirl, tom, xianglingC6, yunjinBurst } from './traits.js';
@@ -84,10 +84,10 @@ export const fireDanceAction = ({ weapon, artifacts, buffs, debuffs, amps = [], 
     };
 };
 
-const cd_circ = circlet_6;
+const cd_circ = circlet_44;
 const atk_circ = circlet_5;
 const cr_circ = circlet_4;
-const artifacts = [flower_4, feather_4, sand_35, goblet_26, circlet_4];
+const artifacts = [flower_4, feather_4, sand_35, goblet_26, cd_circ];
 const monoPyroTeam = [bennBurst, noblesse, pyroRes, xianglingC6]
 const pyroTeam = [bennBurst, noblesse, pyroRes];
 const geoTeam = [tom, geoRes, yunjinBurst];

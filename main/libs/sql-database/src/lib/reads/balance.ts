@@ -1,7 +1,7 @@
 import { EntityManager } from 'typeorm';
 import { connectToDatabase } from '../db';
 import { Transaction } from '../entity/transaction';
-import { decode } from '../hash';
+import { decode } from '@main/hash';
 
 export const getBalance = async (
   id: string,

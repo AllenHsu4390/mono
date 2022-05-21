@@ -92,14 +92,17 @@ export const gorouBanner = ({ elemDmg, def, baseDef, critDmg }, { stats, team })
     };
 };
 
-export const yunjinBurst = ({ flatDmg, elemDmg }, hit) => {
-    // c2
-    const DEF = 2200; // hard code until figure
-    return {
-        flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.661 * DEF) : 0),
-        elemDmg: elemDmg + (hit.stats.includes("normal") ? 0.15 : 0),
+export const makeYunjinBurst = (num = 30, DEF = 2200) => {
+    return ({ flatDmg, elemDmg }, hit) => {
+        // c2
+        return {
+            flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.661 * DEF) : 0),
+            elemDmg: elemDmg + (hit.stats.includes("normal") ? 0.15 : 0),
+        };
     };
-};
+} 
+
+export const yunjinBurst = makeYunjinBurst();
 
 export const makeShenheE = (num, ATK = 3300, hold = false) => {
     let shenheQuota = num;

@@ -1,6 +1,6 @@
 import { connectToDatabase } from '../db';
 import { Asset } from '../entity/asset';
-import { decode, encode } from '../hash';
+import { decode, encode } from '@main/hash';
 import { createCursor, createSkip } from '../pagination';
 
 const PAGE_SIZE = 4;

@@ -6,15 +6,20 @@ import { circlet_4, feather_4, flower_4, goblet_26, sand_27 } from "./my_artifac
 import { yoimiya, yunjin } from "./my_characters.js";
 import { stats } from "./stats.js";
 import { getCurrentTeam } from "./team.js";
-import { yunjinBurst } from "./traits.js";
+import { makeYunjinBurst, yunjinBurst } from "./traits.js";
 
 export const char = yunjin;
+
+let DEF = undefined;
+
+// level 90 override
+DEF = 2600;
 
 const bannerHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
     return Array(duration).fill(0.50).map((motionValue, index) => {
         return {
             stats: ["normal", ...stats],
-            traits: [...traits, yunjinBurst],
+            traits: [...traits, makeYunjinBurst(undefined, DEF)],
             amplifiers: [crit, ...amps],
             motionValue,
             index,

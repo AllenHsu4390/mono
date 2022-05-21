@@ -1,6 +1,6 @@
+import { decode, encode } from '@main/hash';
 import { connectToDatabase } from '../db';
 import { Asset } from '../entity/asset';
-import { decode, encode } from '../hash';
 
 export const getAsset = async (id: string) => {
   const db = await connectToDatabase();

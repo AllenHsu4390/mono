@@ -1,6 +1,6 @@
 import { connectToDatabase } from '../db';
 import { Creator } from '../entity/creator';
-import { decode, encode } from '../hash';
+import { decode, encode } from '@main/hash';
 
 export const getCreator = async (id: string) => {
   const db = await connectToDatabase();
