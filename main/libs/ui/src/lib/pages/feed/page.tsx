@@ -1,5 +1,5 @@
 import { TrendResponse, UserResponse } from '@main/rest-models';
-import { TopGallery } from '../../block/gallery';
+import { TopGallery } from '../../block/gallery/top-gallery';
 import Page from '../_base/page';
 
 interface Props {

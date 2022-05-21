@@ -1,14 +1,13 @@
-import { CreatorResponse } from '@main/rest-models';
-import { useAssets } from '../../hooks/assets';
+import { TrendResponse } from '@main/rest-models';
+import { useTopAssets } from '../../hooks/assets';
 import { AssetsGrid } from './grid';
 
 interface Props {
-  creator: CreatorResponse;
+  trend: TrendResponse;
 }
-
-export const Gallery = ({ creator }: Props) => {
+export const TopGallery = ({ trend }: Props) => {
   const { assets, isLoading, isError, hasNextPage, fetchNextPage } =
-    useAssets(creator);
+    useTopAssets(trend);
 
   const assetPages = assets?.pages || [];
   const shouldShowSkeleton =
