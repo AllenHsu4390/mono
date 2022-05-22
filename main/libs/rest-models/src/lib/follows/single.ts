@@ -1,4 +1,4 @@
-import { Creator } from '../creators/single';
+import { Creator } from '../creators/creator';
 
 export interface Follow {
   id: string;

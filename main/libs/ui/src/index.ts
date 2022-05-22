@@ -14,4 +14,5 @@ export {
   FeedPage,
   ErrorPage,
 };
+export { AppProvider } from './lib/providers/app-provider';
 export { theme } from './lib/providers/theme';

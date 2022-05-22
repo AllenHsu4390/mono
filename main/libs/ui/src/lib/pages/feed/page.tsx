@@ -1,16 +1,18 @@
-import { TrendResponse, UserResponse } from '@main/rest-models';
-import { TopGallery } from '../../block/gallery/top-gallery';
+import { AssetsResponse, UserResponse } from '@main/rest-models';
+import { Gallery } from '../../block/gallery';
+import { useScrollReset } from '../../hooks/useScrollReset';
 import Page from '../_base/page';
 
 interface Props {
   user: UserResponse;
-  trend: TrendResponse;
+  initialAssets: AssetsResponse;
 }
 
-export default function FeedPage({ user, trend }: Props) {
+export default function FeedPage({ user, initialAssets }: Props) {
+  useScrollReset('feed');
   return (
     <Page user={user}>
-      <TopGallery trend={trend} />
+      <Gallery initialAssets={initialAssets} />
     </Page>
   );
 }

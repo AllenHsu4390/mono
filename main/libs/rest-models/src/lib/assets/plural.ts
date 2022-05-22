@@ -12,8 +12,8 @@ export type AssetsResponse = Assets & {
       rel: 'next';
       url: string;
     };
-    asset: {
-      rel: 'asset';
+    assets: {
+      rel: 'assets';
       url: string;
     }[];
   };

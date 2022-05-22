@@ -1,7 +1,7 @@
 import { environment } from '@main/environment';
 import { AssetsResponse } from '@main/rest-models';
 
-export const getTopAssets = async (pageId): Promise<AssetsResponse> => {
+export const getTopAssets = async (pageId: string): Promise<AssetsResponse> => {
   const db = environment.db;
   const { assets, pagination } = await db.get.topAssets(pageId);
 
@@ -9,8 +9,8 @@ export const getTopAssets = async (pageId): Promise<AssetsResponse> => {
     assets,
     pagination,
     links: {
-      asset: assets.map((a) => ({
-        rel: 'asset',
+      assets: assets.map((a) => ({
+        rel: 'assets',
         url: `/assets/${a.id}`,
       })),
       ...(pagination.next

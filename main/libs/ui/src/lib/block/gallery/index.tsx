@@ -1,14 +1,17 @@
-import { CreatorResponse } from '@main/rest-models';
-import { useAssets } from '../../hooks/assets';
+import { AssetsResponse } from '@main/rest-models';
+import { useEffect } from 'react';
+import { useAssets } from '../../hooks/useAssets';
+import { useScrollReset } from '../../hooks/useScrollReset';
 import { AssetsGrid } from './grid';
 
 interface Props {
-  creator: CreatorResponse;
+  initialAssets: AssetsResponse;
 }
 
-export const Gallery = ({ creator }: Props) => {
-  const { assets, isLoading, isError, hasNextPage, fetchNextPage } =
-    useAssets(creator);
+export const Gallery = ({ initialAssets }: Props) => {
+  const { assets, isLoading, isError, hasNextPage, fetchNextPage } = useAssets(
+    initialAssets.links.next?.url
+  );
 
   const assetPages = assets?.pages || [];
   const shouldShowSkeleton =
@@ -24,6 +27,7 @@ export const Gallery = ({ creator }: Props) => {
       shouldShowSkeleton={shouldShowSkeleton}
       loadMore={loadMore}
       assetPages={assetPages}
+      initialAssets={initialAssets}
     />
   );
 };

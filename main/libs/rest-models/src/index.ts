@@ -1,7 +1,7 @@
 export * from './lib/assets/plural';
 export * from './lib/assets/single';
 
-export * from './lib/creators/single';
+export * from './lib/creators/creator';
 
 export * from './lib/errors/single';
 
