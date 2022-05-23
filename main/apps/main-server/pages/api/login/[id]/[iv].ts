@@ -9,8 +9,8 @@ const setSession = (res: NextApiResponse, encryptedUserId: string) => {
 };
 
 const login = async (req, res: NextApiResponse<ErrorResponse>) => {
-  const { id }: { id: string } = req.query;
-  const user = await getUser(auth().identity.userId(id));
+  const { id, iv }: { id: string; iv: string } = req.query;
+  const user = await getUser(auth().identity.userId([id, iv].join('|')));
   setSession(res, auth().identity.encryptedUserId(user.id));
   return res.redirect('/');
 };

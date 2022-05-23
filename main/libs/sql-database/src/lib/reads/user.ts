@@ -6,17 +6,12 @@ import { isTopUpTime } from '../writes/dailyTopUp';
 export const getUser = async (id: string) => {
   const db = await connectToDatabase();
   const userId = decode(id);
-
-  console.log(`how is this a number: ${userId}`);
-
   const user = await db.getRepository(User).findOneOrFail({
     where: {
       id: userId,
     },
     relations: ['creator', 'dailyTopUp'],
   });
-
-  console.log(user);
   const dailyTopUp = user.dailyTopUp;
 
   return {

@@ -1,5 +1,3 @@
-import { auth } from '@main/auth';
-import { NextApiResponse } from 'next';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 
 export const redirectLocal = (req: NextRequest, newPathname: string) => {
@@ -31,7 +29,7 @@ export const isPublicPath = (pathname: string) => {
 
   return !![
     '/api/login',
-    '/api/login/:id',
+    '/api/login/:id/:iv',
     '/api/creators/:id',
     '/api/assets',
     '/api/assets/:id',

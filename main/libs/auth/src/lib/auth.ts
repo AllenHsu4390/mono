@@ -1,19 +1,12 @@
 import { decrypt, encrypt } from '@main/crypt';
 
-interface Identity {
-  userId(encryptedKey: string): string;
-  encryptedUserId(userId: string): string;
-}
-
-interface Auth {
-  identity: Identity;
-}
-
-export function auth(): Auth {
+export function auth() {
   return {
     identity: {
-      userId: (encryptedKey: string) => decrypt(encryptedKey),
-      encryptedUserId: (userId: string) => encrypt(userId),
+      userId: (encryptedKey: string, delimiter?: string) =>
+        decrypt(encryptedKey, delimiter),
+      encryptedUserId: (userId: string, delimiter?: string) =>
+        encrypt(userId, delimiter),
     },
   };
 }

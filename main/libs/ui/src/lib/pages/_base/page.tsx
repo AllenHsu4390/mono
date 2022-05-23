@@ -7,18 +7,25 @@ import { BalanceProvider } from '../../hooks/useBalance';
 import { page, theme } from '../../providers/theme';
 import { DropProvider } from '../../hooks/drop';
 import { UserProvider } from '../../hooks/useUser';
+import Head from '../../element/head';
+import { companyName, Wordmark } from '../../element/company/wordmark';
 
 interface Props {
+  title?: string;
   user?: UserResponse;
   children?: React.ReactNode;
 }
 
-interface LoggedInPageProps {
-  user: UserResponse;
+interface LoggedOutPageProps {
+  title: string;
   children?: React.ReactNode;
 }
 
-const LoggedInPage = ({ user, children }: LoggedInPageProps) => {
+type LoggedInPageProps = LoggedOutPageProps & {
+  user: UserResponse;
+};
+
+const LoggedInPage = ({ title, user, children }: LoggedInPageProps) => {
   return (
     <UserProvider user={user}>
       <DropProvider>
@@ -26,6 +33,9 @@ const LoggedInPage = ({ user, children }: LoggedInPageProps) => {
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <Navigation user={user} />
+            <Head>
+              <title>{title}</title>
+            </Head>
             <main>
               <Container
                 sx={{
@@ -44,15 +54,14 @@ const LoggedInPage = ({ user, children }: LoggedInPageProps) => {
   );
 };
 
-interface LoggedOutPageProps {
-  children?: React.ReactNode;
-}
-
-const LoggedOutPage = ({ children }: LoggedOutPageProps) => {
+const LoggedOutPage = ({ title, children }: LoggedOutPageProps) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Navigation />
+      <Head>
+        <title>{title}</title>
+      </Head>
       <main>
         <Container
           sx={{
@@ -68,12 +77,18 @@ const LoggedOutPage = ({ children }: LoggedOutPageProps) => {
   );
 };
 
-const Page = ({ children, user }: Props) => {
+const Page = ({ children, user, title }: Props) => {
   if (!user) {
-    return <LoggedOutPage>{children}</LoggedOutPage>;
+    return (
+      <LoggedOutPage title={title || companyName}>{children}</LoggedOutPage>
+    );
   }
 
-  return <LoggedInPage user={user}>{children}</LoggedInPage>;
+  return (
+    <LoggedInPage title={title || companyName} user={user}>
+      {children}
+    </LoggedInPage>
+  );
 };
 
 export default Page;

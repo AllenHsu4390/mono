@@ -10,7 +10,7 @@ interface Props {
 
 export default function AssetPage({ asset, user }: Props) {
   return (
-    <Page user={user}>
+    <Page user={user} title={asset.creator.name}>
       <Container>
         <AssetInteractable asset={asset} />
       </Container>

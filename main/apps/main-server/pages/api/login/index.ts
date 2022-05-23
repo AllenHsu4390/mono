@@ -11,7 +11,10 @@ const login = async (req, res: NextApiResponse<ErrorResponse | OK>) => {
   const { email }: { email: string } = req.body;
   const userId = await getUserIdByEmail(email);
   res.status(200).json({
-    magic: `/api/login/${auth().identity.encryptedUserId(userId)}`,
+    magic: `localhost:4200/api/login/${auth().identity.encryptedUserId(
+      userId,
+      '/'
+    )}`,
   });
 };
 

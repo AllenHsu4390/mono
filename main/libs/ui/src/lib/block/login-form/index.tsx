@@ -16,10 +16,11 @@ interface State {
   isLoading: boolean;
   errorMsg: string;
   isReady: boolean;
+  isDone: boolean;
 }
 
 type Action = {
-  type: 'input-changed' | 'loading' | 'error';
+  type: 'input-changed' | 'loading' | 'error' | 'done' | 'reset';
   email?: string;
   isLoading?: boolean;
   errorMsg?: string;
@@ -45,10 +46,26 @@ const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'input-changed':
       return verifiedInput(state, action);
+    case 'done':
+      return {
+        ...state,
+        isLoading: false,
+        isDone: true,
+      };
     case 'loading':
       return {
         ...state,
         isLoading: true,
+      };
+
+    case 'reset':
+      return {
+        ...state,
+        email: '',
+        errorMsg: '',
+        isLoading: false,
+        isReady: false,
+        isDone: false,
       };
     case 'error':
       return {
@@ -72,6 +89,7 @@ const LoginForm = ({ loginUrl }: Props) => {
     errorMsg: '',
     isLoading: false,
     isReady: false,
+    isDone: false,
   });
   const login = async () => {
     dispatch({ type: 'loading' });
@@ -88,6 +106,7 @@ const LoginForm = ({ loginUrl }: Props) => {
       const loginResponse = await response.json();
 
       if (loginResponse.magic) {
+        dispatch({ type: 'done' });
         console.log(loginResponse.magic);
       }
       if (loginResponse.status > 400) {
@@ -119,70 +138,98 @@ const LoginForm = ({ loginUrl }: Props) => {
       >
         <Wordmark />
       </Typography>
-      <Stack
-        direction="column"
-        spacing={2}
-        justifyContent="center"
-        sx={{
-          mt: '2rem',
-        }}
-      >
-        <TextField
-          label="Email"
-          variant="outlined"
-          type="email"
-          onChange={(e) =>
-            dispatch({
-              type: 'input-changed',
-              email: e.target.value,
-            })
-          }
-          onKeyUp={(e) => e.key === 'Enter' && login()}
-        />
-      </Stack>
-      <Stack
-        direction="row"
-        spacing={2}
-        justifyContent="center"
-        sx={{
-          mt: '3rem',
-        }}
-      >
-        <Button
-          disabled={state.isLoading || !state.isReady}
-          onClick={login}
-          variant="contained"
-          sx={{
-            minWidth: '6rem',
-          }}
-        >
-          {state.isLoading ? (
-            <CircularProgress size={'1rem'} />
-          ) : (
-            <Typography>Continue</Typography>
-          )}
-        </Button>
-      </Stack>
-      {state.errorMsg ? (
-        <Alert
-          severity="error"
-          sx={{
-            mt: '3rem',
-          }}
-        >
-          {state.errorMsg}
-        </Alert>
-      ) : !state.isLoading && state.isReady ? (
-        <Alert
-          severity="info"
-          sx={{
-            mt: '3rem',
-          }}
-        >
-          We use passwordless login. With just an email address you are ready to
-          go.
-        </Alert>
-      ) : null}
+      {state.isDone ? (
+        <>
+          <Stack
+            direction="column"
+            spacing={2}
+            justifyContent="center"
+            sx={{
+              mt: '2rem',
+            }}
+          >
+            <Typography>
+              Email sent to <b>{state.email}</b>. Continue from link in the
+              email to login.
+            </Typography>
+          </Stack>
+          <Stack
+            direction="row"
+            spacing={2}
+            justifyContent="center"
+            sx={{
+              mt: '3rem',
+            }}
+          >
+            <Button
+              onClick={() => dispatch({ type: 'reset' })}
+              variant="contained"
+              sx={{
+                minWidth: '6rem',
+              }}
+            >
+              <Typography>Back</Typography>
+            </Button>
+          </Stack>
+        </>
+      ) : (
+        <>
+          <Stack
+            direction="column"
+            spacing={2}
+            justifyContent="center"
+            sx={{
+              mt: '2rem',
+            }}
+          >
+            <TextField
+              label="Email"
+              variant="outlined"
+              type="email"
+              onChange={(e) =>
+                dispatch({
+                  type: 'input-changed',
+                  email: e.target.value,
+                })
+              }
+              onKeyUp={(e) => e.key === 'Enter' && login()}
+            />
+          </Stack>
+          <Stack
+            direction="row"
+            spacing={2}
+            justifyContent="center"
+            sx={{
+              mt: '3rem',
+            }}
+          >
+            <Button
+              disabled={state.isLoading || !state.isReady}
+              onClick={login}
+              variant="contained"
+              sx={{
+                minWidth: '6rem',
+              }}
+            >
+              {state.isLoading ? (
+                <CircularProgress size={'1rem'} />
+              ) : (
+                <Typography>Continue</Typography>
+              )}
+            </Button>
+          </Stack>
+          {state.errorMsg ? (
+            <Alert
+              severity="error"
+              sx={{
+                mt: '3rem',
+              }}
+            >
+              {state.errorMsg}
+            </Alert>
+          ) : null}
+        </>
+      )}
     </Container>
   );
 };

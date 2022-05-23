@@ -1,3 +1,5 @@
+export const companyName = 'mezzanine';
+
 export const Wordmark = () => {
-  return <span>mezzanine</span>;
+  return <span>{companyName}</span>;
 };

@@ -17,7 +17,7 @@ interface Props {
 export default function GalleryPage({ creator, user, initialAssets }: Props) {
   useScrollReset(`creator-${creator.id}`);
   return (
-    <Page user={user}>
+    <Page user={user} title={creator.name}>
       <CreatorProfile creator={creator} />
       <Gallery initialAssets={initialAssets} />
     </Page>
