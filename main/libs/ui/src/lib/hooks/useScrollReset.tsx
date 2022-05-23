@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 const positionsMap = new Map<string, { scrollPos: number }>();
 
-const Context =
+const ScrollResetContext =
   React.createContext<Map<string, { scrollPos: number }>>(positionsMap);
 
 interface ScrollResetProviderProps {
@@ -10,11 +10,15 @@ interface ScrollResetProviderProps {
 }
 
 export const ScrollResetProvider = ({ children }: ScrollResetProviderProps) => {
-  return <Context.Provider value={positionsMap}>{children}</Context.Provider>;
+  return (
+    <ScrollResetContext.Provider value={positionsMap}>
+      {children}
+    </ScrollResetContext.Provider>
+  );
 };
 
 export const useScrollReset = (key: string) => {
-  const pageLookup = useContext(Context);
+  const pageLookup = useContext(ScrollResetContext);
   if (!pageLookup.has(key)) {
     pageLookup.set(key, {
       scrollPos: 0,

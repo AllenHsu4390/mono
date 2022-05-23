@@ -5,7 +5,8 @@ import AlertDialog from '../../block/alert';
 import { useBalance } from '../../hooks/useBalance';
 import { useConfirmDialog } from '../../hooks/confirm-dialog';
 import { useDrop } from '../../hooks/drop';
-import { useLikeCount, useSendLike } from '../../hooks/like';
+import { useSendLike } from '../../hooks/useSendLike';
+import { useLikeCount } from '../../hooks/useLikeCount';
 
 const iconButtonSx = (theme: Theme) => ({
   borderRadius: '0',

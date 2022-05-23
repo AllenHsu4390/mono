@@ -1,7 +1,5 @@
 import { AssetsResponse } from '@main/rest-models';
-import { useEffect } from 'react';
 import { useAssets } from '../../hooks/useAssets';
-import { useScrollReset } from '../../hooks/useScrollReset';
 import { AssetsGrid } from './grid';
 
 interface Props {
