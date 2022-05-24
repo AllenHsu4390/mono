@@ -20,11 +20,19 @@ const enemy = {
     defDebuff: 0
 };
 
+let OZ_START = 4.1934;
+let OZ_HIT = 188.7;
+
 // level 90 override
+/*
+*/
 char.baseAtk = 244;
 char.atkPct = 0.24;
 char.lvl = 90;
 char.lvlMax = 90;
+
+OZ_START = 2.4531;
+OZ_HIT = 1.887;
 
 export const icdElectroCharged = (attr, hit) => {
     if (hit.index % 3 === 0) {
@@ -35,7 +43,7 @@ export const icdElectroCharged = (attr, hit) => {
 };
 
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 12) => {
-    return [4.1934, ...Array(duration).fill(1.6872)].map((motionValue, index) => {
+    return [OZ_START, ...Array(duration).fill(OZ_HIT)].map((motionValue, index) => {
         return {
             stats: ["electro", "skill"],
             traits,

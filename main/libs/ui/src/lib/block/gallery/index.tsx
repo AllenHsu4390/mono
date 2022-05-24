@@ -1,5 +1,5 @@
 import { AssetsResponse } from '@main/rest-models';
-import { useAssets } from '../../hooks/useAssets';
+import { useAssets } from '../../hooks/use-assets';
 import { AssetsGrid } from './grid';
 
 interface Props {

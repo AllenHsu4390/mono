@@ -3,12 +3,12 @@ import { ThemeProvider } from '@mui/material/styles';
 import Navigation from '../../block/navigation';
 import { Container } from '@mui/material';
 import { UserResponse } from '@main/rest-models';
-import { BalanceProvider } from '../../hooks/useBalance';
+import { BalanceProvider } from '../../hooks/use-balance';
 import { page, theme } from '../../providers/theme';
-import { DropProvider } from '../../hooks/drop';
-import { UserProvider } from '../../hooks/useUser';
+import { DropProvider } from '../../hooks/use-drop';
+import { UserProvider } from '../../hooks/use-user';
 import Head from '../../element/head';
-import { companyName, Wordmark } from '../../element/company/wordmark';
+import { companyName } from '../../element/company/wordmark';
 
 interface Props {
   title?: string;

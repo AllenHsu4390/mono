@@ -1,7 +1,7 @@
 import { AssetResponse } from '@main/rest-models';
 import { Typography, Box, useTheme } from '@mui/material';
 import { useEffect, useReducer } from 'react';
-import { useLikeCount } from '../../hooks/useLikeCount';
+import { useLikeCount } from '../../hooks/use-like-count';
 import Toast from '../toast';
 
 interface State {

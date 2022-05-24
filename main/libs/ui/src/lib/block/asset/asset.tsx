@@ -5,7 +5,7 @@ import { AssetCardFull } from './card-full';
 import LikeCounter from '../../element/like-counter';
 import Link from '../../element/link';
 import { indigo } from '@mui/material/colors';
-import { useDrop } from '../../hooks/drop';
+import { useDrop } from '../../hooks/use-drop';
 import { AssetResponse } from '@main/rest-models';
 
 interface Props {

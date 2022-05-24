@@ -10,13 +10,20 @@ import { bennBurst, noblesse } from "./traits.js";
 
 export const char = jean;
 
+let BREEZE_START = 6.7968;
+let BREEZE_HIT = 1.2544;
+
 // level 90 override
+/*
+*/
 char.baseAtk = 239;
 char.lvl = 90;
 char.lvlMax = 90;
+BREEZE_START = 7.6464;
+BREEZE_HIT = 1.4112;
 
 const breezeHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
-    return [6.7968, 1.2544].map((motionValue, index) => {
+    return [BREEZE_START, BREEZE_HIT].map((motionValue, index) => {
         return {
             stats: ["anemo", "burst", ...stats],
             traits: [...traits],

@@ -2,11 +2,12 @@ import { AssetResponse, Cost } from '@main/rest-models';
 import { FavoriteBorderOutlined } from '@mui/icons-material';
 import { Typography, Button, IconButton, useTheme, Theme } from '@mui/material';
 import AlertDialog from '../../block/alert';
-import { useBalance } from '../../hooks/useBalance';
-import { useConfirmDialog } from '../../hooks/confirm-dialog';
-import { useDrop } from '../../hooks/drop';
-import { useSendLike } from '../../hooks/useSendLike';
-import { useLikeCount } from '../../hooks/useLikeCount';
+import { useBalance } from '../../hooks/use-balance';
+import { useConfirmDialog } from '../../hooks/use-confirm-dialog';
+import { useDrop } from '../../hooks/use-drop';
+import { useSendLike } from '../../hooks/use-send-like';
+import { useLikeCount } from '../../hooks/use-like-count';
+import Link from '../link';
 
 const iconButtonSx = (theme: Theme) => ({
   borderRadius: '0',
@@ -37,9 +38,36 @@ const LikeButton = ({ asset }: Props) => {
 
   const dialog = useConfirmDialog();
 
-  if (!isLikeAvailable) return null;
+  const { state: dialogState } = dialog;
 
-  const { state } = dialog;
+  if (!isLikeAvailable) {
+    return (
+      <AlertDialog
+        open={dialogState.isOpen}
+        onClose={dialog.close}
+        {...{
+          title: 'Login required',
+          content: (
+            <Typography>An account is needed to like an asset</Typography>
+          ),
+          actions: (
+            <Link to="/users/login" target="_blank">
+              <Button variant="contained">Go to Login</Button>
+            </Link>
+          ),
+        }}
+        trigger={
+          <IconButton onClick={dialog.open} sx={iconButtonSx(theme)}>
+            <FavoriteBorderOutlined
+              sx={{
+                fontSize: '2rem',
+              }}
+            />
+          </IconButton>
+        }
+      />
+    );
+  }
 
   const confirm = async () => {
     dialog.confirm();
@@ -64,14 +92,14 @@ const LikeButton = ({ asset }: Props) => {
           actions: (
             <>
               <Button onClick={dialog.close}>
-                {state.isConfirmed ? 'Close' : 'Cancel'}
+                {dialogState.isConfirmed ? 'Close' : 'Cancel'}
               </Button>
               <Button
                 variant="contained"
-                disabled={state.isLocked}
+                disabled={dialogState.isLocked}
                 onClick={confirm}
               >
-                {state.isConfirmed ? 'Sending...' : 'Agree'}
+                {dialogState.isConfirmed ? 'Sending...' : 'Agree'}
               </Button>
             </>
           ),
@@ -81,14 +109,14 @@ const LikeButton = ({ asset }: Props) => {
           content: <Typography>{`Not enough SNP in your account`}</Typography>,
           actions: (
             <Button onClick={dialog.close}>
-              {state.isConfirmed ? 'Close' : 'Cancel'}
+              {dialogState.isConfirmed ? 'Close' : 'Cancel'}
             </Button>
           ),
         };
 
   return (
     <AlertDialog
-      open={state.isOpen}
+      open={dialogState.isOpen}
       onClose={dialog.close}
       {...dialogOptions}
       trigger={

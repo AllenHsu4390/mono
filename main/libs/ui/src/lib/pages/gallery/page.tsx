@@ -6,7 +6,7 @@ import {
   CreatorResponse,
   UserResponse,
 } from '@main/rest-models';
-import { useScrollReset } from '../../hooks/useScrollReset';
+import { useScrollReset } from '../../hooks/use-scroll-reset';
 
 interface Props {
   creator: CreatorResponse;

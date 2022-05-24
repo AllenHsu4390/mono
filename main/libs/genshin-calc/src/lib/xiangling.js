@@ -20,15 +20,22 @@ const enemy = {
 
 const char = xiangling;
 
+let START_HITS = [1.37, 1.67, 2.08];
+let SPIN_HIT = 2.13;
+
 // level 90 override
+/*
+*/
 char.baseAtk = 225;
 char.elemMast = 96;
 char.lvl = 90;
 char.lvlMax = 90;
+START_HITS = [1.62, 1.98, 2.47];
+SPIN_HIT = 2.52;
 
 
 export const pyronadoSpinHits = (traits = [], debuffs = [], amps = [], transforms = [], hitStats = [], duration = 11) => {
-    const pyronado = Array(duration).fill(2.13);
+    const pyronado = Array(duration).fill(SPIN_HIT);
     return pyronado.map((motionValue) => {
         return {
             traits,
@@ -44,7 +51,7 @@ export const pyronadoSpinHits = (traits = [], debuffs = [], amps = [], transform
 };
 
 export const pyronadoHits = (traits = [], debuffs = [], amps = [], transforms = [], hitStats = []) => {
-    return [1.37, 1.67, 2.08].map((motionValue) => {
+    return START_HITS.map((motionValue) => {
         return {
             traits,
             amplifiers: [crit],

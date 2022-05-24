@@ -1,4 +1,4 @@
-import { ScrollResetProvider } from '../hooks/useScrollReset';
+import { ScrollResetProvider } from '../hooks/use-scroll-reset';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient();

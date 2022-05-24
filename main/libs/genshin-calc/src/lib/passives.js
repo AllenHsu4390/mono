@@ -216,7 +216,7 @@ export const skywardBlade = (attr, { stats }) => {
     const { atk, flatDmg } = attr;
     return {
         // attack speed increased by 12%
-        flatDmg: flatDmg + (stats.includes("normal") || stats.includes("charge") ? (0.2 * atk) : 0)
+        flatDmg: flatDmg + 200
     };
 };
 

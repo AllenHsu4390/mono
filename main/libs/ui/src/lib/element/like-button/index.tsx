@@ -1,3 +1,3 @@
-import LikeButton from './LikeButton';
+import LikeButton from './like-button';
 
 export default LikeButton;

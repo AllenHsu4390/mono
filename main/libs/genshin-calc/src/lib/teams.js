@@ -4115,6 +4115,40 @@ export const ayato_xiangling_yae_bennett = () => {
         }),
         bennett.passionAction(),
         bennett.passionAction(),
+        bennett.passionAction(),
+    ])}`);
+};
+
+export const ayato_xiangling_sucrose_bennett = () => {
+    const teamWide = [noblesse, pyroRes];
+    const onField = [bennBurst, ...teamWide, sucroseSwirl];
+    const debuffs = [vvShred];
+
+    output(`Ayato, Xiangling, Sucrose, Bennett: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        xiangling.pyronadoAction({
+            weapon: theCatchR5,
+            artifacts: [flower_2, feather_2, sand_2, goblet_2, circlet_12],
+            buffs: [...onField, sucroseC6],
+            amps: [pyroVape],
+            transforms: [overloaded],
+            debuffs,
+        }),
+        bennett.passionAction(),
+        bennett.passionAction(),
+        bennett.passionAction(),
     ])}`);
 };
 

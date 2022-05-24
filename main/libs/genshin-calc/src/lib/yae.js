@@ -12,11 +12,17 @@ import { getCurrentTeam } from './team.js';
 
 export const char = yae;
 
+let SESSHOU = 1.517;
+
 // level 90 override
+/*
+*/
 char.baseAtk = 340;
 char.critRate = 0.05 + 0.192;
 char.lvl = 90;
 char.lvlMax = 90;
+
+SESSHOU = 1.7064;
 
 const enemy = {
     lvl: 90,
@@ -33,7 +39,7 @@ const a2 = ({ elemMast, elemDmg }, hit) => {
 };
 
 export const sesshouHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 5) => {
-    return Array(duration * 3).fill(1.517).map((motionValue, index) => {
+    return Array(duration * 3).fill(SESSHOU).map((motionValue, index) => {
         return {
             stats: ["skill", "electro", ...stats],
             traits: [...traits, a2],

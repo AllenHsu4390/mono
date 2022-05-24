@@ -1,6 +1,12 @@
+export const traitsModifiers = {
+    SHENHE_DMG_BONUS: 0.73,
+    YUNJIN_DMG_BONUS: 0.661,
+    BENNETT_ATK_BONUS: 1.06,
+};
+
 export const bennBurst = ({ atk, elemDmg }, hit) => {
     return {
-        atk: atk + (702 * 1.06),
+        atk: atk + (702 * traitsModifiers.BENNETT_ATK_BONUS),
         elemDmg: elemDmg + (hit.stats.includes("pyro") ? 0.15 : 0)
     };
 };
@@ -91,12 +97,11 @@ export const gorouBanner = ({ elemDmg, def, baseDef, critDmg }, { stats, team })
         critDmg: critDmg + ((geoCount > 2 && stats.includes("geo")) ? 0.4 : 0)
     };
 };
-
 export const makeYunjinBurst = (num = 30, DEF = 2200) => {
     return ({ flatDmg, elemDmg }, hit) => {
         // c2
         return {
-            flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.661 * DEF) : 0),
+            flatDmg: flatDmg + (hit.stats.includes("normal") ? (traitsModifiers.YUNJIN_DMG_BONUS * DEF) : 0),
             elemDmg: elemDmg + (hit.stats.includes("normal") ? 0.15 : 0),
         };
     };
@@ -114,7 +119,7 @@ export const makeShenheE = (num, ATK = 3300, hold = false) => {
             ((hit.stats.includes("normal") || hit.stats.includes("charge")) ? 0.15 : 0) :
             ((hit.stats.includes("burst") || hit.stats.includes("skill")) ? 0.15 : 0);
         return {
-            flatDmg: flatDmg + ((hit.stats.includes("cryo") && shenheQuota > -1) ? (0.73 * ATK) : 0),
+            flatDmg: flatDmg + ((hit.stats.includes("cryo") && shenheQuota > -1) ? (traitsModifiers.SHENHE_DMG_BONUS * ATK) : 0),
             // ascension 1
             elemDmg: elemDmg + boost
         };

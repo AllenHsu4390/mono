@@ -1,8 +1,8 @@
 import { Typography, Button, Badge } from '@mui/material';
 import AlertDialog from '../../block/alert';
-import { useBalance } from '../../hooks/useBalance';
-import { useConfirmDialog } from '../../hooks/confirm-dialog';
-import { useDailyTopUp } from '../../hooks/useDailyTopUp';
+import { useBalance } from '../../hooks/use-balance';
+import { useConfirmDialog } from '../../hooks/use-confirm-dialog';
+import { useDailyTopUp } from '../../hooks/use-daily-top-up';
 import BalanceLabel from '../balance';
 
 const BalanceButton = () => {

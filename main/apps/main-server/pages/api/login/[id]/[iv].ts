@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '@main/auth';
-import { getError, getUser, getUserIdByEmail } from '@main/rest';
+import { getError, getUser } from '@main/rest';
 import { ErrorResponse } from '@main/rest-models';
 
 const setSession = (res: NextApiResponse, encryptedUserId: string) => {

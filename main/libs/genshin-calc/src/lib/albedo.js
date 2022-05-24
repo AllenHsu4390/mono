@@ -11,6 +11,8 @@ import { getCurrentTeam, setCurrentTeam } from './team.js';
 
 export const char = albedo;
 
+let BLOSSOM = 2.14;
+
 // level 90 override
 char.baseDef = 876;
 char.traits = [({ elemDmg }, { stats }) => {
@@ -21,6 +23,8 @@ char.traits = [({ elemDmg }, { stats }) => {
 char.lvl = 90;
 char.lvlMax = 90;
 
+BLOSSOM = 2.4048;
+
 const enemy = {
     lvl: 90,
     res: 0.10,
@@ -29,7 +33,7 @@ const enemy = {
     defDebuff: 0
 };
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
-    return Array(Math.floor(Math.min(duration, 30) / 2)).fill(2.14).map((motionValue, index) => {
+    return Array(Math.floor(Math.min(duration, 30) / 2)).fill(BLOSSOM).map((motionValue, index) => {
         return {
             stats: ["skill", "geo", ...stats],
             traits,

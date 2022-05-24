@@ -24,6 +24,8 @@ let BURST_INITIAL = 3.9296;
 let BURST_FINAL = 6.274;
 let STACK = 1.2818;
 
+/*
+*/
 // level 90 override
 char.baseAtk = 342;
 char.critDmg = 0.5 + 0.384;
