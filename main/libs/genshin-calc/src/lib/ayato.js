@@ -16,7 +16,6 @@ let KYOUKA = [0.9041, 1.007, 1.1098];
 let KYOUKA_FINAL = 1.735;
 
 /*
-*/
 // level 90 override
 char.baseAtk = 299;
 char.critDmg = 0.5 + 0.384;
@@ -25,6 +24,7 @@ char.lvlMax = 90;
 HP_BONUS = 0.0111;
 KYOUKA = [1.0455, 1.1645, 1.2835];
 KYOUKA_FINAL = 2.006;
+*/
 
 const enemy = {
     lvl: 90,

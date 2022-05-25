@@ -15,12 +15,12 @@ let BREEZE_HIT = 1.2544;
 
 // level 90 override
 /*
-*/
 char.baseAtk = 239;
 char.lvl = 90;
 char.lvlMax = 90;
 BREEZE_START = 7.6464;
 BREEZE_HIT = 1.4112;
+*/
 
 const breezeHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
     return [BREEZE_START, BREEZE_HIT].map((motionValue, index) => {

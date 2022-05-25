@@ -32,6 +32,7 @@ const enemy = {
     resDebuff: 0,
     defDebuff: 0
 };
+
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
     return Array(Math.floor(Math.min(duration, 30) / 2)).fill(BLOSSOM).map((motionValue, index) => {
         return {

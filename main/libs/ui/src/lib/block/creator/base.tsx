@@ -13,8 +13,8 @@ export function CreatorProfileBase({ description, avatar, title }: Props) {
       container
       sx={{
         bgcolor: 'background.paper',
-        pt: 4,
-        pb: 8,
+        pt: '4rem',
+        pb: '8rem',
       }}
       spacing={[1, 1, 2, 3]}
     >
@@ -22,6 +22,8 @@ export function CreatorProfileBase({ description, avatar, title }: Props) {
         item
         md={2}
         lg={2}
+        sm={3}
+        xs={3}
         sx={{
           margin: 'auto',
         }}
@@ -32,6 +34,8 @@ export function CreatorProfileBase({ description, avatar, title }: Props) {
         item
         md={10}
         lg={10}
+        sm={9}
+        xs={9}
         sx={{
           margin: 'auto',
         }}

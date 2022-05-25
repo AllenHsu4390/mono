@@ -15,12 +15,12 @@ let RAINSWORD = 1.03;
 
 // level 90 override
 /*
-*/
 char.baseAtk = 202;
 char.atkPct = .24;
 char.lvl = 90;
 char.lvlMax = 90;
 RAINSWORD = 1.22;
+*/
 
 
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {

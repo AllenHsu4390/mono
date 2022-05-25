@@ -25,7 +25,6 @@ let BURST_FINAL = 6.274;
 let STACK = 1.2818;
 
 /*
-*/
 // level 90 override
 char.baseAtk = 342;
 char.critDmg = 0.5 + 0.384;
@@ -34,6 +33,7 @@ char.lvlMax = 90;
 BURST_INITIAL = 4.4208;
 BURST_FINAL = 7.2556;
 STACK = 1.4824;
+*/
 
 const glacialIllu = (stacks) => {
     return stacks * STACK;

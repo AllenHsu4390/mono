@@ -1,7 +1,9 @@
 export const traitsModifiers = {
     SHENHE_DMG_BONUS: 0.73,
+    SHENHE_ATK: 3300,
     YUNJIN_DMG_BONUS: 0.661,
     BENNETT_ATK_BONUS: 1.06,
+    YUNJIN_DEF: 2200,
 };
 
 export const bennBurst = ({ atk, elemDmg }, hit) => {
@@ -97,17 +99,14 @@ export const gorouBanner = ({ elemDmg, def, baseDef, critDmg }, { stats, team })
         critDmg: critDmg + ((geoCount > 2 && stats.includes("geo")) ? 0.4 : 0)
     };
 };
-export const makeYunjinBurst = (num = 30, DEF = 2200) => {
-    return ({ flatDmg, elemDmg }, hit) => {
-        // c2
-        return {
-            flatDmg: flatDmg + (hit.stats.includes("normal") ? (traitsModifiers.YUNJIN_DMG_BONUS * DEF) : 0),
-            elemDmg: elemDmg + (hit.stats.includes("normal") ? 0.15 : 0),
-        };
-    };
-} 
 
-export const yunjinBurst = makeYunjinBurst();
+export const yunjinBurst = ({ flatDmg, elemDmg }, hit) => {
+    // c2
+    return {
+        flatDmg: flatDmg + (hit.stats.includes("normal") ? (traitsModifiers.YUNJIN_DMG_BONUS * traitsModifiers.YUNJIN_DEF) : 0),
+        elemDmg: elemDmg + (hit.stats.includes("normal") ? 0.15 : 0),
+    };
+};
 
 export const makeShenheE = (num, ATK = 3300, hold = false) => {
     let shenheQuota = num;

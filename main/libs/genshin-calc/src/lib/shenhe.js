@@ -37,11 +37,11 @@ const baseChar = {
 const char = baseChar;
 
 // level 90 override
-/* */
+/*
 char.lvl = 90;
 char.lvlMax = 90;
 ATK = 3800;
-traitsModifiers.SHENHE_DMG_BONUS = 0.8218;
+traitsModifiers.SHENHE_DMG_BONUS = 0.8218; */
 
 const springHit = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
     return Array(1).fill(2.23).map((motionValue, index) => {
