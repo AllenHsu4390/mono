@@ -3,6 +3,7 @@ import { SessionResponse } from '@main/rest-models';
 export const getSession = (): SessionResponse => {
   return {
     isUsualClient: true,
+    isLoggedIn: true,
     links: {
       login: {
         rel: 'login',
@@ -11,6 +12,10 @@ export const getSession = (): SessionResponse => {
       logout: {
         rel: 'logout',
         url: '/api/logout',
+      },
+      session: {
+        rel: 'session',
+        url: '/api/session',
       },
     },
   };

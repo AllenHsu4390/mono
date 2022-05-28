@@ -1,5 +1,6 @@
 export interface SessionResponse {
   isUsualClient: boolean;
+  isLoggedIn: boolean;
   links: {
     login: {
       rel: 'login';
@@ -7,6 +8,10 @@ export interface SessionResponse {
     };
     logout: {
       rel: 'logout';
+      url: string;
+    };
+    session: {
+      rel: 'session';
       url: string;
     };
   };

@@ -1,41 +1,37 @@
-import { UserResponse } from '@main/rest-models';
-import { noop } from 'lodash';
+import { SessionResponse } from '@main/rest-models';
 import { createContext, useContext } from 'react';
 import { useQuery } from 'react-query';
 
 interface SessionContextResult {
-  user: UserResponse | undefined;
-  refetchUser(): void;
+  session: SessionResponse | undefined;
+}
+
+interface ProviderProps {
+  children: React.ReactNode;
 }
 
 export const SessionContext = createContext<SessionContextResult>({
-  user: undefined,
-  refetchUser: noop,
+  session: undefined,
 });
 
 export const useSession = () => {
   return useContext(SessionContext);
 };
 
-interface UserProviderProps {
-  user: UserResponse;
-  children?: React.ReactNode;
-}
-
-export const UserProvider = ({ user, children }: UserProviderProps) => {
-  const { data, refetch } = useQuery<UserResponse>(
-    ['user', user.id],
+export const SessionProvider = ({ children }: ProviderProps) => {
+  const { data } = useQuery<SessionResponse>(
+    'session',
     async () => {
-      const res = await fetch(user.links.me.url);
+      const res = await fetch('/api/session');
       return res.json();
     },
     {
-      initialData: user,
+      refetchInterval: 5000,
     }
   );
   return (
-    <UserContext.Provider value={{ user: data, refetchUser: refetch }}>
+    <SessionContext.Provider value={{ session: data }}>
       {children}
-    </UserContext.Provider>
+    </SessionContext.Provider>
   );
 };

@@ -9,6 +9,7 @@ import { DropProvider } from '../../hooks/use-drop';
 import { UserProvider } from '../../hooks/use-user';
 import Head from '../../element/head';
 import { companyName } from '../../element/company/wordmark';
+import { SessionProvider } from '../../hooks/use-session';
 
 interface Props {
   title?: string;
@@ -27,53 +28,57 @@ type LoggedInPageProps = LoggedOutPageProps & {
 
 const LoggedInPage = ({ title, user, children }: LoggedInPageProps) => {
   return (
-    <UserProvider user={user}>
-      <DropProvider>
-        <BalanceProvider user={user}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Navigation user={user} />
-            <Head>
-              <title>{title}</title>
-            </Head>
-            <main>
-              <Container
-                sx={{
-                  pt: '10rem',
-                  pb: '10rem',
-                  maxWidth: page.maxWidth,
-                }}
-              >
-                {children}
-              </Container>
-            </main>
-          </ThemeProvider>
-        </BalanceProvider>
-      </DropProvider>
-    </UserProvider>
+    <SessionProvider>
+      <UserProvider user={user}>
+        <DropProvider>
+          <BalanceProvider user={user}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Navigation user={user} />
+              <Head>
+                <title>{title}</title>
+              </Head>
+              <main>
+                <Container
+                  sx={{
+                    pt: '10rem',
+                    pb: '10rem',
+                    maxWidth: page.maxWidth,
+                  }}
+                >
+                  {children}
+                </Container>
+              </main>
+            </ThemeProvider>
+          </BalanceProvider>
+        </DropProvider>
+      </UserProvider>
+    </SessionProvider>
   );
 };
 
 const LoggedOutPage = ({ title, children }: LoggedOutPageProps) => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Navigation />
-      <Head>
-        <title>{title}</title>
-      </Head>
-      <main>
-        <Container
-          sx={{
-            pt: '10rem',
-            pb: '10rem',
-            maxWidth: page.maxWidth,
-          }}
-        >
-          {children}
-        </Container>
-      </main>
-    </ThemeProvider>
+    <SessionProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navigation />
+        <Head>
+          <title>{title}</title>
+        </Head>
+        <main>
+          <Container
+            sx={{
+              pt: '10rem',
+              pb: '10rem',
+              maxWidth: page.maxWidth,
+            }}
+          >
+            {children}
+          </Container>
+        </main>
+      </ThemeProvider>
+    </SessionProvider>
   );
 };
 
