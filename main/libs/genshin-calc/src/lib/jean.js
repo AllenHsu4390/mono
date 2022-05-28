@@ -100,7 +100,7 @@ export const sunfireAction = ({ weapon, artifacts, buffs, debuffs, amps, transfo
 };
 
 //const artifacts = [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387, elemMast: 79 }];
-const artifacts = [{ atk: 408, critRate: 0.366, critDmg: 0.311, elemDmg: 0.12, elemMast: 544 }];
+const artifacts = [{ atk: 408, critRate: 0.521, critDmg: 0.241, elemDmg: 0.12, elemMast: 560 }];
 const buffs = [bennBurst, noblesse];
 const debuffs = [];
 const transforms = [swirl];
