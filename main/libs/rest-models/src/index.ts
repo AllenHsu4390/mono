@@ -9,9 +9,11 @@ export * from './lib/follows/single';
 export * from './lib/follows/plural';
 
 export * from './lib/likes/count';
-export * from './lib/likes/single';
+export * from './lib/likes/like';
 
-export * from './lib/sessions/single';
+export * from './lib/drops/drop';
+
+export * from './lib/sessions/session';
 
 export * from './lib/transactions/sum';
 
@@ -19,7 +21,7 @@ export * from './lib/trends/single';
 
 export * from './lib/users/single';
 
-export * from './lib/dailyTopUp/single';
+export * from './lib/dailyTopUps/daily-top-up';
 
 export * from './lib/cost';
 export * from './lib/gain';
