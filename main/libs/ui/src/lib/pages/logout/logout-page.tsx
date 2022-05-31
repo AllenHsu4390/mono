@@ -1,10 +1,6 @@
-interface Props {
-  logoutUrl: string;
-}
-
-export default function LoginPage({ logoutUrl }: Props) {
+export default function LogoutPage() {
   const logout = async () => {
-    const response = await fetch(logoutUrl, {
+    const response = await fetch('/api/users/logout', {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'same-origin',
       method: 'POST',
@@ -16,6 +12,7 @@ export default function LoginPage({ logoutUrl }: Props) {
       window.location.href = '/';
     }
   };
+
   logout();
   return <div>Logging out...</div>;
 }

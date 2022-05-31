@@ -1,23 +1,23 @@
-export * from './lib/errors/getError';
+export * from './lib/errors/get-error';
 
-export * from './lib/creators/getCreator';
+export * from './lib/creators/get-creator';
 
-export * from './lib/assets/getTopAssets';
-export * from './lib/assets/getAssets';
-export * from './lib/assets/getAsset';
+export * from './lib/assets/get-top-assets';
+export * from './lib/assets/get-assets';
+export * from './lib/assets/get-asset';
 
-export * from './lib/users/getUser';
-export * from './lib/users/getUserIdByEmail';
+export * from './lib/users/get-user';
+export * from './lib/users/get-user-id-by-email';
 
-export * from './lib/follows/getFollows';
+export * from './lib/follows/get-follows';
 
-export * from './lib/likes/getLikesCount';
-export * from './lib/likes/saveLike';
+export * from './lib/likes/get-likes-count';
+export * from './lib/likes/save-like';
 
-export * from './lib/trends/getTrend';
+export * from './lib/trends/get-trend';
 
-export * from './lib/sessions/getSession';
+export * from './lib/sessions/get-session';
 
-export * from './lib/transactions/getBalance';
+export * from './lib/transactions/get-balance';
 
-export * from './lib/dailyTopUp/saveDailyTopUp';
+export * from './lib/daily-top-up/save-daily-top-up';

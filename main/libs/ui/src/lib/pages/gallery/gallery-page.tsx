@@ -7,6 +7,7 @@ import {
   UserResponse,
 } from '@main/rest-models';
 import { useScrollReset } from '../../hooks/use-scroll-reset';
+import { Container } from '@mui/material';
 
 interface Props {
   creator: CreatorResponse;
@@ -18,7 +19,9 @@ export default function GalleryPage({ creator, user, initialAssets }: Props) {
   useScrollReset(`creator-${creator.id}`);
   return (
     <Page user={user} title={creator.name}>
-      <CreatorProfile creator={creator} />
+      <Container>
+        <CreatorProfile creator={creator} />
+      </Container>
       <Gallery initialAssets={initialAssets} />
     </Page>
   );

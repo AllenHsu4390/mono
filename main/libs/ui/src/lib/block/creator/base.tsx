@@ -5,16 +5,22 @@ interface Props {
   description: React.ReactNode;
   avatar: React.ReactNode;
   title: React.ReactNode;
+  contact: React.ReactNode;
 }
 
-export function CreatorProfileBase({ description, avatar, title }: Props) {
+export function CreatorProfileBase({
+  description,
+  avatar,
+  title,
+  contact,
+}: Props) {
   return (
     <Grid
       container
       sx={{
         bgcolor: 'background.paper',
-        pt: '4rem',
-        pb: '8rem',
+        pt: '2rem',
+        pb: '6rem',
       }}
       spacing={[1, 1, 2, 3]}
     >
@@ -42,6 +48,7 @@ export function CreatorProfileBase({ description, avatar, title }: Props) {
       >
         {title}
         {description}
+        {contact}
       </Grid>
     </Grid>
   );

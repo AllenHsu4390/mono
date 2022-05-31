@@ -7,6 +7,7 @@ import Link from '../../element/link';
 import { indigo } from '@mui/material/colors';
 import { useDrop } from '../../hooks/use-drop';
 import { AssetResponse } from '@main/rest-models';
+import { CreatorLink } from '../../element/creator-link/creator-link';
 
 interface Props {
   asset: AssetResponse;
@@ -14,6 +15,7 @@ interface Props {
 
 export default function AssetInteractable({ asset }: Props) {
   const [drop] = useDrop();
+  const socialMediaLinks = ['Instagram', 'Discord', 'Youtube'];
   return (
     <>
       {drop.isDropped && (
@@ -29,21 +31,24 @@ export default function AssetInteractable({ asset }: Props) {
             linkTo={asset.links.creator.url}
           />
         }
+        contact={
+          <>
+            {socialMediaLinks.map((link, index) => (
+              <>
+                <CreatorLink key={link} to={link} label={link} />
+                {index === socialMediaLinks.length - 1 ? null : ' · '}
+              </>
+            ))}
+          </>
+        }
         avatarTitle={
-          <Link to={asset.links.creator.url}>
-            <Typography
-              fontWeight={'bold'}
-              sx={{
-                transition: 'color 0.6s ease',
-                ':hover': {
-                  color: indigo[600],
-                  textDecoration: 'underline',
-                },
-              }}
-            >
-              {asset.creator.name}
-            </Typography>
-          </Link>
+          <CreatorLink
+            to={asset.links.creator.url}
+            label={asset.creator.name}
+            sx={{
+              fontWeight: 'bold',
+            }}
+          />
         }
         counter={<LikeCounter asset={asset} />}
         actions={<LikeButton asset={asset} />}

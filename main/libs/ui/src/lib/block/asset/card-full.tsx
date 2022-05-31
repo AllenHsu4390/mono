@@ -16,6 +16,7 @@ interface Props {
   avatar?: React.ReactNode;
   counter?: React.ReactNode;
   avatarTitle?: React.ReactNode;
+  contact?: React.ReactNode;
 }
 
 export function AssetCardFull({
@@ -24,6 +25,7 @@ export function AssetCardFull({
   avatarTitle,
   counter,
   actions,
+  contact,
 }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -48,7 +50,7 @@ export function AssetCardFull({
           }}
           avatar={avatar}
           title={avatarTitle}
-          subheader={<Typography>Instagram · Discord · YouTube</Typography>}
+          subheader={contact}
         />
         <Stack
           spacing={0}

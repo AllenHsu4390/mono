@@ -1,7 +1,15 @@
 import { AssetResponse, LikesCountResponse } from '@main/rest-models';
 import { useQuery } from 'react-query';
 
-export const useLikeCount = ({ asset }: { asset: AssetResponse }) => {
+export const useLikeCount = ({
+  asset,
+  onSuccess,
+  refetchInterval,
+}: {
+  asset: AssetResponse;
+  onSuccess?(likes: LikesCountResponse): void;
+  refetchInterval?: number;
+}) => {
   const {
     isLoading,
     isError,
@@ -18,7 +26,8 @@ export const useLikeCount = ({ asset }: { asset: AssetResponse }) => {
       return res.json();
     },
     {
-      refetchInterval: 5000,
+      refetchInterval,
+      onSuccess,
     }
   );
 
