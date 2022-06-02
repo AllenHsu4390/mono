@@ -298,3 +298,17 @@ export const yae = {
     critRate: 0.194,
     critDmg: 0.5
 };
+
+export const yelan = {
+    element: "hydro",
+    name: "yelan",
+    lvl: 90,
+    lvlMax: 90,
+    baseAtk: 244,
+    baseDef: 548,
+    baseHp: 14450,
+    recharge: 1,
+    critRate: 0.05 + 0.192,
+    critDmg: 0.50,
+    elemMast: 0,
+};

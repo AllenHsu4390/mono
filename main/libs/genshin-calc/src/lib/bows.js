@@ -33,14 +33,14 @@ export const amosR2 = (attr) => {
     };
 };
 
-export const stringlessR2 = (attr) => {
+export const stringlessR5 = (attr) => {
     const { baseAtk, elemMast } = attr;
     const newBaseAtk = baseAtk + 475;
 
     return {
         name: "stringless",
         baseAtk: newBaseAtk,
-        elemMast: elemMast + 151
+        elemMast: elemMast + 165
     };
 };
 
