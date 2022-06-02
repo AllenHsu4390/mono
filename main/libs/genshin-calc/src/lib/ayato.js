@@ -11,6 +11,21 @@ import { getCurrentTeam } from './team.js';
 
 export const char = ayato;
 
+let HP_BONUS = 0.0096;
+let KYOUKA = [0.9041, 1.007, 1.1098];
+let KYOUKA_FINAL = 1.735;
+
+/*
+// level 90 override
+char.baseAtk = 299;
+char.critDmg = 0.5 + 0.384;
+char.lvl = 90;
+char.lvlMax = 90;
+HP_BONUS = 0.0111;
+KYOUKA = [1.0455, 1.1645, 1.2835];
+KYOUKA_FINAL = 2.006;
+*/
+
 const enemy = {
     lvl: 90,
     res: 0.10,
@@ -19,9 +34,10 @@ const enemy = {
     defDebuff: 0,
 };
 
+
 const hpBonus = ({ flatDmg, hp }, hit) => {
     return {
-        flatDmg: flatDmg + (hit.stats.includes("normal") ? (0.0096 * hp * 4) : 0),
+        flatDmg: flatDmg + (hit.stats.includes("normal") ? (HP_BONUS * hp * 4) : 0),
     };
 };
 
@@ -34,10 +50,9 @@ const burstBonus = ({ elemDmg }, hit) => {
 export const kyoukaHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
     const biggerNumThanDuration = duration * 3;
     return Array(biggerNumThanDuration)
-        .fill([0.9041, 1.007, 1.1098])
+        .fill(KYOUKA)
         .flat()
-        .slice(0, duration)
-        .concat(1.735).map((motionValue, index) => {
+        .slice(0, duration).map((motionValue, index) => {
             return {
                 stats: ["normal", "weapon_sword", "hydro", ...stats],
                 traits: [...traits, hpBonus, burstBonus],
@@ -49,7 +64,20 @@ export const kyoukaHits = (traits = [], debuffs = [], amps = [], transforms = []
                 debuffs,
                 transforms
             };
-        });
+        })
+        .concat([KYOUKA_FINAL].map((motionValue, index) => {
+            return {
+                stats: ["skill", "weapon_sword", "hydro", ...stats],
+                traits: [...traits, hpBonus, burstBonus],
+                amplifiers: [crit, ...amps],
+                motionValue,
+                index,
+                enemy: getCurrentEnemy(),
+                team: getCurrentTeam(),
+                debuffs,
+                transforms
+            };
+        }));
 };
 
 export const suiyuuHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 11) => {

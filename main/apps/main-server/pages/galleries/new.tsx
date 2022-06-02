@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { NewGalleryPage } from '@main/ui';
 import { auth } from '@main/auth';
-import { getUser } from '@main/rest';
+import { getUser, getUserOrNull } from '@main/rest';
 import { UserResponse } from '@main/rest-models';
 
 interface Props {
@@ -10,18 +10,21 @@ interface Props {
 
 export async function getServerSideProps({ req }) {
   const { idKey } = req.cookies;
-  if (!idKey) {
-    throw {
-      message: 'Authentication failed',
-    };
-  }
   const userId = auth().identity.userId(idKey);
-  const user = await getUser(userId);
+  const user = await getUserOrNull(userId);
   const props: Props = {
     user,
   };
 
   return {
+    ...(!user
+      ? {
+          redirect: {
+            permanent: false,
+            destination: '/404',
+          },
+        }
+      : {}),
     props,
   };
 }

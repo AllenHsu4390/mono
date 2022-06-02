@@ -121,13 +121,13 @@ export const yoimiya_xingqiu_yae_bennett = () => {
 };
 
 export const yoimiya_xingqiu_yae_yunjin = () => {
-    const teamWide = [pyroRes, yoimiyaSaxi];
+    const teamWide = [yoimiyaSaxi];
     const debuffs = [xingqiuC2];
 
     const firedanceAction = yoimiya.fireDanceAction({
         weapon: rustR5,
         artifacts: yoimiyaArtifacts,
-        buffs: [pyroRes, yunjinBurst],
+        buffs: [yunjinBurst],
         debuffs,
         amps: [yoimiya.icdPyroVape],
         transforms: [yoimiya.icdOverloaded],
@@ -216,7 +216,7 @@ export const yoimiya_xingqiu_bennett_zhongli = () => {
 };
 
 export const yoimiya_xingqiu_yunjin_bennett = () => {
-    const teamWide = [tom, pyroRes, yoimiyaSaxi];
+    const teamWide = [pyroRes, yoimiyaSaxi];
     const onField = [xingqiuC2, bennBurst, yunjinBurst, ...teamWide];
 
     const firedanceAction = yoimiya.fireDanceAction({
@@ -239,7 +239,7 @@ export const yoimiya_xingqiu_yunjin_bennett = () => {
 };
 
 export const yoimiya_yae_yunjin_bennett = () => {
-    const teamWide = [tom, pyroRes, yoimiyaSaxi];
+    const teamWide = [pyroRes, yoimiyaSaxi];
     const onField = [bennBurst, yunjinBurst, ...teamWide];
 
     const firedanceAction = yoimiya.fireDanceAction({
@@ -4113,6 +4113,40 @@ export const ayato_xiangling_yae_bennett = () => {
             debuffs,
             transforms: [yae.icdElectroCharged]
         }),
+        bennett.passionAction(),
+        bennett.passionAction(),
+        bennett.passionAction(),
+    ])}`);
+};
+
+export const ayato_xiangling_sucrose_bennett = () => {
+    const teamWide = [noblesse, pyroRes];
+    const onField = [bennBurst, ...teamWide, sucroseSwirl];
+    const debuffs = [vvShred];
+
+    output(`Ayato, Xiangling, Sucrose, Bennett: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        xiangling.pyronadoAction({
+            weapon: theCatchR5,
+            artifacts: [flower_2, feather_2, sand_2, goblet_2, circlet_12],
+            buffs: [...onField, sucroseC6],
+            amps: [pyroVape],
+            transforms: [overloaded],
+            debuffs,
+        }),
+        bennett.passionAction(),
         bennett.passionAction(),
         bennett.passionAction(),
     ])}`);

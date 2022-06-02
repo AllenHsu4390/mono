@@ -1,7 +1,7 @@
 import { connectToDatabase } from '../db';
 import { Like as LikeEntity } from '../entity/like';
 import { TransactionTypes } from '../entity/transaction';
-import { decode, encode } from '../hash';
+import { decode, encode } from '@main/hash';
 import { getBalance } from '../reads/balance';
 import { saveTransaction } from './transaction';
 

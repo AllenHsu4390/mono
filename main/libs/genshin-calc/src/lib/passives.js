@@ -174,6 +174,25 @@ export const albedo1 = ({ elemDmg }, { index, enemy }) => {
     };
 };
 
+export const itto1 = ({ flatDmg, def }, { index, enemy, stats }) => {
+
+    return {
+        flatDmg: flatDmg + (stats.includes("kesagiri") ? (0.35 * def) : 0)
+    };
+};
+
+export const ayaka1 = ({ elemDmg }, { stats }) => {
+    return {
+        elemDmg: elemDmg + (stats.includes("cryo") && stats.includes("after_dash") ? 0.18 : 0)
+    };
+};
+
+export const ayaka2 = ({ elemDmg }, { stats }) => {
+    return {
+        elemDmg: elemDmg + ((stats.includes("normal") || stats.includes("charge")) && stats.includes("after_hyouka") ? 0.30 : 0)
+    };
+};
+
 export const cinnabar = ({ flatDmg, def }, { stats }) => {
     return {
         flatDmg: flatDmg + (stats.includes("skill") ? (0.8 * def) : 0)
@@ -197,7 +216,7 @@ export const skywardBlade = (attr, { stats }) => {
     const { atk, flatDmg } = attr;
     return {
         // attack speed increased by 12%
-        flatDmg: flatDmg + (stats.includes("normal") || stats.includes("charge") ? (0.2 * atk) : 0)
+        flatDmg: flatDmg + 200
     };
 };
 

@@ -1,5 +1,9 @@
 import { CreatorResponse } from '@main/rest-models';
-import { Avatar, Typography } from '@mui/material';
+import { Avatar, Typography, Button } from '@mui/material';
+import { indigo } from '@mui/material/colors';
+import { Box, useTheme } from '@mui/system';
+import { CreatorLink } from '../../element/creator-link/creator-link';
+import Link from '../../element/link';
 import { CreatorProfileBase } from './base';
 
 interface Props {
@@ -8,6 +12,7 @@ interface Props {
 
 export function CreatorProfile({ creator }: Props) {
   const { avatarUrl, desc } = creator;
+  const socialMediaLinks = ['Instagram', 'Discord', 'Youtube'];
   return (
     <CreatorProfileBase
       title={
@@ -15,6 +20,7 @@ export function CreatorProfile({ creator }: Props) {
           variant="h4"
           sx={{
             pl: '1rem',
+            pb: '1rem',
           }}
         >
           {creator.name}
@@ -26,11 +32,33 @@ export function CreatorProfile({ creator }: Props) {
           color="text.secondary"
           paragraph
           sx={{
-            padding: '1rem',
+            pl: '1rem',
+            pt: '1rem',
           }}
         >
           {desc}
         </Typography>
+      }
+      contact={
+        <Box
+          sx={{
+            pl: '1rem',
+          }}
+        >
+          {socialMediaLinks.map((link, index) => (
+            <>
+              <CreatorLink
+                key={link}
+                to={link}
+                label={link}
+                sx={{
+                  fontSize: '1.2rem',
+                }}
+              />
+              {index === socialMediaLinks.length - 1 ? null : ' · '}
+            </>
+          ))}
+        </Box>
       }
       avatar={
         <Avatar

@@ -1,7 +1,7 @@
 import { EntityManager } from 'typeorm';
 import { connectToDatabase } from '../db';
 import { Transaction, TransactionTypes } from '../entity/transaction';
-import { decode, encode } from '../hash';
+import { decode, encode } from '@main/hash';
 
 export const saveTransaction = async (
   type: TransactionTypes,

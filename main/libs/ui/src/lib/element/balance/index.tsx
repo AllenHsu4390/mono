@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { useBalance } from '../../hooks/balance';
+import { useBalance } from '../../hooks/use-balance';
 
 const BalanceLabel = () => {
   const { balance } = useBalance();

@@ -80,9 +80,9 @@ export const pale2 = (attr) => {
     };
 };
 
-export const pale4 = ({ elemDmg, atkPct }, hit) => {
+export const pale4 = ({ elemDmg, baseAtk, atk }, hit) => {
     return {
-        atkPct: atkPct + 0.18,
+        atk: atk + (baseAtk * 0.18),
         elemDmg: elemDmg + (hit.stats.includes("physical") ? 0.25 : 0)
     };
 };
@@ -100,9 +100,9 @@ export const husk2 = ({ defPct }) => {
     };
 };
 
-export const husk4 = ({ defPct, elemDmg }, hit) => {
+export const husk4 = ({ baseDef, def, elemDmg }, hit) => {
     return {
-        defPct: defPct + 0.24,
+        def: def + (baseDef * .24),
         elemDmg: elemDmg + (hit.stats.includes("geo") ? 0.24 : 0)
     };
 };

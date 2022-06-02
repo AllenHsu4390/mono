@@ -8,7 +8,40 @@ import { wavebreakerR3 } from './polearms.js';
 import { stats } from './stats.js';
 import { amenoma, harbinger } from './swords.js';
 import { getCurrentTeam } from './team.js';
-import { cryoRes, makeShenheE, noblesse, ttds } from './traits.js';
+import { cryoRes, makeShenheE, noblesse, traitsModifiers, ttds } from './traits.js';
+
+let ATK = undefined;
+const enemy = {
+    lvl: 90,
+    res: 0.10,
+    resBuff: 0,
+    resDebuff: 0,
+    defDebuff: 0,
+    stats: ["hasCryo"]
+};
+
+const baseChar = {
+    element: "cryo",
+    name: "shenhe",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 8144,
+    baseAtk: 1000,
+    baseDef: 526,
+    recharge: 1,
+    atkPct: 0,
+    critRate: 0.05,
+    critDmg: 0.50
+};
+
+const char = baseChar;
+
+// level 90 override
+/*
+char.lvl = 90;
+char.lvlMax = 90;
+ATK = 3800;
+traitsModifiers.SHENHE_DMG_BONUS = 0.8218; */
 
 const springHit = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
     return Array(1).fill(2.23).map((motionValue, index) => {
@@ -27,7 +60,7 @@ const springHit = (traits = [], debuffs = [], amps = [], transforms = [], stats 
 };
 
 const divineHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
-    const shenheE = makeShenheE(5);
+    const shenheE = makeShenheE(5, ATK);
     return [1.512].concat(Array(12).fill(.4968)).map((motionValue, index) => {
         return {
             stats: ["cryo", "burst", ...stats],
@@ -60,34 +93,12 @@ export const divineAction = ({ weapon, artifacts, buffs, debuffs, amps, transfor
     };
 };
 
-const enemy = {
-    lvl: 90,
-    res: 0.10,
-    resBuff: 0,
-    resDebuff: 0,
-    defDebuff: 0,
-    stats: ["hasCryo"]
-};
-
-const baseChar = {
-    element: "cryo",
-    name: "shenhe",
-    lvl: 80,
-    lvlMax: 80,
-    baseHp: 8144,
-    baseAtk: 1000,
-    baseDef: 526,
-    recharge: 1,
-    atkPct: 0,
-    critRate: 0.05,
-    critDmg: 0.50
-};
 
 const quillHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
     return Array(duration).fill(0.50).map((motionValue, index) => {
         return {
             stats: ["cryo", ...stats],
-            traits: [...traits, makeShenheE(1)],
+            traits: [...traits, makeShenheE(1, ATK)],
             amplifiers: [crit, ...amps],
             motionValue,
             index,
@@ -123,7 +134,7 @@ const noWeapon = () => { return { name: 'none' }};
 export const print = () => {
     setCurrentEnemy(enemy);
     console.log('-----Shenhe 3 Cryo-----');
-    console.log(`Wave Divine Damage: ${damageDps(stats(shenhe, wavebreakerR3, artifacts), hits(buffs, debuffs, undefined, undefined, undefined))}`);
+    console.log(`Wave full combo Damage: ${damageDps(stats(shenhe, wavebreakerR3, artifacts), hits(buffs, debuffs, undefined, undefined, undefined), 15)}`);
     console.log('-----Shenhe 1 Cryo Base-----');
     console.log(`Wave Quill Damage: ${damageDps(stats(baseChar, () => { return { name: 'none' }}, []), quillHits(buffs, debuffs, undefined, undefined, undefined, 5))}`);
     console.log(`Wave Quill Damage Ayaka: ${damageDps(stats(ayaka, amenoma, [flower_33, feather_33, sand_33, goblet_33, circlet_33]), quillHits(buffs, debuffs, undefined, undefined, undefined, 5))}`);

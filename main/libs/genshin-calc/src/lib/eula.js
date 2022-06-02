@@ -9,6 +9,8 @@ import { stats } from './stats.js';
 import { getCurrentTeam } from './team.js';
 import { baalE, bennBurst, cryoRes, geoRes, homNature, noblesse, pyroRes, makeShenheE, tom, ttds } from './traits.js';
 
+export const char = eula;
+
 const enemy = {
     lvl: 90,
     res: 0.30,
@@ -17,12 +19,28 @@ const enemy = {
     defDebuff: 0,
 };
 
+
+let BURST_INITIAL = 3.9296;
+let BURST_FINAL = 6.274;
+let STACK = 1.2818;
+
+/*
+// level 90 override
+char.baseAtk = 342;
+char.critDmg = 0.5 + 0.384;
+char.lvl = 90;
+char.lvlMax = 90;
+BURST_INITIAL = 4.4208;
+BURST_FINAL = 7.2556;
+STACK = 1.4824;
+*/
+
 const glacialIllu = (stacks) => {
-    return stacks * 1.2818;
+    return stacks * STACK;
 };
 
 const burstHit = (stacks = 13, traits = [], debuffs = [], amps = [], transforms = []) => {
-    return [6.274 + glacialIllu(stacks)].map((motionValue, index) => {
+    return [BURST_FINAL + glacialIllu(stacks)].map((motionValue, index) => {
         return {
             stats: ["physical", "burst"],
             traits,
@@ -81,7 +99,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
     };
 
     const combo = [
-        ...[3.9296].map(cryoHit),
+        ...[BURST_INITIAL].map(cryoHit),
         ...[1.419, 1.41794, .8982, .8982, 1.7813].map(physHit),
         ...[3.07, 1.20, 1.20].map(cryoHit),
         ...[6.274 / 2].map(miniBurstHit),
@@ -142,8 +160,6 @@ const geoTeam = [tom, geoRes, baalE];
 const electroTeam = [tom, baalE, ttds];
 const cryoTeam = [baalE, cryoRes, makeShenheE(12)];
 const xinyanTeam = [tom, baalE, xinyanFervor];
-
-export const char = eula;
 
 export const print = () => {
     setCurrentEnemy(enemy);

@@ -2,13 +2,21 @@ import { crit } from "./amplifiers.js";
 import { rustR5 } from "./bows.js";
 import { damageDps } from "./damage.js";
 import { getCurrentEnemy } from "./enemy.js";
-import { circlet_4, feather_4, flower_4, goblet_26, sand_27 } from "./my_artifacts.js";
+import { circlet_4, circlet_51, feather_4, feather_51, flower_4, flower_51, goblet_26, goblet_51, sand_27, sand_51 } from "./my_artifacts.js";
 import { yoimiya, yunjin } from "./my_characters.js";
-import { stats } from "./stats.js";
+import { favoniusLance } from "./polearms.js";
+import { finalStats, stats } from "./stats.js";
 import { getCurrentTeam } from "./team.js";
-import { yunjinBurst } from "./traits.js";
+import { traitsModifiers, yunjinBurst } from "./traits.js";
 
 export const char = yunjin;
+
+// level 90 override
+/* */
+char.lvl = 90;
+char.lvlMax = 90;
+char.baseDef = 734;
+traitsModifiers.YUNJIN_DMG_BONUS = .6834;
 
 const bannerHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
     return Array(duration).fill(0.50).map((motionValue, index) => {
@@ -55,10 +63,14 @@ export const bannerAction = () => {
     };
 };
 
-
 const buffs = [];
 const debuffs = [];
-const artifacts = [];
+const artifacts = [flower_51, feather_51, sand_51, goblet_51, circlet_51];
+
+const charFinalValues = finalStats(stats(char, favoniusLance, artifacts));
+
+traitsModifiers.YUNJIN_DEF = charFinalValues.def;
+
 const noWeapon = () => { return { name: 'none' }};
 
 export const print = () => {

@@ -1124,3 +1124,49 @@ export const circlet_45 = {
     critDmg: 0.132,
     recharge: 0.091
 };
+
+// yunjin
+export const flower_51 = {
+    type: "husk",
+    hp: 4780,
+    defPct: 0.182,
+    recharge: 0.181,
+    def: 19,
+    critRate: 0.07
+};
+
+export const feather_51 = {
+    type: "husk",
+    atk: 311,
+    atPct: 0.111,
+    defPct: 0.131,
+    critRate: 0.058,
+    hp: 538
+};
+
+export const sand_51 = {
+    type: "husk",
+    defPct: 0.583,
+    critRate: 0.066,
+    critDmg: 0.187,
+    hpPct: 0.041,
+    hp: 508,
+};
+
+export const goblet_51 = {
+    type: "husk",
+    defPct: 0.583,
+    atkPct: .146,
+    critRate: 0.062,
+    elemMast: 44,
+    recharge: 0.058,
+};
+
+export const circlet_51 = {
+    type: "husk",
+    critRate: 0.258,
+    hp: 299,
+    atkPct: 0.105,
+    atk: 60,
+    defPct: 0.117
+};

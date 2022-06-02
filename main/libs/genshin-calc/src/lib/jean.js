@@ -10,8 +10,20 @@ import { bennBurst, noblesse } from "./traits.js";
 
 export const char = jean;
 
+let BREEZE_START = 6.7968;
+let BREEZE_HIT = 1.2544;
+
+// level 90 override
+/*
+char.baseAtk = 239;
+char.lvl = 90;
+char.lvlMax = 90;
+BREEZE_START = 7.6464;
+BREEZE_HIT = 1.4112;
+*/
+
 const breezeHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 1) => {
-    return [6.7968, 1.2544].map((motionValue, index) => {
+    return [BREEZE_START, BREEZE_HIT].map((motionValue, index) => {
         return {
             stats: ["anemo", "burst", ...stats],
             traits: [...traits],
@@ -66,7 +78,7 @@ const sunfirePyroHits = (traits = [], debuffs = [], amps = [], transforms = [], 
 
 export const galeAction = () => {
     return {
-        char: jean,
+        char: char,
         hits: [],
         delay: 4
     };
@@ -74,7 +86,7 @@ export const galeAction = () => {
 
 export const breezeAction = ({ weapon, artifacts, buffs, debuffs, amps, transforms, hitStats, duration }) => {
     return {
-        char: stats(jean, weapon, artifacts),
+        char: stats(char, weapon, artifacts),
         hits: breezeHits(buffs, debuffs, amps, transforms, hitStats, duration),
         delay: 2
     };
@@ -82,13 +94,13 @@ export const breezeAction = ({ weapon, artifacts, buffs, debuffs, amps, transfor
 
 export const sunfireAction = ({ weapon, artifacts, buffs, debuffs, amps, transforms, hitStats, duration }) => {
     return {
-        char: stats(jean, weapon, artifacts),
+        char: stats(char, weapon, artifacts),
         hits: sunfireHits(buffs, debuffs, amps, transforms, hitStats, duration),
     };
 };
 
 //const artifacts = [{ atk: 720, critRate: 0.359, critDmg: 0.249, elemDmg: 0.387, elemMast: 79 }];
-const artifacts = [{ atk: 408, critRate: 0.366, critDmg: 0.311, elemDmg: 0.12, elemMast: 544 }];
+const artifacts = [{ atk: 408, critRate: 0.521, critDmg: 0.241, elemDmg: 0.12, elemMast: 560 }];
 const buffs = [bennBurst, noblesse];
 const debuffs = [];
 const transforms = [swirl];
@@ -99,15 +111,23 @@ const sunfireOvervapeTest = (start, hits) => {
     return [start, sunfirePyroHits(buffs, debuffs, [pyroVape], [overloaded, swirl], undefined, undefined, motionValue).slice(0, hits)];
 };
 
+const sunfireVapeTest = (start, hits) => {
+    const swirlHits = sunfireHits(buffs, debuffs, undefined, transforms, undefined);
+    const motionValue = damage(start, swirlHits.slice(0, 1));
+    return [start, sunfirePyroHits(buffs, debuffs, [pyroVape], [swirl], undefined, undefined, motionValue).slice(0, hits)];
+};
 
 export const print = () => {
     console.log('-----Breeze damage-----');
-    console.log(`Sac sword: ${damageDps(stats(jean, sacSword, artifacts), breezeHits(buffs, debuffs, undefined, transforms, undefined))}`);
-    console.log(`Iron sting: ${damageDps(stats(jean, ironSting, artifacts), breezeHits(buffs, debuffs, undefined, transforms, undefined))}`);
+    console.log(`Sac sword: ${damageDps(stats(char, sacSword, artifacts), breezeHits(buffs, debuffs, undefined, transforms, undefined))}`);
+    console.log(`Iron sting: ${damageDps(stats(char, ironSting, artifacts), breezeHits(buffs, debuffs, undefined, transforms, undefined))}`);
+    console.log('-----Sunfire vape damage-----');
+    console.log(`Sac sword: ${damageDps(...sunfireVapeTest(stats(char, sacSword, artifacts)), 8)}`);
+    console.log(`Iron sting: ${damageDps(...sunfireVapeTest(stats(char, ironSting, artifacts)), 8)}`);
     console.log('-----Sunfire overvape damage-----');
-    console.log(`Sac sword: ${damageDps(...sunfireOvervapeTest(stats(jean, sacSword, artifacts)), 8)}`);
-    console.log(`Iron sting: ${damageDps(...sunfireOvervapeTest(stats(jean, ironSting, artifacts)), 8)}`);
+    console.log(`Sac sword: ${damageDps(...sunfireOvervapeTest(stats(char, sacSword, artifacts)), 8)}`);
+    console.log(`Iron sting: ${damageDps(...sunfireOvervapeTest(stats(char, ironSting, artifacts)), 8)}`);
     console.log('-----Sunfire overvape damage 1 HIT-----');
-    console.log(`Sac sword: ${damageDps(...sunfireOvervapeTest(stats(jean, sacSword, artifacts), 1))}`);
-    console.log(`Iron sting: ${damageDps(...sunfireOvervapeTest(stats(jean, ironSting, artifacts), 1))}`);
+    console.log(`Sac sword: ${damageDps(...sunfireOvervapeTest(stats(char, sacSword, artifacts), 1))}`);
+    console.log(`Iron sting: ${damageDps(...sunfireOvervapeTest(stats(char, ironSting, artifacts), 1))}`);
 };

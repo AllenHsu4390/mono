@@ -52,6 +52,17 @@ export const amenoma = (attr) => {
     };
 };
 
+export const mistSplitter = (attr) => {
+    const { baseAtk, critDmg, elemDmg } = attr;
+    const newBaseAtk = baseAtk + 674;
+    return {
+        name: "mistsplitter",
+        baseAtk: newBaseAtk,
+        critDmg: critDmg + 0.441,
+        elemDmg: elemDmg + 0.16
+    };
+};
+
 export const festering = (attr) => {
     const { baseAtk, recharge } = attr;
     const newBaseAtk = baseAtk + 475;

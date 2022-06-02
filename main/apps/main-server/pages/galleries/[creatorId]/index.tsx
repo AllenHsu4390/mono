@@ -1,36 +1,52 @@
 import { NextPage } from 'next';
 import { GalleryPage } from '@main/ui';
-import { getCreator, getUser } from '@main/rest';
+import { getAssets, getCreatorOrNull, getUserOrNull } from '@main/rest';
 import { auth } from '@main/auth';
-import { CreatorResponse, UserResponse } from '@main/rest-models';
+import {
+  AssetsResponse,
+  CreatorResponse,
+  UserResponse,
+} from '@main/rest-models';
 
 interface Props {
   user: UserResponse | null;
   creator: CreatorResponse;
+  assets: AssetsResponse | null;
 }
 
 export async function getServerSideProps({ params, req }) {
   const { idKey } = req.cookies;
   const { creatorId } = params;
-  if (typeof creatorId !== 'string') {
-    throw {
-      message: 'Something went wrong',
-    };
-  }
-  const user = idKey ? await getUser(auth().identity.userId(idKey)) : null;
-  const creator = await getCreator(creatorId);
+  const user = await getUserOrNull(auth().identity.userId(idKey));
+  const creator = await getCreatorOrNull(creatorId);
+  const assets = creator ? await getAssets(creator.id, '1') : null;
   const props: Props = {
     user,
     creator,
+    assets,
   };
 
   return {
+    ...(!creator
+      ? {
+          redirect: {
+            permanent: false,
+            destination: '/404',
+          },
+        }
+      : {}),
     props,
   };
 }
 
-const Gallery: NextPage<Props> = ({ user, creator }) => {
-  return <GalleryPage user={user || undefined} creator={creator} />;
+const Gallery: NextPage<Props> = ({ user, creator, assets }) => {
+  return (
+    <GalleryPage
+      user={user || undefined}
+      creator={creator}
+      initialAssets={assets}
+    />
+  );
 };
 
 export default Gallery;

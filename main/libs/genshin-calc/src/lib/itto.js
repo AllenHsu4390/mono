@@ -28,8 +28,13 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
 
     return combo.map((motionValue, index) => {
         return {
-            stats: [motionValue === ushi ? "skill" : "charge", "geo", ...stats],
-            traits,
+            stats: [
+                motionValue === ushi ? "skill" : "charge", 
+                "geo",
+                ...motionValue === ushi ? [] : ["kesagiri"],
+                ...stats
+            ],
+            traits: [...traits],
             amplifiers: [crit, ...amps],
             motionValue,
             index,

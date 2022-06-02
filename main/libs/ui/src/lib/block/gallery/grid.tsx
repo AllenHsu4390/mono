@@ -10,6 +10,7 @@ interface Props {
   hasNextPage: boolean;
   loadMore(page: number): void;
   assetPages: AssetsResponse[];
+  initialAssets: AssetsResponse;
   shouldShowSkeleton: boolean;
 }
 
@@ -21,24 +22,38 @@ const Item = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+const assetToItem = (
+  asset: AssetsResponse['assets'][0],
+  url: string,
+  isPreloaded?: boolean
+) => {
+  return (
+    <Item key={asset.id}>
+      <Link to={url} key={asset.id} scroll={false}>
+        <AssetCard asset={asset} isPreloaded={isPreloaded} />
+      </Link>
+    </Item>
+  );
+};
+
 export const AssetsGrid = ({
   hasNextPage,
   loadMore,
   assetPages,
   shouldShowSkeleton,
+  initialAssets,
 }: Props) => {
   return (
     <InfiniteScroll hasMore={hasNextPage} loadMore={loadMore}>
       <Grid container spacing={0.5}>
         {[
+          ...initialAssets.assets.map((asset, index) =>
+            assetToItem(asset, initialAssets.links.assets[index].url, true)
+          ),
           ...assetPages.map((page: AssetsResponse) =>
-            page.assets.map((asset, index) => (
-              <Item key={asset.id}>
-                <Link to={page.links.asset[index].url} key={asset.id}>
-                  <AssetCard asset={asset} />
-                </Link>
-              </Item>
-            ))
+            page.assets.map((asset, index) =>
+              assetToItem(asset, page.links.assets[index].url)
+            )
           ),
           ...(shouldShowSkeleton
             ? new Array(4).fill(null).map((_, index) => (

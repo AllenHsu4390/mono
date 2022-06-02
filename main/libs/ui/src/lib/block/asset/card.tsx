@@ -10,9 +10,9 @@ interface Props {
   isPreloaded?: boolean;
 }
 
-export function AssetCard({ asset }: Props) {
+export function AssetCard({ asset, isPreloaded }: Props) {
   const [isLoading, setIsLoading] = useState(true);
-  const showSkeleton = isLoading;
+  const showSkeleton = isLoading && !isPreloaded;
 
   const loadingSkeleton = (
     <Box

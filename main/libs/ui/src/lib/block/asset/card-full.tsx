@@ -8,6 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import { AssetResponse } from '@main/rest-models';
+import { useState } from 'react';
 
 interface Props {
   asset: AssetResponse;
@@ -15,6 +16,7 @@ interface Props {
   avatar?: React.ReactNode;
   counter?: React.ReactNode;
   avatarTitle?: React.ReactNode;
+  contact?: React.ReactNode;
 }
 
 export function AssetCardFull({
@@ -23,7 +25,10 @@ export function AssetCardFull({
   avatarTitle,
   counter,
   actions,
+  contact,
 }: Props) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <Card
       sx={{
@@ -32,23 +37,6 @@ export function AssetCardFull({
         position: 'relative',
       }}
     >
-      <CardContent
-        sx={{
-          px: 0,
-          pb: 0,
-        }}
-      >
-        <CardMedia
-          sx={{
-            margin: 'auto',
-            width: 'auto',
-            maxHeight: '50vh',
-          }}
-          component="img"
-          image={asset.src}
-          alt="random"
-        />
-      </CardContent>
       <CardActions
         disableSpacing
         sx={{
@@ -62,7 +50,7 @@ export function AssetCardFull({
           }}
           avatar={avatar}
           title={avatarTitle}
-          subheader={<Typography>Instagram · Discord · YouTube</Typography>}
+          subheader={contact}
         />
         <Stack
           spacing={0}
@@ -75,6 +63,25 @@ export function AssetCardFull({
           {actions ? actions : null}
         </Stack>
       </CardActions>
+      <CardContent
+        sx={{
+          px: 0,
+          pb: 0,
+        }}
+      >
+        <CardMedia
+          sx={{
+            margin: 'auto',
+            cursor: 'pointer',
+            width: isExpanded ? '100%' : 'auto',
+            height: isExpanded ? 'auto' : '60vh',
+          }}
+          component="img"
+          image={asset.src}
+          alt="random"
+          onClick={() => setIsExpanded(!isExpanded)}
+        />
+      </CardContent>
     </Card>
   );
 }

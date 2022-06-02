@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { AssetPage } from '@main/ui';
-import { getAsset, getUser } from '@main/rest';
+import { getAssetOrNull, getUserOrNull } from '@main/rest';
 import { auth } from '@main/auth';
 import { AssetResponse, UserResponse } from '@main/rest-models';
 
@@ -12,19 +12,22 @@ interface Props {
 export async function getServerSideProps({ params, req }) {
   const { idKey } = req.cookies;
   const { assetId } = params;
-  if (typeof assetId !== 'string') {
-    throw {
-      message: 'Something went wrong',
-    };
-  }
-  const asset = await getAsset(assetId);
-  const user = idKey ? await getUser(auth().identity.userId(idKey)) : null;
+  const user = await getUserOrNull(auth().identity.userId(idKey));
+  const asset = await getAssetOrNull(assetId);
   const props: Props = {
     user,
     asset,
   };
 
   return {
+    ...(!asset
+      ? {
+          redirect: {
+            permanent: false,
+            destination: '/404',
+          },
+        }
+      : {}),
     props,
   };
 }

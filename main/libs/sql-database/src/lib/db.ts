@@ -9,7 +9,7 @@ import { getCreator } from './reads/creator';
 import { getUser, getUserId } from './reads/user';
 import { getFollows } from './reads/follows';
 import { Like } from './entity/like';
-import { getLikesCount } from './reads/likesCount';
+import { getLikesCount } from './reads/likes';
 import { saveLike } from './writes/like';
 import { Transaction, TransactionTypes } from './entity/transaction';
 import { getBalance } from './reads/balance';
@@ -26,21 +26,15 @@ const datasource = new DataSource({
   password: 'H>c$6H2xyA`VrR{B',
   database: 'creator_network',
   synchronize: true,
-  logging: true,
+  //logging: true,
   entities: [Creator, User, Asset, Follow, Like, Transaction, DailyTopUp],
 });
 
-let isInitialized = false;
-
 export const connectToDatabase = async () => {
-  if (isInitialized) {
+  if (datasource.isInitialized) {
     return datasource;
   }
   await datasource.initialize();
-  if (process.env.NODE_ENV === 'development') {
-    global['datasource'] = datasource;
-  }
-  isInitialized = true;
   return datasource;
 };
 

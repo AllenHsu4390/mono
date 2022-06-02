@@ -1,27 +1,21 @@
 import { auth } from '@main/auth';
-import { getTrend, getUser } from '@main/rest';
-import { TrendResponse, UserResponse } from '@main/rest-models';
+import { getTopAssets, getUserOrNull } from '@main/rest';
+import { AssetsResponse, UserResponse } from '@main/rest-models';
 import { FeedPage } from '@main/ui';
 import { NextPage } from 'next';
 
 interface Props {
-  user: UserResponse;
-  trend: TrendResponse;
+  user: UserResponse | null;
+  assets: AssetsResponse;
 }
 
 export async function getServerSideProps({ req }) {
   const { idKey } = req.cookies;
-  if (!idKey) {
-    throw {
-      message: 'Authentication failed',
-    };
-  }
-  const userId = auth().identity.userId(idKey);
-  const user = await getUser(userId);
-  const trend = await getTrend();
+  const user = await getUserOrNull(auth().identity.userId(idKey));
+  const assets = await getTopAssets('1');
   const props: Props = {
     user,
-    trend,
+    assets,
   };
 
   return {
@@ -29,8 +23,8 @@ export async function getServerSideProps({ req }) {
   };
 }
 
-const Home: NextPage<Props> = ({ user, trend }) => {
-  return <FeedPage user={user} trend={trend} />;
+const Home: NextPage<Props> = ({ user, assets }) => {
+  return <FeedPage user={user} initialAssets={assets} />;
 };
 
 export default Home;

@@ -14,8 +14,7 @@ const post = async (
     };
   }
   const userId = auth().identity.userId(idKey);
-  const user = await getUser(userId);
-  const topup = await saveDailyTopUp(user.dailyTopUpId, user.id);
+  const topup = await saveDailyTopUp(userId);
   res.status(200).json(topup);
 };
 

@@ -51,6 +51,26 @@ const getPassiveTraits = (char, weapon) => {
     return passiveTraits;
 };
 
+export const finalStats = (start) => {
+    const emptyHit = {
+        stats: [],
+        traits: [],
+        amplifiers: [],
+        motionValue: 0,
+        index: 0,
+        debuffs: [],
+        transforms: []
+    };
+    const attr = [...start.traits].reduce((accum, next) => {
+        return {
+            ...accum,
+            ...next(accum, emptyHit)
+        };
+    }, start);
+
+    return attr;
+};
+
 export const stats = (baseAttr, weapon, artifacts) => {
     const charAttr = {
         lvl: 80,
