@@ -34,10 +34,10 @@ export default function AssetInteractable({ asset }: Props) {
         contact={
           <>
             {socialMediaLinks.map((link, index) => (
-              <>
-                <CreatorLink key={link} to={link} label={link} />
+              <span key={link}>
+                <CreatorLink to={link} label={link} />
                 {index === socialMediaLinks.length - 1 ? null : ' · '}
-              </>
+              </span>
             ))}
           </>
         }

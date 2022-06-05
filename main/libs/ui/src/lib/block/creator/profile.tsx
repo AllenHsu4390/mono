@@ -1,9 +1,7 @@
 import { CreatorResponse } from '@main/rest-models';
 import { Avatar, Typography, Button } from '@mui/material';
-import { indigo } from '@mui/material/colors';
 import { Box, useTheme } from '@mui/system';
 import { CreatorLink } from '../../element/creator-link/creator-link';
-import Link from '../../element/link';
 import { CreatorProfileBase } from './base';
 
 interface Props {
@@ -46,9 +44,8 @@ export function CreatorProfile({ creator }: Props) {
           }}
         >
           {socialMediaLinks.map((link, index) => (
-            <>
+            <span key={link}>
               <CreatorLink
-                key={link}
                 to={link}
                 label={link}
                 sx={{
@@ -56,7 +53,7 @@ export function CreatorProfile({ creator }: Props) {
                 }}
               />
               {index === socialMediaLinks.length - 1 ? null : ' · '}
-            </>
+            </span>
           ))}
         </Box>
       }

@@ -39,7 +39,25 @@ export const getTopAssets = async (pageId: string) => {
     relations: ['creator'],
     skip: createSkip(page, PAGE_SIZE),
     take: PAGE_SIZE,
+    order: {
+      id: 'desc',
+    },
   });
+
+  /*
+  db.createQueryBuilder(Asset)
+        .select('a.id')
+        .addSelect((subQuery) => {
+            return subQuery
+                .select('COUNT(c.id)', 'count')
+                .from(Comment, 'c')
+                .where('c.article.id = a.id');
+        }, 'count')
+        .orderBy('count', 'DESC')
+        .loadRelationCountAndMap('a.comment_count', 'a.comments')
+        .skip(createSkip(page, PAGE_SIZE))
+        .take(PAGE_SIZE);
+        */
   return {
     assets: assets.map(({ id, creator, src }) => ({
       id: encode(id),

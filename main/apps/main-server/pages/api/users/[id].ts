@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { auth } from '@main/auth';
-import { getError, getUser } from '@main/rest';
+import { getError, requestTo } from '@main/rest';
 import { ErrorResponse, UserResponse } from '@main/rest-models';
 import { setSession } from '../logout';
 
@@ -11,15 +10,7 @@ export default async function handler(
   const { id } = req.query;
   try {
     if (req.method === 'GET' && id === 'me') {
-      const { idKey } = req.cookies;
-      if (!idKey) {
-        throw {
-          message: 'Authentication failed',
-        };
-      }
-      const userId = auth().identity.userId(idKey);
-      const user = await getUser(userId);
-      res.status(200).json(user);
+      res.status(200).json(await requestTo.user(req));
     } else {
       throw {
         message: 'Invalid operation',

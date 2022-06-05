@@ -10,11 +10,9 @@ type OK = {
 const login = async (req, res: NextApiResponse<ErrorResponse | OK>) => {
   const { email }: { email: string } = req.body;
   const userId = await getUserIdByEmail(email);
+  const tokenPieces = auth().identity.encryptedUserId(userId).split('|');
   res.status(200).json({
-    magic: `localhost:4200/api/login/${auth().identity.encryptedUserId(
-      userId,
-      '/'
-    )}`,
+    magic: `localhost:4200/api/authentications?u=${tokenPieces[0]}&iv=${tokenPieces[1]}`,
   });
 };
 

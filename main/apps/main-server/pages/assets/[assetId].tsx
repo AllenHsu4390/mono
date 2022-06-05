@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { AssetPage } from '@main/ui';
 import { getAssetOrNull, getUserOrNull } from '@main/rest';
 import { auth } from '@main/auth';
@@ -9,11 +9,14 @@ interface Props {
   asset: AssetResponse;
 }
 
-export async function getServerSideProps({ params, req }) {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query,
+}) => {
   const { idKey } = req.cookies;
-  const { assetId } = params;
+  const { assetId } = query;
   const user = await getUserOrNull(auth().identity.userId(idKey));
-  const asset = await getAssetOrNull(assetId);
+  const asset = await getAssetOrNull([...[assetId]].flat()[0]);
   const props: Props = {
     user,
     asset,
@@ -30,7 +33,8 @@ export async function getServerSideProps({ params, req }) {
       : {}),
     props,
   };
-}
+};
+
 const AssetNextPage: NextPage<Props> = ({ user, asset }) => {
   return <AssetPage user={user || undefined} asset={asset} />;
 };

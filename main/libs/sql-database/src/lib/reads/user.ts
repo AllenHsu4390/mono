@@ -1,7 +1,7 @@
 import { connectToDatabase } from '../db';
 import { User } from '../entity/user';
 import { decode, encode } from '@main/hash';
-import { isTopUpTime } from '../writes/dailyTopUp';
+import { isTopUpTime } from '../writes/daily-top-up';
 
 export const getUser = async (id: string) => {
   const db = await connectToDatabase();

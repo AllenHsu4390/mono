@@ -945,6 +945,98 @@ export const hutao_xingqiu_sucrose_xinyan = () => {
     ])}`);
 };
 
+export const raiden_yelan_xingqiu_sucrose = () => {
+    const teamWide = [baalE, sucroseSwirl];
+    const onField = [yelanA4, ...teamWide, sucroseC6];
+    const debuffs = [xingqiuC2, vvShred];
+    
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        transforms: [raiden.icdElectroCharged],
+    });
+
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasHydro"],
+    });
+
+    output(`Raiden, Yelan, Xingqiu, Sucrose: ${teamDamageDps([
+        musouAction,
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        xingqiu.raincutterAction({
+            weapon: lionroarR5,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            debuffs,
+            buffs: teamWide
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        sucrose.swirlAction(),
+    ])}`);
+};
+
+export const raiden_yelan_xingqiu_zhongli = () => {
+    const teamWide = [baalE, tom];
+    const onField = [yelanA4, ...teamWide];
+    const debuffs = [xingqiuC2, lapidus];
+    
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        transforms: [raiden.icdElectroCharged],
+    });
+
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasHydro"],
+    });
+
+    output(`Raiden, Yelan, Xingqiu, Zhongli: ${teamDamageDps([
+        musouAction,
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        xingqiu.raincutterAction({
+            weapon: lionroarR5,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            debuffs,
+            buffs: teamWide
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        zhongli.lapidusAction(),
+    ])}`);
+};
+
 export const raiden_xingqiu_xiangling_bennett = () => {
     const teamWide = [noblesse, pyroRes, baalE];
     const onField = [bennBurst, ...teamWide];

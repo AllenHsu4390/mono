@@ -1,6 +1,6 @@
 export default function LogoutPage() {
   const logout = async () => {
-    const response = await fetch('/api/users/logout', {
+    const response = await fetch('/api/logout', {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'same-origin',
       method: 'POST',

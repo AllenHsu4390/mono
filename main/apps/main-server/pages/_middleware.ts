@@ -28,9 +28,10 @@ export const isPublicPath = (pathname: string) => {
   const pieces = pathname.split('/');
 
   return !![
-    '/api/login',
-    '/api/login/:id/:iv',
+    '/api/authentications',
     '/api/creators/:id',
+    '/api/login',
+    '/api/sessions',
     '/api/assets',
     '/api/assets/:id',
     '/api/assets/:id/likes/count',

@@ -21,3 +21,5 @@ export * from './lib/sessions/get-session';
 export * from './lib/transactions/get-balance';
 
 export * from './lib/daily-top-up/save-daily-top-up';
+
+export * from './lib/nextjs/requestTo';

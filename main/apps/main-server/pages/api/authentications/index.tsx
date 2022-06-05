@@ -8,9 +8,9 @@ const setSession = (res: NextApiResponse, encryptedUserId: string) => {
   res.setHeader('Set-Cookie', cookieValue);
 };
 
-const login = async (req, res: NextApiResponse<ErrorResponse>) => {
-  const { id, iv }: { id: string; iv: string } = req.query;
-  const user = await getUser(auth().identity.userId([id, iv].join('|')));
+const authenticate = async (req, res: NextApiResponse<ErrorResponse>) => {
+  const { u, iv }: { u: string; iv: string } = req.query;
+  const user = await getUser(auth().identity.userId([u, iv].join('|')));
   setSession(res, auth().identity.encryptedUserId(user.id));
   return res.redirect('/');
 };
@@ -20,7 +20,7 @@ export default async function handler(
   res: NextApiResponse<ErrorResponse>
 ) {
   try {
-    await login(req, res);
+    await authenticate(req, res);
   } catch (e) {
     const error = getError(e);
     res.status(error.status).json(error);

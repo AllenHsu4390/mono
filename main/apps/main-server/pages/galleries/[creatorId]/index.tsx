@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { GalleryPage } from '@main/ui';
 import { getAssets, getCreatorOrNull, getUserOrNull } from '@main/rest';
 import { auth } from '@main/auth';
@@ -14,11 +14,14 @@ interface Props {
   assets: AssetsResponse | null;
 }
 
-export async function getServerSideProps({ params, req }) {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query,
+}) => {
   const { idKey } = req.cookies;
-  const { creatorId } = params;
+  const { creatorId } = query;
   const user = await getUserOrNull(auth().identity.userId(idKey));
-  const creator = await getCreatorOrNull(creatorId);
+  const creator = await getCreatorOrNull([...[creatorId]].flat()[0]);
   const assets = creator ? await getAssets(creator.id, '1') : null;
   const props: Props = {
     user,
@@ -37,7 +40,7 @@ export async function getServerSideProps({ params, req }) {
       : {}),
     props,
   };
-}
+};
 
 const Gallery: NextPage<Props> = ({ user, creator, assets }) => {
   return (

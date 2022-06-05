@@ -10,7 +10,17 @@ import { swirl } from './reactions.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 import { getCurrentTeam } from './team.js';
 
+
+let PLUNGE = 3.49;
+
 export const char = xiao;
+
+// level 90 override
+char.baseAtk = 349;
+char.critRate = 0.05 + 0.192;
+char.lvl = 90;
+char.lvlMax = 90;
+PLUNGE = 4.0402;
 
 const enemy = {
     lvl: 90,
@@ -39,7 +49,7 @@ const tamerOfDemons = ({ elemDmg }, { index }) => {
 };
 
 export const hits = (traits = [], debuffs = [], amps = [], transforms = []) => {
-    return Array(12).fill(3.49).map((motionValue, index) => {
+    return Array(12).fill(PLUNGE).map((motionValue, index) => {
         return {
             traits: [baneOfEvil, tamerOfDemons, ...traits],
             amplifiers: [crit, ...amps],
