@@ -21,6 +21,7 @@ export const getUser = async (id: string) => {
     isLoggedIn: true,
     name: user.creator.name,
     hasDailyTopUp: isTopUpTime(dailyTopUp.updatedAt),
+    creatorId: encode(user.creator.id),
   };
 };
 

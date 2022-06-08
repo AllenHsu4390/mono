@@ -4,14 +4,11 @@ export interface User {
   email: string;
   name: string;
   isLoggedIn: boolean;
+  creatorId: string;
 }
 
 export type UserResponse = User & {
   links: {
-    newGallery: {
-      rel: 'new-gallery';
-      url: string;
-    };
     editAccount: {
       rel: 'edit-account';
       url: string;
@@ -20,8 +17,16 @@ export type UserResponse = User & {
       rel: 'balance';
       url: string;
     };
+    gallery: {
+      rel: 'gallery';
+      url: string;
+    };
     me: {
       rel: 'me';
+      url: string;
+    };
+    logout: {
+      rel: 'logout';
       url: string;
     };
     dailyTopUp?: {

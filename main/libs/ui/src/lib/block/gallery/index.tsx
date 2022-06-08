@@ -1,12 +1,18 @@
-import { AssetsResponse } from '@main/rest-models';
+import {
+  AssetsResponse,
+  CreatorResponse,
+  UserResponse,
+} from '@main/rest-models';
 import { useAssets } from '../../hooks/use-assets';
 import { AssetsGrid } from './grid';
 
 interface Props {
+  user?: UserResponse;
+  creator: CreatorResponse;
   initialAssets: AssetsResponse;
 }
 
-export const Gallery = ({ initialAssets }: Props) => {
+export const Gallery = ({ initialAssets, creator, user }: Props) => {
   const { assets, isLoading, isError, hasNextPage, fetchNextPage } = useAssets(
     initialAssets.links.next?.url
   );
@@ -26,6 +32,8 @@ export const Gallery = ({ initialAssets }: Props) => {
       loadMore={loadMore}
       assetPages={assetPages}
       initialAssets={initialAssets}
+      creator={creator}
+      user={user}
     />
   );
 };

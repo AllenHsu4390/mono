@@ -22,7 +22,7 @@ export default function GalleryPage({ creator, user, initialAssets }: Props) {
       <Container>
         <CreatorProfile creator={creator} />
       </Container>
-      <Gallery initialAssets={initialAssets} />
+      <Gallery creator={creator} initialAssets={initialAssets} user={user} />
     </Page>
   );
 }

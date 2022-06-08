@@ -20,6 +20,14 @@ export const getCreator = async (id: string): Promise<CreatorResponse> => {
         rel: 'assets',
         url: `/api/assets?creatorId=${id}&pageId=1`,
       },
+      newAsset: {
+        rel: 'new-asset',
+        url: `/api/assets/new?creatorId=${id}`,
+      },
+      gallery: {
+        rel: 'gallery',
+        url: `/galleries/${id}`,
+      },
     },
   };
 };

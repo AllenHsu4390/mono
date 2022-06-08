@@ -17,13 +17,13 @@ export const getUser = async (userId: string): Promise<UserResponse> => {
   return {
     ...user,
     links: {
-      newGallery: {
-        rel: 'new-gallery',
-        url: '/galleries/new',
-      },
       editAccount: {
         rel: 'edit-account',
         url: '/users/edit',
+      },
+      gallery: {
+        rel: 'gallery',
+        url: `/galleries/${user.creatorId}`,
       },
       balance: {
         rel: 'balance',
@@ -32,6 +32,10 @@ export const getUser = async (userId: string): Promise<UserResponse> => {
       me: {
         rel: 'me',
         url: '/api/users/me',
+      },
+      logout: {
+        rel: 'logout',
+        url: '/users/logout',
       },
       ...(user.hasDailyTopUp
         ? {
