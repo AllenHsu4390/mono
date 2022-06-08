@@ -1,23 +1,27 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getError, saveLike } from '@main/rest';
+import { saveLike } from '@main/rest';
 import { auth } from '@main/auth';
 import { DropResponse, ErrorResponse } from '@main/rest-models';
+import { z } from 'zod';
+import { withErrorResponse } from '@main/next-utils';
 
-const userFromLogin = (req: NextApiRequest) => req.cookies.idKey;
+const handler = withErrorResponse(
+  async (
+    req: NextApiRequest,
+    res: NextApiResponse<DropResponse | ErrorResponse>
+  ) => {
+    const { idKey } = z
+      .object({
+        idKey: z.string(),
+      })
+      .parse(req.cookies);
+    const { id } = z
+      .object({
+        id: z.string(),
+      })
+      .parse(req.query);
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<DropResponse | ErrorResponse>
-) {
-  try {
-    const { id } = req.query;
-    const userId = auth().identity.userId(userFromLogin(req));
-
-    if (typeof id !== 'string') {
-      throw {
-        message: 'Something went wrong',
-      };
-    }
+    const userId = auth().identity.userId(idKey);
 
     if (req.method !== 'POST') {
       throw {
@@ -31,8 +35,7 @@ export default async function handler(
     });
 
     res.status(200).json(drop);
-  } catch (e) {
-    const error = getError(e);
-    res.status(error.status).json(error);
   }
-}
+);
+
+export default handler;

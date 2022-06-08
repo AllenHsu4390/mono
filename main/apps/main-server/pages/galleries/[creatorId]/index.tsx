@@ -1,12 +1,14 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { GalleryPage } from '@main/ui';
-import { getAssets, getCreatorOrNull, getUserOrNull } from '@main/rest';
+import { getAssets, getCreator, getUserOrNull } from '@main/rest';
 import { auth } from '@main/auth';
 import {
   AssetsResponse,
   CreatorResponse,
   UserResponse,
 } from '@main/rest-models';
+import { z } from 'zod';
+import { withRedirect404OnError } from '@main/next-utils';
 
 interface Props {
   user: UserResponse | null;
@@ -14,33 +16,33 @@ interface Props {
   assets: AssetsResponse | null;
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-  query,
-}) => {
-  const { idKey } = req.cookies;
-  const { creatorId } = query;
-  const user = await getUserOrNull(auth().identity.userId(idKey));
-  const creator = await getCreatorOrNull([...[creatorId]].flat()[0]);
-  const assets = creator ? await getAssets(creator.id, '1') : null;
-  const props: Props = {
-    user,
-    creator,
-    assets,
-  };
+export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
+  async ({ req, query }) => {
+    const { idKey } = z
+      .object({
+        idKey: z.string().optional(),
+      })
+      .parse(req.cookies);
+    const { creatorId } = z
+      .object({
+        creatorId: z.string(),
+      })
+      .parse(query);
+    const userId = idKey ? auth().identity.userId(idKey) : null;
+    const user = userId ? await getUserOrNull(userId) : null;
+    const creator = await getCreator(creatorId);
+    const assets = await getAssets(creator.id, '1');
+    const props: Props = {
+      user,
+      creator,
+      assets,
+    };
 
-  return {
-    ...(!creator
-      ? {
-          redirect: {
-            permanent: false,
-            destination: '/404',
-          },
-        }
-      : {}),
-    props,
-  };
-};
+    return {
+      props,
+    };
+  }
+);
 
 const Gallery: NextPage<Props> = ({ user, creator, assets }) => {
   return (

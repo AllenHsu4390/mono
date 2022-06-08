@@ -1,14 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '@main/auth';
-import { getError, getUserIdByEmail } from '@main/rest';
+import { getUserIdByEmail } from '@main/rest';
 import { ErrorResponse } from '@main/rest-models';
+import { z } from 'zod';
+import { withErrorResponse } from '@main/next-utils';
 
 type OK = {
   magic: string;
 };
 
 const login = async (req, res: NextApiResponse<ErrorResponse | OK>) => {
-  const { email }: { email: string } = req.body;
+  const { email } = z
+    .object({
+      email: z.string().email(),
+    })
+    .parse(req.body);
   const userId = await getUserIdByEmail(email);
   const tokenPieces = auth().identity.encryptedUserId(userId).split('|');
   res.status(200).json({
@@ -16,11 +22,8 @@ const login = async (req, res: NextApiResponse<ErrorResponse | OK>) => {
   });
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ErrorResponse | OK>
-) {
-  try {
+const handler = withErrorResponse(
+  async (req: NextApiRequest, res: NextApiResponse<ErrorResponse | OK>) => {
     switch (true) {
       case req.method === 'POST':
         await login(req, res);
@@ -30,8 +33,7 @@ export default async function handler(
           message: 'Invalid operation',
         };
     }
-  } catch (e) {
-    const error = getError(e);
-    res.status(error.status).json(error);
   }
-}
+);
+
+export default handler;

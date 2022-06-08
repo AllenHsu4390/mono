@@ -1,23 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getAsset, getError } from '@main/rest';
+import { getAsset } from '@main/rest';
 import { AssetResponse, ErrorResponse } from '@main/rest-models';
+import { z } from 'zod';
+import { withErrorResponse } from '@main/next-utils';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<AssetResponse | ErrorResponse>
-) {
-  try {
-    const { id } = req.query;
-
-    if (typeof id !== 'string') {
-      throw {
-        message: 'Something went wrong',
-      };
-    }
+const handler = withErrorResponse(
+  async (
+    req: NextApiRequest,
+    res: NextApiResponse<AssetResponse | ErrorResponse>
+  ) => {
+    const { id } = z
+      .object({
+        id: z.string(),
+      })
+      .parse(req.query);
 
     res.status(200).json(await getAsset(id));
-  } catch (e) {
-    const error = getError(e);
-    res.status(error.status).json(error);
   }
-}
+);
+
+export default handler;

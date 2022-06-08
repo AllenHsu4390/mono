@@ -1,28 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '@main/auth';
-import { getBalance, getError } from '@main/rest';
+import { getBalance } from '@main/rest';
 import { BalanceResponse, ErrorResponse } from '@main/rest-models';
+import { z } from 'zod';
+import { withErrorResponse } from '@main/next-utils';
 
 const get = async (
   req,
   res: NextApiResponse<BalanceResponse | ErrorResponse>
 ) => {
-  const { idKey } = req.cookies;
-  if (!idKey) {
-    throw {
-      message: 'Authentication failed',
-    };
-  }
+  const { idKey } = z
+    .object({
+      idKey: z.string(),
+    })
+    .parse(req.cookies);
   const userId = auth().identity.userId(idKey);
   const balance = await getBalance(userId);
   res.status(200).json(balance);
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<BalanceResponse | ErrorResponse>
-) {
-  try {
+const handler = withErrorResponse(
+  async (
+    req: NextApiRequest,
+    res: NextApiResponse<BalanceResponse | ErrorResponse>
+  ) => {
     switch (true) {
       case req.method === 'GET':
         await get(req, res);
@@ -32,8 +33,7 @@ export default async function handler(
           message: 'Invalid operation',
         };
     }
-  } catch (e) {
-    const error = getError(e);
-    res.status(error.status).json(error);
   }
-}
+);
+
+export default handler;

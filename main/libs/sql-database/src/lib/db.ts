@@ -17,6 +17,7 @@ import { saveTransaction } from './writes/transaction';
 import { DailyTopUp } from './entity/daily-top-up';
 import { getDailyTopUp } from './reads/daily-top-up';
 import { saveDailyTopUp } from './writes/daily-top-up';
+import { saveAsset } from './writes/asset';
 
 const datasource = new DataSource({
   type: 'mysql',
@@ -55,6 +56,7 @@ export const db = {
     like: saveLike,
     transaction: saveTransaction,
     dailyTopUp: saveDailyTopUp,
+    asset: saveAsset,
   },
   enums: {
     transactionTypes: TransactionTypes,

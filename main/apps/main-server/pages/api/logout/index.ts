@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getError } from '@main/rest';
 import { ErrorResponse } from '@main/rest-models';
+import { withErrorResponse } from '@main/next-utils';
 
 type OK = {
   ok: true;
@@ -19,11 +19,8 @@ const logout = async (res: NextApiResponse<ErrorResponse | OK>) => {
   });
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ErrorResponse | OK>
-) {
-  try {
+const handler = withErrorResponse(
+  async (req: NextApiRequest, res: NextApiResponse<ErrorResponse | OK>) => {
     switch (true) {
       case req.method === 'POST':
         await logout(res);
@@ -33,8 +30,7 @@ export default async function handler(
           message: 'Invalid operation',
         };
     }
-  } catch (e) {
-    const error = getError(e);
-    res.status(error.status).json(error);
   }
-}
+);
+
+export default handler;

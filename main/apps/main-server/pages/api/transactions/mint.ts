@@ -1,28 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '@main/auth';
-import { getError, getUser, saveDailyTopUp } from '@main/rest';
+import { saveDailyTopUp } from '@main/rest';
 import { DailyTopUpResponse, ErrorResponse } from '@main/rest-models';
+import { z } from 'zod';
+import { withErrorResponse } from '@main/next-utils';
 
 const post = async (
   req,
   res: NextApiResponse<DailyTopUpResponse | ErrorResponse>
 ) => {
-  const { idKey } = req.cookies;
-  if (!idKey) {
-    throw {
-      message: 'Authentication failed',
-    };
-  }
+  const { idKey } = z
+    .object({
+      idKey: z.string(),
+    })
+    .parse(req.cookies);
   const userId = auth().identity.userId(idKey);
   const topup = await saveDailyTopUp(userId);
   res.status(200).json(topup);
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<DailyTopUpResponse | ErrorResponse>
-) {
-  try {
+const handler = withErrorResponse(
+  async (
+    req: NextApiRequest,
+    res: NextApiResponse<DailyTopUpResponse | ErrorResponse>
+  ) => {
     switch (true) {
       case req.method === 'POST':
         await post(req, res);
@@ -32,8 +33,7 @@ export default async function handler(
           message: 'Invalid operation',
         };
     }
-  } catch (e) {
-    const error = getError(e);
-    res.status(error.status).json(error);
   }
-}
+);
+
+export default handler;

@@ -1,26 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getCreator, getError } from '@main/rest';
+import { getCreator } from '@main/rest';
 import { CreatorResponse, ErrorResponse } from '@main/rest-models';
+import { z } from 'zod';
+import { withErrorResponse } from '@main/next-utils';
 
-const typeError = (value, type) => {
-  return {
-    message: `Invalid type: ${value} to be ${type}`,
-  };
-};
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<CreatorResponse | ErrorResponse>
-) {
-  const { id } = req.query;
-  try {
-    if (typeof id !== 'string') {
-      throw typeError(id, 'string');
-    }
+const handler = withErrorResponse(
+  async (
+    req: NextApiRequest,
+    res: NextApiResponse<CreatorResponse | ErrorResponse>
+  ) => {
+    const { id } = z
+      .object({
+        id: z.string(),
+      })
+      .parse(req.query);
 
     res.status(200).json(await getCreator(id));
-  } catch (e) {
-    const error = getError(e);
-    res.status(error.status).json(error);
   }
-}
+);
+
+export default handler;
