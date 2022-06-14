@@ -11,7 +11,7 @@ import {
 import { IsEmail } from 'class-validator';
 
 import { Creator } from './creator';
-import { DailyTopUp } from './dailyTopUp';
+import { DailyTopUp } from './daily-top-up';
 
 @Entity()
 export class User extends BaseEntity {

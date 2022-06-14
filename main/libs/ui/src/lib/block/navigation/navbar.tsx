@@ -33,14 +33,14 @@ export default function Navigation({ user }: Props) {
 
   const menuItems = user
     ? [
-        <MenuItem key={user.links.newGallery.url}>
-          <Link to={user.links.newGallery.url}>{user.name}</Link>
+        <MenuItem key={user.links.gallery.url}>
+          <Link to={user.links.gallery.url}>{user.name}</Link>
         </MenuItem>,
         <MenuItem key={user.links.editAccount.url}>
           <Link to={user.links.editAccount.url}>{'Settings'}</Link>
         </MenuItem>,
-        <MenuItem key={'/users/logout'}>
-          <Link to={'/users/logout'}>{'Logout'}</Link>
+        <MenuItem key={user.links.logout.url}>
+          <Link to={user.links.logout.url}>{'Logout'}</Link>
         </MenuItem>,
       ]
     : [

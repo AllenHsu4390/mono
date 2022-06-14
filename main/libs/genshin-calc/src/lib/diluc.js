@@ -11,6 +11,9 @@ import { rainslasher, redhorn, serpentSpine, wolfs } from './claymore.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 import { getCurrentTeam } from './team.js';
 
+
+export const char = diluc;
+
 const enemy = {
     lvl: 90,
     res: 0.10,
@@ -20,9 +23,19 @@ const enemy = {
     stats: ["hasHydro"]
 };
 
-const normals = [1.4185, 1.3858, 1.5626, 2.1189]
-const onslaught = [1.7936, 1.8544, 2.4472];
-const dawn = [3.06, .90, .90, .90, 3.06];
+let normals = [1.4185, 1.3858, 1.5626, 2.1189]
+let onslaught = [1.7936, 1.8544, 2.4472];
+let dawn = [3.06, .90, .90, .90, 3.06];
+
+// level 90 override
+char.baseAtk = 335;
+char.baseDef = 784;
+char.critRate = 0.05 + 0.192;
+char.lvl = 90;
+char.lvlMax = 90;
+normals = [1.4185, 1.3858, 1.5626, 2.1189]
+onslaught = [1.7936, 1.8544, 2.4472];
+dawn = [3.06, .90, .90, .90, 3.06];
 
 const normalHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 10) => {
     return normals.slice(0, duration).map((motionValue, index) => {
@@ -107,16 +120,14 @@ export const comboAction = ({ weapon, artifacts, buffs = [], debuffs, amps = [],
 
 const artifacts = [flower_7, feather_7, sand_4, goblet_4, circlet_41];
 
-export const char = diluc;
-
 export const print = () => {
     setCurrentEnemy(enemy);
     const vapeHits = comboHits([tom, noblesse, bennBurst, pyroRes], [lapidus], [pyroVape]);
     console.log("Vape Combo");
-    console.log(`Wolfs: ${damageDps(stats(char, wolfs, artifacts), vapeHits)}`);
-    console.log(`Rainslasher: ${damageDps(stats(char, rainslasher, artifacts), vapeHits)}`);
-    console.log(`Serpent Spine: ${damageDps(stats(char, serpentSpine, artifacts), vapeHits)}`);
-    console.log(`Redhorn: ${damageDps(stats(char, redhorn, artifacts), vapeHits)}`);
+    console.log(`Wolfs: ${damageDps(stats(char, wolfs, artifacts), vapeHits, 10)}`);
+    console.log(`Rainslasher: ${damageDps(stats(char, rainslasher, artifacts), vapeHits, 10)}`);
+    console.log(`Serpent Spine: ${damageDps(stats(char, serpentSpine, artifacts), vapeHits, 10)}`);
+    console.log(`Redhorn: ${damageDps(stats(char, redhorn, artifacts), vapeHits, 10)}`);
     console.log("Dawn CRIT HIT");
     console.log(`Wolfs: ${damageDps(stats(char, wolfs, artifacts.concat({ critRate: 1 })), [vapeHits[3]])}`);
     console.log(`Rainslasher: ${damageDps(stats(char, rainslasher, artifacts.concat({ critRate: 1 })), [vapeHits[3]])}`);

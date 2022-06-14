@@ -1,48 +1,8 @@
 import { AssetResponse } from '@main/rest-models';
 import { Typography, Box, useTheme } from '@mui/material';
-import { useReducer } from 'react';
+import { useState } from 'react';
 import { useLikeCount } from '../../hooks/use-like-count';
 import Toast from '../toast';
-
-interface State {
-  likes: number;
-  diff: number;
-  errorMsg?: string;
-  isShowDiff: boolean;
-}
-
-interface Action {
-  type: 'sync' | 'show-diff' | 'hide-diff' | 'init' | 'error';
-  newLikes?: number;
-}
-
-const reducer = (state: State, action: Action): State => {
-  switch (action.type) {
-    case 'sync':
-      return {
-        ...state,
-        diff: (action.newLikes || 0) - state.likes,
-        likes: action.newLikes || 0,
-      };
-    case 'show-diff':
-      return {
-        ...state,
-        isShowDiff: true,
-      };
-    case 'hide-diff':
-      return {
-        ...state,
-        isShowDiff: false,
-      };
-    case 'error':
-      return {
-        ...state,
-        errorMsg: 'Something went wrong',
-      };
-    default:
-      return state;
-  }
-};
 
 interface Props {
   asset: AssetResponse;
@@ -50,32 +10,26 @@ interface Props {
 
 const LikeCounter = ({ asset }: Props) => {
   const theme = useTheme();
-  const [state, dispatch] = useReducer(reducer, {
+  const [state, setState] = useState({
     likes: 0,
-    diff: 0,
-    isShowDiff: false,
+    isInitial: true,
   });
   const { isLoading, isError, likes } = useLikeCount({
     asset,
     refetchInterval: 5000,
-    onSuccess: () => {
-      const newCount = likes?.count || 0;
-
-      if (newCount === 0) return;
-
-      // sync likes
-      dispatch({
-        type: 'sync',
-        newLikes: newCount,
-      });
-
-      if (state.diff > 0) {
-        dispatch({
-          type: 'show-diff',
-        });
-      }
-    },
+    onSuccess: state.isInitial
+      ? (likesData) => {
+          setState({
+            ...state,
+            isInitial: false,
+            likes: likesData.count,
+          });
+        }
+      : undefined,
   });
+
+  const hasLikes = !isLoading && !isError && !!likes;
+  const showToast = hasLikes && likes.count > state.likes && !state.isInitial;
 
   return (
     <Box
@@ -85,26 +39,28 @@ const LikeCounter = ({ asset }: Props) => {
         position: 'relative',
       }}
     >
-      <Typography>
-        {isLoading || isError || !likes ? '...' : likes.count} snaps
-      </Typography>
-      <Toast
-        show={state.isShowDiff}
-        onHide={() => dispatch({ type: 'hide-diff' })}
-        timer={1000}
-        content={
-          state.diff > 0 && (
-            <Typography>{`+${Math.abs(state.diff)}`}</Typography>
-          )
-        }
-        color={theme.palette.success.main}
-        sx={{
-          right: '100%',
-          top: '0',
-          p: '1rem',
-          fontWeight: 'bold',
-        }}
-      />
+      <Typography>{hasLikes ? likes?.count : '...'} snaps</Typography>
+      {showToast ? (
+        <Toast
+          onDelete={() =>
+            setState({
+              ...state,
+              likes: likes.count,
+            })
+          }
+          timer={2000}
+          content={
+            <Typography>{`+${Math.abs(likes.count - state.likes)}`}</Typography>
+          }
+          color={theme.palette.success.main}
+          sx={{
+            right: '100%',
+            top: '0',
+            p: '1rem',
+            fontWeight: 'bold',
+          }}
+        />
+      ) : null}
     </Box>
   );
 };

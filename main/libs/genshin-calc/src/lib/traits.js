@@ -108,6 +108,13 @@ export const yunjinBurst = ({ flatDmg, elemDmg }, hit) => {
     };
 };
 
+export const yelanA4 = ({ flatDmg, elemDmg }, hit) => {
+    // averaged out
+    return {
+        elemDmg: elemDmg + 0.25,
+    };
+};
+
 export const makeShenheE = (num, ATK = 3300, hold = false) => {
     let shenheQuota = num;
     return ({ flatDmg, elemDmg }, hit) => {

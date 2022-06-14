@@ -1,12 +1,6 @@
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-import {
-  CardActions,
-  CardContent,
-  CardHeader,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { CardActions, CardContent, CardHeader, Stack } from '@mui/material';
 import { AssetResponse } from '@main/rest-models';
 import { useState } from 'react';
 

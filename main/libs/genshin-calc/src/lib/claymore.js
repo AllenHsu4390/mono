@@ -12,9 +12,9 @@ export const wolfs = (attr) => {
 export const serpentSpine = ({ baseAtk, critRate, elemDmg }) => {
     return {
         name: "serpent",
-        baseAtk: baseAtk + 475,
-        critRate: critRate + 0.251,
-        elemDmg: elemDmg + 0.40
+        baseAtk: baseAtk + 510,
+        critRate: critRate + 0.276,
+        elemDmg: elemDmg + 0.45
     }
 };
 

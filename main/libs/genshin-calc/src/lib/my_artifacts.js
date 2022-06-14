@@ -530,6 +530,15 @@ export const flower_50 = {
     def: 39,
 };
 
+export const goblet_53 = {
+    type: "eosf",
+    atkPct: 0.466,
+    elemMast: 19,
+    critDmg: 0.132,
+    critRate: 0.031,
+    hpPct: 0.14,
+};
+
 // yoimiya
 export const flower_4 = {
     type: "shime",
@@ -1138,7 +1147,7 @@ export const flower_51 = {
 export const feather_51 = {
     type: "husk",
     atk: 311,
-    atPct: 0.111,
+    atkPct: 0.111,
     defPct: 0.131,
     critRate: 0.058,
     hp: 538
@@ -1169,4 +1178,42 @@ export const circlet_51 = {
     atkPct: 0.105,
     atk: 60,
     defPct: 0.117
+};
+
+// yelan
+export const flower_52 = {
+    type: "eosf",
+    hp: 4780,
+    hpPct: 0.157,
+    recharge: 0.104,
+    defPct: 0.109,
+    critDmg: 0.07
+};
+
+export const sand_52 = {
+    type: "eosf",
+    recharge: 0.518,
+    elemMast: 23,
+    critDmg: 0.21,
+    hp: 209,
+    hpPct: 0.152
+};
+
+export const goblet_52 = {
+    type: "clam",
+    element: "hydro",
+    elemDmg: 0.466,
+    hpPct: 0.082,
+    critRate: 0.089,
+    def: 42,
+    hp: 538,
+};
+
+export const circlet_52 = {
+    type: "eosf",
+    hpPct: 0.466,
+    def: 37,
+    critDmg: 0.194,
+    elemMast: 35,
+    hp: 448,
 };

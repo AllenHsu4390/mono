@@ -1,29 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getError, saveLike } from '@main/rest';
-import { auth } from '@main/auth';
-import { DropResponse, ErrorResponse } from '@main/rest-models';
+import { saveLike } from '@main/rest';
+import { DropResponse } from '@main/rest-models';
+import { z } from 'zod';
+import { ApiHandler, requestTo } from '@main/next-utils';
 
-const userFromLogin = (req: NextApiRequest) => req.cookies.idKey;
+const handler = new ApiHandler()
+  .withErrorResponse()
+  .withPost(async (req: NextApiRequest, res: NextApiResponse<DropResponse>) => {
+    const { id } = z
+      .object({
+        id: z.string(),
+      })
+      .parse(req.query);
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<DropResponse | ErrorResponse>
-) {
-  try {
-    const { id } = req.query;
-    const userId = auth().identity.userId(userFromLogin(req));
-
-    if (typeof id !== 'string') {
-      throw {
-        message: 'Something went wrong',
-      };
-    }
-
-    if (req.method !== 'POST') {
-      throw {
-        message: 'Invalid method',
-      };
-    }
+    const userId = await requestTo.userId(req);
 
     const drop = await saveLike({
       userId,
@@ -31,8 +21,7 @@ export default async function handler(
     });
 
     res.status(200).json(drop);
-  } catch (e) {
-    const error = getError(e);
-    res.status(error.status).json(error);
-  }
-}
+  })
+  .engage();
+
+export default handler;

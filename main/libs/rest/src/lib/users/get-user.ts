@@ -12,26 +12,39 @@ export const getUserOrNull = async (
 };
 
 export const getUser = async (userId: string): Promise<UserResponse> => {
-  const db = environment.db;
-  const user = await db.get.user(userId);
+  const { cache, db } = environment;
+
+  const user = await cache.get.user(
+    userId,
+    async () => await db.get.user(userId)
+  );
+
   return {
     ...user,
     links: {
-      newGallery: {
-        rel: 'new-gallery',
-        url: '/galleries/new',
-      },
       editAccount: {
         rel: 'edit-account',
         url: '/users/edit',
+      },
+      gallery: {
+        rel: 'gallery',
+        url: `/galleries/${user.creatorId}`,
       },
       balance: {
         rel: 'balance',
         url: '/api/transactions/balance',
       },
+      creator: {
+        rel: 'creator',
+        url: `/api/creators/${user.creatorId}`,
+      },
       me: {
         rel: 'me',
         url: '/api/users/me',
+      },
+      logout: {
+        rel: 'logout',
+        url: '/users/logout',
       },
       ...(user.hasDailyTopUp
         ? {

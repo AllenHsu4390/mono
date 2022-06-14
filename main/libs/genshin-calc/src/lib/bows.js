@@ -33,14 +33,14 @@ export const amosR2 = (attr) => {
     };
 };
 
-export const stringlessR2 = (attr) => {
+export const stringlessR5 = (attr) => {
     const { baseAtk, elemMast } = attr;
     const newBaseAtk = baseAtk + 475;
 
     return {
         name: "stringless",
         baseAtk: newBaseAtk,
-        elemMast: elemMast + 151
+        elemMast: elemMast + 165
     };
 };
 
@@ -65,3 +65,25 @@ export const skywardHarpR1 = (attr) => {
         critRate: critRate + .221
     };
 }
+
+export const recurve = (attr) => {
+    const { baseAtk, hpPct } = attr;
+    const newBaseAtk = baseAtk + 354;
+
+    return {
+        name: "recurve",
+        baseAtk: newBaseAtk,
+        hpPct: hpPct + .469
+    };
+};
+
+export const mouun = (attr) => {
+    const { baseAtk, atkPct } = attr;
+    const newBaseAtk = baseAtk + 565;
+
+    return {
+        name: "mouun",
+        baseAtk: newBaseAtk,
+        atkPct: atkPct + .276
+    };
+};

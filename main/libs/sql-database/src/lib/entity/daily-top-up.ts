@@ -24,11 +24,8 @@ export class DailyTopUp extends BaseEntity {
     this.createdAt = new Date();
     this.updatedAt = new Date();
   }
-
-  /*
   @BeforeUpdate()
   timeStampUpdate() {
     this.updatedAt = new Date();
   }
-  */
 }

@@ -12,7 +12,7 @@ export default function AssetPage({ asset, user }: Props) {
   return (
     <Page user={user} title={asset.creator.name}>
       <Container>
-        <AssetInteractable asset={asset} />
+        <AssetInteractable user={user} asset={asset} />
       </Container>
     </Page>
   );

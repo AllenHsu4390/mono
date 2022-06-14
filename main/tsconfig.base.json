@@ -21,6 +21,7 @@
       "@main/environment": ["libs/environment/src/index.ts"],
       "@main/genshin-calc": ["libs/genshin-calc/src/index.ts"],
       "@main/hash": ["libs/hash/src/index.ts"],
+      "@main/next-utils": ["libs/next-utils/src/index.ts"],
       "@main/rest": ["libs/rest/src/index.ts"],
       "@main/rest-models": ["libs/rest-models/src/index.ts"],
       "@main/sql-database": ["libs/sql-database/src/index.ts"],

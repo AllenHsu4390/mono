@@ -10,7 +10,17 @@ import { swirl } from './reactions.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 import { getCurrentTeam } from './team.js';
 
+
+let PLUNGE = 3.49;
+
 export const char = xiao;
+
+// level 90 override
+char.baseAtk = 349;
+char.critRate = 0.05 + 0.192;
+char.lvl = 90;
+char.lvlMax = 90;
+PLUNGE = 4.0402;
 
 const enemy = {
     lvl: 90,
@@ -39,7 +49,7 @@ const tamerOfDemons = ({ elemDmg }, { index }) => {
 };
 
 export const hits = (traits = [], debuffs = [], amps = [], transforms = []) => {
-    return Array(12).fill(3.49).map((motionValue, index) => {
+    return Array(12).fill(PLUNGE).map((motionValue, index) => {
         return {
             traits: [baneOfEvil, tamerOfDemons, ...traits],
             amplifiers: [crit, ...amps],
@@ -83,14 +93,14 @@ export const print = () => {
     const debuffs = [lapidus];
     const plungehits = hits([tom, geoRes], debuffs, undefined, [swirl]);
 
-    console.log(`Deathmatch r1: ${damageDps(stats(xiao, deathmatch1, artifacts), plungehits, 15, 3)}`);
+    console.log(`Deathmatch: ${damageDps(stats(xiao, deathmatch1, artifacts), plungehits, 15, 3)}`);
     console.log(`Kitain: ${damageDps(stats(xiao, kitain, artifacts), plungehits, 15, 3)}`);
     console.log(`Jade r1: ${damageDps(stats(xiao, jadeSpear, artifacts), plungehits, 15, 3)}`);
     console.log(`Lithic r1, 3 liyue: ${damageDps(stats(xiao, lithic3, artifacts), plungehits, 15, 3)}`);
     console.log(`Homa: ${damageDps(stats(xiao, homa, artifacts), plungehits, 15, 3)}`);
 
     console.log("");
-    console.log(`Deathmatch r1 one hit CRIT: ${damageDps(stats(xiao, deathmatch1, artifacts.concat({ critRate: 1 })), plungehits.slice(0, 1))}`);
+    console.log(`Deathmatch one hit CRIT: ${damageDps(stats(xiao, deathmatch1, artifacts.concat({ critRate: 1 })), plungehits.slice(0, 1))}`);
     console.log(`Jade r1 one hit CRIT: ${damageDps(stats(xiao, jadeSpear, artifacts.concat({ critRate: 1 })), plungehits.slice(0, 1))}`);
     console.log(`Lithic 3 Liyue one hit CRIT: ${damageDps(stats(xiao, lithic3, artifacts.concat({ critRate: 1 })), plungehits.slice(0, 1))}`);
     console.log(`Homa one hit CRIT: ${damageDps(stats(xiao, homa, artifacts.concat({ critRate: 1 })), plungehits.slice(0, 1))}`);

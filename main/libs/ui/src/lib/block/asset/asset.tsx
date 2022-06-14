@@ -1,19 +1,19 @@
-import { Alert, IconButton, Typography } from '@mui/material';
+import { Alert } from '@mui/material';
 import LikeButton from '../../element/like-button';
 import CreatorAvatar from '../../element/avatar';
 import { AssetCardFull } from './card-full';
 import LikeCounter from '../../element/like-counter';
-import Link from '../../element/link';
-import { indigo } from '@mui/material/colors';
 import { useDrop } from '../../hooks/use-drop';
-import { AssetResponse } from '@main/rest-models';
+import { AssetResponse, UserResponse } from '@main/rest-models';
 import { CreatorLink } from '../../element/creator-link/creator-link';
+import DeleteAssetButton from '../../element/delete-asset-button';
 
 interface Props {
   asset: AssetResponse;
+  user: UserResponse;
 }
 
-export default function AssetInteractable({ asset }: Props) {
+export default function AssetInteractable({ asset, user }: Props) {
   const [drop] = useDrop();
   const socialMediaLinks = ['Instagram', 'Discord', 'Youtube'];
   return (
@@ -34,10 +34,10 @@ export default function AssetInteractable({ asset }: Props) {
         contact={
           <>
             {socialMediaLinks.map((link, index) => (
-              <>
-                <CreatorLink key={link} to={link} label={link} />
+              <span key={link}>
+                <CreatorLink to={link} label={link} />
                 {index === socialMediaLinks.length - 1 ? null : ' · '}
-              </>
+              </span>
             ))}
           </>
         }
@@ -51,7 +51,12 @@ export default function AssetInteractable({ asset }: Props) {
           />
         }
         counter={<LikeCounter asset={asset} />}
-        actions={<LikeButton asset={asset} />}
+        actions={
+          <>
+            {asset.links.like ? <LikeButton asset={asset} /> : null}
+            {asset.links.delete ? <DeleteAssetButton asset={asset} /> : null}
+          </>
+        }
       />
     </>
   );

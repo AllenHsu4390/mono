@@ -14,29 +14,30 @@ export const char = xingqiu;
 let RAINSWORD = 1.03;
 
 // level 90 override
-/*
 char.baseAtk = 202;
 char.atkPct = .24;
 char.lvl = 90;
 char.lvlMax = 90;
 RAINSWORD = 1.22;
-*/
 
 
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
-    return Array(Math.floor(Math.min(15, duration) * 4)).fill(RAINSWORD).map((motionValue, index) => {
-        return {
-            stats: ["burst", "hydro", ...stats],
-            traits,
-            amplifiers: [crit, ...amps],
-            motionValue,
-            index,
-            enemy: getCurrentEnemy(),
-            team: getCurrentTeam(),
-            debuffs,
-            transforms
-        };
-    });
+    return [
+        ...fatalRainScreenHits(traits, debuffs, amps, transforms, stats),
+        ...Array(Math.floor(Math.min(15, duration) * 4)).fill(RAINSWORD).map((motionValue, index) => {
+            return {
+                stats: ["burst", "hydro", ...stats],
+                traits,
+                amplifiers: [crit, ...amps],
+                motionValue,
+                index,
+                enemy: getCurrentEnemy(),
+                team: getCurrentTeam(),
+                debuffs,
+                transforms
+            };
+        })
+    ];
 };
 
 const fatalRainScreenHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {

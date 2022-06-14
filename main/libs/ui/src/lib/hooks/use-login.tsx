@@ -12,6 +12,7 @@ export const useLogin = ({
   const mutation = useMutation(
     async () => {
       if (!session || !session.links.login) {
+        console.log(session);
         throw new Error('Missing capability login');
       }
 

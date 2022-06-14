@@ -18,6 +18,8 @@ import * as jean from './jean.js';
 import * as sara from './sara.js';
 import * as yae from './yae.js';
 import * as ayato from './ayato.js';
+import * as yelan from './yelan.js';
+import * as venti from './venti.js';
 import * as teams from './teams.js';
 
 import { getOutputString, output } from './output.js';
@@ -95,6 +97,12 @@ export const print = (command, restCommands = []) => {
             break;
         case 'ayato':
             ayato.print();
+            break;
+        case 'yelan':
+            yelan.print();
+            break;
+        case 'venti':
+            venti.print();
             break;
         case 'teams':
             if (searches.length > 0) {

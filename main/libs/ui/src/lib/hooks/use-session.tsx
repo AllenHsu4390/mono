@@ -22,24 +22,9 @@ export const SessionProvider = ({ children }: ProviderProps) => {
   const { data } = useQuery<SessionResponse>(
     'session',
     async () => {
-      return {
-        isUsualClient: true,
-        isLoggedIn: false,
-        links: {
-          login: {
-            rel: 'login',
-            url: '/api/login',
-          },
-          logout: {
-            rel: 'logout',
-            url: '/api/logout',
-          },
-          session: {
-            rel: 'session',
-            url: '/api/session',
-          },
-        },
-      };
+      const res = await fetch('/api/sessions');
+
+      return res.json();
     },
     {
       refetchInterval: 5000,

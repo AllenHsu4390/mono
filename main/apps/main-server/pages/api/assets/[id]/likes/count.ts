@@ -1,23 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getError, getLikesCount } from '@main/rest';
-import { ErrorResponse, LikesCountResponse } from '@main/rest-models';
+import { getLikesCount } from '@main/rest';
+import { LikesCountResponse } from '@main/rest-models';
+import { z } from 'zod';
+import { ApiHandler } from '@main/next-utils';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<LikesCountResponse | ErrorResponse>
-) {
-  try {
-    const { id } = req.query;
+const handler = new ApiHandler()
+  .withErrorResponse()
+  .withGet(
+    async (req: NextApiRequest, res: NextApiResponse<LikesCountResponse>) => {
+      const { id } = z
+        .object({
+          id: z.string(),
+        })
+        .parse(req.query);
 
-    if (typeof id !== 'string') {
-      throw {
-        message: 'Something went wrong',
-      };
+      res.status(200).json(await getLikesCount(id));
     }
+  )
+  .engage();
 
-    res.status(200).json(await getLikesCount(id));
-  } catch (e) {
-    const error = getError(e);
-    res.status(error.status).json(error);
-  }
-}
+export default handler;

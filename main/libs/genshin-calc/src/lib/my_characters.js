@@ -298,3 +298,30 @@ export const yae = {
     critRate: 0.194,
     critDmg: 0.5
 };
+
+export const yelan = {
+    element: "hydro",
+    name: "yelan",
+    lvl: 90,
+    lvlMax: 90,
+    baseAtk: 244,
+    baseDef: 548,
+    baseHp: 14450,
+    recharge: 1,
+    critRate: 0.05 + 0.192,
+    critDmg: 0.50,
+    elemMast: 0,
+};
+
+export const venti = {
+    element: "anemo",
+    name: "venti",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 9292,
+    baseAtk: 232,
+    baseDef: 590,
+    recharge: 1.24,
+    critRate: 0.05,
+    critDmg: 0.5
+};
