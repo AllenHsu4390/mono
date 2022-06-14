@@ -530,6 +530,15 @@ export const flower_50 = {
     def: 39,
 };
 
+export const goblet_53 = {
+    type: "eosf",
+    atkPct: 0.466,
+    elemMast: 19,
+    critDmg: 0.132,
+    critRate: 0.031,
+    hpPct: 0.14,
+};
+
 // yoimiya
 export const flower_4 = {
     type: "shime",

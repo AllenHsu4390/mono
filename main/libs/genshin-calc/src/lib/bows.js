@@ -65,3 +65,25 @@ export const skywardHarpR1 = (attr) => {
         critRate: critRate + .221
     };
 }
+
+export const recurve = (attr) => {
+    const { baseAtk, hpPct } = attr;
+    const newBaseAtk = baseAtk + 354;
+
+    return {
+        name: "recurve",
+        baseAtk: newBaseAtk,
+        hpPct: hpPct + .469
+    };
+};
+
+export const mouun = (attr) => {
+    const { baseAtk, atkPct } = attr;
+    const newBaseAtk = baseAtk + 565;
+
+    return {
+        name: "mouun",
+        baseAtk: newBaseAtk,
+        atkPct: atkPct + .276
+    };
+};

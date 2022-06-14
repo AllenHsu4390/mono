@@ -12,7 +12,7 @@ export const useSendLike = ({
   const { user } = useUser();
   const mutation = useMutation<DropResponse>(
     async () => {
-      const likeUrl = asset.links.like.url;
+      const likeUrl = asset.links.like?.url;
       if (!likeUrl) {
         throw new Error('missing like capability');
       }

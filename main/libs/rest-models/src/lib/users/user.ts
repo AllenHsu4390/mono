@@ -5,6 +5,7 @@ export interface User {
   name: string;
   isLoggedIn: boolean;
   creatorId: string;
+  hasDailyTopUp: boolean;
 }
 
 export type UserResponse = User & {
@@ -23,6 +24,10 @@ export type UserResponse = User & {
     };
     me: {
       rel: 'me';
+      url: string;
+    };
+    creator: {
+      rel: 'creator';
       url: string;
     };
     logout: {

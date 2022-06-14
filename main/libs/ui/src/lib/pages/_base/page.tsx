@@ -4,7 +4,6 @@ import { Container } from '@mui/material';
 import { UserResponse } from '@main/rest-models';
 import { page } from '../../providers/theme';
 import Head from '../../element/head';
-import { companyName } from '../../element/company/wordmark';
 
 interface Props {
   title?: string;

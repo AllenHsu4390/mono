@@ -7,6 +7,7 @@ import { UserResponse } from '@main/rest-models';
 import { UserProvider } from '../hooks/use-user';
 import { DropProvider } from '../hooks/use-drop';
 import { BalanceProvider } from '../hooks/use-balance';
+import { CreatorProvider } from '../hooks/use-creator';
 
 const queryClient = new QueryClient();
 
@@ -22,11 +23,13 @@ export const AppProvider = ({ user, children }: Props) => {
         <ScrollResetProvider>
           <SessionProvider>
             <UserProvider user={user}>
-              <DropProvider>
-                <BalanceProvider user={user}>
-                  <ThemeProvider theme={theme}>{children}</ThemeProvider>
-                </BalanceProvider>
-              </DropProvider>
+              <CreatorProvider user={user}>
+                <DropProvider>
+                  <BalanceProvider user={user}>
+                    <ThemeProvider theme={theme}>{children}</ThemeProvider>
+                  </BalanceProvider>
+                </DropProvider>
+              </CreatorProvider>
             </UserProvider>
           </SessionProvider>
         </ScrollResetProvider>

@@ -1,9 +1,9 @@
 import { crit, pyroVape } from './amplifiers.js';
 import { damageDps } from './damage.js';
-import { flower_9, feather_9, sand_9, goblet_9, circlet_9, feather_40, circlet_39 } from './my_artifacts.js';
+import { flower_9, feather_9, sand_2, sand_9, goblet_9, circlet_9, feather_40, circlet_13, sand_19, circlet_45, goblet_53 } from './my_artifacts.js';
 import { stats } from './stats.js';
 import { baalE, bennBurst, geoRes, monaOmen, noblesse, pyroRes, saraBurst, tom, ttds } from './traits.js';
-import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel, theCatchR5, favoniusLance, wavebreakerR3, homa } from './polearms.js';
+import { deathmatch1, jadeSpear, lithic3, kitain, whiteTassel, theCatchR5, favoniusLance, wavebreakerR3, homa, engulfing } from './polearms.js';
 import { lisaA2, raidenC2, vvShred } from './debuffs.js';
 import { electroCharged, overloaded } from './reactions.js';
 import { raiden } from './my_characters.js';
@@ -97,8 +97,17 @@ export const omenAction = ({ weapon, artifacts, buffs = [], debuffs = [], amps =
         delay: 2
     };
 };
+goblet_53
 
-const artifacts = [flower_9, feather_40, sand_9, goblet_9, circlet_9];
+const cd_er_artifacts = [flower_9, feather_40, sand_9, goblet_9, circlet_9];
+const cd_atk_artifacts = [flower_9, feather_40, sand_19, goblet_9, circlet_9];
+const cd_er_atk_artifacts = [flower_9, feather_40, sand_19, goblet_53, circlet_9];
+const cd_atk_atk_artifacts = [flower_9, feather_40, sand_19, goblet_53, circlet_9];
+
+const cr_er_artifacts = [flower_9, feather_40, sand_9, goblet_9, circlet_45];
+const cr_atk_artifacts = [flower_9, feather_40, sand_19, goblet_9, circlet_45];
+const cr_er_atk_artifacts = [flower_9, feather_40, sand_19, goblet_53, circlet_45];
+const cr_atk_atk_artifacts = [flower_9, feather_40, sand_19, goblet_53, circlet_45];
 
 const nationalTeam = [bennBurst, noblesse, pyroRes, baalE];
 const buffTeam = [bennBurst, noblesse, baalE, saraBurst];
@@ -107,22 +116,26 @@ export const char = raiden;
 
 export const print = () => {
     setCurrentEnemy(enemy);
-    const nationalTeamEasy = comboHits(N5X3, nationalTeam, [], [], [icdElectroCharged]);
-    const nationalTeamHard = comboHits(N3CAX2_N2CAX2, nationalTeam, [], [], [icdElectroCharged]);
+    const nationalTeamEasy = comboHits(N5X3, nationalTeam, [], [], []);
+    const nationalTeamHard = comboHits(N3CAX2_N2CAX2, nationalTeam, [], [], []);
     const buffTeamEasy = comboHits(N5X3, buffTeam, [vvShred]);
     const buffTeamHard = comboHits(N3CAX2_N2CAX2, buffTeam, [vvShred]);
 
     console.log("National Team");
-    console.log(`Jade r1 3NA5 spam: ${damageDps(stats(char, jadeSpear, artifacts), nationalTeamEasy, 6)}`);
-    console.log(`Catch r5 3NA5 spam: ${damageDps(stats(char, theCatchR5, artifacts), nationalTeamEasy, 6)}`);
-    console.log(`Homa r1 3NA5 spam: ${damageDps(stats(char, homa, artifacts), nationalTeamEasy, 6)}`);
-    console.log(`Wavebreaker 3NA5 spam: ${damageDps(stats(char, wavebreakerR3, artifacts), nationalTeamEasy, 6)}`);
+    console.log(`Engulfing r1 3NA5 spam: ${damageDps(stats(char, engulfing, cr_er_artifacts), nationalTeamEasy, 6)}`);
+    console.log(`Jade r1 3NA5 spam: ${damageDps(stats(char, jadeSpear, cd_er_artifacts), nationalTeamEasy, 6)}`);
+    console.log(`Catch r5 3NA5 spam: ${damageDps(stats(char, theCatchR5, cd_atk_artifacts), nationalTeamEasy, 6)}`);
+    console.log(`Homa r1 3NA5 spam: ${damageDps(stats(char, homa, cr_er_artifacts), nationalTeamEasy, 6)}`);
+    console.log(`Wavebreaker 3NA5 spam: ${damageDps(stats(char, wavebreakerR3, cr_er_artifacts), nationalTeamEasy, 6)}`);
+    console.log(`Deathmatch 3NA5 spam: ${damageDps(stats(char, deathmatch1, cd_er_artifacts), nationalTeamEasy, 6)}`);
     console.log("");
     console.log("Buff Team");
-    console.log(`Jade r1 spam: ${damageDps(stats(char, jadeSpear, artifacts), buffTeamEasy, 6)}`);
-    console.log(`Catch r5 spam: ${damageDps(stats(char, theCatchR5, artifacts), buffTeamEasy, 6)}`);
-    console.log(`Homa r1 spam: ${damageDps(stats(char, homa, artifacts), buffTeamEasy, 6)}`);
-    console.log(`Wavebreaker spam: ${damageDps(stats(char, wavebreakerR3, artifacts), buffTeamEasy, 6)}`);
+    console.log(`Engulfing r1 spam: ${damageDps(stats(char, engulfing, cr_er_artifacts), buffTeamEasy, 6)}`);
+    console.log(`Jade r1 spam: ${damageDps(stats(char, jadeSpear, cd_er_artifacts), buffTeamEasy, 6)}`);
+    console.log(`Catch r5 spam: ${damageDps(stats(char, theCatchR5, cd_atk_artifacts), buffTeamEasy, 6)}`);
+    console.log(`Homa r1 spam: ${damageDps(stats(char, homa, cr_er_artifacts), buffTeamEasy, 6)}`);
+    console.log(`Wavebreaker spam: ${damageDps(stats(char, wavebreakerR3, cr_er_artifacts), buffTeamEasy, 6)}`);
+    console.log(`Deathmatch spam: ${damageDps(stats(char, deathmatch1, cd_er_artifacts), buffTeamEasy, 6)}`);
 
     /*
     console.log("");
@@ -139,20 +152,21 @@ export const print = () => {
     */
     console.log("");
     console.log("National Team first hit");
-    console.log(`Jade r1 initial hit CRIT: ${damageDps(stats(char, jadeSpear, artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
-    console.log(`Catch r5 initial hit CRIT: ${damageDps(stats(char, theCatchR5, artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
-    console.log(`Homa r1 initial hit CRIT: ${damageDps(stats(char, homa, artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
-    console.log(`Wavebreaker r3 initial hit CRIT: ${damageDps(stats(char, wavebreakerR3, artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
+    console.log(`Engulfing r1 initial hit CRIT: ${damageDps(stats(char, engulfing, cr_er_artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
+    console.log(`Jade r1 initial hit CRIT: ${damageDps(stats(char, jadeSpear, cd_er_artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
+    console.log(`Catch r5 initial hit CRIT: ${damageDps(stats(char, theCatchR5, cd_atk_artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
+    console.log(`Homa r1 initial hit CRIT: ${damageDps(stats(char, homa, cr_er_artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
+    console.log(`Wavebreaker r3 initial hit CRIT: ${damageDps(stats(char, wavebreakerR3, cr_er_artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
+    console.log(`Deathmatch initial hit CRIT: ${damageDps(stats(char, deathmatch1, cd_er_artifacts.concat({ critRate: 1 })), nationalTeamEasy.slice(0, 1))}`);
     console.log("");
     console.log("Buff Team first hit");
-    console.log(`Jade r1 initial hit CRIT: ${damageDps(stats(char, jadeSpear, artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
-    console.log(`Catch r5 initial hit CRIT: ${damageDps(stats(char, theCatchR5, artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
-    console.log(`Homa r1 initial hit CRIT: ${damageDps(stats(char, homa, artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
-    console.log(`Wavebreaker r3 initial hit CRIT: ${damageDps(stats(char, wavebreakerR3, artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
+    console.log(`Engulfing r1 initial hit CRIT: ${damageDps(stats(char, engulfing, cr_er_artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
+    console.log(`Jade r1 initial hit CRIT: ${damageDps(stats(char, jadeSpear, cd_er_artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
+    console.log(`Catch r5 initial hit CRIT: ${damageDps(stats(char, theCatchR5, cd_atk_artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
+    console.log(`Homa r1 initial hit CRIT: ${damageDps(stats(char, homa, cr_er_artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
+    console.log(`Wavebreaker r3 initial hit CRIT: ${damageDps(stats(char, wavebreakerR3, cr_er_artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
+    console.log(`Deathmatch initial hit CRIT: ${damageDps(stats(char, deathmatch1, cd_er_artifacts.concat({ critRate: 1 })), buffTeamEasy.slice(0, 1))}`);
 
-    console.log("");
-    console.log("Baleful Omen");
-    console.log(`Jade r1 3NA5 spam: ${damageDps(stats(char, jadeSpear, artifacts), balefulOmenHits(nationalTeam), 10, 0)}`);
 
     //console.log(`Jade r1 C2, initial hit CRIT: ${damageDps(stats(char, jadeSpear, artifacts.concat({ critRate: 1 })), NA3_CA1_jadeSpear(fullbuff, c2).slice(0, 1))}`);
     //console.log(`Catch r5 C2, initial hit CRIT: ${damageDps(stats(char, theCatchR5, artifacts.concat({ critRate: 1 })), NA3_CA1(fullbuff, c2).slice(0, 1))}`);

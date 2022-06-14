@@ -11,7 +11,7 @@ export type CreatorResponse = Creator & {
       rel: 'assets';
       url: string;
     };
-    newAsset: {
+    newAsset?: {
       rel: 'new-asset';
       url: string;
     };

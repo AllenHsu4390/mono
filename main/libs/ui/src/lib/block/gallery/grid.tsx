@@ -57,7 +57,7 @@ export const AssetsGrid = ({
       <Grid container spacing={0.5}>
         {[
           ...[
-            user && user.creatorId === creator.id ? (
+            user && creator.links.newAsset ? (
               <Item>
                 <AddAssetCard key={user.creatorId} creator={creator} />
               </Item>

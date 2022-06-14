@@ -25,6 +25,7 @@ import * as diluc from './diluc.js';
 import * as ayato from './ayato.js';
 import * as yae from './yae.js';
 import * as mona from './mona.js';
+import * as venti from './venti.js';
 import * as yelan from './yelan.js';
 import { amenoma, cinnabar, harbinger, lionroarR5, sacSword, skywardBlade, blackSword } from './swords.js';
 import { circlet_10, circlet_11, circlet_12, circlet_13, circlet_20, circlet_23, circlet_3, circlet_4, circlet_25, circlet_7, circlet_8, circlet_9, feather_1, feather_10, feather_11, feather_13, feather_16, feather_2, feather_20, feather_4, feather_7, feather_8, feather_9, flower_1, flower_10, flower_11, flower_13, flower_18, flower_2, flower_20, flower_4, flower_7, flower_8, flower_9, goblet_1, goblet_10, goblet_11, goblet_15, goblet_2, goblet_20, goblet_4, goblet_43, goblet_8, goblet_9, sand_1, sand_10, sand_11, sand_13, sand_2, sand_20, sand_4, sand_7, sand_8, sand_9, sand_27, goblet_26, feather_28, circlet_29, sands_28, flower_28, flower_30, feather_30, sands_30, goblet_30, circlet_30, feather_31, circlet_28, flower_33, feather_33, sand_33, goblet_33, circlet_33, flower_34, feather_34, sand_34, goblet_34, circlet_5, sand_35, circlet_36, goblet_36, sand_36, feather_36, flower_36, circlet_2, circlet_37, feather_40, circlet_41, goblet_42, sand_42, feather_42, flower_42, circlet_44, circlet_45, feather_44, flower_44, goblet_44, sand_44, circlet_38, goblet_48, circlet_48, goblet_50, sand_48, circlet_52, goblet_52, sand_52, flower_52 } from './my_artifacts.js';
@@ -424,8 +425,40 @@ export const yoimiya_xingqiu_fischl_zhongli = () => {
             artifacts: [flower_13, feather_16, sand_13, goblet_15, circlet_45],
             buffs: teamWide,
             debuffs,
-            
         })
+    ])}`);
+};
+
+export const yoimiya_yelan_xingqiu_bennett = () => {
+    const teamWide = [yoimiyaSaxi, pyroRes, noblesse];
+    const onField = [...teamWide, yelanA4, bennBurst];
+    const debuffs = [xingqiuC2];
+
+    const firedanceAction = yoimiya.fireDanceAction({
+        weapon: rustR5,
+        artifacts: yoimiyaArtifacts,
+        buffs: onField,
+        debuffs,
+        amps: [yoimiya.icdPyroVape],
+        transforms: [yoimiya.icdOverloaded],
+    });
+
+    output(`Yoimiya, Yelan, Xingqiu, Bennett: ${teamDamageDps([
+        firedanceAction,
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        bennett.passionAction(),
+        bennett.passionAction(),
     ])}`);
 };
 
@@ -712,7 +745,6 @@ export const hutao_xingqiu_albedo_zhongli = () => {
             weapon: sacSword,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
-            duration: afterlifeAction.duration,
             debuffs,
         }),
         albedo.blossomAction({
@@ -751,7 +783,6 @@ export const hutao_xingqiu_yae_zhongli = () => {
             weapon: sacSword,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
-            duration: afterlifeAction.duration,
             debuffs,
         }),
         yae.comboAction({
@@ -785,7 +816,6 @@ export const hutao_yelan_xingqiu_zhongli = () => {
             weapon: sacSword,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
-            duration: afterlifeAction.duration,
             debuffs,
         }),
         yelan.diceAction({
@@ -855,7 +885,6 @@ export const hutao_xingqiu_fischl_zhongli = () => {
             weapon: sacSword,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
-            duration: afterlifeAction.duration,
             debuffs,
         }),
         fischl.ozAction({
@@ -901,7 +930,6 @@ export const hutao_xingqiu_sara_zhongli = () => {
             weapon: sacSword,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
-            duration: afterlifeAction.duration,
             debuffs,
         }),
         sara.subjugationAction({
@@ -933,7 +961,6 @@ export const hutao_xingqiu_sucrose_xinyan = () => {
             weapon: sacSword,
             artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
             buffs: teamWide,
-            duration: afterlifeAction.duration,
             debuffs,
         }),
         sucrose.swirlAction(),
@@ -1034,6 +1061,110 @@ export const raiden_yelan_xingqiu_zhongli = () => {
             debuffs,
         }),
         zhongli.lapidusAction(),
+    ])}`);
+};
+
+export const raiden_yelan_xingqiu_xiangling = () => {
+    const teamWide = [baalE];
+    const onField = [yelanA4, ...teamWide];
+    const debuffs = [xingqiuC2];
+    
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        transforms: [raiden.icdElectroCharged],
+    });
+
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasHydro"],
+    });
+
+    output(`Raiden, Yelan, Xingqiu, Xiangling: ${teamDamageDps([
+        musouAction,
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        xingqiu.raincutterAction({
+            weapon: lionroarR5,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            debuffs,
+            buffs: teamWide
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        xiangling.pyronadoAction({
+            weapon: theCatchR5,
+            artifacts: [flower_2, feather_2, sand_2, goblet_2, circlet_12],
+            buffs: onField,
+            debuffs,
+            amps: [pyroVape],
+            transforms: [overloaded],
+        }),
+    ])}`);
+};
+
+export const raiden_yelan_xingqiu_yae = () => {
+    const teamWide = [baalE];
+    const onField = [yelanA4, ...teamWide];
+    const debuffs = [xingqiuC2];
+    
+    const musouAction = raiden.musouAction({
+        weapon: jadeSpear,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        transforms: [raiden.icdElectroCharged],
+    });
+
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasHydro"],
+    });
+
+    output(`Raiden, Yelan, Xingqiu, Yae: ${teamDamageDps([
+        musouAction,
+        raiden.omenAction({
+            weapon: jadeSpear,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        xingqiu.raincutterAction({
+            weapon: lionroarR5,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            debuffs,
+            buffs: teamWide
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yae.comboAction({
+            weapon: widsith_dmg,
+            artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
+            buffs: onField,
+            debuffs,
+        }),
     ])}`);
 };
 
@@ -1670,7 +1801,6 @@ export const ganyu_shenhe_jean_bennett = () => {
         }),
         bennett.passionAction(),
         bennett.passionAction(),
-        bennett.passionAction(),
         jean.galeAction(),
         jean.breezeAction({
             weapon: sacSword,
@@ -2218,6 +2348,69 @@ export const xingqiu_xiangling_bennett_zhongli = () => {
     ])}`);
 };
 
+export const xingqiu_yelan_xiangling_bennett = () => {
+    const teamWide = [noblesse, pyroRes];
+    const onField = [bennBurst, yelanA4, ...teamWide];
+    const debuffs = [xingqiuC2];
+
+    output(`Xingqiu, Yelan, Xiangling, Bennett: ${teamDamageDps([
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: onField,
+            debuffs,
+        }),
+        xiangling.pyronadoAction({
+            weapon: theCatchR5,
+            artifacts: [flower_2, feather_2, sand_2, goblet_2, circlet_12],
+            buffs: [...onField],
+            amps: [pyroVape],
+            debuffs,
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        bennett.passionAction(),
+        bennett.passionAction(),
+        bennett.passionAction()
+    ])}`);
+};
+
+export const xingqiu_yelan_xiangling_zhongli = () => {
+    const teamWide = [tom, pyroRes];
+    const onField = [yelanA4, ...teamWide];
+    const debuffs = [xingqiuC2, lapidus];
+
+    output(`Xingqiu, Yelan, Xiangling, Zhongli: ${teamDamageDps([
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: onField,
+            debuffs,
+        }),
+        xiangling.pyronadoAction({
+            weapon: theCatchR5,
+            artifacts: [flower_2, feather_2, sand_2, goblet_2, circlet_12],
+            buffs: [...onField],
+            amps: [pyroVape],
+            debuffs,
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        bennett.passionAction(),
+        bennett.passionAction(),
+        bennett.passionAction(),
+        zhongli.lapidusAction(),
+    ])}`);
+};
+
 export const xingqiu_xiangling_bennett_sucrose = () => {
     const teamWide = [noblesse, pyroRes];
     const onField = [xingqiuC2, bennBurst, ...teamWide, sucroseSwirl];
@@ -2279,42 +2472,6 @@ export const itto_raiden_albedo_gorou = () => {
             artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         gorou.bannerAction()
-    ])}`);
-};
-
-export const itto_xingqiu_albedo_gorou = () => {
-    const teamWide = [gorouBanner];
-    const onField = [geoRes, ...teamWide];
-    const debuffs = [xingqiuC2, geoResShred];
-
-    setCurrentTeam({
-        chars: [itto.char, albedo.char, gorou.char, xingqiu.char]
-    });
-
-    const royalAction = itto.royalAction({
-        weapon: redhorn,
-        debuffs,
-        buffs: onField,
-        artifacts: [flower_20, feather_30, sands_28, goblet_30, circlet_28]
-    });
-
-    const raincutterAction = xingqiu.raincutterAction({
-        weapon: sacSword,
-        artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
-        buffs: teamWide,
-        duration: 7
-    });
-
-    output(`Itto, Xingqiu, Albedo, Gorou: ${teamDamageDps([
-        royalAction,
-        raincutterAction,
-        albedo.blossomAction({
-            weapon: cinnabar,
-            buffs: teamWide,
-            debuffs,
-            artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
-        }),
-        gorou.bannerAction(),
     ])}`);
 };
 
@@ -2497,6 +2654,11 @@ export const ayaka_mona_venti_diona = () => {
             buffs: [cryoRes],
             artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
         }),
+        venti.odeAction({
+            weapon: stringlessR5,
+            artifacts: [{ atk: 667, critRate: 0.167, critDmg: 0.117, elemDmg: 0, elemMast: 548 }],
+            buffs: [cryoRes],
+        })
     ])}`);
 };
 
@@ -2556,6 +2718,11 @@ export const ayaka_mona_venti_shenhe = () => {
             artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
             buffs: teamWide,
             debuffs
+        }),
+        venti.odeAction({
+            weapon: stringlessR5,
+            artifacts: [{ atk: 667, critRate: 0.167, critDmg: 0.117, elemDmg: 0, elemMast: 548 }],
+            buffs: teamWide,
         }),
         shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
         mona.stellarisAction(),
@@ -2620,6 +2787,84 @@ export const ayaka_kokomi_venti_shenhe = () => {
             debuffs
         }),
         shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
+        venti.odeAction({
+            weapon: stringlessR5,
+            artifacts: [{ atk: 667, critRate: 0.167, critDmg: 0.117, elemDmg: 0, elemMast: 548 }],
+            buffs: teamWide,
+        }),
+    ])}`);
+};
+
+export const ayaka_yelan_xingqiu_shenhe = () => {
+    const teamWide = [yelanA4, cryoRes];
+    const debuffs = [shenheBurst];
+    
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasFrozen"]
+    });
+    const soumetsuAction = ayaka.soumetsuAction({
+        weapon: amenoma,
+        debuffs,
+        buffs: [ttds, makeShenheE(10), ...teamWide],
+        artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+    });
+
+    output(`Ayaka, Yelan, Xingqiu, Shenhe: ${teamDamageDps([
+        soumetsuAction,
+        ayaka.comboAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: teamWide,
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: [ttds, ...teamWide],
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        ayaka.hyoukaAction({
+            weapon: amenoma,
+            debuffs,
+            buffs: teamWide,
+            artifacts: [flower_33, feather_33, sand_33, goblet_33, circlet_33]
+        }),
+        shenhe.springAction({
+            weapon: wavebreakerR3,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.divineAction({
+            weapon: wavebreakerR3,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.springAction({
+            weapon: wavebreakerR3,
+            artifacts: [flower_34, feather_34, sand_34, goblet_34, circlet_5],
+            buffs: teamWide,
+            debuffs
+        }),
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
     ])}`);
 };
 
@@ -2743,7 +2988,12 @@ export const ayaka_venti_diona_shenhe = () => {
             debuffs
         }),
         shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
-        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide })
+        shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
+        venti.odeAction({
+            weapon: stringlessR5,
+            artifacts: [{ atk: 667, critRate: 0.167, critDmg: 0.117, elemDmg: 0, elemMast: 548 }],
+            buffs: teamWide,
+        }),
     ])}`);
 };
 
@@ -2871,6 +3121,11 @@ export const ayaka_venti_bennett_shenhe = () => {
         shenhe.baseQuillAction({ duration: 5, debuffs, teamWide }),
         bennett.passionAction(),
         bennett.passionAction(),
+        venti.odeAction({
+            weapon: stringlessR5,
+            artifacts: [{ atk: 667, critRate: 0.167, critDmg: 0.117, elemDmg: 0, elemMast: 548 }],
+            buffs: teamWide,
+        }),
     ])}`);
 };
 
@@ -4552,6 +4807,43 @@ export const ayato_xingqiu_yunjin_bennett = () => {
             debuffs,
         }),
         yunjin.bannerAction(),
+        bennett.passionAction(),
+    ])}`);
+};
+
+export const ayato_yelan_xiangling_bennett = () => {
+    const teamWide = [noblesse, pyroRes];
+    const onField = [yelanA4, xingqiuC2, bennBurst, ...teamWide];
+    const debuffs = [];
+
+    output(`Ayato, Yelan, Xiangling, Bennett: ${teamDamageDps([
+        ayato.suiyuuAction({
+            weapon: skywardBlade,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        ayato.kyoukaAction({
+            weapon: skywardBlade,
+            duration: 17,
+            buffs: [...onField, yelanA4],
+            debuffs,
+            artifacts: [flower_44, feather_44, sand_44, goblet_48, circlet_13]
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        xiangling.pyronadoAction({
+            weapon: theCatchR5,
+            artifacts: [flower_2, feather_2, sand_2, goblet_2, circlet_12],
+            buffs: [...onField],
+            amps: [pyroVape],
+        }),
+        bennett.passionAction(),
+        bennett.passionAction(),
         bennett.passionAction(),
     ])}`);
 };

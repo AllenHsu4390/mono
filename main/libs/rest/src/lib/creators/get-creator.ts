@@ -1,5 +1,5 @@
 import { environment } from '@main/environment';
-import { CreatorResponse } from '@main/rest-models';
+import { CreatorResponse, User } from '@main/rest-models';
 
 export const getCreatorOrNull = async (
   id: string
@@ -11,7 +11,10 @@ export const getCreatorOrNull = async (
   }
 };
 
-export const getCreator = async (id: string): Promise<CreatorResponse> => {
+export const getCreator = async (
+  id: string,
+  user?: User
+): Promise<CreatorResponse> => {
   const db = environment.db;
   return {
     ...(await db.get.creator(id)),
@@ -20,14 +23,18 @@ export const getCreator = async (id: string): Promise<CreatorResponse> => {
         rel: 'assets',
         url: `/api/assets?creatorId=${id}&pageId=1`,
       },
-      newAsset: {
-        rel: 'new-asset',
-        url: `/api/assets/new?creatorId=${id}`,
-      },
       gallery: {
         rel: 'gallery',
         url: `/galleries/${id}`,
       },
+      ...(user && user.creatorId === id
+        ? {
+            newAsset: {
+              rel: 'new-asset',
+              url: `/api/assets/new?creatorId=${id}`,
+            },
+          }
+        : {}),
     },
   };
 };

@@ -17,7 +17,7 @@ import { saveTransaction } from './writes/transaction';
 import { DailyTopUp } from './entity/daily-top-up';
 import { getDailyTopUp } from './reads/daily-top-up';
 import { saveDailyTopUp } from './writes/daily-top-up';
-import { saveAsset } from './writes/asset';
+import { deleteAsset, saveAsset } from './writes/asset';
 
 const datasource = new DataSource({
   type: 'mysql',
@@ -57,6 +57,9 @@ export const db = {
     transaction: saveTransaction,
     dailyTopUp: saveDailyTopUp,
     asset: saveAsset,
+  },
+  delete: {
+    asset: deleteAsset,
   },
   enums: {
     transactionTypes: TransactionTypes,

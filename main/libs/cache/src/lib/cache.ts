@@ -10,24 +10,24 @@ const memoryCache = new NodeCache({
 export const getUser = async (
   userId: string,
   dbGet: () => Promise<User>
-): Promise<number> => {
+): Promise<User> => {
   // fix for topup
 
-  const key = `user-{${userId}}`;
+  const key = `user-${userId}`;
   if (!memoryCache.has(key)) {
     const value = await dbGet();
     memoryCache.set(key, value, DEFAULT_TTL);
   }
 
   // guaranteed
-  return memoryCache.get(key) as number;
+  return memoryCache.get(key) as User;
 };
 
 const getLikesCount = async (
   assetId: string,
   dbGet: () => Promise<number>
 ): Promise<number> => {
-  const key = `likes-count-{${assetId}}`;
+  const key = `likes-count-${assetId}`;
   if (!memoryCache.has(key)) {
     const value = await dbGet();
     memoryCache.set(key, value, DEFAULT_TTL);
@@ -36,6 +36,7 @@ const getLikesCount = async (
   // guaranteed
   return memoryCache.get(key) as number;
 };
+
 const getBalance = async (
   userId: string,
   dbGet: () => Promise<number>
@@ -51,7 +52,7 @@ const getBalance = async (
 };
 
 const saveLikesCount = async (assetId: string) => {
-  const key = `likes-count-{${assetId}}`;
+  const key = `likes-count-${assetId}`;
   if (memoryCache.has(key)) {
     const value = Number(memoryCache.get(key));
     memoryCache.set(key, value + 1, DEFAULT_TTL);
@@ -67,10 +68,17 @@ const saveBalance = async ({
   debit: number;
   userId: string;
 }) => {
-  const balanceKey = `balance-{${userId}}`;
+  const balanceKey = `balance-${userId}`;
   if (memoryCache.has(balanceKey)) {
     const value = Number(memoryCache.get(balanceKey));
     memoryCache.set(balanceKey, value + credit - debit, DEFAULT_TTL);
+  }
+};
+
+const saveUser = async (user: User) => {
+  const key = `user-${user.id}`;
+  if (memoryCache.has(key)) {
+    memoryCache.set(key, user, DEFAULT_TTL);
   }
 };
 
@@ -78,9 +86,11 @@ export const cache = {
   get: {
     likesCount: getLikesCount,
     balance: getBalance,
+    user: getUser,
   },
   save: {
     likesCount: saveLikesCount,
     balance: saveBalance,
+    user: saveUser,
   },
 };

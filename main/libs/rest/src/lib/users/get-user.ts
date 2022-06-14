@@ -12,8 +12,13 @@ export const getUserOrNull = async (
 };
 
 export const getUser = async (userId: string): Promise<UserResponse> => {
-  const db = environment.db;
-  const user = await db.get.user(userId);
+  const { cache, db } = environment;
+
+  const user = await cache.get.user(
+    userId,
+    async () => await db.get.user(userId)
+  );
+
   return {
     ...user,
     links: {
@@ -28,6 +33,10 @@ export const getUser = async (userId: string): Promise<UserResponse> => {
       balance: {
         rel: 'balance',
         url: '/api/transactions/balance',
+      },
+      creator: {
+        rel: 'creator',
+        url: `/api/creators/${user.creatorId}`,
       },
       me: {
         rel: 'me',

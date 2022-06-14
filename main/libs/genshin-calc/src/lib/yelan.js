@@ -5,7 +5,7 @@ import { stats } from './stats.js';
 import { yelan } from './my_characters.js';
 import { getCurrentEnemy, setCurrentEnemy } from './enemy.js';
 import { getCurrentTeam, setCurrentTeam } from './team.js';
-import { skywardHarpR1, stringlessR5 } from './bows.js';
+import { mouun, recurve, skywardHarpR1, stringlessR5, thunderingPulseR1 } from './bows.js';
 
 export const char = yelan;
 
@@ -115,7 +115,7 @@ const cd_circlet = {
 flower_46;
 
 const artifacts = [flower_52, feather_36, sand_52, goblet_52, circlet_52];
-const cr_artifacts = [flower_52, feather_36, sand_52, goblet_52, circlet_52];
+const cr_artifacts = [flower_52, feather_36, sand_52, goblet_52, cr_circlet];
 
 const buffs = [];
 const debuffs = [];
@@ -132,15 +132,22 @@ export const print = () => {
     setCurrentEnemy(enemy);
     setCurrentTeam({
         chars: [{ element: "geo" }, { element: "hydro" }, { element: "pyro" }, { element: "electro" }]
-    })
+    });
 
     console.log("Total Combo");
     console.log(`Skyward Harp: ${damageDps(stats(char, skywardHarpR1, artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
-    console.log(`Stringless: ${damageDps(stats(char, stringlessR5, cr_artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
+    console.log(`Stringless: ${damageDps(stats(char, stringlessR5, artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
+    console.log(`Recurve: ${damageDps(stats(char, recurve, cr_artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
+    console.log(`Thundering pulse: ${damageDps(stats(char, thunderingPulseR1, cr_artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
+    console.log(`Mouun: ${damageDps(stats(char, mouun, artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
     
+    console.log("");
     console.log("Single Exquisite throw CRIT");
     console.log(`Skyward Harp: ${damageDps(stats(char, skywardHarpR1, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
-    console.log(`Stringless: ${damageDps(stats(char, stringlessR5, cr_artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
+    console.log(`Stringless: ${damageDps(stats(char, stringlessR5, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
+    console.log(`Recurve: ${damageDps(stats(char, recurve, cr_artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
+    console.log(`Thundering pulse: ${damageDps(stats(char, thunderingPulseR1, cr_artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
+    console.log(`Mouun: ${damageDps(stats(char, mouun, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
 
     /* 
     console.log("");

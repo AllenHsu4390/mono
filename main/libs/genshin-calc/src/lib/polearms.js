@@ -60,6 +60,17 @@ export const theCatchR5 = (attr) => {
     };
 };
 
+export const engulfing = (attr) => {
+    const { recharge, baseAtk } = attr;
+    const newBaseAtk = baseAtk + 608;
+
+    return {
+        name: "engulfing",
+        baseAtk: newBaseAtk,
+        recharge: recharge + .551,
+    };
+};
+
 export const jadeSpear = (attr) => {
     const { critRate, baseAtk } = attr;
     const newBaseAtk = baseAtk + 674;

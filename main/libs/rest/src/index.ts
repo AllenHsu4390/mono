@@ -6,6 +6,7 @@ export * from './lib/assets/get-top-assets';
 export * from './lib/assets/get-assets';
 export * from './lib/assets/get-asset';
 export * from './lib/assets/save-asset';
+export * from './lib/assets/delete-asset';
 
 export * from './lib/cdn/save-cdn-data';
 

@@ -4,8 +4,7 @@ import { LikesCountResponse } from '@main/rest-models';
 export const getLikesCount = async (
   assetId: string
 ): Promise<LikesCountResponse> => {
-  const db = environment.db;
-  const cache = environment.cache;
+  const { db, cache } = environment;
   const likesCount = await cache.get.likesCount(assetId, () =>
     db.get.likesCount(assetId)
   );

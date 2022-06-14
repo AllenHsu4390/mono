@@ -19,6 +19,13 @@ export const jadeSpear = ({ baseAtk, atk, elemDmg }, { index }) => {
     };
 };
 
+export const engulfing = ({ baseAtk, atk, recharge }, { index }) => {
+    const atkBonus = (0.28 * (recharge + 0.30 - 1));
+    return {
+        atk: atk + (baseAtk * Math.min(atkBonus, 0.8)),
+    };
+};
+
 export const wolfs = ({ baseAtk, atk }, { index }) => {
     // inaccurate condition
     return {
@@ -110,7 +117,13 @@ export const skywardHarp = ({ critDmg }, { stats }) => {
 export const thunderingPulse = ({ atk, elemDmg, baseAtk }, { stats, index }) => {
     return {
         atk: atk + (baseAtk * 0.2),
-        elemDmg: elemDmg + (3 * 0.4)
+        elemDmg: elemDmg + (stats.includes("normal") ? (3 * 0.4) : 0)
+    };
+};
+
+export const mouun = ({ atk, elemDmg, baseAtk }, { stats, index }) => {
+    return {
+        elemDmg: elemDmg + (stats.includes("burst") ? (250 * 0.0015) : 0)
     };
 };
 

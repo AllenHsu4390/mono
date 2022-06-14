@@ -6,11 +6,9 @@ const dropRate = ({ pctChance } = { pctChance: 0.02 }) => {
 };
 
 export const saveLike = async (like: Like): Promise<DropResponse> => {
-  const db = environment.db;
-  const cache = environment.cache;
+  const { db, cache } = environment;
 
   await db.save.like(like.userId, like.assetId, Cost.Like);
-
   await cache.save.likesCount(like.assetId);
   await cache.save.balance({
     credit: 0,
@@ -18,9 +16,8 @@ export const saveLike = async (like: Like): Promise<DropResponse> => {
     userId: like.userId,
   });
 
-  const isDropped = dropRate();
   return {
-    isDropped,
+    isDropped: dropRate(),
     assetId: like.assetId,
   };
 };

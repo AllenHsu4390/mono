@@ -312,3 +312,16 @@ export const yelan = {
     critDmg: 0.50,
     elemMast: 0,
 };
+
+export const venti = {
+    element: "anemo",
+    name: "venti",
+    lvl: 80,
+    lvlMax: 80,
+    baseHp: 9292,
+    baseAtk: 232,
+    baseDef: 590,
+    recharge: 1.24,
+    critRate: 0.05,
+    critDmg: 0.5
+};
