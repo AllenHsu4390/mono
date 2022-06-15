@@ -12,5 +12,5 @@ export const saveAsset = async (
     throw new Error('Creator did not match user creator');
   }
   const cdnAsset = await saveCdnData(imageData);
-  await db.save.asset(creatorId, cdnAsset.url);
+  await db.asset.save(creatorId, cdnAsset.url);
 };

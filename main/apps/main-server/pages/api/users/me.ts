@@ -1,9 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getUser } from '@main/rest';
 import { ErrorResponse, UserResponse } from '@main/rest-models';
-import { z } from 'zod';
-import { auth } from '@main/auth';
-import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
+import { ApiHandler, requestTo } from '@main/next-utils';
 
 const handler = new ApiHandler()
   .withErrorResponse()

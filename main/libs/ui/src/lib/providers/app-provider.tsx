@@ -11,12 +11,18 @@ import { CreatorProvider } from '../hooks/use-creator';
 
 const queryClient = new QueryClient();
 
-interface Props {
-  user?: UserResponse;
+export interface WithUserProps {
+  user?: UserResponse | null;
+}
+
+interface ReactChildren {
   children: React.ReactNode;
 }
 
-export const AppProvider = ({ user, children }: Props) => {
+export const AppProvider = ({
+  user,
+  children,
+}: WithUserProps & ReactChildren) => {
   if (user) {
     return (
       <QueryClientProvider client={queryClient}>

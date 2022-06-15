@@ -15,7 +15,7 @@ const handler = new ApiHandler()
 
     const user = await requestTo.userOrNull(req);
 
-    res.status(200).json(await getAsset(id, user));
+    res.status(200).json(await getAsset(id, user || undefined));
   })
   .engage();
 

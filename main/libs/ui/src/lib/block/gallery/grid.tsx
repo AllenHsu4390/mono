@@ -4,20 +4,16 @@ import { Grid } from '@mui/material';
 import { AssetCard } from '../asset/card';
 import { AssetCardSkeleton } from '../asset/skeleton';
 import Link from '../../element/link';
-import {
-  AssetsResponse,
-  CreatorResponse,
-  UserResponse,
-} from '@main/rest-models';
+import { AssetsResponse, CreatorResponse } from '@main/rest-models';
 import { AddAssetCard } from '../add-asset-card/add-asset-card';
+import { useUser } from '../../hooks/use-user';
 
 interface Props {
   hasNextPage: boolean;
   loadMore(page: number): void;
   assetPages: AssetsResponse[];
   initialAssets: AssetsResponse;
-  user?: UserResponse;
-  creator: CreatorResponse;
+  creator?: CreatorResponse;
   shouldShowSkeleton: boolean;
 }
 
@@ -49,15 +45,16 @@ export const AssetsGrid = ({
   assetPages,
   shouldShowSkeleton,
   initialAssets,
-  user,
   creator,
 }: Props) => {
+  const { user } = useUser();
+
   return (
     <InfiniteScroll hasMore={hasNextPage} loadMore={loadMore}>
       <Grid container spacing={0.5}>
         {[
           ...[
-            user && creator.links.newAsset ? (
+            user && creator?.links.newAsset ? (
               <Item>
                 <AddAssetCard key={user.creatorId} creator={creator} />
               </Item>

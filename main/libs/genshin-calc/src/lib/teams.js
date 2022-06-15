@@ -3349,6 +3349,86 @@ export const diluc_xingqiu_bennett_zhongli = () => {
     ])}`);
 };
 
+export const diluc_yelan_xingqiu_zhongli = () => {
+    const teamWide = [tom];
+    const onField = [...teamWide, yelanA4];
+    const debuffs = [lapidus, xingqiuC2];
+
+    const comboAction = diluc.comboAction({
+        weapon: serpentSpine,
+        artifacts: [flower_7, feather_7, sand_4, goblet_4, circlet_41],
+        buffs: onField,
+        debuffs,
+        amps: [pyroVape],
+    });
+
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasHydro"]
+    });
+
+    output(`Diluc, Yelan, Xingqiu, Zhong Li: ${teamDamageDps([
+        comboAction,
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        zhongli.lapidusAction(),
+    ])}`);
+};
+
+export const diluc_yelan_xingqiu_bennett = () => {
+    const teamWide = [noblesse];
+    const onField = [...teamWide, bennBurst, yelanA4];
+    const debuffs = [xingqiuC2];
+
+    const comboAction = diluc.comboAction({
+        weapon: serpentSpine,
+        artifacts: [flower_7, feather_7, sand_4, goblet_4, circlet_41],
+        buffs: onField,
+        debuffs,
+        amps: [pyroVape],
+    });
+    
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasHydro"]
+    });
+
+    output(`Diluc, Yelan, Xingqiu, Bennett: ${teamDamageDps([
+        comboAction,
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        bennett.passionAction(),
+    ])}`);
+};
+
 export const yae_xingqiu_albedo_zhongli = () => {
     const teamWide = [tom, homNature];
     const onField = [geoRes, ...teamWide];
@@ -4813,7 +4893,7 @@ export const ayato_xingqiu_yunjin_bennett = () => {
 
 export const ayato_yelan_xiangling_bennett = () => {
     const teamWide = [noblesse, pyroRes];
-    const onField = [yelanA4, xingqiuC2, bennBurst, ...teamWide];
+    const onField = [xingqiuC2, bennBurst, ...teamWide];
     const debuffs = [];
 
     output(`Ayato, Yelan, Xiangling, Bennett: ${teamDamageDps([

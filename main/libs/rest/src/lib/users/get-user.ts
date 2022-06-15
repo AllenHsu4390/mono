@@ -1,22 +1,12 @@
 import { environment } from '@main/environment';
 import { UserResponse } from '@main/rest-models';
 
-export const getUserOrNull = async (
-  userId: string
-): Promise<UserResponse | null> => {
-  try {
-    return await getUser(userId);
-  } catch (e) {
-    return null;
-  }
-};
-
 export const getUser = async (userId: string): Promise<UserResponse> => {
   const { cache, db } = environment;
 
-  const user = await cache.get.user(
+  const user = await cache.user.get(
     userId,
-    async () => await db.get.user(userId)
+    async () => await db.user.get(userId)
   );
 
   return {

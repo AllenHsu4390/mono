@@ -40,26 +40,44 @@ export const connectToDatabase = async () => {
 };
 
 export const db = {
-  get: {
-    user: getUser,
-    creator: getCreator,
-    asset: getAsset,
-    assets: getAssets,
-    topAssets: getTopAssets,
-    follows: getFollows,
-    likesCount: getLikesCount,
-    userId: getUserId,
-    balance: getBalance,
-    dailyTopUP: getDailyTopUp,
+  user: {
+    get: getUser,
   },
-  save: {
-    like: saveLike,
-    transaction: saveTransaction,
-    dailyTopUp: saveDailyTopUp,
-    asset: saveAsset,
+  creator: {
+    get: getCreator,
   },
-  delete: {
-    asset: deleteAsset,
+  asset: {
+    get: getAsset,
+    save: saveAsset,
+    delete: deleteAsset,
+  },
+  assets: {
+    get: getAssets,
+  },
+  topAssets: {
+    get: getTopAssets,
+  },
+  follows: {
+    get: getFollows,
+  },
+  likesCount: {
+    get: getLikesCount,
+  },
+  userId: {
+    get: getUserId,
+  },
+  balance: {
+    get: getBalance,
+  },
+  dailyTopUp: {
+    get: getDailyTopUp,
+    save: saveDailyTopUp,
+  },
+  like: {
+    save: saveLike,
+  },
+  transaction: {
+    save: saveTransaction,
   },
   enums: {
     transactionTypes: TransactionTypes,

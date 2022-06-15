@@ -26,7 +26,7 @@ export const withRedirect404OnError = (
   };
 };
 
-export const withErrorResponse = (handler: NextApiHandler) => {
+const withErrorResponse = (handler: NextApiHandler): NextApiHandler => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       return await handler(req, res);
@@ -42,7 +42,7 @@ interface Methods {
   get?: NextApiHandler;
 }
 
-export const withMethods = (methods: Methods) => {
+export const withMethods = (methods: Methods): NextApiHandler => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST' && methods.post) {
       return await methods.post(req, res);
@@ -57,14 +57,9 @@ export const withMethods = (methods: Methods) => {
   };
 };
 
-const pipe =
-  (...fns) =>
-  (x) =>
-    fns.reduce((y, f) => f(y), x);
-
 export class ApiHandler {
   private methods: Methods = {};
-  private traits = [];
+  private traits: Array<(handler: NextApiHandler) => NextApiHandler> = [];
 
   public withErrorResponse() {
     this.traits.push(withErrorResponse);
@@ -82,7 +77,13 @@ export class ApiHandler {
   }
 
   public engage(): NextApiHandler {
-    return pipe(withMethods, ...this.traits)(this.methods);
+    let handler = withMethods(this.methods);
+
+    this.traits.forEach((trait) => {
+      handler = trait(handler);
+    });
+
+    return handler;
   }
 }
 

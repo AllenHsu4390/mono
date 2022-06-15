@@ -3,7 +3,7 @@ import { AssetsResponse } from '@main/rest-models';
 
 export const getTopAssets = async (pageId: string): Promise<AssetsResponse> => {
   const db = environment.db;
-  const { assets, pagination } = await db.get.topAssets(pageId);
+  const { assets, pagination } = await db.topAssets.get(pageId);
 
   return {
     assets,

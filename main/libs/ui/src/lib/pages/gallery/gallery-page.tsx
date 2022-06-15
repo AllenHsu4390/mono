@@ -1,28 +1,23 @@
 import Page from '../_base/page';
 import { CreatorProfile } from '../../block/creator/profile';
 import { Gallery } from '../../block/gallery';
-import {
-  AssetsResponse,
-  CreatorResponse,
-  UserResponse,
-} from '@main/rest-models';
+import { AssetsResponse, CreatorResponse } from '@main/rest-models';
 import { useScrollReset } from '../../hooks/use-scroll-reset';
 import { Container } from '@mui/material';
 
-interface Props {
+export interface GalleryPageProps {
   creator: CreatorResponse;
-  user?: UserResponse;
   initialAssets: AssetsResponse;
 }
 
-export default function GalleryPage({ creator, user, initialAssets }: Props) {
+export const GalleryPage = ({ creator, initialAssets }: GalleryPageProps) => {
   useScrollReset(`creator-${creator.id}`);
   return (
-    <Page user={user} title={creator.name}>
+    <Page title={creator.name}>
       <Container>
         <CreatorProfile creator={creator} />
       </Container>
-      <Gallery creator={creator} initialAssets={initialAssets} user={user} />
+      <Gallery creator={creator} initialAssets={initialAssets} />
     </Page>
   );
-}
+};

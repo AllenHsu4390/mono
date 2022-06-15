@@ -6,7 +6,7 @@ export const saveDailyTopUp = async (
 ): Promise<DailyTopUpResponse> => {
   const db = environment.db;
 
-  await db.save.dailyTopUp(userId, Gain.DailyTopUp);
+  await db.dailyTopUp.save(userId, Gain.DailyTopUp);
 
   return {
     hasToppedUp: true,

@@ -6,7 +6,7 @@ export const getAssets = async (
   pageId: string
 ): Promise<AssetsResponse> => {
   const db = environment.db;
-  const { assets, pagination } = await db.get.assets(creatorId, pageId);
+  const { assets, pagination } = await db.assets.get(creatorId, pageId);
 
   return {
     assets,

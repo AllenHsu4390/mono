@@ -1,5 +1,5 @@
 import { Pagination } from '../pagination';
-import { Follow } from './single';
+import { Follow } from './follow';
 
 export interface Follows {
   follows: Follow[];

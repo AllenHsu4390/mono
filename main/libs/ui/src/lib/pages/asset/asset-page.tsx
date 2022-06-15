@@ -3,17 +3,16 @@ import AssetInteractable from '../../block/asset/asset';
 import { AssetResponse, UserResponse } from '@main/rest-models';
 import { Container } from '@mui/material';
 
-interface Props {
+export interface AssetPageProps {
   asset: AssetResponse;
-  user: UserResponse;
 }
 
-export default function AssetPage({ asset, user }: Props) {
+export const AssetPage = ({ asset }: AssetPageProps) => {
   return (
-    <Page user={user} title={asset.creator.name}>
+    <Page title={asset.creator.name}>
       <Container>
-        <AssetInteractable user={user} asset={asset} />
+        <AssetInteractable asset={asset} />
       </Container>
     </Page>
   );
-}
+};

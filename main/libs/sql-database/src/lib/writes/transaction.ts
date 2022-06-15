@@ -3,14 +3,23 @@ import { connectToDatabase } from '../db';
 import { Transaction, TransactionTypes } from '../entity/transaction';
 import { decode, encode } from '@main/hash';
 
-export const saveTransaction = async (
-  type: TransactionTypes,
-  userId: string,
-  actionId: string,
-  credit: number,
-  debit: number,
-  manager?: EntityManager
-): Promise<{ id: string }> => {
+export interface SaveTransactionProps {
+  type: TransactionTypes;
+  userId: string;
+  actionId: string;
+  credit?: number;
+  debit?: number;
+  manager?: EntityManager;
+}
+
+export const saveTransaction = async ({
+  type,
+  userId,
+  actionId,
+  credit = 0,
+  debit = 0,
+  manager,
+}: SaveTransactionProps): Promise<{ id: string }> => {
   const db = manager || (await connectToDatabase());
   const savedTransaction = await db.transaction(async (manager) => {
     const dbTransaction = new Transaction();

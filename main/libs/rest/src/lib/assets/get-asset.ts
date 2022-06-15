@@ -3,10 +3,10 @@ import { AssetResponse, User } from '@main/rest-models';
 
 export const getAsset = async (
   id: string,
-  user?: User
+  user?: User | null
 ): Promise<AssetResponse> => {
   const db = environment.db;
-  const asset = await db.get.asset(id);
+  const asset = await db.asset.get(id);
   const isLogin = !!user;
   const isOwnAsset = isLogin && asset.creator.id === user.creatorId;
 

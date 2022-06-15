@@ -3,7 +3,7 @@ import { auth } from '@main/auth';
 import { getUser } from '@main/rest';
 import { ErrorResponse } from '@main/rest-models';
 import { z } from 'zod';
-import { ApiHandler, withErrorResponse } from '@main/next-utils';
+import { ApiHandler } from '@main/next-utils';
 
 const setSession = (res: NextApiResponse, encryptedUserId: string) => {
   const cookieValue = `idKey=${encryptedUserId}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`;

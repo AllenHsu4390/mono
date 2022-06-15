@@ -4,7 +4,7 @@ import { AppProvider } from '@main/ui';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AppProvider user={pageProps.user || undefined}>
+    <AppProvider user={pageProps.user}>
       <Component {...pageProps} />
     </AppProvider>
   );

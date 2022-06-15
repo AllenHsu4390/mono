@@ -26,16 +26,15 @@ export const saveDailyTopUp = async (userId: string, topUpCredit: number) => {
     }
 
     dailyTopUp.updatedAt = new Date();
-    const savedDailyTopUp = await manager.save(dailyTopUp, {});
+    const savedDailyTopUp = await manager.save(dailyTopUp);
 
-    const savedTransaction = await saveTransaction(
-      TransactionTypes.MINT,
+    const savedTransaction = await saveTransaction({
+      type: TransactionTypes.MINT,
       userId,
-      encode(savedDailyTopUp.id),
-      topUpCredit,
-      0,
-      manager
-    );
+      actionId: encode(savedDailyTopUp.id),
+      credit: topUpCredit,
+      manager,
+    });
 
     return {
       transaction: savedTransaction,
