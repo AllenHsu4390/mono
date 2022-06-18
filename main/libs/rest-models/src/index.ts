@@ -20,6 +20,7 @@ export * from './lib/transactions/balance';
 export * from './lib/trends/trend';
 
 export * from './lib/users/user';
+export * from './lib/users/login';
 
 export * from './lib/daily-top-ups/daily-top-up';
 

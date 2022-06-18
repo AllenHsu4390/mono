@@ -2,7 +2,7 @@ import { LoginResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
 import { useSession } from './use-session';
 
-export const useLogin = ({
+export const useSignup = ({
   email,
   onError,
 }: {
@@ -12,11 +12,11 @@ export const useLogin = ({
   const { session } = useSession();
   const mutation = useMutation<LoginResponse>(
     async () => {
-      if (!session || !session.links.login) {
-        throw new Error('Missing capability login');
+      if (!session || !session.links.signup) {
+        throw new Error('Missing capability signup');
       }
 
-      const response = await fetch(session.links.login.url, {
+      const response = await fetch(session.links.signup.url, {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         method: 'POST',
@@ -39,6 +39,6 @@ export const useLogin = ({
   );
 
   return {
-    sendLogin: mutation.mutateAsync,
+    sendSignup: mutation.mutateAsync,
   };
 };

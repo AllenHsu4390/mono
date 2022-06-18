@@ -18,6 +18,10 @@ import { DailyTopUp } from './entity/daily-top-up';
 import { getDailyTopUp } from './reads/daily-top-up';
 import { saveDailyTopUp } from './writes/daily-top-up';
 import { deleteAsset, saveAsset } from './writes/asset';
+import { saveUser } from './writes/user';
+import { saveSession } from './writes/session';
+import { getSession } from './reads/session';
+import { Session } from './entity/session';
 
 const datasource = new DataSource({
   type: 'mysql',
@@ -28,7 +32,16 @@ const datasource = new DataSource({
   database: 'creator_network',
   synchronize: true,
   //logging: true,
-  entities: [Creator, User, Asset, Follow, Like, Transaction, DailyTopUp],
+  entities: [
+    Creator,
+    User,
+    Asset,
+    Follow,
+    Like,
+    Transaction,
+    DailyTopUp,
+    Session,
+  ],
 });
 
 export const connectToDatabase = async () => {
@@ -42,6 +55,7 @@ export const connectToDatabase = async () => {
 export const db = {
   user: {
     get: getUser,
+    save: saveUser,
   },
   creator: {
     get: getCreator,
@@ -75,6 +89,10 @@ export const db = {
   },
   like: {
     save: saveLike,
+  },
+  session: {
+    get: getSession,
+    save: saveSession,
   },
   transaction: {
     save: saveTransaction,

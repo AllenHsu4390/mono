@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
+import { useRouter } from './use-router';
 import { useSession } from './use-session';
 
 export const useLogout = () => {

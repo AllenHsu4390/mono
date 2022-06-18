@@ -14,5 +14,9 @@ export interface SessionResponse {
       rel: 'session';
       url: string;
     };
+    signup: {
+      rel: 'signup';
+      url: string;
+    };
   };
 }

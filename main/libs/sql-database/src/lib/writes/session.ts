@@ -9,8 +9,20 @@ export const saveSession = async (
 ): Promise<{ id: string }> => {
   const db = manager || (await connectToDatabase());
   const savedSession = await db.transaction(async (manager) => {
+    const foundSession = await manager.getRepository(Session).findOne({
+      where: {
+        userId: decode(userId),
+      },
+    });
+
+    if (foundSession) {
+      foundSession.updatedAt = new Date();
+      return await manager.save(foundSession);
+    }
+
     const dbSession = new Session();
     dbSession.userId = decode(userId);
+    dbSession.updatedAt = new Date();
     return await manager.save(dbSession);
   });
 

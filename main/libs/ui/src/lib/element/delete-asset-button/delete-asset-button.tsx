@@ -4,8 +4,8 @@ import { Typography, Button, IconButton, useTheme, Theme } from '@mui/material';
 import AlertDialog from '../../block/alert';
 import { useConfirmDialog } from '../../hooks/use-confirm-dialog';
 import { useDeleteAsset } from '../../hooks/use-delete-asset';
-import { useRouter } from 'next/router';
 import { useCreator } from '../../hooks/use-creator';
+import { useRouter } from '../../hooks/use-router';
 
 const iconButtonSx = (theme: Theme) => ({
   borderRadius: '0',

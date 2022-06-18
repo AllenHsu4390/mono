@@ -462,6 +462,38 @@ export const yoimiya_yelan_xingqiu_bennett = () => {
     ])}`);
 };
 
+export const yoimiya_yelan_xingqiu_mona = () => {
+    const teamWide = [yoimiyaSaxi, monaOmen];
+    const onField = [...teamWide, yelanA4];
+    const debuffs = [xingqiuC2];
+
+    const firedanceAction = yoimiya.fireDanceAction({
+        weapon: rustR5,
+        artifacts: yoimiyaArtifacts,
+        buffs: onField,
+        debuffs,
+        amps: [yoimiya.icdPyroVape],
+        transforms: [yoimiya.icdOverloaded],
+    });
+
+    output(`Yoimiya, Yelan, Xingqiu, Mona: ${teamDamageDps([
+        firedanceAction,
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        mona.stellarisAction()
+    ])}`);
+};
+
 export const yoimiya_yelan_xingqiu_zhongli = () => {
     const teamWide = [tom, yoimiyaSaxi];
     const onField = [...teamWide, yelanA4];
@@ -764,9 +796,9 @@ export const hutao_xingqiu_albedo_zhongli = () => {
 };
 
 export const hutao_xingqiu_yae_zhongli = () => {
-    const teamWide = [tom, homNature];
-    const onField = [geoRes, ...teamWide];
-    const debuffs = [xingqiuC2, lapidus, geoResShred];
+    const teamWide = [tom];
+    const onField = [...teamWide];
+    const debuffs = [xingqiuC2, lapidus];
 
     const afterlifeAction = hutao.afterlifeAction({
         weapon: homa,
@@ -797,9 +829,9 @@ export const hutao_xingqiu_yae_zhongli = () => {
 };
 
 export const hutao_yelan_xingqiu_zhongli = () => {
-    const teamWide = [tom, homNature];
-    const onField = [geoRes, ...teamWide, yelanA4];
-    const debuffs = [xingqiuC2, lapidus, geoResShred];
+    const teamWide = [tom];
+    const onField = [...teamWide, yelanA4];
+    const debuffs = [xingqiuC2, lapidus];
 
     const afterlifeAction = hutao.afterlifeAction({
         weapon: homa,
@@ -825,6 +857,38 @@ export const hutao_yelan_xingqiu_zhongli = () => {
             debuffs,
         }),
         zhongli.lapidusAction()
+    ])}`);
+};
+
+export const hutao_yelan_xingqiu_mona = () => {
+    const teamWide = [monaOmen];
+    const onField = [...teamWide, yelanA4];
+    const debuffs = [xingqiuC2];
+
+    const afterlifeAction = hutao.afterlifeAction({
+        weapon: homa,
+        artifacts: [flower_18, feather_13, sand_7, goblet_43, circlet_25],
+        buffs: onField,
+        debuffs,
+        amps: [hutao.icdPyroVape],
+        transforms: [hutao.icdOverloaded]
+    });
+
+    output(`Hutao, Yelan, Xingqiu, Mona: ${teamDamageDps([
+        afterlifeAction, 
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        mona.stellarisAction()
     ])}`);
 };
 
@@ -1590,8 +1654,8 @@ export const raiden_bennett_yae_sucrose = () => {
 };
 
 export const raiden_mona_jean_bennett = () => {
-    const teamWide = [noblesse, baalE];
-    const onField = [bennBurst, ttds, monaOmen, ...teamWide];
+    const teamWide = [monaOmen, noblesse, baalE];
+    const onField = [bennBurst, ttds, ...teamWide];
     const debuffs = [vvShred];
 
     const musouAction = raiden.musouAction({
@@ -2658,7 +2722,8 @@ export const ayaka_mona_venti_diona = () => {
             weapon: stringlessR5,
             artifacts: [{ atk: 667, critRate: 0.167, critDmg: 0.117, elemDmg: 0, elemMast: 548 }],
             buffs: [cryoRes],
-        })
+        }),
+        mona.stellarisAction(),
     ])}`);
 };
 

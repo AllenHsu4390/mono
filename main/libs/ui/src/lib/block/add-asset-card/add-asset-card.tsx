@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { CreatorResponse } from '@main/rest-models';
 import { useAddAsset } from '../../hooks/use-add-asset';
-import { useRouter } from 'next/router';
+import { useRouter } from '../../hooks/use-router';
 
 interface Props {
   creator: CreatorResponse;

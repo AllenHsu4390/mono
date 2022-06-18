@@ -27,17 +27,15 @@ export const AppProvider = ({
     return (
       <QueryClientProvider client={queryClient}>
         <ScrollResetProvider>
-          <SessionProvider>
-            <UserProvider user={user}>
-              <CreatorProvider user={user}>
-                <DropProvider>
-                  <BalanceProvider user={user}>
-                    <ThemeProvider theme={theme}>{children}</ThemeProvider>
-                  </BalanceProvider>
-                </DropProvider>
-              </CreatorProvider>
-            </UserProvider>
-          </SessionProvider>
+          <UserProvider user={user}>
+            <CreatorProvider user={user}>
+              <DropProvider>
+                <BalanceProvider user={user}>
+                  <ThemeProvider theme={theme}>{children}</ThemeProvider>
+                </BalanceProvider>
+              </DropProvider>
+            </CreatorProvider>
+          </UserProvider>
         </ScrollResetProvider>
       </QueryClientProvider>
     );
@@ -46,9 +44,7 @@ export const AppProvider = ({
   return (
     <QueryClientProvider client={queryClient}>
       <ScrollResetProvider>
-        <SessionProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </SessionProvider>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </ScrollResetProvider>
     </QueryClientProvider>
   );

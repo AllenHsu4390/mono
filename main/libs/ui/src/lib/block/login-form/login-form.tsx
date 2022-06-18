@@ -1,3 +1,4 @@
+import { LoginResponse } from '@main/rest-models';
 import {
   Alert,
   Button,
@@ -11,6 +12,9 @@ import {
 import { useReducer } from 'react';
 import { Wordmark } from '../../element/company/wordmark';
 import { useLogin } from '../../hooks/use-login';
+import { useSignup } from '../../hooks/use-signup';
+import { LoginCreate } from './login-create';
+import { LoginWait } from './login-wait';
 
 interface State {
   email: string;
@@ -18,13 +22,16 @@ interface State {
   errorMsg: string;
   isReady: boolean;
   isDone: boolean;
+  isCreate: boolean;
+  loginAttempt?: LoginResponse;
 }
 
 type Action = {
-  type: 'input-changed' | 'loading' | 'error' | 'done' | 'reset';
+  type: 'input-changed' | 'loading' | 'error' | 'done' | 'reset' | 'create';
   email?: string;
   isLoading?: boolean;
   errorMsg?: string;
+  loginAttempt?: LoginResponse;
 };
 
 const emailIsValid = (email: string) => {
@@ -52,6 +59,14 @@ const reducer = (state: State, action: Action): State => {
         ...state,
         isLoading: false,
         isDone: true,
+        loginAttempt: action.loginAttempt || undefined,
+      };
+    case 'create':
+      return {
+        ...state,
+        isLoading: false,
+        isDone: false,
+        isCreate: true,
       };
     case 'loading':
       return {
@@ -67,12 +82,15 @@ const reducer = (state: State, action: Action): State => {
         isLoading: false,
         isReady: false,
         isDone: false,
+        isCreate: false,
+        loginAttempt: undefined,
       };
     case 'error':
       return {
         ...state,
         isLoading: false,
         errorMsg: action.errorMsg || '',
+        loginAttempt: undefined,
       };
     default:
       return state;
@@ -87,32 +105,43 @@ const LoginForm = () => {
     isLoading: false,
     isReady: false,
     isDone: false,
+    isCreate: false,
   });
   const { sendLogin } = useLogin({
     email: state.email,
     onError: (e) => {
-      dispatch({
-        type: 'error',
-        errorMsg: e.message,
-      });
+      dispatch({ type: 'create' });
     },
   });
+
+  const { sendSignup } = useSignup({
+    email: state.email,
+  });
+
   const login = async () => {
     dispatch({ type: 'loading' });
     try {
       const loginResponse = await sendLogin();
 
-      if (loginResponse.magic) {
-        dispatch({ type: 'done' });
-        console.log(loginResponse.magic);
-      }
+      console.log(loginResponse.links.magic.url);
+      dispatch({ type: 'done', loginAttempt: loginResponse });
     } catch (e) {
-      dispatch({
-        type: 'error',
-        errorMsg: e.message,
-      });
+      dispatch({ type: 'create' });
     }
   };
+
+  const signup = async () => {
+    dispatch({ type: 'loading' });
+    try {
+      const loginResponse = await sendSignup();
+
+      console.log(loginResponse.links.magic.url);
+      dispatch({ type: 'done', loginAttempt: loginResponse });
+    } catch (e) {
+      dispatch({ type: 'error' });
+    }
+  };
+
   return (
     <Container
       sx={{
@@ -132,40 +161,18 @@ const LoginForm = () => {
       >
         <Wordmark />
       </Typography>
-      {state.isDone ? (
-        <>
-          <Stack
-            direction="column"
-            spacing={2}
-            justifyContent="center"
-            sx={{
-              mt: '2rem',
-            }}
-          >
-            <Typography>
-              Email sent to <b>{state.email}</b>. Click the link in the email to
-              continue.
-            </Typography>
-          </Stack>
-          <Stack
-            direction="row"
-            spacing={2}
-            justifyContent="center"
-            sx={{
-              mt: '3rem',
-            }}
-          >
-            <Button
-              onClick={() => dispatch({ type: 'reset' })}
-              variant="contained"
-              sx={{
-                minWidth: '6rem',
-              }}
-            >
-              <Typography>Back</Typography>
-            </Button>
-          </Stack>
-        </>
+      {state.isDone && state.loginAttempt ? (
+        <LoginWait
+          loginAttempt={state.loginAttempt}
+          backClick={() => dispatch({ type: 'reset' })}
+          email={state.email}
+        />
+      ) : state.isCreate ? (
+        <LoginCreate
+          signupClick={signup}
+          backClick={() => dispatch({ type: 'reset' })}
+          email={state.email}
+        />
       ) : (
         <>
           <Stack
@@ -212,16 +219,6 @@ const LoginForm = () => {
               )}
             </Button>
           </Stack>
-          {state.errorMsg ? (
-            <Alert
-              severity="error"
-              sx={{
-                mt: '3rem',
-              }}
-            >
-              {state.errorMsg}
-            </Alert>
-          ) : null}
         </>
       )}
     </Container>

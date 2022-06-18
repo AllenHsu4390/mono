@@ -12,6 +12,7 @@ export * from './lib/cdn/save-cdn-data';
 
 export * from './lib/users/get-user';
 export * from './lib/users/get-user-id-by-email';
+export * from './lib/users/save-user';
 
 export * from './lib/follows/get-follows';
 
@@ -21,6 +22,7 @@ export * from './lib/likes/save-like';
 export * from './lib/trends/get-trend';
 
 export * from './lib/sessions/get-session';
+export * from './lib/sessions/save-session';
 
 export * from './lib/transactions/get-balance';
 

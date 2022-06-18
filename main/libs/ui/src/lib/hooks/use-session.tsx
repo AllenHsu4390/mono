@@ -1,38 +1,28 @@
-import { SessionResponse } from '@main/rest-models';
-import { createContext, useContext } from 'react';
+import { LoginResponse, SessionResponse } from '@main/rest-models';
 import { useQuery } from 'react-query';
 
-interface SessionContextResult {
-  session: SessionResponse | undefined;
+interface Props {
+  loginAttempt: LoginResponse;
+  refetchInterval: number;
 }
 
-interface ProviderProps {
-  children: React.ReactNode;
-}
-
-export const SessionContext = createContext<SessionContextResult>({
-  session: undefined,
-});
-
-export const useSession = () => {
-  return useContext(SessionContext);
-};
-
-export const SessionProvider = ({ children }: ProviderProps) => {
+export const useSession = ({
+  refetchInterval,
+  loginAttempt,
+}: Partial<Props> = {}) => {
   const { data } = useQuery<SessionResponse>(
-    'session',
+    ['session'],
     async () => {
-      const res = await fetch('/api/sessions');
-
+      const url = loginAttempt?.links.auth.url || '/api/sessions';
+      const res = await fetch(url);
       return res.json();
     },
     {
-      refetchInterval: 5000,
+      refetchInterval,
     }
   );
-  return (
-    <SessionContext.Provider value={{ session: data }}>
-      {children}
-    </SessionContext.Provider>
-  );
+
+  return {
+    session: data,
+  };
 };

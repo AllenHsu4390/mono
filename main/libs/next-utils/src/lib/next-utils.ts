@@ -16,6 +16,7 @@ export const withRedirect404OnError = (
     try {
       return await getSsp(ctx);
     } catch (e) {
+      console.log(e);
       return {
         redirect: {
           permanent: false,
