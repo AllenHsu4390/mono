@@ -1,18 +1,14 @@
 import { useMutation } from 'react-query';
 import { useRouter } from './use-router';
-import { useSession } from './use-session';
+import { useUser } from './use-user';
 
 export const useLogout = () => {
-  const { session } = useSession();
+  const { user } = useUser();
   const router = useRouter();
 
   const mutation = useMutation(
     async () => {
-      if (!session || !session.links.logout) {
-        throw new Error('Missing capability logout');
-      }
-
-      await fetch(session.links.logout.url, {
+      await fetch('/api/users/logout', {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         method: 'POST',

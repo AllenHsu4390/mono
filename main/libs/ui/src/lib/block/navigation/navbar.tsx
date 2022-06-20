@@ -10,14 +10,13 @@ import { AppBar } from './appbar';
 import Link from '../../element/link';
 import ProfileMenu from '../profile-menu';
 import { page } from '../../providers/theme';
-import { UserResponse } from '@main/rest-models';
 import BalanceButton from '../../element/balance-button';
+import { useUser } from '../../hooks/use-user';
+import { useGuest } from '../../hooks/use-guest';
 
-interface Props {
-  user?: UserResponse;
-}
-
-export default function Navigation({ user }: Props) {
+export default function Navigation() {
+  const { user } = useUser();
+  const { guest } = useGuest();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -31,22 +30,30 @@ export default function Navigation({ user }: Props) {
     setAnchorEl(null);
   };
 
+  if (user) {
+    console.log(user);
+  }
+
   const menuItems = user
     ? [
-        <MenuItem key={user.links.gallery.url}>
+        <MenuItem key={user.links.gallery.rel}>
           <Link to={user.links.gallery.url}>{user.name}</Link>
         </MenuItem>,
-        <MenuItem key={user.links.editAccount.url}>
+        <MenuItem key={user.links.editAccount.rel}>
           <Link to={user.links.editAccount.url}>{'Settings'}</Link>
         </MenuItem>,
-        <MenuItem key={user.links.logout.url}>
-          <Link to={user.links.logout.url}>{'Logout'}</Link>
+        <MenuItem key={user.links.logoutPage.rel}>
+          <Link to={user.links.logoutPage.url}>{'Logout'}</Link>
+        </MenuItem>,
+      ]
+    : guest
+    ? [
+        <MenuItem key={guest.links.loginPage.rel}>
+          <Link to={guest.links.loginPage.url}>Login</Link>
         </MenuItem>,
       ]
     : [
-        <MenuItem key={'/users/login'}>
-          <Link to={'/users/login'}>Login</Link>
-        </MenuItem>,
+        // should never happen
       ];
 
   const renderMenu = (

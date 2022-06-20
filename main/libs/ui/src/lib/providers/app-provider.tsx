@@ -1,18 +1,22 @@
 import { ScrollResetProvider } from '../hooks/use-scroll-reset';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { theme } from './theme';
-import { SessionProvider } from '../hooks/use-session';
 import { ThemeProvider } from '@mui/material/styles';
-import { UserResponse } from '@main/rest-models';
 import { UserProvider } from '../hooks/use-user';
+import { GuestResponse, UserResponse } from '@main/rest-models';
 import { DropProvider } from '../hooks/use-drop';
 import { BalanceProvider } from '../hooks/use-balance';
 import { CreatorProvider } from '../hooks/use-creator';
+import { setGuest } from '../hooks/use-guest';
 
 const queryClient = new QueryClient();
 
 export interface WithUserProps {
   user?: UserResponse | null;
+}
+
+export interface WithGuestProps {
+  guest?: GuestResponse | null;
 }
 
 interface ReactChildren {
@@ -21,8 +25,9 @@ interface ReactChildren {
 
 export const AppProvider = ({
   user,
+  guest,
   children,
-}: WithUserProps & ReactChildren) => {
+}: WithUserProps & WithGuestProps & ReactChildren) => {
   if (user) {
     return (
       <QueryClientProvider client={queryClient}>
@@ -39,6 +44,10 @@ export const AppProvider = ({
         </ScrollResetProvider>
       </QueryClientProvider>
     );
+  }
+
+  if (guest) {
+    setGuest(guest);
   }
 
   return (

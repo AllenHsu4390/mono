@@ -3,13 +3,13 @@ import { useMutation } from 'react-query';
 import Page from '../_base/page';
 
 export interface AuthPageProps {
-  magicLink: string;
+  confirmLoginUrl: string;
 }
 
-export const AuthPage = ({ magicLink }: AuthPageProps) => {
+export const AuthPage = ({ confirmLoginUrl }: AuthPageProps) => {
   const [authenticated, setAuthenticated] = useState(false);
   const mutation = useMutation<{ ok: true }>(async () => {
-    const res = await fetch(magicLink, {
+    const res = await fetch(confirmLoginUrl, {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'same-origin',
       method: 'POST',

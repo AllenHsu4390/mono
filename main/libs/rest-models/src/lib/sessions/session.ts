@@ -1,21 +1,20 @@
 export interface SessionResponse {
-  isUsualClient: boolean;
   isLoggedIn: boolean;
   links: {
-    login: {
+    login?: {
       rel: 'login';
       url: string;
     };
-    logout: {
+    logout?: {
       rel: 'logout';
       url: string;
     };
-    session: {
-      rel: 'session';
+    signup?: {
+      rel: 'signup';
       url: string;
     };
-    signup: {
-      rel: 'signup';
+    session?: {
+      rel: 'session';
       url: string;
     };
   };

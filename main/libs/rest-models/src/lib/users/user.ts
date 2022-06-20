@@ -30,6 +30,10 @@ export type UserResponse = User & {
       rel: 'creator';
       url: string;
     };
+    logoutPage: {
+      rel: 'logout-page';
+      url: string;
+    };
     logout: {
       rel: 'logout';
       url: string;

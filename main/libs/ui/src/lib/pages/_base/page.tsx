@@ -3,7 +3,6 @@ import Navigation from '../../block/navigation';
 import { Container } from '@mui/material';
 import { page } from '../../providers/theme';
 import Head from '../../element/head';
-import { useUser } from '../../hooks/use-user';
 
 interface Props {
   title?: string;
@@ -11,12 +10,10 @@ interface Props {
 }
 
 const Page = ({ children, title }: Props) => {
-  const { user } = useUser();
-
   return (
     <>
       <CssBaseline />
-      <Navigation user={user} />
+      <Navigation />
       <Head>
         <title>{title}</title>
       </Head>

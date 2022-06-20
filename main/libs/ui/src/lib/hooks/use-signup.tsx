@@ -1,6 +1,6 @@
-import { LoginResponse } from '@main/rest-models';
+import { SessionResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
-import { useSession } from './use-session';
+import { useGuest } from './use-guest';
 
 export const useSignup = ({
   email,
@@ -9,14 +9,14 @@ export const useSignup = ({
   email: string;
   onError?(error: any): void;
 }) => {
-  const { session } = useSession();
-  const mutation = useMutation<LoginResponse>(
+  const { guest } = useGuest();
+  const mutation = useMutation<SessionResponse>(
     async () => {
-      if (!session || !session.links.signup) {
+      if (!guest?.links.signup) {
         throw new Error('Missing capability signup');
       }
 
-      const response = await fetch(session.links.signup.url, {
+      const response = await fetch(guest.links.signup.url, {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         method: 'POST',

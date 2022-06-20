@@ -1,53 +1,54 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getSession, getUser, saveSession } from '@main/rest';
-import { SessionResponse } from '@main/rest-models';
+import { getSession, updateSession } from '@main/rest';
 import { ApiHandler, OK } from '@main/next-utils';
 import { z } from 'zod';
 import { auth } from '@main/auth';
+import { SessionResponse } from '@main/rest-models';
 
-const authorizeLogin = (res: NextApiResponse, userId: string) => {
-  const encryptedUserId = auth().identity.encryptedUserId(userId);
-  const cookieValue = `idKey=${encryptedUserId}; authToken=deleted; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`;
-  res.setHeader('Set-Cookie', cookieValue);
+const authorizeLogin = (
+  res: NextApiResponse,
+  userId: string,
+  sessionId: string
+) => {
+  const encryptedUserId = auth.encrypt(userId);
+  const encryptedSessionId = auth.encrypt(sessionId);
+  res.setHeader('Set-Cookie', [
+    `waitKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;`,
+    `idKey=${encryptedUserId}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`,
+    `sessionKey=${encryptedSessionId}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`,
+  ]);
 };
 
 const handler = new ApiHandler()
   .withErrorResponse()
-  .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
-    const { u, iv } = z
-      .object({
-        u: z.string(),
-        iv: z.string(),
-      })
-      .parse(req.query);
-    const user = await getUser(auth().identity.userId([u, iv].join('|')));
-    saveSession(user.id);
-    res.status(200).json({
-      ok: true,
-    });
-  })
   .withGet(
     async (req: NextApiRequest, res: NextApiResponse<SessionResponse>) => {
-      const { u, iv } = z
+      const { waitKey } = z
         .object({
-          u: z.string().optional(),
-          iv: z.string().optional(),
+          waitKey: z.string(),
         })
-        .parse(req.query);
+        .parse(req.cookies);
 
-      if (!u || !iv) {
-        res.status(200).json(await getSession());
-        return;
-      }
-      const user = await getUser(auth().identity.userId([u, iv].join('|')));
-      const userId = user.id;
-      const session = await getSession(userId);
+      const [userId, sessionId] = auth.decrypt(waitKey).split('-SEP-');
+      const session = await getSession(sessionId);
       if (session.isLoggedIn) {
-        authorizeLogin(res, userId);
+        authorizeLogin(res, userId, sessionId);
       }
       res.status(200).json(session);
     }
   )
+  .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
+    const { sessionKey } = z
+      .object({
+        sessionKey: z.string(),
+      })
+      .parse(req.query);
+    const sessionId = auth.decrypt(sessionKey);
+    updateSession(sessionId);
+    res.status(200).json({
+      ok: true,
+    });
+  })
   .engage();
 
 export default handler;

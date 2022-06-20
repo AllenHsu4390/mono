@@ -1042,7 +1042,7 @@ export const raiden_yelan_xingqiu_sucrose = () => {
     const debuffs = [xingqiuC2, vvShred];
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1061,7 +1061,7 @@ export const raiden_yelan_xingqiu_sucrose = () => {
     output(`Raiden, Yelan, Xingqiu, Sucrose: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1088,7 +1088,7 @@ export const raiden_yelan_xingqiu_zhongli = () => {
     const debuffs = [xingqiuC2, lapidus];
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1107,7 +1107,7 @@ export const raiden_yelan_xingqiu_zhongli = () => {
     output(`Raiden, Yelan, Xingqiu, Zhongli: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1134,7 +1134,7 @@ export const raiden_yelan_xingqiu_xiangling = () => {
     const debuffs = [xingqiuC2];
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1153,7 +1153,7 @@ export const raiden_yelan_xingqiu_xiangling = () => {
     output(`Raiden, Yelan, Xingqiu, Xiangling: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1187,7 +1187,7 @@ export const raiden_yelan_xingqiu_yae = () => {
     const debuffs = [xingqiuC2];
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1206,7 +1206,7 @@ export const raiden_yelan_xingqiu_yae = () => {
     output(`Raiden, Yelan, Xingqiu, Yae: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1232,13 +1232,65 @@ export const raiden_yelan_xingqiu_yae = () => {
     ])}`);
 };
 
+export const raiden_yelan_mona_yae = () => {
+    const teamWide = [baalE, monaOmen];
+    const onField = [yelanA4, ...teamWide];
+    const debuffs = [];
+    
+    const musouAction = raiden.musouAction({
+        weapon: deathmatch1,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        transforms: [raiden.icdElectroCharged],
+    });
+
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasHydro"],
+    });
+
+    output(`Raiden, Yelan, Mona, Yae: ${teamDamageDps([
+        musouAction,
+        raiden.omenAction({
+            weapon: deathmatch1,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yae.sesshouAction({
+            weapon: widsith_dmg,
+            artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yae.tenkoAction({
+            weapon: widsith_dmg,
+            artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
+            buffs: onField,
+            debuffs,
+        }),
+        mona.stellarisAction(),
+    ])}`);
+};
+
 export const raiden_xingqiu_xiangling_bennett = () => {
     const teamWide = [noblesse, pyroRes, baalE];
     const onField = [bennBurst, ...teamWide];
     const debuffs = [xingqiuC2];
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1271,10 +1323,62 @@ export const raiden_xingqiu_xiangling_bennett = () => {
             transforms: [overloaded],
         }),
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+    ])}`);
+};
+
+export const raiden_yae_xiangling_bennett = () => {
+    const teamWide = [noblesse, pyroRes, baalE];
+    const onField = [bennBurst, ...teamWide];
+    const debuffs = [];
+    
+    const musouAction = raiden.musouAction({
+        weapon: deathmatch1,
+        buffs: onField,
+        debuffs,
+        artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+    });
+
+    setCurrentEnemy({
+        lvl: 90,
+        res: 0.10,
+        resBuff: 0,
+        resDebuff: 0,
+        defDebuff: 0,
+        stats: ["hasElectro", "hasPyro"]
+    });
+
+    output(`Raiden, Yae, Xiangling, Bennett: ${teamDamageDps([
+        musouAction,
+        xiangling.pyronadoAction({
+            weapon: theCatchR5,
+            artifacts: [flower_2, feather_2, sand_2, goblet_2, circlet_12],
+            buffs: onField,
+            debuffs,
+            transforms: [overloaded],
+        }),
+        raiden.omenAction({
+            weapon: deathmatch1,
+            buffs: onField,
+            debuffs,
+            artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
+        }),
+        yae.sesshouAction({
+            weapon: widsith_dmg,
+            artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yae.tenkoAction({
+            weapon: widsith_dmg,
+            artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
+            buffs: onField,
+            debuffs,
+            transforms: [overloaded],
         }),
     ])}`);
 };
@@ -1285,7 +1389,7 @@ export const raiden_xingqiu_yoimiya_zhongli = () => {
     const debuffs = [xingqiuC2, lapidus];
 
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1318,7 +1422,7 @@ export const raiden_xingqiu_yoimiya_zhongli = () => {
             buffs: teamWide
         }),
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             debuffs,
             buffs: onField,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1333,7 +1437,7 @@ export const raiden_xingqiu_sara_jean = () => {
     const debuffs = [xingqiuC2, vvShred]
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1357,7 +1461,7 @@ export const raiden_xingqiu_sara_jean = () => {
             buffs: teamWide
         }),
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1382,7 +1486,7 @@ export const raiden_xingqiu_bennett_fischl = () => {
     const onField = [xingqiuC2, bennBurst, ...teamWide];
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
         transforms: [raiden.icdElectroCharged],
@@ -1405,7 +1509,7 @@ export const raiden_xingqiu_bennett_fischl = () => {
             buffs: teamWide
         }),
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
         }),
@@ -1433,7 +1537,7 @@ export const raiden_xingqiu_bennett_jean = () => {
     const debuffs = [xingqiuC2, vvShred]
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1457,7 +1561,7 @@ export const raiden_xingqiu_bennett_jean = () => {
             buffs: teamWide
         }),
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1484,7 +1588,7 @@ export const raiden_bennett_sara_jean = () => {
     const debuffs = [vvShred]
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1493,7 +1597,7 @@ export const raiden_bennett_sara_jean = () => {
     output(`Raiden, Bennett, Sara, Jean: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1525,7 +1629,7 @@ export const raiden_bennett_lisa_jean = () => {
     const debuffs = [vvShred, lisaA2];
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1534,7 +1638,7 @@ export const raiden_bennett_lisa_jean = () => {
     output(`Raiden, Bennett, Lisa, Jean: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1560,7 +1664,7 @@ export const raiden_bennett_fischl_sucrose = () => {
     const debuffs = [vvShred];
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1569,7 +1673,7 @@ export const raiden_bennett_fischl_sucrose = () => {
     output(`Raiden, Bennett, Fischl, Sucrose: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1601,7 +1705,7 @@ export const raiden_bennett_sara_sucrose = () => {
     const debuffs = [vvShred];
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1610,7 +1714,7 @@ export const raiden_bennett_sara_sucrose = () => {
     output(`Raiden, Bennett, Sara, Sucrose: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1630,7 +1734,7 @@ export const raiden_bennett_yae_sucrose = () => {
     const debuffs = [vvShred];
     
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: onField,
         debuffs,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1639,7 +1743,7 @@ export const raiden_bennett_yae_sucrose = () => {
     output(`Raiden, Bennett, Yae, Sucrose: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             debuffs,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1659,7 +1763,7 @@ export const raiden_mona_jean_bennett = () => {
     const debuffs = [vvShred];
 
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         debuffs: debuffs,
         buffs: onField,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1668,7 +1772,7 @@ export const raiden_mona_jean_bennett = () => {
     output(`Raiden, Mona, Jean, Bennett: ${teamDamageDps([
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: teamWide,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
         }),
@@ -1894,7 +1998,7 @@ export const eula_raiden_albedo_zhongli = () => {
     });
 
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         debuffs: [lapidus],
         buffs: onField,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1910,7 +2014,7 @@ export const eula_raiden_albedo_zhongli = () => {
             artifacts: [flower_28, feather_31, sands_30, goblet_20, circlet_38]
         }),
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             debuffs: [lapidus],
             buffs: onField,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1987,7 +2091,7 @@ export const eula_raiden_shenhe_zhongli = () => {
     });
 
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         debuffs: [lapidus],
         buffs: onField,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -1997,7 +2101,7 @@ export const eula_raiden_shenhe_zhongli = () => {
         glacialAction,
         musouAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             debuffs: [lapidus],
             buffs: onField,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -2076,7 +2180,7 @@ export const eula_raiden_rosaria_zhongli = () => {
     });
 
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         debuffs: [lapidus],
         buffs: onField,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -2104,7 +2208,7 @@ export const eula_raiden_rosaria_zhongli = () => {
         confessionAction,
         terminationAction,
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             debuffs: [lapidus],
             buffs: onField,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -2126,7 +2230,7 @@ export const eula_raiden_lisa_zhongli = () => {
     });
 
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         debuffs: [lapidus],
         buffs: onField,
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -2136,7 +2240,7 @@ export const eula_raiden_lisa_zhongli = () => {
         glacialAction,
         musouAction, 
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             debuffs: [lapidus],
             buffs: onField,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
@@ -2516,7 +2620,7 @@ export const itto_raiden_albedo_gorou = () => {
     });
 
     const musouAction = raiden.musouAction({
-        weapon: jadeSpear,
+        weapon: deathmatch1,
         buffs: [baalE, ...onField],
         artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
     });
@@ -2525,7 +2629,7 @@ export const itto_raiden_albedo_gorou = () => {
         royalAction,
         musouAction, 
         raiden.omenAction({
-            weapon: jadeSpear,
+            weapon: deathmatch1,
             buffs: onField,
             artifacts: [flower_9, feather_40, sand_9, goblet_9, circlet_9],
         }),

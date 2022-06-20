@@ -10,6 +10,8 @@ export * from './lib/assets/delete-asset';
 
 export * from './lib/cdn/save-cdn-data';
 
+export * from './lib/guests/get-guest';
+
 export * from './lib/users/get-user';
 export * from './lib/users/get-user-id-by-email';
 export * from './lib/users/save-user';
@@ -21,8 +23,10 @@ export * from './lib/likes/save-like';
 
 export * from './lib/trends/get-trend';
 
+export * from './lib/sessions/create-session';
 export * from './lib/sessions/get-session';
-export * from './lib/sessions/save-session';
+export * from './lib/sessions/update-session';
+export * from './lib/sessions/delete-session';
 
 export * from './lib/transactions/get-balance';
 

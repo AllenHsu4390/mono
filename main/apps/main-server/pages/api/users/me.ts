@@ -10,8 +10,7 @@ const handler = new ApiHandler()
       req: NextApiRequest,
       res: NextApiResponse<UserResponse | ErrorResponse>
     ) => {
-      const userId = await requestTo.userId(req);
-      res.status(200).json(await getUser(userId));
+      res.status(200).json(await requestTo.user(req));
     }
   )
   .engage();

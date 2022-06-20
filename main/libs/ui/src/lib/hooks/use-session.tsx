@@ -1,28 +1,43 @@
-import { LoginResponse, SessionResponse } from '@main/rest-models';
+import { SessionResponse } from '@main/rest-models';
 import { useQuery } from 'react-query';
-
-interface Props {
-  loginAttempt: LoginResponse;
-  refetchInterval: number;
-}
+import { useRouter } from './use-router';
 
 export const useSession = ({
-  refetchInterval,
-  loginAttempt,
-}: Partial<Props> = {}) => {
-  const { data } = useQuery<SessionResponse>(
-    ['session'],
+  session,
+  onError,
+}: {
+  session: SessionResponse;
+  onError?(error: any): void;
+}) => {
+  const router = useRouter();
+
+  useQuery<SessionResponse>(
+    ['session', 'wait'],
     async () => {
-      const url = loginAttempt?.links.auth.url || '/api/sessions';
-      const res = await fetch(url);
-      return res.json();
+      if (!session.links.session) {
+        throw new Error('missing capability: session');
+      }
+
+      const response = await fetch(session.links.session.url, {
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        method: 'GET',
+      });
+
+      return response.json();
     },
     {
-      refetchInterval,
+      onError: (error) => {
+        onError && onError(error);
+      },
+      onSuccess: (data) => {
+        if (data.isLoggedIn) {
+          router.push('/');
+        }
+      },
+      refetchInterval: 4000,
     }
   );
 
-  return {
-    session: data,
-  };
+  return;
 };

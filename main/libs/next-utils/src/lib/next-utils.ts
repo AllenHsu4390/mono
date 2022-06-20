@@ -93,6 +93,15 @@ export interface OK {
 }
 
 export const requestTo = {
+  sessionId: async (req: { cookies: NextApiRequestCookies }) => {
+    const { sessionKey } = z
+      .object({
+        sessionKey: z.string(),
+      })
+      .parse(req.cookies);
+
+    return z.string().min(1).parse(auth.decrypt(sessionKey));
+  },
   user: async (req: { cookies: NextApiRequestCookies }) => {
     const { idKey } = z
       .object({
@@ -100,7 +109,7 @@ export const requestTo = {
       })
       .parse(req.cookies);
 
-    const userId = auth().identity.userId(idKey);
+    const userId = auth.decrypt(idKey);
     return await getUser(userId);
   },
   userId: async (req: { cookies: NextApiRequestCookies }) => {
@@ -110,9 +119,7 @@ export const requestTo = {
       })
       .parse(req.cookies);
 
-    const userId = z.string().min(1).parse(auth().identity.userId(idKey));
-
-    return userId;
+    return z.string().min(1).parse(auth.decrypt(idKey));
   },
   userOrNull: async (req: { cookies: NextApiRequestCookies }) => {
     const { idKey } = z
@@ -125,7 +132,7 @@ export const requestTo = {
       return null;
     }
 
-    const userId = auth().identity.userId(idKey);
+    const userId = auth.decrypt(idKey);
 
     if (!userId) {
       return null;

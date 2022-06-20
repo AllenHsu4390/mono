@@ -5,12 +5,20 @@ import {
   Column,
   BeforeInsert,
   BeforeUpdate,
+  ManyToOne,
 } from 'typeorm';
+import { User } from './user';
 
 @Entity()
 export class Session extends BaseEntity {
   @Column('int')
   userId: number;
+
+  @Column('boolean')
+  isLoggedIn: boolean;
+
+  @ManyToOne('User')
+  user: User;
 
   // default columns
   @PrimaryGeneratedColumn()

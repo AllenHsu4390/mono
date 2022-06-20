@@ -1,27 +1,17 @@
-import { LoginResponse } from '@main/rest-models';
+import { SessionResponse } from '@main/rest-models';
 import { Button, Stack, Typography } from '@mui/material';
-import { useEffect } from 'react';
-import { useRouter } from '../../hooks/use-router';
 import { useSession } from '../../hooks/use-session';
 
 interface Props {
-  loginAttempt: LoginResponse;
   email: string;
   backClick(): void;
+  session: SessionResponse;
 }
 
-export const LoginWait = ({ loginAttempt, email, backClick }: Props) => {
-  const router = useRouter();
-  const { session } = useSession({
-    loginAttempt,
-    refetchInterval: 4000,
+export const LoginWait = ({ email, backClick, session }: Props) => {
+  useSession({
+    session,
   });
-
-  useEffect(() => {
-    if (session?.isLoggedIn) {
-      router.push('/');
-    }
-  }, [session, router]);
 
   return (
     <>

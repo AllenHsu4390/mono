@@ -1,6 +1,11 @@
 import { GetServerSideProps } from 'next';
-import { WithUserProps, AssetPage, AssetPageProps } from '@main/ui';
-import { getAsset } from '@main/rest';
+import {
+  WithUserProps,
+  AssetPage,
+  AssetPageProps,
+  WithGuestProps,
+} from '@main/ui';
+import { getAsset, getGuest } from '@main/rest';
 import { z } from 'zod';
 import { requestTo, withRedirect404OnError } from '@main/next-utils';
 
@@ -14,9 +19,11 @@ export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
 
     const user = await requestTo.userOrNull(req);
     const asset = await getAsset(assetId, user);
-    const props: AssetPageProps & WithUserProps = {
+    const guest = getGuest();
+    const props: AssetPageProps & WithUserProps & WithGuestProps = {
       user,
       asset,
+      guest,
     };
 
     return {

@@ -8,6 +8,8 @@ export * from './lib/errors/error';
 export * from './lib/follows/follow';
 export * from './lib/follows/follows';
 
+export * from './lib/guests/guest';
+
 export * from './lib/likes/likes-count';
 export * from './lib/likes/like';
 
@@ -20,7 +22,6 @@ export * from './lib/transactions/balance';
 export * from './lib/trends/trend';
 
 export * from './lib/users/user';
-export * from './lib/users/login';
 
 export * from './lib/daily-top-ups/daily-top-up';
 

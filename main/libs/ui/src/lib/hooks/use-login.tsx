@@ -1,6 +1,6 @@
-import { LoginResponse } from '@main/rest-models';
+import { SessionResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
-import { useSession } from './use-session';
+import { useGuest } from './use-guest';
 
 export const useLogin = ({
   email,
@@ -9,14 +9,14 @@ export const useLogin = ({
   email: string;
   onError?(error: any): void;
 }) => {
-  const { session } = useSession();
-  const mutation = useMutation<LoginResponse>(
+  const { guest } = useGuest();
+  const mutation = useMutation<SessionResponse>(
     async () => {
-      if (!session || !session.links.login) {
-        throw new Error('Missing capability login');
+      if (!guest?.links.login) {
+        throw new Error('Missing capability: login');
       }
 
-      const response = await fetch(session.links.login.url, {
+      const response = await fetch(guest.links.login.url, {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         method: 'POST',

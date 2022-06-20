@@ -19,7 +19,7 @@ import { getDailyTopUp } from './reads/daily-top-up';
 import { saveDailyTopUp } from './writes/daily-top-up';
 import { deleteAsset, saveAsset } from './writes/asset';
 import { saveUser } from './writes/user';
-import { saveSession } from './writes/session';
+import { createSession, deleteSession, updateSession } from './writes/session';
 import { getSession } from './reads/session';
 import { Session } from './entity/session';
 
@@ -92,7 +92,9 @@ export const db = {
   },
   session: {
     get: getSession,
-    save: saveSession,
+    create: createSession,
+    update: updateSession,
+    delete: deleteSession,
   },
   transaction: {
     save: saveTransaction,

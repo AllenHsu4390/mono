@@ -5,15 +5,14 @@ import { z } from 'zod';
 
 export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
   async ({ query }) => {
-    const { u, iv } = z
+    const { sessionKey } = z
       .object({
-        u: z.string(),
-        iv: z.string(),
+        sessionKey: z.string(),
       })
       .parse(query);
 
     const props: AuthPageProps = {
-      magicLink: `/api/sessions?u=${u}&iv=${iv}`,
+      confirmLoginUrl: `/api/sessions?sessionKey=${sessionKey}`,
     };
 
     return {

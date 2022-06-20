@@ -14,7 +14,7 @@ export const useSendLike = ({
     async () => {
       const likeUrl = asset.links.like?.url;
       if (!likeUrl) {
-        throw new Error('missing like capability');
+        throw new Error('Missing capability: like');
       }
       const res = await fetch(likeUrl, {
         method: 'POST',

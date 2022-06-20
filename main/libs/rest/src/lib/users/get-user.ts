@@ -28,13 +28,17 @@ export const getUser = async (userId: string): Promise<UserResponse> => {
         rel: 'creator',
         url: `/api/creators/${user.creatorId}`,
       },
+      logoutPage: {
+        rel: 'logout-page',
+        url: '/users/logout',
+      },
       me: {
         rel: 'me',
         url: '/api/users/me',
       },
       logout: {
         rel: 'logout',
-        url: '/users/logout',
+        url: '/api/users/logout',
       },
       ...(user.hasDailyTopUp
         ? {

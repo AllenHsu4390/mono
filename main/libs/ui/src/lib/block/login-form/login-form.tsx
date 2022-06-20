@@ -1,4 +1,4 @@
-import { LoginResponse } from '@main/rest-models';
+import { SessionResponse } from '@main/rest-models';
 import {
   Alert,
   Button,
@@ -23,7 +23,7 @@ interface State {
   isReady: boolean;
   isDone: boolean;
   isCreate: boolean;
-  loginAttempt?: LoginResponse;
+  session?: SessionResponse;
 }
 
 type Action = {
@@ -31,7 +31,7 @@ type Action = {
   email?: string;
   isLoading?: boolean;
   errorMsg?: string;
-  loginAttempt?: LoginResponse;
+  session?: SessionResponse;
 };
 
 const emailIsValid = (email: string) => {
@@ -59,7 +59,8 @@ const reducer = (state: State, action: Action): State => {
         ...state,
         isLoading: false,
         isDone: true,
-        loginAttempt: action.loginAttempt || undefined,
+        isCreate: false,
+        session: action.session,
       };
     case 'create':
       return {
@@ -83,14 +84,14 @@ const reducer = (state: State, action: Action): State => {
         isReady: false,
         isDone: false,
         isCreate: false,
-        loginAttempt: undefined,
+        session: undefined,
       };
     case 'error':
       return {
         ...state,
         isLoading: false,
         errorMsg: action.errorMsg || '',
-        loginAttempt: undefined,
+        session: undefined,
       };
     default:
       return state;
@@ -121,11 +122,11 @@ const LoginForm = () => {
   const login = async () => {
     dispatch({ type: 'loading' });
     try {
-      const loginResponse = await sendLogin();
+      const session = await sendLogin();
 
-      console.log(loginResponse.links.magic.url);
-      dispatch({ type: 'done', loginAttempt: loginResponse });
+      dispatch({ type: 'done', session });
     } catch (e) {
+      console.log(e);
       dispatch({ type: 'create' });
     }
   };
@@ -133,10 +134,8 @@ const LoginForm = () => {
   const signup = async () => {
     dispatch({ type: 'loading' });
     try {
-      const loginResponse = await sendSignup();
-
-      console.log(loginResponse.links.magic.url);
-      dispatch({ type: 'done', loginAttempt: loginResponse });
+      const session = await sendSignup();
+      dispatch({ type: 'done', session });
     } catch (e) {
       dispatch({ type: 'error' });
     }
@@ -161,9 +160,9 @@ const LoginForm = () => {
       >
         <Wordmark />
       </Typography>
-      {state.isDone && state.loginAttempt ? (
+      {state.isDone && state.session ? (
         <LoginWait
-          loginAttempt={state.loginAttempt}
+          session={state.session}
           backClick={() => dispatch({ type: 'reset' })}
           email={state.email}
         />
