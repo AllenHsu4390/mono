@@ -8,25 +8,30 @@ export interface AuthPageProps {
 
 export const AuthPage = ({ confirmLoginUrl }: AuthPageProps) => {
   const [authenticated, setAuthenticated] = useState(false);
-  const mutation = useMutation<{ ok: true }>(async () => {
-    const res = await fetch(confirmLoginUrl, {
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'same-origin',
-      method: 'POST',
-    });
+  const mutation = useMutation<{ ok: true }>(
+    async () => {
+      const res = await fetch(confirmLoginUrl, {
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        method: 'POST',
+      });
 
-    return res.json();
-  });
+      return res.json();
+    },
+    {
+      onSuccess: ({ ok }) => {
+        if (ok) {
+          setAuthenticated(true);
+        }
+      },
+    }
+  );
+
+  const sendAuth = mutation.mutateAsync;
 
   useEffect(() => {
-    const sendAuth = async () => {
-      const res = await mutation.mutateAsync();
-      if (res.ok) {
-        setAuthenticated(true);
-      }
-    };
     sendAuth();
-  }, [mutation]);
+  }, [sendAuth]);
 
   return (
     <Page>

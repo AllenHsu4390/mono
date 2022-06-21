@@ -8,19 +8,15 @@ interface UserContextResult {
   refetchUser(): void;
 }
 
-export const UserContext = createContext<UserContextResult>({
-  user: undefined,
-  refetchUser: noop,
-});
-
-export const useUser = () => {
-  return useContext(UserContext);
-};
-
 interface UserProviderProps {
   user: UserResponse;
   children?: React.ReactNode;
 }
+
+export const UserContext = createContext<UserContextResult>({
+  user: undefined,
+  refetchUser: noop,
+});
 
 export const UserProvider = ({ user, children }: UserProviderProps) => {
   const { data, refetch } = useQuery<UserResponse>(
@@ -31,6 +27,8 @@ export const UserProvider = ({ user, children }: UserProviderProps) => {
     },
     {
       initialData: user,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
   return (
@@ -38,4 +36,8 @@ export const UserProvider = ({ user, children }: UserProviderProps) => {
       {children}
     </UserContext.Provider>
   );
+};
+
+export const useUser = () => {
+  return useContext(UserContext);
 };

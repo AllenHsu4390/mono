@@ -28,6 +28,10 @@ export const CreatorProvider = ({ user, children }: CreatorProviderProps) => {
     async () => {
       const res = await fetch(user.links.creator.url);
       return res.json();
+    },
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
   return (

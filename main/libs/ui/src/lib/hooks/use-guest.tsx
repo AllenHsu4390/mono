@@ -1,14 +1,21 @@
 import { GuestResponse } from '@main/rest-models';
-import React from 'react';
+import React, { createContext, useContext, useMemo } from 'react';
 
-let _guest: GuestResponse;
+interface ProviderProps {
+  guest: GuestResponse;
+  children: React.ReactNode;
+}
 
-export const setGuest = (guest: GuestResponse) => {
-  _guest = guest;
+const GuestContext = createContext<{ guest: GuestResponse | undefined }>({
+  guest: undefined,
+});
+
+export const GuestProvider = ({ guest, children }: ProviderProps) => {
+  return (
+    <GuestContext.Provider value={{ guest }}>{children}</GuestContext.Provider>
+  );
 };
 
 export const useGuest = () => {
-  return {
-    guest: _guest,
-  };
+  return useContext(GuestContext);
 };

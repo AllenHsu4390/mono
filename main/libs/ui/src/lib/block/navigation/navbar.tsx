@@ -30,10 +30,6 @@ export default function Navigation() {
     setAnchorEl(null);
   };
 
-  if (user) {
-    console.log(user);
-  }
-
   const menuItems = user
     ? [
         <MenuItem key={user.links.gallery.rel}>

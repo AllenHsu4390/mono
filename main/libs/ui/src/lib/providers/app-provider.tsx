@@ -7,7 +7,7 @@ import { GuestResponse, UserResponse } from '@main/rest-models';
 import { DropProvider } from '../hooks/use-drop';
 import { BalanceProvider } from '../hooks/use-balance';
 import { CreatorProvider } from '../hooks/use-creator';
-import { setGuest } from '../hooks/use-guest';
+import { GuestProvider } from '../hooks/use-guest';
 
 const queryClient = new QueryClient();
 
@@ -47,7 +47,15 @@ export const AppProvider = ({
   }
 
   if (guest) {
-    setGuest(guest);
+    return (
+      <QueryClientProvider client={queryClient}>
+        <ScrollResetProvider>
+          <GuestProvider guest={guest}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </GuestProvider>
+        </ScrollResetProvider>
+      </QueryClientProvider>
+    );
   }
 
   return (
