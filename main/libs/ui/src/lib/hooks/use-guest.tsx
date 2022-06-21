@@ -1,5 +1,5 @@
 import { GuestResponse } from '@main/rest-models';
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useContext } from 'react';
 
 interface ProviderProps {
   guest: GuestResponse;

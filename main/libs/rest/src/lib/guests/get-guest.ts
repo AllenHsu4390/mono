@@ -11,6 +11,10 @@ export const getGuest = (): GuestResponse => {
         rel: 'login',
         url: '/api/users/login',
       },
+      logout: {
+        rel: 'logout',
+        url: '/api/users/logout',
+      },
       signup: {
         rel: 'signup',
         url: '/api/users/new',

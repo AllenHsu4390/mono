@@ -8,6 +8,10 @@ export interface GuestResponse {
       rel: 'login';
       url: string;
     };
+    logout: {
+      rel: 'logout';
+      url: string;
+    };
     signup: {
       rel: 'signup';
       url: string;

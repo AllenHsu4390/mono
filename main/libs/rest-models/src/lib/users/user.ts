@@ -34,10 +34,6 @@ export type UserResponse = User & {
       rel: 'logout-page';
       url: string;
     };
-    logout: {
-      rel: 'logout';
-      url: string;
-    };
     dailyTopUp?: {
       rel: 'daily-top-up';
       url: string;

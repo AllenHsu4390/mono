@@ -36,10 +36,6 @@ export const getUser = async (userId: string): Promise<UserResponse> => {
         rel: 'me',
         url: '/api/users/me',
       },
-      logout: {
-        rel: 'logout',
-        url: '/api/users/logout',
-      },
       ...(user.hasDailyTopUp
         ? {
             dailyTopUp: {
