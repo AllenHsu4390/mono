@@ -1,5 +1,5 @@
 import { requestTo, withRedirect404OnError } from '@main/next-utils';
-import { getGuest, getTopAssets } from '@main/rest';
+import { rest } from '@main/rest';
 import {
   WithUserProps,
   FeedPage,
@@ -12,8 +12,8 @@ export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
   async ({ req }) => {
     const props: FeedPageProps & WithUserProps & WithGuestProps = {
       user: await requestTo.userOrNull(req),
-      guest: getGuest(),
-      initialAssets: await getTopAssets('1'),
+      guest: rest.guests.start(),
+      initialAssets: await rest.assets.top('1'),
     };
 
     return {

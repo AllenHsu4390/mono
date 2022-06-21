@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getSession, updateSession } from '@main/rest';
+import { rest } from '@main/rest';
 import { ApiHandler, OK } from '@main/next-utils';
 import { z } from 'zod';
 import { auth } from '@main/auth';
-import { SessionResponse } from '@main/rest-models';
+import { SessionResponse, SessionResponseSchema } from '@main/rest-models';
 
 const authorizeLogin = (
   res: NextApiResponse,
@@ -30,11 +30,11 @@ const handler = new ApiHandler()
         .parse(req.cookies);
 
       const [userId, sessionId] = auth.decrypt(waitKey).split('-SEP-');
-      const session = await getSession(sessionId);
+      const session = await rest.sessions.byId(sessionId);
       if (session.isLoggedIn) {
         authorizeLogin(res, userId, sessionId);
       }
-      res.status(200).json(session);
+      res.status(200).json(SessionResponseSchema.parse(session));
     }
   )
   .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
@@ -44,7 +44,7 @@ const handler = new ApiHandler()
       })
       .parse(req.query);
     const sessionId = auth.decrypt(sessionKey);
-    updateSession(sessionId);
+    await rest.sessions.update(sessionId);
     res.status(200).json({
       ok: true,
     });

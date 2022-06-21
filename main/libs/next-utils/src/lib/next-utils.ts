@@ -1,5 +1,5 @@
 import { auth } from '@main/auth';
-import { getError, getUser } from '@main/rest';
+import { getError, rest } from '@main/rest';
 import {
   GetServerSideProps,
   NextApiHandler,
@@ -16,7 +16,6 @@ export const withRedirect404OnError = (
     try {
       return await getSsp(ctx);
     } catch (e) {
-      console.log(e);
       return {
         redirect: {
           permanent: false,
@@ -110,7 +109,7 @@ export const requestTo = {
       .parse(req.cookies);
 
     const userId = auth.decrypt(idKey);
-    return await getUser(userId);
+    return await rest.users.byId(userId);
   },
   userId: async (req: { cookies: NextApiRequestCookies }) => {
     const { idKey } = z
@@ -138,6 +137,6 @@ export const requestTo = {
       return null;
     }
 
-    return await getUser(userId);
+    return await rest.users.byId(userId);
   },
 };

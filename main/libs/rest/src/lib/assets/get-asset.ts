@@ -17,7 +17,7 @@ export const getAsset = async (
       ...(isOwnAsset
         ? {}
         : {
-            like: `/api/assets/${asset.id}/likes`,
+            like: `/api/assets/${asset.id}/likes/new`,
           }),
       ...(isOwnAsset
         ? {

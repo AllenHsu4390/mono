@@ -14,13 +14,13 @@ const cacheGet = async <T>(
     const value = await dbGet();
     memoryCache.set<T>(key, value, DEFAULT_TTL);
   }
-  return memoryCache.get<T>(key);
+  return memoryCache.get<T>(key) as T;
 };
 
 const cacheSave = async <T>(key: string, transform: (value: T) => T) => {
   if (memoryCache.has(key)) {
     const value = memoryCache.get<T>(key);
-    memoryCache.set<T>(key, transform(value), DEFAULT_TTL);
+    memoryCache.set<T>(key, transform(value as T), DEFAULT_TTL);
   }
 };
 

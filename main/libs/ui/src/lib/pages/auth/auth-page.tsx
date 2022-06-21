@@ -16,6 +16,10 @@ export const AuthPage = ({ confirmLoginUrl }: AuthPageProps) => {
         method: 'POST',
       });
 
+      if (res.status > 200) {
+        throw Error('something went wrong');
+      }
+
       return res.json();
     },
     {

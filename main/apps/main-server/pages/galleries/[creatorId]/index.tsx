@@ -5,7 +5,7 @@ import {
   GalleryPageProps,
   WithGuestProps,
 } from '@main/ui';
-import { getAssets, getCreator, getGuest } from '@main/rest';
+import { getCreator, rest } from '@main/rest';
 import { z } from 'zod';
 import { requestTo, withRedirect404OnError } from '@main/next-utils';
 
@@ -18,8 +18,8 @@ export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
       .parse(query);
     const user = await requestTo.userOrNull(req);
     const creator = await getCreator(creatorId, user);
-    const assets = await getAssets(creator.id, '1');
-    const guest = getGuest();
+    const assets = await rest.assets.byCreator(creator.id, '1');
+    const guest = rest.guests.start();
     const props: GalleryPageProps & WithUserProps & WithGuestProps = {
       user,
       creator,

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getAsset } from '@main/rest';
+import { rest } from '@main/rest';
 import { AssetResponse } from '@main/rest-models';
 import { z } from 'zod';
 import { ApiHandler, requestTo } from '@main/next-utils';
@@ -15,7 +15,7 @@ const handler = new ApiHandler()
 
     const user = await requestTo.userOrNull(req);
 
-    res.status(200).json(await getAsset(id, user || undefined));
+    res.status(200).json(await rest.assets.byId(id, user || undefined));
   })
   .engage();
 

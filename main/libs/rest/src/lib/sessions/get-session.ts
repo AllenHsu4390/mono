@@ -1,9 +1,6 @@
 import { environment } from '@main/environment';
-import { SessionResponse } from '@main/rest-models';
 
-export const getSession = async (
-  sessionId: string
-): Promise<SessionResponse> => {
+export const getSession = async (sessionId: string) => {
   const db = environment.db;
   const session = await db.session.get(sessionId);
 

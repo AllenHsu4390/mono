@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getLikesCount } from '@main/rest';
+import { rest } from '@main/rest';
 import { LikesCountResponse } from '@main/rest-models';
 import { z } from 'zod';
 import { ApiHandler } from '@main/next-utils';
@@ -14,7 +14,7 @@ const handler = new ApiHandler()
         })
         .parse(req.query);
 
-      res.status(200).json(await getLikesCount(id));
+      res.status(200).json(await rest.likes.count.byAsset(id));
     }
   )
   .engage();

@@ -5,7 +5,7 @@ import {
   AssetPageProps,
   WithGuestProps,
 } from '@main/ui';
-import { getAsset, getGuest } from '@main/rest';
+import { rest } from '@main/rest';
 import { z } from 'zod';
 import { requestTo, withRedirect404OnError } from '@main/next-utils';
 
@@ -18,8 +18,8 @@ export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
       .parse(query);
 
     const user = await requestTo.userOrNull(req);
-    const asset = await getAsset(assetId, user);
-    const guest = getGuest();
+    const asset = await rest.assets.byId(assetId, user);
+    const guest = rest.guests.start();
     const props: AssetPageProps & WithUserProps & WithGuestProps = {
       user,
       asset,

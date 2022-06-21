@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getUser } from '@main/rest';
 import { ErrorResponse, UserResponse } from '@main/rest-models';
 import { ApiHandler, requestTo } from '@main/next-utils';
 
