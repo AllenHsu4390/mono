@@ -9,10 +9,7 @@ export const getError = (e: any): ErrorResponse => {
     e,
     status: 401, // derive from e later
     links: {
-      home: {
-        rel: 'home',
-        url: '/',
-      },
+      home: '/',
     },
   };
 };

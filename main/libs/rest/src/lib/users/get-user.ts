@@ -12,36 +12,15 @@ export const getUser = async (userId: string): Promise<UserResponse> => {
   return {
     ...user,
     links: {
-      editAccount: {
-        rel: 'edit-account',
-        url: '/users/edit',
-      },
-      gallery: {
-        rel: 'gallery',
-        url: `/galleries/${user.creatorId}`,
-      },
-      balance: {
-        rel: 'balance',
-        url: '/api/transactions/balance',
-      },
-      creator: {
-        rel: 'creator',
-        url: `/api/creators/${user.creatorId}`,
-      },
-      logoutPage: {
-        rel: 'logout-page',
-        url: '/users/logout',
-      },
-      me: {
-        rel: 'me',
-        url: '/api/users/me',
-      },
+      editAccount: '/users/edit',
+      gallery: `/galleries/${user.creatorId}`,
+      balance: '/api/transactions/balance',
+      creator: `/api/creators/${user.creatorId}`,
+      logoutPage: '/users/logout',
+      me: '/api/users/me',
       ...(user.hasDailyTopUp
         ? {
-            dailyTopUp: {
-              rel: 'daily-top-up',
-              url: '/api/transactions/mint',
-            },
+            dailyTopUp: '/api/transactions/mint',
           }
         : {}),
     },

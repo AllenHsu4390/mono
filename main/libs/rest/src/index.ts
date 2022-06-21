@@ -21,8 +21,6 @@ export * from './lib/follows/get-follows';
 export * from './lib/likes/get-likes-count';
 export * from './lib/likes/save-like';
 
-export * from './lib/trends/get-trend';
-
 export * from './lib/sessions/create-session';
 export * from './lib/sessions/get-session';
 export * from './lib/sessions/update-session';

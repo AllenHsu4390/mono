@@ -7,17 +7,8 @@ export interface Creator {
 
 export type CreatorResponse = Creator & {
   links: {
-    assets: {
-      rel: 'assets';
-      url: string;
-    };
-    newAsset?: {
-      rel: 'new-asset';
-      url: string;
-    };
-    gallery: {
-      rel: 'gallery';
-      url: string;
-    };
+    assets: string;
+    newAsset?: string;
+    gallery: string;
   };
 };

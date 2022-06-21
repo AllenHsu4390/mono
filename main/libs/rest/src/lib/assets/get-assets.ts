@@ -12,16 +12,10 @@ export const getAssets = async (
     assets,
     pagination,
     links: {
-      assets: assets.map((a) => ({
-        rel: 'assets',
-        url: `/assets/${a.id}`,
-      })),
+      assets: assets.map((a) => `/assets/${a.id}`),
       ...(pagination.next
         ? {
-            next: {
-              rel: 'next',
-              url: `/api/assets?creatorId=${creatorId}&pageId=${pagination.next}`,
-            },
+            next: `/api/assets?creatorId=${creatorId}&pageId=${pagination.next}`,
           }
         : {}),
     },

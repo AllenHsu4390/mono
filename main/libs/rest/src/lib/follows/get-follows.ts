@@ -11,16 +11,10 @@ export const getFollows = async (
   return {
     ...page,
     links: {
-      follow: page.follows.map((f) => ({
-        rel: 'follow',
-        url: `/galleries/${f.creator.id}`,
-      })),
+      follows: page.follows.map((f) => `/galleries/${f.creator.id}`),
       ...(page.pagination.next
         ? {
-            next: {
-              rel: 'next',
-              url: `/api/follows?pageId=${page.pagination.next}`,
-            },
+            next: `/api/follows?pageId=${page.pagination.next}`,
           }
         : {}),
     },

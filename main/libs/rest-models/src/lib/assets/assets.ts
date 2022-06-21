@@ -8,13 +8,7 @@ export interface Assets {
 
 export type AssetsResponse = Assets & {
   links: {
-    next?: {
-      rel: 'next';
-      url: string;
-    };
-    assets: {
-      rel: 'assets';
-      url: string;
-    }[];
+    next?: string;
+    assets: string[];
   };
 };

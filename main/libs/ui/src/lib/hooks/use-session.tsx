@@ -15,10 +15,10 @@ export const useSession = ({
     ['session', 'wait'],
     async () => {
       if (!session.links.session) {
-        throw new Error('missing capability: session');
+        throw new Error('Missing capability: session');
       }
 
-      const response = await fetch(session.links.session.url, {
+      const response = await fetch(session.links.session, {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         method: 'GET',

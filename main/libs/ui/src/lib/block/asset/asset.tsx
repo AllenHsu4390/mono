@@ -25,10 +25,7 @@ export default function AssetInteractable({ asset }: Props) {
       <AssetCardFull
         asset={asset}
         avatar={
-          <CreatorAvatar
-            creator={asset.creator}
-            linkTo={asset.links.creator.url}
-          />
+          <CreatorAvatar creator={asset.creator} linkTo={asset.links.creator} />
         }
         contact={
           <>
@@ -42,7 +39,7 @@ export default function AssetInteractable({ asset }: Props) {
         }
         avatarTitle={
           <CreatorLink
-            to={asset.links.creator.url}
+            to={asset.links.creator}
             label={asset.creator.name}
             sx={{
               fontWeight: 'bold',

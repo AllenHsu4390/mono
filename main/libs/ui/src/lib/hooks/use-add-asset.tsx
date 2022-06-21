@@ -12,11 +12,10 @@ export const useAddAsset = ({
   const { user } = useUser();
   const mutation = useMutation<{ ok: true }>(
     async () => {
-      const newAssetUrl = creator.links.newAsset.url;
-      if (!newAssetUrl) {
+      if (!creator.links.newAsset) {
         throw new Error('missing capability new-asset');
       }
-      const res = await fetch(newAssetUrl, {
+      const res = await fetch(creator.links.newAsset, {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify({

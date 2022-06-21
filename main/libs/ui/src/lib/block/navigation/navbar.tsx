@@ -32,20 +32,20 @@ export default function Navigation() {
 
   const menuItems = user
     ? [
-        <MenuItem key={user.links.gallery.rel}>
-          <Link to={user.links.gallery.url}>{user.name}</Link>
+        <MenuItem key={user.links.gallery}>
+          <Link to={user.links.gallery}>{user.name}</Link>
         </MenuItem>,
-        <MenuItem key={user.links.editAccount.rel}>
-          <Link to={user.links.editAccount.url}>{'Settings'}</Link>
+        <MenuItem key={user.links.editAccount}>
+          <Link to={user.links.editAccount}>{'Settings'}</Link>
         </MenuItem>,
-        <MenuItem key={user.links.logoutPage.rel}>
-          <Link to={user.links.logoutPage.url}>{'Logout'}</Link>
+        <MenuItem key={user.links.logoutPage}>
+          <Link to={user.links.logoutPage}>{'Logout'}</Link>
         </MenuItem>,
       ]
     : guest
     ? [
-        <MenuItem key={guest.links.loginPage.rel}>
-          <Link to={guest.links.loginPage.url}>Login</Link>
+        <MenuItem key={guest.links.loginPage}>
+          <Link to={guest.links.loginPage}>Login</Link>
         </MenuItem>,
       ]
     : [

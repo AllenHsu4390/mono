@@ -8,21 +8,9 @@ export interface Asset {
 
 export type AssetResponse = Asset & {
   links: {
-    like?: {
-      rel: 'like';
-      url: string;
-    };
-    delete?: {
-      rel: 'delete';
-      url: string;
-    };
-    likeCount: {
-      rel: 'like-count';
-      url: string;
-    };
-    creator: {
-      rel: 'creator';
-      url: string;
-    };
+    like?: string;
+    delete?: string;
+    likeCount: string;
+    creator: string;
   };
 };

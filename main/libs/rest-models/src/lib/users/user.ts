@@ -10,33 +10,12 @@ export interface User {
 
 export type UserResponse = User & {
   links: {
-    editAccount: {
-      rel: 'edit-account';
-      url: string;
-    };
-    balance: {
-      rel: 'balance';
-      url: string;
-    };
-    gallery: {
-      rel: 'gallery';
-      url: string;
-    };
-    me: {
-      rel: 'me';
-      url: string;
-    };
-    creator: {
-      rel: 'creator';
-      url: string;
-    };
-    logoutPage: {
-      rel: 'logout-page';
-      url: string;
-    };
-    dailyTopUp?: {
-      rel: 'daily-top-up';
-      url: string;
-    };
+    editAccount: string;
+    balance: string;
+    gallery: string;
+    me: string;
+    creator: string;
+    logoutPage: string;
+    dailyTopUp?: string;
   };
 };

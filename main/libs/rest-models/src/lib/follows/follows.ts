@@ -8,13 +8,7 @@ export interface Follows {
 
 export type FollowsResponse = Follows & {
   links: {
-    next?: {
-      rel: 'next';
-      url: string;
-    };
-    follow: {
-      rel: 'follow';
-      url: string;
-    }[];
+    next?: string;
+    follows: string[];
   };
 };

@@ -26,7 +26,7 @@ export const CreatorProvider = ({ user, children }: CreatorProviderProps) => {
   const { data, refetch } = useQuery<CreatorResponse>(
     ['creator', user.creatorId],
     async () => {
-      const res = await fetch(user.links.creator.url);
+      const res = await fetch(user.links.creator);
       return res.json();
     },
     {

@@ -13,10 +13,10 @@ export const useSignup = ({
   const mutation = useMutation<SessionResponse>(
     async () => {
       if (!guest?.links.signup) {
-        throw new Error('Missing capability signup');
+        throw new Error('Missing capability: signup');
       }
 
-      const response = await fetch(guest.links.signup.url, {
+      const response = await fetch(guest.links.signup, {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         method: 'POST',

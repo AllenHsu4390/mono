@@ -32,7 +32,7 @@ export const AddAssetCard = ({ creator }: Props) => {
       <CardActionArea
         onClick={async () => {
           await addAsset();
-          router.push(creator.links.gallery.url);
+          router.push(creator.links.gallery);
         }}
       >
         <CardContent

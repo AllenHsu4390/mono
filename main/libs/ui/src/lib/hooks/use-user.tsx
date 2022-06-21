@@ -22,7 +22,7 @@ export const UserProvider = ({ user, children }: UserProviderProps) => {
   const { data, refetch } = useQuery<UserResponse>(
     ['user', user.id],
     async () => {
-      const res = await fetch(user.links.me.url);
+      const res = await fetch(user.links.me);
       return res.json();
     },
     {

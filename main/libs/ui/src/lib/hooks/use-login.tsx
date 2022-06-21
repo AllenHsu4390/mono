@@ -16,7 +16,7 @@ export const useLogin = ({
         throw new Error('Missing capability: login');
       }
 
-      const response = await fetch(guest.links.login.url, {
+      const response = await fetch(guest.links.login, {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         method: 'POST',

@@ -12,7 +12,7 @@ export const useLogout = () => {
         throw new Error('Missing capability: logout');
       }
 
-      await fetch(guest.links.logout.url, {
+      await fetch(guest.links.logout, {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         method: 'POST',

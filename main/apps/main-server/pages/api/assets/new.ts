@@ -6,11 +6,6 @@ import { ApiHandler, OK, requestTo } from '@main/next-utils';
 const handler = new ApiHandler()
   .withErrorResponse()
   .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
-    const { creatorId } = z
-      .object({
-        creatorId: z.string(),
-      })
-      .parse(req.query);
     const { imageData } = z
       .object({
         imageData: z.string(),
@@ -18,7 +13,7 @@ const handler = new ApiHandler()
       .parse(req.body);
 
     const user = await requestTo.user(req);
-    await saveAsset(creatorId, imageData, user);
+    await saveAsset(user, imageData);
 
     res.status(200).json({
       ok: true,

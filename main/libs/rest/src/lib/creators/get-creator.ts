@@ -9,20 +9,11 @@ export const getCreator = async (
   return {
     ...(await db.creator.get(id)),
     links: {
-      assets: {
-        rel: 'assets',
-        url: `/api/assets?creatorId=${id}&pageId=1`,
-      },
-      gallery: {
-        rel: 'gallery',
-        url: `/galleries/${id}`,
-      },
+      assets: `/api/assets?creatorId=${id}&pageId=1`,
+      gallery: `/galleries/${id}`,
       ...(user && user.creatorId === id
         ? {
-            newAsset: {
-              rel: 'new-asset',
-              url: `/api/assets/new?creatorId=${id}`,
-            },
+            newAsset: `/api/assets/new`,
           }
         : {}),
     },

@@ -26,7 +26,7 @@ export const BalanceProvider = ({ user, children }: BalanceProviderProps) => {
   const { data, refetch } = useQuery<BalanceResponse>(
     ['balance', user.id],
     async () => {
-      const balanceUrl = user.links.balance.url;
+      const balanceUrl = user.links.balance;
       if (!balanceUrl) {
         throw new Error('missing balance capability');
       }

@@ -18,11 +18,7 @@ export const useLikeCount = ({
   } = useQuery<LikesCountResponse>(
     ['likes', asset.id],
     async () => {
-      const countUrl = asset.links.likeCount.url;
-      if (!countUrl) {
-        throw new Error('missing like-count capability');
-      }
-      const res = await fetch(countUrl);
+      const res = await fetch(asset.links.likeCount);
       return res.json();
     },
     {

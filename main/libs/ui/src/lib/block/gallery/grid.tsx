@@ -63,11 +63,11 @@ export const AssetsGrid = ({
             ),
           ],
           ...initialAssets.assets.map((asset, index) =>
-            assetToItem(asset, initialAssets.links.assets[index].url, true)
+            assetToItem(asset, initialAssets.links.assets[index], true)
           ),
           ...assetPages.map((page: AssetsResponse) =>
             page.assets.map((asset, index) =>
-              assetToItem(asset, page.links.assets[index].url)
+              assetToItem(asset, page.links.assets[index])
             )
           ),
           ...(shouldShowSkeleton

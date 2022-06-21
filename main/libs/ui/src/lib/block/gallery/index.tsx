@@ -8,9 +8,8 @@ interface Props {
 }
 
 export const Gallery = ({ initialAssets, creator }: Props) => {
-  const { assets, isLoading, isError, hasNextPage, fetchNextPage } = useAssets(
-    initialAssets.links.next?.url
-  );
+  const { assets, isLoading, isError, hasNextPage, fetchNextPage } =
+    useAssets(initialAssets);
 
   const assetPages = assets?.pages || [];
   const shouldShowSkeleton =
