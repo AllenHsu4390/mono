@@ -1,4 +1,4 @@
-import { GuestResponse } from '@main/rest-models';
+import type { GuestResponse } from '@main/rest-models';
 import React, { createContext, useContext } from 'react';
 
 interface ProviderProps {

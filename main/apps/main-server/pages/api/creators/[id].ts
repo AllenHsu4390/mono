@@ -1,23 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getCreator } from '@main/rest';
-import { CreatorResponse, ErrorResponse } from '@main/rest-models';
+import { CreatorResponse, CreatorResponseSchema } from '@main/rest-models';
 import { z } from 'zod';
-import { ApiHandler, requestTo } from '@main/next-utils';
+import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withGet(
-    async (
-      req: NextApiRequest,
-      res: NextApiResponse<CreatorResponse | ErrorResponse>
-    ) => {
+    async (req: NextApiRequest, res: NextApiResponse<CreatorResponse>) => {
       const { id } = z
         .object({
           id: z.string(),
         })
         .parse(req.query);
       const user = await requestTo.user(req);
-      res.status(200).json(await getCreator(id, user));
+      res
+        .status(200)
+        .json(CreatorResponseSchema.parse(await getCreator(id, user)));
     }
   )
   .engage();

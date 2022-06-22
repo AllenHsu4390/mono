@@ -1,6 +1,6 @@
-import { CreatorResponse } from '@main/rest-models';
-import { Avatar, Typography, Button } from '@mui/material';
-import { Box, useTheme } from '@mui/system';
+import type { CreatorResponse } from '@main/rest-models';
+import { Avatar, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { CreatorLink } from '../../element/creator-link/creator-link';
 import { CreatorProfileBase } from './base';
 

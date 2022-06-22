@@ -1,4 +1,4 @@
-import { Creator } from '@main/rest-models';
+import type { Creator } from '@main/rest-models';
 import { Avatar, Stack, Typography } from '@mui/material';
 import { indigo } from '@mui/material/colors';
 import Link from '../link';

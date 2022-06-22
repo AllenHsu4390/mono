@@ -1,6 +1,13 @@
-import { Gain } from '@main/rest-models';
 import { useMutation } from 'react-query';
 import { useUser } from './use-user';
+
+// MOVE
+export const Gain = {
+  TopUpSmall: 200,
+  TopUpMedium: 1000,
+  TopUpLarge: 5000,
+  DailyTopUp: 2000,
+};
 
 export const useDailyTopUp = ({ onError }: { onError?(error: any): void }) => {
   const { user, refetchUser } = useUser();

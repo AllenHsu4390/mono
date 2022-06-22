@@ -7,7 +7,7 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import { CreatorResponse } from '@main/rest-models';
+import type { CreatorResponse } from '@main/rest-models';
 import { useAddAsset } from '../../hooks/use-add-asset';
 import { useRouter } from '../../hooks/use-router';
 

@@ -1,5 +1,7 @@
 import { auth } from '@main/auth';
 import { getError, rest } from '@main/rest';
+import { UserResponseSchema } from '@main/rest-models';
+import * as _ from 'lodash';
 import {
   GetServerSideProps,
   NextApiHandler,
@@ -16,6 +18,9 @@ export const withRedirect404OnError = (
     try {
       return await getSsp(ctx);
     } catch (e) {
+      if (process.env.NODE_ENV === 'development') {
+        console.log(e);
+      }
       return {
         redirect: {
           permanent: false,
@@ -26,7 +31,43 @@ export const withRedirect404OnError = (
   };
 };
 
-const withErrorResponse = (handler: NextApiHandler): NextApiHandler => {
+export const withUserProps = (
+  getSsp: GetServerSideProps
+): GetServerSideProps => {
+  return async (ctx) => {
+    return _.merge(await getSsp(ctx), {
+      props: {
+        user: await requestTo.user(ctx.req),
+      },
+    });
+  };
+};
+
+export const withUserOrNullProps = (
+  getSsp: GetServerSideProps
+): GetServerSideProps => {
+  return async (ctx) => {
+    return _.merge(await getSsp(ctx), {
+      props: {
+        user: await requestTo.userOrNull(ctx.req),
+      },
+    });
+  };
+};
+
+export const withGuestProps = (
+  getSsp: GetServerSideProps
+): GetServerSideProps => {
+  return async (ctx) => {
+    return _.merge(await getSsp(ctx), {
+      props: {
+        guest: await rest.guests.start(),
+      },
+    });
+  };
+};
+
+export const withErrorResponse = (handler: NextApiHandler): NextApiHandler => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       return await handler(req, res);
@@ -57,12 +98,28 @@ export const withMethods = (methods: Methods): NextApiHandler => {
   };
 };
 
+export class PropsHandler {
+  private traits: Array<(getSsp: GetServerSideProps) => GetServerSideProps> =
+    [];
+
+  public add(trait: (getSsp: GetServerSideProps) => GetServerSideProps) {
+    this.traits.push(trait);
+    return this;
+  }
+
+  public engage(handler: GetServerSideProps) {
+    return this.traits.reduce((accum, trait) => {
+      return trait(accum);
+    }, handler);
+  }
+}
+
 export class ApiHandler {
   private methods: Methods = {};
   private traits: Array<(handler: NextApiHandler) => NextApiHandler> = [];
 
-  public withErrorResponse() {
-    this.traits.push(withErrorResponse);
+  public add(trait: (handler: NextApiHandler) => NextApiHandler) {
+    this.traits.push(trait);
     return this;
   }
 
@@ -77,13 +134,9 @@ export class ApiHandler {
   }
 
   public engage(): NextApiHandler {
-    let handler = withMethods(this.methods);
-
-    this.traits.forEach((trait) => {
-      handler = trait(handler);
-    });
-
-    return handler;
+    return this.traits.reduce((accum, trait) => {
+      return trait(accum);
+    }, withMethods(this.methods));
   }
 }
 
@@ -109,7 +162,7 @@ export const requestTo = {
       .parse(req.cookies);
 
     const userId = auth.decrypt(idKey);
-    return await rest.users.byId(userId);
+    return UserResponseSchema.parse(await rest.users.byId(userId));
   },
   userId: async (req: { cookies: NextApiRequestCookies }) => {
     const { idKey } = z
@@ -137,6 +190,6 @@ export const requestTo = {
       return null;
     }
 
-    return await rest.users.byId(userId);
+    return UserResponseSchema.parse(await rest.users.byId(userId));
   },
 };

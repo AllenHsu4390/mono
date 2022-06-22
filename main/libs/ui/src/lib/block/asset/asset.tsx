@@ -4,7 +4,7 @@ import CreatorAvatar from '../../element/avatar';
 import { AssetCardFull } from './card-full';
 import LikeCounter from '../../element/like-counter';
 import { useDrop } from '../../hooks/use-drop';
-import { AssetResponse } from '@main/rest-models';
+import type { AssetResponse } from '@main/rest-models';
 import { CreatorLink } from '../../element/creator-link/creator-link';
 import DeleteAssetButton from '../../element/delete-asset-button';
 

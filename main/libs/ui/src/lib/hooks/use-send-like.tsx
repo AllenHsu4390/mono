@@ -1,4 +1,4 @@
-import { AssetResponse, DropResponse } from '@main/rest-models';
+import type { AssetResponse, DropResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
 import { useUser } from './use-user';
 

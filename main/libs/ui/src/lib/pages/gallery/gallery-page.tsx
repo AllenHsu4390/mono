@@ -1,7 +1,7 @@
 import Page from '../_base/page';
 import { CreatorProfile } from '../../block/creator/profile';
 import { Gallery } from '../../block/gallery';
-import { AssetsResponse, CreatorResponse } from '@main/rest-models';
+import type { AssetsResponse, CreatorResponse } from '@main/rest-models';
 import { useScrollReset } from '../../hooks/use-scroll-reset';
 import { Container } from '@mui/material';
 

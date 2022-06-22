@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import { AssetCard } from '../asset/card';
 import { AssetCardSkeleton } from '../asset/skeleton';
 import Link from '../../element/link';
-import { AssetsResponse, CreatorResponse } from '@main/rest-models';
+import type { AssetsResponse, CreatorResponse } from '@main/rest-models';
 import { AddAssetCard } from '../add-asset-card/add-asset-card';
 import { useUser } from '../../hooks/use-user';
 

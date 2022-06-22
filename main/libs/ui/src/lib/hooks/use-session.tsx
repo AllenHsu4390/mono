@@ -1,4 +1,4 @@
-import { SessionResponse } from '@main/rest-models';
+import type { SessionResponse } from '@main/rest-models';
 import { useQuery } from 'react-query';
 import { useRouter } from './use-router';
 

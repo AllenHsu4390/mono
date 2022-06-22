@@ -1,4 +1,4 @@
-import { AssetResponse } from '@main/rest-models';
+import type { AssetResponse } from '@main/rest-models';
 import { DeleteForeverOutlined } from '@mui/icons-material';
 import { Typography, Button, IconButton, useTheme, Theme } from '@mui/material';
 import AlertDialog from '../../block/alert';

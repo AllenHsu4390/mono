@@ -1,4 +1,4 @@
-import { CreatorResponse } from '@main/rest-models';
+import type { CreatorResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
 import { useUser } from './use-user';
 

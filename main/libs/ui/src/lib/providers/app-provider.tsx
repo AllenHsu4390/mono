@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { theme } from './theme';
 import { ThemeProvider } from '@mui/material/styles';
 import { UserProvider } from '../hooks/use-user';
-import { GuestResponse, UserResponse } from '@main/rest-models';
+import type { GuestResponse, UserResponse } from '@main/rest-models';
 import { DropProvider } from '../hooks/use-drop';
 import { BalanceProvider } from '../hooks/use-balance';
 import { CreatorProvider } from '../hooks/use-creator';
@@ -11,11 +11,11 @@ import { GuestProvider } from '../hooks/use-guest';
 
 const queryClient = new QueryClient();
 
-export interface WithUserProps {
+export interface UserProps {
   user?: UserResponse | null;
 }
 
-export interface WithGuestProps {
+export interface GuestProps {
   guest?: GuestResponse | null;
 }
 
@@ -27,7 +27,7 @@ export const AppProvider = ({
   user,
   guest,
   children,
-}: WithUserProps & WithGuestProps & ReactChildren) => {
+}: UserProps & GuestProps & ReactChildren) => {
   if (user) {
     return (
       <QueryClientProvider client={queryClient}>

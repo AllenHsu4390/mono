@@ -1,4 +1,4 @@
-import { AssetsResponse } from '@main/rest-models';
+import type { AssetsResponse } from '@main/rest-models';
 import { useInfiniteQuery } from 'react-query';
 
 export const useAssets = (assets: AssetsResponse) => {

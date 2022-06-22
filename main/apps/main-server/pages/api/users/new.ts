@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { rest } from '@main/rest';
 import { z } from 'zod';
-import { ApiHandler } from '@main/next-utils';
+import { ApiHandler, withErrorResponse } from '@main/next-utils';
 import { initiateLogin } from './login';
 import { SessionResponse } from '@main/rest-models';
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withPost(
     async (req: NextApiRequest, res: NextApiResponse<SessionResponse>) => {
       const { email } = z

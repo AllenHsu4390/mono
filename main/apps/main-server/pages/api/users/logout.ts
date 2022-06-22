@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { ApiHandler, OK, requestTo } from '@main/next-utils';
+import { ApiHandler, OK, requestTo, withErrorResponse } from '@main/next-utils';
 import { rest } from '@main/rest';
 
 export const initiateLogout = (res: NextApiResponse) => {
@@ -10,7 +10,7 @@ export const initiateLogout = (res: NextApiResponse) => {
 };
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
     const sessionId = await requestTo.sessionId(req);
     await rest.sessions.delete(sessionId);

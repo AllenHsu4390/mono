@@ -2,8 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '@main/auth';
 import { rest } from '@main/rest';
 import { z } from 'zod';
-import { ApiHandler } from '@main/next-utils';
-import { SessionResponse } from '@main/rest-models';
+import { ApiHandler, withErrorResponse } from '@main/next-utils';
+import { SessionResponse, SessionResponseSchema } from '@main/rest-models';
 
 export const initiateLogin = async (
   userId: string,
@@ -12,6 +12,7 @@ export const initiateLogin = async (
   const session = await rest.sessions.new(userId);
   const sessionKey = auth.encrypt(session.id);
 
+  // send to email
   console.log(`localhost:4200/users/auth?sessionKey=${sessionKey}`);
 
   res.setHeader('Set-Cookie', [
@@ -20,11 +21,13 @@ export const initiateLogin = async (
     )}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`,
   ]);
 
-  res.status(200).json(await rest.sessions.byId(session.id));
+  res
+    .status(200)
+    .json(SessionResponseSchema.parse(await rest.sessions.byId(session.id)));
 };
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withPost(
     async (req: NextApiRequest, res: NextApiResponse<SessionResponse>) => {
       const { email } = z

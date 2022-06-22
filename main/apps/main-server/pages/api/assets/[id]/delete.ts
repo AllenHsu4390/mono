@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { rest } from '@main/rest';
 import { z } from 'zod';
-import { ApiHandler, OK, requestTo } from '@main/next-utils';
+import { ApiHandler, OK, requestTo, withErrorResponse } from '@main/next-utils';
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
     const { id } = z
       .object({

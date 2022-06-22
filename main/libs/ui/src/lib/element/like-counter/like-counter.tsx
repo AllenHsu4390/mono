@@ -1,4 +1,4 @@
-import { AssetResponse } from '@main/rest-models';
+import type { AssetResponse } from '@main/rest-models';
 import { Typography, Box, useTheme } from '@mui/material';
 import { useState } from 'react';
 import { useLikeCount } from '../../hooks/use-like-count';

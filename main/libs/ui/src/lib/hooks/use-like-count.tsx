@@ -1,4 +1,4 @@
-import { AssetResponse, LikesCountResponse } from '@main/rest-models';
+import type { AssetResponse, LikesCountResponse } from '@main/rest-models';
 import { useQuery } from 'react-query';
 
 export const useLikeCount = ({

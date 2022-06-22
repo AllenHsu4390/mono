@@ -1,4 +1,4 @@
-import { SessionResponse } from '@main/rest-models';
+import type { SessionResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
 import { useGuest } from './use-guest';
 

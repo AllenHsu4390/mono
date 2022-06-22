@@ -1,4 +1,4 @@
-import { AssetResponse, Cost } from '@main/rest-models';
+import type { AssetResponse } from '@main/rest-models';
 import { FavoriteBorderOutlined } from '@mui/icons-material';
 import { Typography, Button, IconButton, useTheme, Theme } from '@mui/material';
 import AlertDialog from '../../block/alert';
@@ -8,6 +8,11 @@ import { useDrop } from '../../hooks/use-drop';
 import { useSendLike } from '../../hooks/use-send-like';
 import { useLikeCount } from '../../hooks/use-like-count';
 import Link from '../link';
+
+// MOVE
+const Cost = {
+  Like: 60,
+};
 
 const iconButtonSx = (theme: Theme) => ({
   borderRadius: '0',

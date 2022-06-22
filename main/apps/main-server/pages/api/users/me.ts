@@ -1,17 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { ErrorResponse, UserResponse } from '@main/rest-models';
-import { ApiHandler, requestTo } from '@main/next-utils';
+import { UserResponse, UserResponseSchema } from '@main/rest-models';
+import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
 
 const handler = new ApiHandler()
-  .withErrorResponse()
-  .withGet(
-    async (
-      req: NextApiRequest,
-      res: NextApiResponse<UserResponse | ErrorResponse>
-    ) => {
-      res.status(200).json(await requestTo.user(req));
-    }
-  )
+  .add(withErrorResponse)
+  .withGet(async (req: NextApiRequest, res: NextApiResponse<UserResponse>) => {
+    res.status(200).json(UserResponseSchema.parse(await requestTo.user(req)));
+  })
   .engage();
 
 export default handler;

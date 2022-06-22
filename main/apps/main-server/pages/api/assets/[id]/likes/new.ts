@@ -2,10 +2,10 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { rest } from '@main/rest';
 import { DropResponse } from '@main/rest-models';
 import { z } from 'zod';
-import { ApiHandler, requestTo } from '@main/next-utils';
+import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withPost(async (req: NextApiRequest, res: NextApiResponse<DropResponse>) => {
     const { id } = z
       .object({

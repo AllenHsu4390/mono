@@ -1,4 +1,4 @@
-import { BalanceResponse, UserResponse } from '@main/rest-models';
+import type { BalanceResponse, UserResponse } from '@main/rest-models';
 import { noop } from 'lodash';
 import { createContext, useContext } from 'react';
 import { useQuery } from 'react-query';

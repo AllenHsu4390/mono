@@ -1,4 +1,4 @@
-import { AssetsResponse, CreatorResponse } from '@main/rest-models';
+import type { AssetsResponse, CreatorResponse } from '@main/rest-models';
 import { useAssets } from '../../hooks/use-assets';
 import { AssetsGrid } from './grid';
 

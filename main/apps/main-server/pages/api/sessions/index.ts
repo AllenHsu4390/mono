@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { rest } from '@main/rest';
-import { ApiHandler, OK } from '@main/next-utils';
+import { ApiHandler, OK, withErrorResponse } from '@main/next-utils';
 import { z } from 'zod';
 import { auth } from '@main/auth';
 import { SessionResponse, SessionResponseSchema } from '@main/rest-models';
@@ -20,7 +20,7 @@ const authorizeLogin = (
 };
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withGet(
     async (req: NextApiRequest, res: NextApiResponse<SessionResponse>) => {
       const { waitKey } = z

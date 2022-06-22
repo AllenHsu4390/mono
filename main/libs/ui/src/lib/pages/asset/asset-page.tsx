@@ -1,6 +1,6 @@
 import Page from '../_base/page';
 import AssetInteractable from '../../block/asset/asset';
-import { AssetResponse, UserResponse } from '@main/rest-models';
+import type { AssetResponse } from '@main/rest-models';
 import { Container } from '@mui/material';
 
 export interface AssetPageProps {

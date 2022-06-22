@@ -1,4 +1,4 @@
-import { SessionResponse } from '@main/rest-models';
+import type { SessionResponse } from '@main/rest-models';
 import { Button, Stack, Typography } from '@mui/material';
 import { useSession } from '../../hooks/use-session';
 

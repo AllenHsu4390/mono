@@ -1,4 +1,4 @@
-import { AssetResponse } from '@main/rest-models';
+import type { AssetResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
 
 export const useDeleteAsset = ({

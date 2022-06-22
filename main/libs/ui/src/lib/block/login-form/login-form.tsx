@@ -1,6 +1,5 @@
-import { SessionResponse } from '@main/rest-models';
+import type { SessionResponse } from '@main/rest-models';
 import {
-  Alert,
   Button,
   CircularProgress,
   Container,
