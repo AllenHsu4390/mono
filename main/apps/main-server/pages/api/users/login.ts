@@ -3,13 +3,15 @@ import { auth } from '@main/auth';
 import { rest } from '@main/rest';
 import { z } from 'zod';
 import { ApiHandler, withErrorResponse } from '@main/next-utils';
-import { SessionResponse, SessionResponseSchema } from '@main/rest-models';
+import { SessionResponse } from '@main/rest-models';
 
 export const initiateLogin = async (
   userId: string,
   res: NextApiResponse<SessionResponse>
 ) => {
-  const session = await rest.sessions.new(userId);
+  const session = await rest.sessions.post({
+    userId,
+  });
   const sessionKey = auth.encrypt(session.id);
 
   // send to email
@@ -21,9 +23,7 @@ export const initiateLogin = async (
     )}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`,
   ]);
 
-  res
-    .status(200)
-    .json(SessionResponseSchema.parse(await rest.sessions.byId(session.id)));
+  res.status(200).json(await rest.sessions.param(session.id).get());
 };
 
 const handler = new ApiHandler()
@@ -35,7 +35,7 @@ const handler = new ApiHandler()
           email: z.string().email('Not a valid email'),
         })
         .parse(req.body);
-      const userId = await rest.users.id.byEmail(email);
+      const userId = await rest.users.id.get({ email });
       await initiateLogin(userId, res);
     }
   )

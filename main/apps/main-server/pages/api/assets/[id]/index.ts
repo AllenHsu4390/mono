@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { rest } from '@main/rest';
-import { AssetResponse, AssetResponseSchema } from '@main/rest-models';
+import { AssetResponse } from '@main/rest-models';
 import { z } from 'zod';
 import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
 
@@ -15,11 +15,11 @@ const handler = new ApiHandler()
 
     const user = await requestTo.userOrNull(req);
 
-    res
-      .status(200)
-      .json(
-        AssetResponseSchema.parse(await rest.assets.byId(id, user || undefined))
-      );
+    res.status(200).json(
+      await rest.assets.param(id).get({
+        user: user || undefined,
+      })
+    );
   })
   .engage();
 

@@ -1,5 +1,7 @@
-export interface Balance {
-  sum: number;
-}
+import { z } from 'zod';
 
-export type BalanceResponse = Balance;
+export const BalanceResponseSchema = z.object({
+  sum: z.number(),
+});
+
+export type BalanceResponse = z.infer<typeof BalanceResponseSchema>;

@@ -15,7 +15,7 @@ export const getUser = async (userId: string): Promise<UserResponse> => {
       editAccount: '/users/edit',
       gallery: `/galleries/${user.creatorId}`,
       balance: '/api/transactions/balance',
-      creator: `/api/creators/${user.creatorId}`,
+      creator: `/api/creators/me`,
       logoutPage: '/users/logout',
       me: '/api/users/me',
       ...(user.hasDailyTopUp

@@ -14,7 +14,7 @@ const handler = new ApiHandler()
           email: z.string().email('Not a valid email'),
         })
         .parse(req.body);
-      const userId = await rest.users.new({
+      const userId = await rest.users.id.get({
         email,
       });
       await initiateLogin(userId, res);

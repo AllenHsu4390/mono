@@ -14,7 +14,7 @@ const handler = new ApiHandler()
         })
         .parse(req.query);
 
-      res.status(200).json(await rest.likes.count.byAsset(id));
+      res.status(200).json(await rest.assets.param(id).likes.count.get());
     }
   )
   .engage();

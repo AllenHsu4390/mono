@@ -13,7 +13,7 @@ const handler = new ApiHandler()
   .add(withErrorResponse)
   .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
     const sessionId = await requestTo.sessionId(req);
-    await rest.sessions.delete(sessionId);
+    await rest.sessions.param(sessionId).delete();
     initiateLogout(res);
     res.status(200).json({
       ok: true,

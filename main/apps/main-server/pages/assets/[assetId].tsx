@@ -20,7 +20,9 @@ export const getServerSideProps: GetServerSideProps = new PropsHandler()
       .parse(query);
 
     const user = await requestTo.userOrNull(req);
-    const asset = await rest.assets.byId(assetId, user);
+    const asset = await rest.assets.param(assetId).get({
+      user: user || undefined,
+    });
     const props: AssetPageProps & UserProps = {
       user,
       asset,

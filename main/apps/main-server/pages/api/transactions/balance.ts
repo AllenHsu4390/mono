@@ -8,7 +8,7 @@ const handler = new ApiHandler()
   .withGet(
     async (req: NextApiRequest, res: NextApiResponse<BalanceResponse>) => {
       const userId = await requestTo.userId(req);
-      const balance = await rest.transactions.balance.byUser(userId);
+      const balance = await rest.users.param(userId).balance.get();
       res.status(200).json(balance);
     }
   )

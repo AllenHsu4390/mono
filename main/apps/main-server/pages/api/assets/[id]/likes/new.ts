@@ -15,9 +15,8 @@ const handler = new ApiHandler()
 
     const userId = await requestTo.userId(req);
 
-    const drop = await rest.likes.new({
+    const drop = await rest.assets.param(id).likes.post({
       userId,
-      assetId: id,
     });
 
     res.status(200).json(drop);

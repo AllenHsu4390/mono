@@ -1,8 +1,12 @@
-export interface GuestResponse {
-  links: {
-    loginPage: string;
-    login: string;
-    logout: string;
-    signup: string;
-  };
-}
+import { z } from 'zod';
+
+export const GuestResponseSchema = z.object({
+  links: z.object({
+    loginPage: z.string(),
+    login: z.string(),
+    logout: z.string(),
+    signup: z.string(),
+  }),
+});
+
+export type GuestResponse = z.infer<typeof GuestResponseSchema>;

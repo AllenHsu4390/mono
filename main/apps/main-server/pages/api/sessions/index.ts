@@ -3,7 +3,7 @@ import { rest } from '@main/rest';
 import { ApiHandler, OK, withErrorResponse } from '@main/next-utils';
 import { z } from 'zod';
 import { auth } from '@main/auth';
-import { SessionResponse, SessionResponseSchema } from '@main/rest-models';
+import { SessionResponse } from '@main/rest-models';
 
 const authorizeLogin = (
   res: NextApiResponse,
@@ -30,11 +30,11 @@ const handler = new ApiHandler()
         .parse(req.cookies);
 
       const [userId, sessionId] = auth.decrypt(waitKey).split('-SEP-');
-      const session = await rest.sessions.byId(sessionId);
+      const session = await rest.sessions.param(sessionId).get();
       if (session.isLoggedIn) {
         authorizeLogin(res, userId, sessionId);
       }
-      res.status(200).json(SessionResponseSchema.parse(session));
+      res.status(200).json(session);
     }
   )
   .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
@@ -44,7 +44,7 @@ const handler = new ApiHandler()
       })
       .parse(req.query);
     const sessionId = auth.decrypt(sessionKey);
-    await rest.sessions.update(sessionId);
+    await rest.sessions.param(sessionId).post();
     res.status(200).json({
       ok: true,
     });

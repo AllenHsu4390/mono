@@ -13,7 +13,9 @@ const handler = new ApiHandler()
       .parse(req.query);
 
     const user = await requestTo.user(req);
-    await rest.assets.delete(id, user.creatorId);
+    await rest.assets.param(id).delete({
+      creatorId: user.creatorId,
+    });
     res.status(200).json({
       ok: true,
     });

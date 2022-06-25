@@ -1,6 +1,5 @@
 import { auth } from '@main/auth';
 import { getError, rest } from '@main/rest';
-import { UserResponseSchema } from '@main/rest-models';
 import * as _ from 'lodash';
 import {
   GetServerSideProps,
@@ -61,7 +60,7 @@ export const withGuestProps = (
   return async (ctx) => {
     return _.merge(await getSsp(ctx), {
       props: {
-        guest: await rest.guests.start(),
+        guest: await rest.guests.start.get(),
       },
     });
   };
@@ -106,7 +105,6 @@ export class PropsHandler {
     this.traits.push(trait);
     return this;
   }
-
   public engage(handler: GetServerSideProps) {
     return this.traits.reduce((accum, trait) => {
       return trait(accum);
@@ -162,7 +160,7 @@ export const requestTo = {
       .parse(req.cookies);
 
     const userId = auth.decrypt(idKey);
-    return UserResponseSchema.parse(await rest.users.byId(userId));
+    return await rest.users.param(userId).get();
   },
   userId: async (req: { cookies: NextApiRequestCookies }) => {
     const { idKey } = z
@@ -190,6 +188,6 @@ export const requestTo = {
       return null;
     }
 
-    return UserResponseSchema.parse(await rest.users.byId(userId));
+    return await rest.users.param(userId).get();
   },
 };

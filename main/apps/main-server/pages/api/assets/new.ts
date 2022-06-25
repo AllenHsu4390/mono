@@ -13,7 +13,8 @@ const handler = new ApiHandler()
       .parse(req.body);
 
     const user = await requestTo.user(req);
-    await rest.assets.new(user, imageData);
+
+    await rest.assets.post({ creatorId: user.creatorId, imageData });
 
     res.status(200).json({
       ok: true,

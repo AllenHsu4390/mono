@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { UserProps, GalleryPage, GalleryPageProps } from '@main/ui';
-import { getCreator, rest } from '@main/rest';
+import { rest } from '@main/rest';
 import { z } from 'zod';
 import {
   PropsHandler,
@@ -19,8 +19,12 @@ export const getServerSideProps: GetServerSideProps = new PropsHandler()
       })
       .parse(query);
     const user = await requestTo.userOrNull(req);
-    const creator = await getCreator(creatorId, user);
-    const assets = await rest.assets.byCreator(creator.id, '1');
+    const creator = await rest.creators.param(creatorId).get({
+      user,
+    });
+    const assets = await rest.creators.param(creatorId).assets.get({
+      pageId: '1',
+    });
     const props: GalleryPageProps & UserProps = {
       user,
       creator,
