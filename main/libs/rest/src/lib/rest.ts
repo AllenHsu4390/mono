@@ -1,8 +1,10 @@
 import {
   AssetsResponseSchema,
   BalanceResponseSchema,
+  CategoriesResponseSchema,
   CreatorResponseSchema,
   DailyTopUpResponseSchema,
+  DropResponseSchema,
   GuestResponseSchema,
   SessionResponseSchema,
   User,
@@ -13,6 +15,9 @@ import { getAsset } from './assets/get-asset';
 import { getAssets } from './assets/get-assets';
 import { getTopAssets } from './assets/get-top-assets';
 import { saveAsset } from './assets/save-asset';
+import { getAssetCategories } from './categories/get-asset-categories';
+import { getCategories } from './categories/get-categories';
+import { saveAssetCategory } from './categories/save-asset-category';
 import { getCreator } from './creators/get-creator';
 import { saveDailyTopUp } from './daily-top-up/save-daily-top-up';
 import { getGuest } from './guests/get-guest';
@@ -37,18 +42,19 @@ export const rest = {
     param: (id: string) => ({
       get: async () => getUser(id),
       dailyTopUp: {
-        post: async () => DailyTopUpResponseSchema.parse(saveDailyTopUp(id)),
+        post: async () =>
+          DailyTopUpResponseSchema.parse(await saveDailyTopUp(id)),
       },
       balance: {
-        get: async () => BalanceResponseSchema.parse(getBalance(id)),
+        get: async () => BalanceResponseSchema.parse(await getBalance(id)),
       },
     }),
     id: {
       get: async ({ email }: { email: string }) =>
-        z.string().parse(getUserIdByEmail(email)),
+        z.string().parse(await getUserIdByEmail(email)),
     },
     post: async ({ email }: { email: string }) =>
-      z.string().parse(saveUser({ email })),
+      z.string().parse(await saveUser({ email })),
   },
 
   // creators/:id
@@ -56,10 +62,10 @@ export const rest = {
   creators: {
     param: (id: string) => ({
       get: async ({ user }: { user?: User | null }) =>
-        CreatorResponseSchema.parse(getCreator(id, user)),
+        CreatorResponseSchema.parse(await getCreator(id, user)),
       assets: {
         get: async ({ pageId }: { pageId: string }) =>
-          AssetsResponseSchema.parse(getAssets(id, pageId)),
+          AssetsResponseSchema.parse(await getAssets(id, pageId)),
       },
     }),
   },
@@ -70,23 +76,31 @@ export const rest = {
   // session?userId=:userId POST
   sessions: {
     param: (id: string) => ({
-      get: async () => SessionResponseSchema.parse(getSession(id)),
+      get: async () => SessionResponseSchema.parse(await getSession(id)),
       post: async () => updateSession(id),
       delete: async () => deleteSession(id),
     }),
     post: async ({ userId }: { userId: string }) => createSession(userId),
   },
+
   // guests/start
   guests: {
     start: {
-      get: () => GuestResponseSchema.parse(getGuest()),
+      get: async () => GuestResponseSchema.parse(await getGuest()),
     },
+  },
+
+  // categories
+  categories: {
+    get: async () => CategoriesResponseSchema.parse(await getCategories()),
   },
 
   // assets/:id
   // assets/:id DELETE
   // assets/:id/likes/count
   // assets/:id/likes POST
+  // assets/:id/categories
+  // assets/:id/categories { name } POST
   // assets/top?pageId=:pageId
   // assets?creatorId=:creatorId { imageData } POST
   assets: {
@@ -94,20 +108,28 @@ export const rest = {
       get: async ({ user }: { user?: User }) => getAsset(id, user),
       delete: async ({ creatorId }: { creatorId: string }) =>
         deleteAsset(id, creatorId),
+      categories: {
+        get: async () =>
+          CategoriesResponseSchema.parse(await getAssetCategories(id)),
+        post: async ({ userId, name }: { userId: string; name: string }) =>
+          await saveAssetCategory(name, id, userId),
+      },
       likes: {
         count: {
           get: async () => getLikesCount(id),
         },
         post: async ({ userId }: { userId: string }) =>
-          saveLike({
-            userId,
-            assetId: id,
-          }),
+          DropResponseSchema.parse(
+            saveLike({
+              userId,
+              assetId: id,
+            })
+          ),
       },
     }),
     top: {
       get: async ({ pageId }: { pageId: string }) =>
-        AssetsResponseSchema.parse(getTopAssets(pageId)),
+        AssetsResponseSchema.parse(await getTopAssets(pageId)),
     },
     post: async ({
       creatorId,

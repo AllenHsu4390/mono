@@ -13,7 +13,7 @@ export const getCreator = async (
       gallery: `/galleries/${id}`,
       ...(user && user.creatorId === id
         ? {
-            newAsset: `/api/assets/new`,
+            newAsset: `/api/assets`,
           }
         : {}),
     },

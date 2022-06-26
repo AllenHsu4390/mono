@@ -6,6 +6,7 @@ export const GuestResponseSchema = z.object({
     login: z.string(),
     logout: z.string(),
     signup: z.string(),
+    categories: z.string(),
   }),
 });
 

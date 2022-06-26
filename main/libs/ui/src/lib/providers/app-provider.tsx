@@ -8,6 +8,7 @@ import { DropProvider } from '../hooks/use-drop';
 import { BalanceProvider } from '../hooks/use-balance';
 import { CreatorProvider } from '../hooks/use-creator';
 import { GuestProvider } from '../hooks/use-guest';
+import { CategoriesProvider } from '../hooks/use-categories';
 
 const queryClient = new QueryClient();
 
@@ -34,11 +35,13 @@ export const AppProvider = ({
         <ScrollResetProvider>
           <UserProvider user={user}>
             <CreatorProvider user={user}>
-              <DropProvider>
-                <BalanceProvider user={user}>
-                  <ThemeProvider theme={theme}>{children}</ThemeProvider>
-                </BalanceProvider>
-              </DropProvider>
+              <CategoriesProvider>
+                <DropProvider>
+                  <BalanceProvider user={user}>
+                    <ThemeProvider theme={theme}>{children}</ThemeProvider>
+                  </BalanceProvider>
+                </DropProvider>
+              </CategoriesProvider>
             </CreatorProvider>
           </UserProvider>
         </ScrollResetProvider>
@@ -51,7 +54,9 @@ export const AppProvider = ({
       <QueryClientProvider client={queryClient}>
         <ScrollResetProvider>
           <GuestProvider guest={guest}>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <CategoriesProvider>
+              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            </CategoriesProvider>
           </GuestProvider>
         </ScrollResetProvider>
       </QueryClientProvider>

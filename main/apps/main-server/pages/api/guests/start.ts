@@ -6,7 +6,7 @@ import { rest } from '@main/rest';
 const handler = new ApiHandler()
   .add(withErrorResponse)
   .withGet(async (req: NextApiRequest, res: NextApiResponse<GuestResponse>) => {
-    res.status(200).json(rest.guests.start.get());
+    res.status(200).json(await rest.guests.start.get());
   })
   .engage();
 

@@ -22,6 +22,9 @@ import { saveUser } from './writes/user';
 import { createSession, deleteSession, updateSession } from './writes/session';
 import { getSession } from './reads/session';
 import { Session } from './entity/session';
+import { Category } from './entity/category';
+import { getAssetCategories } from './reads/category';
+import { saveAssetCategory } from './writes/category';
 
 const datasource = new DataSource({
   type: 'mysql',
@@ -41,6 +44,7 @@ const datasource = new DataSource({
     Transaction,
     DailyTopUp,
     Session,
+    Category,
   ],
 });
 
@@ -59,6 +63,10 @@ export const db = {
   },
   creator: {
     get: getCreator,
+  },
+  category: {
+    get: getAssetCategories,
+    save: saveAssetCategory,
   },
   asset: {
     get: getAsset,

@@ -72,7 +72,13 @@ export const withErrorResponse = (handler: NextApiHandler): NextApiHandler => {
       return await handler(req, res);
     } catch (e) {
       const error = getError(e);
-      res.status(error.status).json(error);
+      if (process.env.NODE_ENV === 'development') {
+        console.log(error);
+      }
+      res.status(error.status).json({
+        message: 'something went wrong',
+        status: error.status,
+      });
     }
   };
 };

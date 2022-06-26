@@ -20,7 +20,7 @@ export const UserContext = createContext<UserContextResult>({
 
 export const UserProvider = ({ user, children }: UserProviderProps) => {
   const { data, refetch } = useQuery<UserResponse>(
-    ['user', user.id],
+    ['user'],
     async () => {
       const res = await fetch(user.links.me);
       return res.json();
