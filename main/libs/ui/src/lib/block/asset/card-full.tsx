@@ -1,7 +1,7 @@
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActions, CardContent, CardHeader, Stack } from '@mui/material';
-import { AssetResponse } from '@main/rest-models';
+import type { AssetResponse } from '@main/rest-models';
 import { useState } from 'react';
 
 interface Props {

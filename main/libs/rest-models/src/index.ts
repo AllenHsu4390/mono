@@ -3,10 +3,14 @@ export * from './lib/assets/asset';
 
 export * from './lib/creators/creator';
 
+export * from './lib/categories/categories';
+
 export * from './lib/errors/error';
 
 export * from './lib/follows/follow';
 export * from './lib/follows/follows';
+
+export * from './lib/guests/guest';
 
 export * from './lib/likes/likes-count';
 export * from './lib/likes/like';
@@ -16,8 +20,6 @@ export * from './lib/drops/drop';
 export * from './lib/sessions/session';
 
 export * from './lib/transactions/balance';
-
-export * from './lib/trends/trend';
 
 export * from './lib/users/user';
 

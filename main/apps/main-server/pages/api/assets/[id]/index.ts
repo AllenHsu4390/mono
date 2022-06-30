@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getAsset } from '@main/rest';
+import { rest } from '@main/rest';
 import { AssetResponse } from '@main/rest-models';
 import { z } from 'zod';
-import { ApiHandler, requestTo } from '@main/next-utils';
+import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withGet(async (req: NextApiRequest, res: NextApiResponse<AssetResponse>) => {
     const { id } = z
       .object({
@@ -15,7 +15,11 @@ const handler = new ApiHandler()
 
     const user = await requestTo.userOrNull(req);
 
-    res.status(200).json(await getAsset(id, user));
+    res.status(200).json(
+      await rest.assets.param(id).get({
+        user: user || undefined,
+      })
+    );
   })
   .engage();
 

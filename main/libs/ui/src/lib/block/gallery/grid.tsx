@@ -4,20 +4,16 @@ import { Grid } from '@mui/material';
 import { AssetCard } from '../asset/card';
 import { AssetCardSkeleton } from '../asset/skeleton';
 import Link from '../../element/link';
-import {
-  AssetsResponse,
-  CreatorResponse,
-  UserResponse,
-} from '@main/rest-models';
+import type { AssetsResponse, CreatorResponse } from '@main/rest-models';
 import { AddAssetCard } from '../add-asset-card/add-asset-card';
+import { useUser } from '../../hooks/use-user';
 
 interface Props {
   hasNextPage: boolean;
   loadMore(page: number): void;
   assetPages: AssetsResponse[];
   initialAssets: AssetsResponse;
-  user?: UserResponse;
-  creator: CreatorResponse;
+  creator?: CreatorResponse;
   shouldShowSkeleton: boolean;
 }
 
@@ -49,28 +45,33 @@ export const AssetsGrid = ({
   assetPages,
   shouldShowSkeleton,
   initialAssets,
-  user,
   creator,
 }: Props) => {
+  const { user } = useUser();
+
   return (
     <InfiniteScroll hasMore={hasNextPage} loadMore={loadMore}>
       <Grid container spacing={0.5}>
         {[
           ...[
-            user && creator.links.newAsset ? (
-              <Item>
-                <AddAssetCard key={user.creatorId} creator={creator} />
+            user && creator?.links.newAsset ? (
+              <Item key="add-asset">
+                <AddAssetCard
+                  key={user.creatorId}
+                  creator={creator}
+                  assets={initialAssets}
+                />
               </Item>
             ) : (
               []
             ),
           ],
           ...initialAssets.assets.map((asset, index) =>
-            assetToItem(asset, initialAssets.links.assets[index].url, true)
+            assetToItem(asset, initialAssets.links.assets[index], true)
           ),
           ...assetPages.map((page: AssetsResponse) =>
             page.assets.map((asset, index) =>
-              assetToItem(asset, page.links.assets[index].url)
+              assetToItem(asset, page.links.assets[index])
             )
           ),
           ...(shouldShowSkeleton

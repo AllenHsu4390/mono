@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { deleteAsset } from '@main/rest';
+import { rest } from '@main/rest';
 import { z } from 'zod';
-import { ApiHandler, OK, requestTo } from '@main/next-utils';
+import { ApiHandler, OK, requestTo, withErrorResponse } from '@main/next-utils';
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
     const { id } = z
       .object({
@@ -13,7 +13,9 @@ const handler = new ApiHandler()
       .parse(req.query);
 
     const user = await requestTo.user(req);
-    await deleteAsset(id, user.creatorId);
+    await rest.assets.param(id).delete({
+      creatorId: user.creatorId,
+    });
     res.status(200).json({
       ok: true,
     });

@@ -6,21 +6,15 @@ export const getFollows = async (
   pageId: string
 ): Promise<FollowsResponse> => {
   const db = environment.db;
-  const page = await db.get.follows(userId, pageId);
+  const page = await db.follows.get(userId, pageId);
 
   return {
     ...page,
     links: {
-      follow: page.follows.map((f) => ({
-        rel: 'follow',
-        url: `/galleries/${f.creator.id}`,
-      })),
+      follows: page.follows.map((f) => `/galleries/${f.creator.id}`),
       ...(page.pagination.next
         ? {
-            next: {
-              rel: 'next',
-              url: `/api/follows?pageId=${page.pagination.next}`,
-            },
+            next: `/api/follows?pageId=${page.pagination.next}`,
           }
         : {}),
     },

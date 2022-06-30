@@ -1,11 +1,15 @@
-import { AssetsResponse } from '@main/rest-models';
+import type { AssetsResponse } from '@main/rest-models';
 import { useInfiniteQuery } from 'react-query';
 
-export const useAssets = (assetsUrl?: string) => {
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
+export const useAssets = (assets: AssetsResponse) => {
+  const { data, isLoading, isError, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery<AssetsResponse, Error>(
-      assetsUrl || 'missing-assets',
-      async ({ pageParam: nextUrl = assetsUrl }: { pageParam?: string }) => {
+      ['assets', assets.links.next],
+      async ({
+        pageParam: nextUrl = assets.links.next,
+      }: {
+        pageParam?: string;
+      }) => {
         if (nextUrl) {
           const response = await fetch(nextUrl);
           return response.json();
@@ -17,7 +21,7 @@ export const useAssets = (assetsUrl?: string) => {
       },
       {
         getNextPageParam: (lastPage): undefined | string => {
-          return lastPage.links.next?.url;
+          return lastPage.links.next;
         },
       }
     );
@@ -27,5 +31,6 @@ export const useAssets = (assetsUrl?: string) => {
     isError,
     hasNextPage,
     fetchNextPage,
+    refetchAssets: refetch,
   };
 };

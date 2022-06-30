@@ -6,5 +6,5 @@ export const deleteAsset = async (
 ): Promise<void> => {
   const db = environment.db;
 
-  await db.delete.asset(assetId, creatorId);
+  await db.asset.delete(assetId, creatorId);
 };

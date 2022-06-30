@@ -1,50 +1,39 @@
-import { GetServerSideProps, NextPage } from 'next';
-import { GalleryPage } from '@main/ui';
-import { getAssets, getCreator } from '@main/rest';
-import {
-  AssetsResponse,
-  CreatorResponse,
-  UserResponse,
-} from '@main/rest-models';
+import { GetServerSideProps } from 'next';
+import { UserProps, GalleryPage, GalleryPageProps } from '@main/ui';
+import { rest } from '@main/rest';
 import { z } from 'zod';
-import { requestTo, withRedirect404OnError } from '@main/next-utils';
+import {
+  PropsHandler,
+  requestTo,
+  withGuestProps,
+  withRedirect404OnError,
+} from '@main/next-utils';
 
-interface Props {
-  user: UserResponse | null;
-  creator: CreatorResponse;
-  assets: AssetsResponse | null;
-}
-
-export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
-  async ({ req, query }) => {
+export const getServerSideProps: GetServerSideProps = new PropsHandler()
+  .add(withRedirect404OnError)
+  .add(withGuestProps)
+  .engage(async ({ req, query }) => {
     const { creatorId } = z
       .object({
         creatorId: z.string(),
       })
       .parse(query);
     const user = await requestTo.userOrNull(req);
-    const creator = await getCreator(creatorId, user);
-    const assets = await getAssets(creator.id, '1');
-    const props: Props = {
+    const creator = await rest.creators.param(creatorId).get({
+      user,
+    });
+    const assets = await rest.creators.param(creatorId).assets.get({
+      pageId: '1',
+    });
+    const props: GalleryPageProps & UserProps = {
       user,
       creator,
-      assets,
+      initialAssets: assets,
     };
 
     return {
       props,
     };
-  }
-);
+  });
 
-const Gallery: NextPage<Props> = ({ user, creator, assets }) => {
-  return (
-    <GalleryPage
-      user={user || undefined}
-      creator={creator}
-      initialAssets={assets}
-    />
-  );
-};
-
-export default Gallery;
+export default GalleryPage;

@@ -1,38 +1,43 @@
-import { SessionResponse } from '@main/rest-models';
-import { createContext, useContext } from 'react';
+import type { SessionResponse } from '@main/rest-models';
 import { useQuery } from 'react-query';
+import { useRouter } from './use-router';
 
-interface SessionContextResult {
-  session: SessionResponse | undefined;
-}
+export const useSession = ({
+  session,
+  onError,
+}: {
+  session: SessionResponse;
+  onError?(error: any): void;
+}) => {
+  const router = useRouter();
 
-interface ProviderProps {
-  children: React.ReactNode;
-}
-
-export const SessionContext = createContext<SessionContextResult>({
-  session: undefined,
-});
-
-export const useSession = () => {
-  return useContext(SessionContext);
-};
-
-export const SessionProvider = ({ children }: ProviderProps) => {
-  const { data } = useQuery<SessionResponse>(
-    'session',
+  useQuery<SessionResponse>(
+    ['session', 'wait'],
     async () => {
-      const res = await fetch('/api/sessions');
+      if (!session.links.session) {
+        throw new Error('Missing capability: session');
+      }
 
-      return res.json();
+      const response = await fetch(session.links.session, {
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        method: 'GET',
+      });
+
+      return response.json();
     },
     {
-      refetchInterval: 5000,
+      onError: (error) => {
+        onError && onError(error);
+      },
+      onSuccess: (data) => {
+        if (data.isLoggedIn) {
+          router.push('/');
+        }
+      },
+      refetchInterval: 4000,
     }
   );
-  return (
-    <SessionContext.Provider value={{ session: data }}>
-      {children}
-    </SessionContext.Provider>
-  );
+
+  return;
 };

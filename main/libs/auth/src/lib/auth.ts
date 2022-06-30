@@ -1,12 +1,6 @@
 import { decrypt, encrypt } from '@main/crypt';
 
-export function auth() {
-  return {
-    identity: {
-      userId: (encryptedKey: string, delimiter?: string) =>
-        decrypt(encryptedKey, delimiter),
-      encryptedUserId: (userId: string, delimiter?: string) =>
-        encrypt(userId, delimiter),
-    },
-  };
-}
+export const auth = {
+  encrypt: (id: string) => encrypt(id, '|'),
+  decrypt: (encryptedId: string) => decrypt(encryptedId, '|'),
+};

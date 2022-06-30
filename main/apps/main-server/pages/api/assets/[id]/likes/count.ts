@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getLikesCount } from '@main/rest';
+import { rest } from '@main/rest';
 import { LikesCountResponse } from '@main/rest-models';
 import { z } from 'zod';
-import { ApiHandler } from '@main/next-utils';
+import { ApiHandler, withErrorResponse } from '@main/next-utils';
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withGet(
     async (req: NextApiRequest, res: NextApiResponse<LikesCountResponse>) => {
       const { id } = z
@@ -14,7 +14,7 @@ const handler = new ApiHandler()
         })
         .parse(req.query);
 
-      res.status(200).json(await getLikesCount(id));
+      res.status(200).json(await rest.assets.param(id).likes.count.get());
     }
   )
   .engage();

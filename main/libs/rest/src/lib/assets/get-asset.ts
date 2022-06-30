@@ -3,40 +3,28 @@ import { AssetResponse, User } from '@main/rest-models';
 
 export const getAsset = async (
   id: string,
-  user?: User
+  user?: User | null
 ): Promise<AssetResponse> => {
   const db = environment.db;
-  const asset = await db.get.asset(id);
+  const asset = await db.asset.get(id);
   const isLogin = !!user;
   const isOwnAsset = isLogin && asset.creator.id === user.creatorId;
 
   return {
     ...asset,
     links: {
-      likeCount: {
-        rel: 'like-count',
-        url: `/api/assets/${asset.id}/likes/count`,
-      },
+      likeCount: `/api/assets/${asset.id}/likes/count`,
       ...(isOwnAsset
         ? {}
         : {
-            like: {
-              rel: 'like',
-              url: `/api/assets/${asset.id}/likes`,
-            },
+            like: `/api/assets/${asset.id}/likes`,
           }),
       ...(isOwnAsset
         ? {
-            delete: {
-              rel: 'delete',
-              url: `/api/assets/${asset.id}/delete`,
-            },
+            delete: `/api/assets/${asset.id}/delete`,
           }
         : {}),
-      creator: {
-        rel: 'creator',
-        url: `/galleries/${asset.creator.id}`,
-      },
+      creator: `/galleries/${asset.creator.id}`,
     },
   };
 };

@@ -8,12 +8,13 @@ const dropRate = ({ pctChance } = { pctChance: 0.02 }) => {
 export const saveLike = async (like: Like): Promise<DropResponse> => {
   const { db, cache } = environment;
 
-  await db.save.like(like.userId, like.assetId, Cost.Like);
-  await cache.save.likesCount(like.assetId);
-  await cache.save.balance({
-    credit: 0,
-    debit: Cost.Like,
-    userId: like.userId,
+  await db.like.save(like.userId, like.assetId, Cost.Like);
+
+  await cache.likesCount.save(like.assetId, (prevCount) => {
+    return prevCount + 1;
+  });
+  await cache.balance.save(like.userId, (prevBalance) => {
+    return prevBalance - Cost.Like;
   });
 
   return {

@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { saveLike } from '@main/rest';
+import { rest } from '@main/rest';
 import { DropResponse } from '@main/rest-models';
 import { z } from 'zod';
-import { ApiHandler, requestTo } from '@main/next-utils';
+import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withPost(async (req: NextApiRequest, res: NextApiResponse<DropResponse>) => {
     const { id } = z
       .object({
@@ -15,9 +15,8 @@ const handler = new ApiHandler()
 
     const userId = await requestTo.userId(req);
 
-    const drop = await saveLike({
+    const drop = await rest.assets.param(id).likes.post({
       userId,
-      assetId: id,
     });
 
     res.status(200).json(drop);

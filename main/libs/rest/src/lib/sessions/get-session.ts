@@ -1,22 +1,13 @@
-import { SessionResponse } from '@main/rest-models';
+import { environment } from '@main/environment';
 
-export const getSession = (): SessionResponse => {
+export const getSession = async (sessionId: string) => {
+  const db = environment.db;
+  const session = await db.session.get(sessionId);
+
   return {
-    isUsualClient: true,
-    isLoggedIn: true,
+    isLoggedIn: session.isLoggedIn,
     links: {
-      login: {
-        rel: 'login',
-        url: '/api/login',
-      },
-      logout: {
-        rel: 'logout',
-        url: '/api/logout',
-      },
-      session: {
-        rel: 'session',
-        url: '/api/session',
-      },
+      session: `/api/sessions`,
     },
   };
 };

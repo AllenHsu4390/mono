@@ -18,6 +18,13 @@ import { DailyTopUp } from './entity/daily-top-up';
 import { getDailyTopUp } from './reads/daily-top-up';
 import { saveDailyTopUp } from './writes/daily-top-up';
 import { deleteAsset, saveAsset } from './writes/asset';
+import { saveUser } from './writes/user';
+import { createSession, deleteSession, updateSession } from './writes/session';
+import { getSession } from './reads/session';
+import { Session } from './entity/session';
+import { Category } from './entity/category';
+import { getAssetCategories } from './reads/category';
+import { saveAssetCategory } from './writes/category';
 
 const datasource = new DataSource({
   type: 'mysql',
@@ -28,7 +35,17 @@ const datasource = new DataSource({
   database: 'creator_network',
   synchronize: true,
   //logging: true,
-  entities: [Creator, User, Asset, Follow, Like, Transaction, DailyTopUp],
+  entities: [
+    Creator,
+    User,
+    Asset,
+    Follow,
+    Like,
+    Transaction,
+    DailyTopUp,
+    Session,
+    Category,
+  ],
 });
 
 export const connectToDatabase = async () => {
@@ -40,26 +57,55 @@ export const connectToDatabase = async () => {
 };
 
 export const db = {
-  get: {
-    user: getUser,
-    creator: getCreator,
-    asset: getAsset,
-    assets: getAssets,
-    topAssets: getTopAssets,
-    follows: getFollows,
-    likesCount: getLikesCount,
-    userId: getUserId,
-    balance: getBalance,
-    dailyTopUP: getDailyTopUp,
+  user: {
+    get: getUser,
+    save: saveUser,
   },
-  save: {
-    like: saveLike,
-    transaction: saveTransaction,
-    dailyTopUp: saveDailyTopUp,
-    asset: saveAsset,
+  creator: {
+    get: getCreator,
   },
-  delete: {
-    asset: deleteAsset,
+  category: {
+    get: getAssetCategories,
+    save: saveAssetCategory,
+  },
+  asset: {
+    get: getAsset,
+    save: saveAsset,
+    delete: deleteAsset,
+  },
+  assets: {
+    get: getAssets,
+  },
+  topAssets: {
+    get: getTopAssets,
+  },
+  follows: {
+    get: getFollows,
+  },
+  likesCount: {
+    get: getLikesCount,
+  },
+  userId: {
+    get: getUserId,
+  },
+  balance: {
+    get: getBalance,
+  },
+  dailyTopUp: {
+    get: getDailyTopUp,
+    save: saveDailyTopUp,
+  },
+  like: {
+    save: saveLike,
+  },
+  session: {
+    get: getSession,
+    create: createSession,
+    update: updateSession,
+    delete: deleteSession,
+  },
+  transaction: {
+    save: saveTransaction,
   },
   enums: {
     transactionTypes: TransactionTypes,

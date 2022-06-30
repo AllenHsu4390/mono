@@ -1,18 +1,18 @@
 import { ErrorResponse } from '@main/rest-models';
+import { env } from 'process';
 
 export const getError = (e: any): ErrorResponse => {
   const status = e.status || 400;
 
-  console.log(e);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(e);
+  }
 
   return {
     e,
-    status: 401, // derive from e later
+    status, // derive from e later
     links: {
-      home: {
-        rel: 'home',
-        url: '/',
-      },
+      home: '/',
     },
   };
 };

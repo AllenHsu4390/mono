@@ -1,31 +1,27 @@
-import { requestTo, withRedirect404OnError } from '@main/next-utils';
-import { getTopAssets } from '@main/rest';
-import { AssetsResponse, UserResponse } from '@main/rest-models';
-import { FeedPage } from '@main/ui';
-import { GetServerSideProps, NextPage } from 'next';
+import {
+  PropsHandler,
+  withGuestProps,
+  withRedirect404OnError,
+  withUserOrNullProps,
+} from '@main/next-utils';
+import { rest } from '@main/rest';
+import { FeedPage, FeedPageProps } from '@main/ui';
+import { GetServerSideProps } from 'next';
 
-interface Props {
-  user: UserResponse | null;
-  assets: AssetsResponse;
-}
-
-export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
-  async ({ req }) => {
-    const user = await requestTo.userOrNull(req);
-    const assets = await getTopAssets('1');
-    const props: Props = {
-      user,
-      assets,
+export const getServerSideProps: GetServerSideProps = new PropsHandler()
+  .add(withRedirect404OnError)
+  .add(withUserOrNullProps)
+  .add(withGuestProps)
+  .engage(async () => {
+    const props: FeedPageProps = {
+      initialAssets: await rest.assets.top.get({
+        pageId: '1',
+      }),
     };
 
     return {
       props,
     };
-  }
-);
+  });
 
-const Home: NextPage<Props> = ({ user, assets }) => {
-  return <FeedPage user={user} initialAssets={assets} />;
-};
-
-export default Home;
+export default FeedPage;

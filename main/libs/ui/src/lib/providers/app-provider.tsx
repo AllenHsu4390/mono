@@ -1,37 +1,63 @@
 import { ScrollResetProvider } from '../hooks/use-scroll-reset';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { theme } from './theme';
-import { SessionProvider } from '../hooks/use-session';
 import { ThemeProvider } from '@mui/material/styles';
-import { UserResponse } from '@main/rest-models';
 import { UserProvider } from '../hooks/use-user';
+import type { GuestResponse, UserResponse } from '@main/rest-models';
 import { DropProvider } from '../hooks/use-drop';
 import { BalanceProvider } from '../hooks/use-balance';
 import { CreatorProvider } from '../hooks/use-creator';
+import { GuestProvider } from '../hooks/use-guest';
+import { CategoriesProvider } from '../hooks/use-categories';
 
 const queryClient = new QueryClient();
 
-interface Props {
-  user?: UserResponse;
+export interface UserProps {
+  user?: UserResponse | null;
+}
+
+export interface GuestProps {
+  guest?: GuestResponse | null;
+}
+
+interface ReactChildren {
   children: React.ReactNode;
 }
 
-export const AppProvider = ({ user, children }: Props) => {
+export const AppProvider = ({
+  user,
+  guest,
+  children,
+}: UserProps & GuestProps & ReactChildren) => {
   if (user) {
     return (
       <QueryClientProvider client={queryClient}>
         <ScrollResetProvider>
-          <SessionProvider>
-            <UserProvider user={user}>
-              <CreatorProvider user={user}>
+          <UserProvider user={user}>
+            <CreatorProvider user={user}>
+              <CategoriesProvider>
                 <DropProvider>
                   <BalanceProvider user={user}>
                     <ThemeProvider theme={theme}>{children}</ThemeProvider>
                   </BalanceProvider>
                 </DropProvider>
-              </CreatorProvider>
-            </UserProvider>
-          </SessionProvider>
+              </CategoriesProvider>
+            </CreatorProvider>
+          </UserProvider>
+        </ScrollResetProvider>
+      </QueryClientProvider>
+    );
+  }
+
+  if (guest) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <ScrollResetProvider>
+          <GuestProvider guest={guest}>
+            <CategoriesProvider>
+              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            </CategoriesProvider>
+          </GuestProvider>
         </ScrollResetProvider>
       </QueryClientProvider>
     );
@@ -40,9 +66,7 @@ export const AppProvider = ({ user, children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <ScrollResetProvider>
-        <SessionProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </SessionProvider>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </ScrollResetProvider>
     </QueryClientProvider>
   );

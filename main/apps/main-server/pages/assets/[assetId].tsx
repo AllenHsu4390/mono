@@ -1,17 +1,18 @@
-import { GetServerSideProps, NextPage } from 'next';
-import { AssetPage } from '@main/ui';
-import { getAsset } from '@main/rest';
-import { AssetResponse, UserResponse } from '@main/rest-models';
+import { GetServerSideProps } from 'next';
+import { UserProps, AssetPage, AssetPageProps } from '@main/ui';
+import { rest } from '@main/rest';
 import { z } from 'zod';
-import { requestTo, withRedirect404OnError } from '@main/next-utils';
+import {
+  PropsHandler,
+  requestTo,
+  withGuestProps,
+  withRedirect404OnError,
+} from '@main/next-utils';
 
-interface Props {
-  user: UserResponse | null;
-  asset: AssetResponse;
-}
-
-export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
-  async ({ req, query }) => {
+export const getServerSideProps: GetServerSideProps = new PropsHandler()
+  .add(withRedirect404OnError)
+  .add(withGuestProps)
+  .engage(async ({ req, query }) => {
     const { assetId } = z
       .object({
         assetId: z.string(),
@@ -19,8 +20,10 @@ export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
       .parse(query);
 
     const user = await requestTo.userOrNull(req);
-    const asset = await getAsset(assetId, user);
-    const props: Props = {
+    const asset = await rest.assets.param(assetId).get({
+      user: user || undefined,
+    });
+    const props: AssetPageProps & UserProps = {
       user,
       asset,
     };
@@ -28,11 +31,6 @@ export const getServerSideProps: GetServerSideProps = withRedirect404OnError(
     return {
       props,
     };
-  }
-);
+  });
 
-const AssetNextPage: NextPage<Props> = ({ user, asset }) => {
-  return <AssetPage user={user || undefined} asset={asset} />;
-};
-
-export default AssetNextPage;
+export default AssetPage;

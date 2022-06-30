@@ -6,22 +6,16 @@ export const getAssets = async (
   pageId: string
 ): Promise<AssetsResponse> => {
   const db = environment.db;
-  const { assets, pagination } = await db.get.assets(creatorId, pageId);
+  const { assets, pagination } = await db.assets.get(creatorId, pageId);
 
   return {
     assets,
     pagination,
     links: {
-      assets: assets.map((a) => ({
-        rel: 'assets',
-        url: `/assets/${a.id}`,
-      })),
+      assets: assets.map((a) => `/assets/${a.id}`),
       ...(pagination.next
         ? {
-            next: {
-              rel: 'next',
-              url: `/api/assets?creatorId=${creatorId}&pageId=${pagination.next}`,
-            },
+            next: `/api/assets?creatorId=${creatorId}&pageId=${pagination.next}`,
           }
         : {}),
     },

@@ -1,10 +1,10 @@
 import LoginForm from '../../block/login-form';
 import Page from '../_base/page';
 
-export default function LoginPage() {
+export const LoginPage = () => {
   return (
     <Page>
       <LoginForm />
     </Page>
   );
-}
+};

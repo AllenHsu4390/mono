@@ -3,22 +3,16 @@ import { AssetsResponse } from '@main/rest-models';
 
 export const getTopAssets = async (pageId: string): Promise<AssetsResponse> => {
   const db = environment.db;
-  const { assets, pagination } = await db.get.topAssets(pageId);
+  const { assets, pagination } = await db.topAssets.get(pageId);
 
   return {
     assets,
     pagination,
     links: {
-      assets: assets.map((a) => ({
-        rel: 'assets',
-        url: `/assets/${a.id}`,
-      })),
+      assets: assets.map((a) => `/assets/${a.id}`),
       ...(pagination.next
         ? {
-            next: {
-              rel: 'next',
-              url: `/api/assets/top?pageId=${pagination.next}`,
-            },
+            next: `/api/assets/top?pageId=${pagination.next}`,
           }
         : {}),
     },

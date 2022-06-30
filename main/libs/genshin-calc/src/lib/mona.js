@@ -1,5 +1,6 @@
 export const char = {
-    element: "hydro"
+    element: "hydro",
+    name: 'mona',
 };
 
 export const stellarisAction = () => {

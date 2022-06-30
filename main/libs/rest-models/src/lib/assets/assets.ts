@@ -1,20 +1,20 @@
-import { Pagination } from '../pagination';
-import { Asset } from './single';
+import { z } from 'zod';
+import { PaginationSchema } from '../pagination';
+import { AssetSchema } from './asset';
 
-export interface Assets {
-  assets: Asset[];
-  pagination: Pagination;
-}
+export const AssetsSchema = z.object({
+  assets: z.array(AssetSchema),
+  pagination: PaginationSchema,
+});
 
-export type AssetsResponse = Assets & {
-  links: {
-    next?: {
-      rel: 'next';
-      url: string;
-    };
-    assets: {
-      rel: 'assets';
-      url: string;
-    }[];
-  };
-};
+export const AssetsResponseSchema = AssetsSchema.merge(
+  z.object({
+    links: z.object({
+      next: z.string().optional(),
+      assets: z.array(z.string()),
+    }),
+  })
+);
+
+export type Assets = z.infer<typeof AssetsSchema>;
+export type AssetsResponse = z.infer<typeof AssetsResponseSchema>;

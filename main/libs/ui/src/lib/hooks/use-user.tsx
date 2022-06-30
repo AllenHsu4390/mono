@@ -1,4 +1,4 @@
-import { UserResponse } from '@main/rest-models';
+import type { UserResponse } from '@main/rest-models';
 import { noop } from 'lodash';
 import { createContext, useContext } from 'react';
 import { useQuery } from 'react-query';
@@ -8,29 +8,27 @@ interface UserContextResult {
   refetchUser(): void;
 }
 
-export const UserContext = createContext<UserContextResult>({
-  user: undefined,
-  refetchUser: noop,
-});
-
-export const useUser = () => {
-  return useContext(UserContext);
-};
-
 interface UserProviderProps {
   user: UserResponse;
   children?: React.ReactNode;
 }
 
+export const UserContext = createContext<UserContextResult>({
+  user: undefined,
+  refetchUser: noop,
+});
+
 export const UserProvider = ({ user, children }: UserProviderProps) => {
   const { data, refetch } = useQuery<UserResponse>(
-    ['user', user.id],
+    ['user'],
     async () => {
-      const res = await fetch(user.links.me.url);
+      const res = await fetch(user.links.me);
       return res.json();
     },
     {
       initialData: user,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
   return (
@@ -38,4 +36,8 @@ export const UserProvider = ({ user, children }: UserProviderProps) => {
       {children}
     </UserContext.Provider>
   );
+};
+
+export const useUser = () => {
+  return useContext(UserContext);
 };

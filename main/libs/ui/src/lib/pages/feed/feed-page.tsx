@@ -1,18 +1,18 @@
-import { AssetsResponse, UserResponse } from '@main/rest-models';
+import type { AssetsResponse } from '@main/rest-models';
 import { Gallery } from '../../block/gallery';
+import { GalleryFilters } from '../../block/gallery-filters/gallery-filters';
 import { useScrollReset } from '../../hooks/use-scroll-reset';
 import Page from '../_base/page';
 
-interface Props {
-  user: UserResponse;
+export interface FeedPageProps {
   initialAssets: AssetsResponse;
 }
 
-export default function FeedPage({ user, initialAssets }: Props) {
+export const FeedPage = ({ initialAssets }: FeedPageProps) => {
   useScrollReset('feed');
   return (
-    <Page user={user}>
+    <Page actionsBar={<GalleryFilters />}>
       <Gallery initialAssets={initialAssets} />
     </Page>
   );
-}
+};

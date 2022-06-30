@@ -1,4 +1,4 @@
-import { AssetResponse } from '@main/rest-models';
+import type { AssetResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
 
 export const useDeleteAsset = ({
@@ -10,11 +10,11 @@ export const useDeleteAsset = ({
 }) => {
   const mutation = useMutation<{ ok: true }>(
     async () => {
-      const deleteUrl = asset.links.delete?.url;
-      if (!deleteUrl) {
-        throw new Error('missing capability delete');
+      if (!asset.links.delete) {
+        throw new Error('Missing capability: delete');
       }
-      const res = await fetch(deleteUrl, {
+      const res = await fetch(asset.links.delete, {
+        credentials: 'same-origin',
         method: 'POST',
       });
       return res.json();

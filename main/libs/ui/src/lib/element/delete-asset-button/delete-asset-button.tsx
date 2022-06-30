@@ -1,11 +1,11 @@
-import { AssetResponse } from '@main/rest-models';
+import type { AssetResponse } from '@main/rest-models';
 import { DeleteForeverOutlined } from '@mui/icons-material';
 import { Typography, Button, IconButton, useTheme, Theme } from '@mui/material';
 import AlertDialog from '../../block/alert';
 import { useConfirmDialog } from '../../hooks/use-confirm-dialog';
 import { useDeleteAsset } from '../../hooks/use-delete-asset';
-import { useRouter } from 'next/router';
 import { useCreator } from '../../hooks/use-creator';
+import { useRouter } from '../../hooks/use-router';
 
 const iconButtonSx = (theme: Theme) => ({
   borderRadius: '0',
@@ -40,7 +40,7 @@ const DeleteAssetButton = ({ asset }: Props) => {
     dialog.confirm();
     await deleteAsset();
     dialog.close();
-    router.push(creator.links.gallery.url);
+    router.push(creator.links.gallery);
   };
 
   const dialogOptions = {

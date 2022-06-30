@@ -1,17 +1,49 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useSession } from '../../hooks/use-session';
+import { useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
 import Page from '../_base/page';
 
-export default function AuthPage() {
-  const router = useRouter();
-  const { session } = useSession();
+export interface AuthPageProps {
+  confirmLoginUrl: string;
+}
+
+export const AuthPage = ({ confirmLoginUrl }: AuthPageProps) => {
+  const [authenticated, setAuthenticated] = useState(false);
+  const mutation = useMutation<{ ok: true }>(
+    async () => {
+      const res = await fetch(confirmLoginUrl, {
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        method: 'POST',
+      });
+
+      if (res.status > 200) {
+        throw Error('something went wrong');
+      }
+
+      return res.json();
+    },
+    {
+      onSuccess: ({ ok }) => {
+        if (ok) {
+          setAuthenticated(true);
+        }
+      },
+    }
+  );
+
+  const sendAuth = mutation.mutateAsync;
 
   useEffect(() => {
-    if (session?.isLoggedIn) {
-      router.push('/');
-    }
-  }, [session?.isLoggedIn, router]);
+    sendAuth();
+  }, [sendAuth]);
 
-  return <Page>Waiting...</Page>;
-}
+  return (
+    <Page>
+      {authenticated ? (
+        <>Authenticated. Check back on the original device.</>
+      ) : (
+        <>Authenticating...</>
+      )}
+    </Page>
+  );
+};

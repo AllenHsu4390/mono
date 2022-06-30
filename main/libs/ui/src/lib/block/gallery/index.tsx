@@ -1,21 +1,15 @@
-import {
-  AssetsResponse,
-  CreatorResponse,
-  UserResponse,
-} from '@main/rest-models';
+import type { AssetsResponse, CreatorResponse } from '@main/rest-models';
 import { useAssets } from '../../hooks/use-assets';
 import { AssetsGrid } from './grid';
 
 interface Props {
-  user?: UserResponse;
-  creator: CreatorResponse;
+  creator?: CreatorResponse;
   initialAssets: AssetsResponse;
 }
 
-export const Gallery = ({ initialAssets, creator, user }: Props) => {
-  const { assets, isLoading, isError, hasNextPage, fetchNextPage } = useAssets(
-    initialAssets.links.next?.url
-  );
+export const Gallery = ({ initialAssets, creator }: Props) => {
+  const { assets, isLoading, isError, hasNextPage, fetchNextPage } =
+    useAssets(initialAssets);
 
   const assetPages = assets?.pages || [];
   const shouldShowSkeleton =
@@ -33,7 +27,6 @@ export const Gallery = ({ initialAssets, creator, user }: Props) => {
       assetPages={assetPages}
       initialAssets={initialAssets}
       creator={creator}
-      user={user}
     />
   );
 };

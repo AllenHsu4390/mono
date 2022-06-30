@@ -25,14 +25,13 @@ export const saveLike = async (
     }
 
     const likeId = encode(dbLikeSaved.id);
-    const dbTransactionSaved = await saveTransaction(
-      TransactionTypes.LIKE,
+    const dbTransactionSaved = await saveTransaction({
+      type: TransactionTypes.LIKE,
       userId,
-      likeId,
-      0,
+      actionId: likeId,
       debit,
-      manager
-    );
+      manager,
+    });
 
     return {
       like: {

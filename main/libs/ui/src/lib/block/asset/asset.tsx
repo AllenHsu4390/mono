@@ -4,16 +4,15 @@ import CreatorAvatar from '../../element/avatar';
 import { AssetCardFull } from './card-full';
 import LikeCounter from '../../element/like-counter';
 import { useDrop } from '../../hooks/use-drop';
-import { AssetResponse, UserResponse } from '@main/rest-models';
+import type { AssetResponse } from '@main/rest-models';
 import { CreatorLink } from '../../element/creator-link/creator-link';
 import DeleteAssetButton from '../../element/delete-asset-button';
 
 interface Props {
   asset: AssetResponse;
-  user: UserResponse;
 }
 
-export default function AssetInteractable({ asset, user }: Props) {
+export default function AssetInteractable({ asset }: Props) {
   const [drop] = useDrop();
   const socialMediaLinks = ['Instagram', 'Discord', 'Youtube'];
   return (
@@ -26,10 +25,7 @@ export default function AssetInteractable({ asset, user }: Props) {
       <AssetCardFull
         asset={asset}
         avatar={
-          <CreatorAvatar
-            creator={asset.creator}
-            linkTo={asset.links.creator.url}
-          />
+          <CreatorAvatar creator={asset.creator} linkTo={asset.links.creator} />
         }
         contact={
           <>
@@ -43,7 +39,7 @@ export default function AssetInteractable({ asset, user }: Props) {
         }
         avatarTitle={
           <CreatorLink
-            to={asset.links.creator.url}
+            to={asset.links.creator}
             label={asset.creator.name}
             sx={{
               fontWeight: 'bold',

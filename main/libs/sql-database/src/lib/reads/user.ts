@@ -2,9 +2,8 @@ import { connectToDatabase } from '../db';
 import { User } from '../entity/user';
 import { decode, encode } from '@main/hash';
 import { isTopUpTime } from '../writes/daily-top-up';
-import { User as RestUser } from '@main/rest-models';
 
-export const getUser = async (id: string): Promise<RestUser> => {
+export const getUser = async (id: string) => {
   const db = await connectToDatabase();
   const userId = decode(id);
   const user = await db.getRepository(User).findOneOrFail({

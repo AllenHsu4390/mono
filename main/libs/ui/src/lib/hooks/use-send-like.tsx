@@ -1,4 +1,4 @@
-import { AssetResponse, DropResponse } from '@main/rest-models';
+import type { AssetResponse, DropResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
 import { useUser } from './use-user';
 
@@ -12,11 +12,12 @@ export const useSendLike = ({
   const { user } = useUser();
   const mutation = useMutation<DropResponse>(
     async () => {
-      const likeUrl = asset.links.like?.url;
+      const likeUrl = asset.links.like;
       if (!likeUrl) {
-        throw new Error('missing like capability');
+        throw new Error('Missing capability: like');
       }
       const res = await fetch(likeUrl, {
+        credentials: 'same-origin',
         method: 'POST',
       });
       return res.json();

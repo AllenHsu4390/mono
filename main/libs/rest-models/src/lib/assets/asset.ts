@@ -1,28 +1,22 @@
-import { Creator } from '../creators/creator';
+import { z } from 'zod';
+import { CreatorSchema } from '../creators/creator';
 
-export interface Asset {
-  id: string;
-  src: string;
-  creator: Creator;
-}
+export const AssetSchema = z.object({
+  id: z.string(),
+  src: z.string(),
+  creator: CreatorSchema,
+});
 
-export type AssetResponse = Asset & {
-  links: {
-    like?: {
-      rel: 'like';
-      url: string;
-    };
-    delete?: {
-      rel: 'delete';
-      url: string;
-    };
-    likeCount: {
-      rel: 'like-count';
-      url: string;
-    };
-    creator: {
-      rel: 'creator';
-      url: string;
-    };
-  };
-};
+export const AssetResponseSchema = AssetSchema.merge(
+  z.object({
+    links: z.object({
+      like: z.string().optional(),
+      delete: z.string().optional(),
+      likeCount: z.string(),
+      creator: z.string(),
+    }),
+  })
+);
+
+export type Asset = z.infer<typeof AssetSchema>;
+export type AssetResponse = z.infer<typeof AssetResponseSchema>;

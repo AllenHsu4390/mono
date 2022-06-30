@@ -10,7 +10,7 @@ import { mouun, recurve, skywardHarpR1, stringlessR5, thunderingPulseR1 } from '
 export const char = yelan;
 
 let LIFELINE = 0.3392;
-let EXQ_THROW = 0.0828;
+let EXQ_THROW = 0.0877;
 let DICE = 0.1315;
 
 const yelanA1 = ({ hp }) => {

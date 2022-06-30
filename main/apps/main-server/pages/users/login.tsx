@@ -1,8 +1,13 @@
-import { NextPage } from 'next';
+import { rest } from '@main/rest';
 import { LoginPage } from '@main/ui';
+import { GetStaticProps } from 'next';
 
-const Login: NextPage = () => {
-  return <LoginPage />;
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      guest: await rest.guests.start.get(),
+    },
+  };
 };
 
-export default Login;
+export default LoginPage;

@@ -1,15 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { saveDailyTopUp } from '@main/rest';
+import { rest } from '@main/rest';
 import { DailyTopUpResponse } from '@main/rest-models';
-import { ApiHandler, requestTo } from '@main/next-utils';
+import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
 
 const handler = new ApiHandler()
-  .withErrorResponse()
+  .add(withErrorResponse)
   .withPost(
     async (req: NextApiRequest, res: NextApiResponse<DailyTopUpResponse>) => {
       const userId = await requestTo.userId(req);
-      const topup = await saveDailyTopUp(userId);
-      res.status(200).json(topup);
+      res.status(200).json(await rest.users.param(userId).dailyTopUp.post());
     }
   )
   .engage();

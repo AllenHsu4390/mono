@@ -3,7 +3,7 @@ import CardMedia from '@mui/material/CardMedia';
 import { Box, CardActionArea } from '@mui/material';
 import { useState } from 'react';
 import { InnerSkeleton } from './inner-skeleton';
-import { Asset } from '@main/rest-models';
+import type { Asset } from '@main/rest-models';
 
 interface Props {
   asset: Asset;
