@@ -7,18 +7,25 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import type { CreatorResponse } from '@main/rest-models';
+import type { AssetsResponse, CreatorResponse } from '@main/rest-models';
 import { useAddAsset } from '../../hooks/use-add-asset';
 import { useRouter } from '../../hooks/use-router';
+import { FileDrop } from './file-drop';
 
 interface Props {
   creator: CreatorResponse;
+  assets: AssetsResponse;
 }
 
-export const AddAssetCard = ({ creator }: Props) => {
+export const AddAssetCard = ({ creator, assets }: Props) => {
   const themes = useTheme();
   const router = useRouter();
-  const { addAsset } = useAddAsset({ creator });
+  const { addAsset } = useAddAsset({ creator, assets });
+
+  const onFileChange = async (file: File) => {
+    await addAsset(file);
+    router.push(creator.links.gallery);
+  };
 
   return (
     <Card
@@ -31,27 +38,28 @@ export const AddAssetCard = ({ creator }: Props) => {
     >
       <CardActionArea
         onClick={async () => {
-          await addAsset();
-          router.push(creator.links.gallery);
+          document.getElementById('contained-button-file')?.click();
         }}
       >
-        <CardContent
-          sx={{
-            height: '25vh',
-            pt: '4rem',
-          }}
-        >
-          <Typography color="text.secondary">{`Add something to the gallery`}</Typography>
-          <Box
+        <FileDrop onFileChange={onFileChange}>
+          <CardContent
             sx={{
-              pt: 2,
-              pb: 1,
+              height: '25vh',
+              pt: '4rem',
             }}
           >
-            <AddBoxOutlined fontSize="large" />
-          </Box>
-          <Typography color="text.secondary">{`It can be anything. Image, Video, Music, Link, Text`}</Typography>
-        </CardContent>
+            <Typography color="text.secondary">{`Add something to the gallery`}</Typography>
+            <Box
+              sx={{
+                pt: 2,
+                pb: 1,
+              }}
+            >
+              <AddBoxOutlined fontSize="large" />
+            </Box>
+            <Typography color="text.secondary">{`Drag a new image here`}</Typography>
+          </CardContent>
+        </FileDrop>
       </CardActionArea>
     </Card>
   );

@@ -462,6 +462,38 @@ export const yoimiya_yelan_xingqiu_bennett = () => {
     ])}`);
 };
 
+export const yoimiya_yelan_xingqiu_yunjin = () => {
+    const teamWide = [yoimiyaSaxi];
+    const onField = [...teamWide, yunjinBurst, yelanA4];
+    const debuffs = [xingqiuC2];
+
+    const firedanceAction = yoimiya.fireDanceAction({
+        weapon: rustR5,
+        artifacts: yoimiyaArtifacts,
+        buffs: onField,
+        debuffs,
+        amps: [yoimiya.icdPyroVape],
+        transforms: [yoimiya.icdOverloaded],
+    });
+
+    output(`Yoimiya, Yelan, Xingqiu, Yunjin: ${teamDamageDps([
+        firedanceAction,
+        xingqiu.raincutterAction({
+            weapon: sacSword,
+            artifacts: [flower_1, feather_9, sand_1, goblet_1, circlet_37],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yelan.diceAction({
+            weapon: skywardHarpR1,
+            artifacts: [flower_52, feather_36, sand_52, goblet_52, circlet_52],
+            buffs: teamWide,
+            debuffs,
+        }),
+        yunjin.bannerAction(),
+    ])}`);
+};
+
 export const yoimiya_yelan_xingqiu_mona = () => {
     const teamWide = [yoimiyaSaxi, monaOmen];
     const onField = [...teamWide, yelanA4];

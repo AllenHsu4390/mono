@@ -17,6 +17,7 @@ export const useDailyTopUp = ({ onError }: { onError?(error: any): void }) => {
         throw new Error('Missing capability: daily-top-up');
       }
       const res = await fetch(user.links.dailyTopUp, {
+        credentials: 'same-origin',
         method: 'POST',
       });
       await refetchUser();

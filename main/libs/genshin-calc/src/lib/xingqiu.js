@@ -21,9 +21,11 @@ char.lvlMax = 90;
 RAINSWORD = 1.22;
 
 
+const c4 = () => 1.5;
+
 export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
     return [
-        ...fatalRainScreenHits(traits, debuffs, amps, transforms, stats),
+        ...fatalRainScreenHits(traits, debuffs, [...amps, c4], transforms, stats),
         ...Array(Math.floor(Math.min(15, duration) * 4)).fill(RAINSWORD).map((motionValue, index) => {
             return {
                 stats: ["burst", "hydro", ...stats],
@@ -42,13 +44,12 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = [], stat
 
 const fatalRainScreenHits = (traits = [], debuffs = [], amps = [], transforms = [], stats = [], duration = 15) => {
     return [3.02, 3.44].map((motionValue, index) => {
-        const c4 = () => 1.5;
     
         return {
             traits: [...traits],
             debuffs,
             transforms,
-            amplifiers: [crit, ...(index === 0 ? [hydroVape] : []), c4, ...amps],
+            amplifiers: [crit, ...amps],
             motionValue,
             stats: ["skill", "hydro", ...stats],
             enemy: getCurrentEnemy(),
@@ -83,14 +84,14 @@ export const print = () => {
         stats: ["hasElectro"]
     });
 
-    console.log("Total raincutter");
+    console.log("Total Combo");
     console.log(`Lion's roar: ${damageDps(stats(xingqiu, lionroarR5, artifacts), hits(buffs, debuffs), 15)}`);
-    console.log(`Sac sword: ${damageDps(stats(xingqiu, sacSword, artifacts), hits(buffs, debuffs), 15)}`);
+    console.log(`Sac sword: ${damageDps(stats(xingqiu, sacSword, artifacts), hits(buffs, debuffs).concat(fatalRainScreenHits(buffs, debuffs)), 15)}`);
     console.log(`HOD: ${damageDps(stats(xingqiu, harbinger, artifacts), hits(buffs, debuffs), 15)}`);
     console.log(`Black sword: ${damageDps(stats(xingqiu, blackSword, artifacts), hits(buffs, debuffs), 15)}`);
 
     console.log("Total rainscreen");
-    console.log(`Sac sword: ${damageDps(stats(xingqiu, sacSword, artifacts), fatalRainScreenHits(buffs, debuffs))}`);
+    console.log(`Sac sword: ${damageDps(stats(xingqiu, sacSword, artifacts), fatalRainScreenHits(buffs, debuffs).concat(fatalRainScreenHits(buffs, debuffs)))}`);
     console.log(`Lion's roar: ${damageDps(stats(xingqiu, lionroarR5, artifacts), fatalRainScreenHits(buffs, debuffs))}`);
     console.log(`HOD: ${damageDps(stats(xingqiu, harbinger, artifacts), fatalRainScreenHits(buffs, debuffs))}`);
     console.log(`Black sword: ${damageDps(stats(xingqiu, blackSword, artifacts), fatalRainScreenHits(buffs, debuffs))}`);

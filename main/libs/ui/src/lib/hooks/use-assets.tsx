@@ -2,7 +2,7 @@ import type { AssetsResponse } from '@main/rest-models';
 import { useInfiniteQuery } from 'react-query';
 
 export const useAssets = (assets: AssetsResponse) => {
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
+  const { data, isLoading, isError, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery<AssetsResponse, Error>(
       ['assets', assets.links.next],
       async ({
@@ -31,5 +31,6 @@ export const useAssets = (assets: AssetsResponse) => {
     isError,
     hasNextPage,
     fetchNextPage,
+    refetchAssets: refetch,
   };
 };

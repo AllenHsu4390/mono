@@ -1,12 +1,11 @@
 import { environment } from '@main/environment';
-import { User } from '@main/rest-models';
-import { saveCdnData } from '../cdn/save-cdn-data';
+import { getCdnData } from '../cdn/get-cdn-data';
 
 export const saveAsset = async (
   creatorId: string,
-  imageData: string
+  cdnToken: string
 ): Promise<void> => {
   const db = environment.db;
-  const cdnAsset = await saveCdnData(imageData);
-  await db.asset.save(creatorId, cdnAsset.url);
+
+  await db.asset.save(creatorId, getCdnData(cdnToken));
 };

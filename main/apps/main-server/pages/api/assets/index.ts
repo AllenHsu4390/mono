@@ -23,15 +23,18 @@ const handler = new ApiHandler()
     }
   )
   .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
-    const { imageData } = z
+    const { cdnToken } = z
       .object({
-        imageData: z.string(),
+        cdnToken: z.string(),
       })
       .parse(req.body);
 
     const user = await requestTo.user(req);
 
-    await rest.assets.post({ creatorId: user.creatorId, imageData });
+    await rest.assets.post({
+      creatorId: user.creatorId,
+      cdnToken,
+    });
 
     res.status(200).json({
       ok: true,

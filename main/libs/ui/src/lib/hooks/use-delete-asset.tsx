@@ -14,6 +14,7 @@ export const useDeleteAsset = ({
         throw new Error('Missing capability: delete');
       }
       const res = await fetch(asset.links.delete, {
+        credentials: 'same-origin',
         method: 'POST',
       });
       return res.json();

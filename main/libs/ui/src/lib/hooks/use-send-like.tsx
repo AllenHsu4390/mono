@@ -17,6 +17,7 @@ export const useSendLike = ({
         throw new Error('Missing capability: like');
       }
       const res = await fetch(likeUrl, {
+        credentials: 'same-origin',
         method: 'POST',
       });
       return res.json();

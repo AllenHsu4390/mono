@@ -40,7 +40,6 @@ const DeleteAssetButton = ({ asset }: Props) => {
     dialog.confirm();
     await deleteAsset();
     dialog.close();
-    console.log(creator);
     router.push(creator.links.gallery);
   };
 

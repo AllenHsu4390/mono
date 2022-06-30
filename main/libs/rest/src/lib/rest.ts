@@ -120,7 +120,7 @@ export const rest = {
         },
         post: async ({ userId }: { userId: string }) =>
           DropResponseSchema.parse(
-            saveLike({
+            await saveLike({
               userId,
               assetId: id,
             })
@@ -133,10 +133,10 @@ export const rest = {
     },
     post: async ({
       creatorId,
-      imageData,
+      cdnToken,
     }: {
       creatorId: string;
-      imageData: string;
-    }) => saveAsset(creatorId, imageData),
+      cdnToken: string;
+    }) => saveAsset(creatorId, cdnToken),
   },
 };

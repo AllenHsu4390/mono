@@ -56,7 +56,11 @@ export const AssetsGrid = ({
           ...[
             user && creator?.links.newAsset ? (
               <Item key="add-asset">
-                <AddAssetCard key={user.creatorId} creator={creator} />
+                <AddAssetCard
+                  key={user.creatorId}
+                  creator={creator}
+                  assets={initialAssets}
+                />
               </Item>
             ) : (
               []
