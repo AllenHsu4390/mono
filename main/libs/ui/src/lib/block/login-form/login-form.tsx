@@ -97,7 +97,7 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-const LoginForm = () => {
+export const LoginForm = () => {
   const theme = useTheme();
   const [state, dispatch] = useReducer(reducer, {
     email: '',
@@ -222,5 +222,3 @@ const LoginForm = () => {
     </Container>
   );
 };
-
-export default LoginForm;

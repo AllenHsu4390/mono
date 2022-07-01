@@ -1,6 +1,4 @@
-import { Copyright } from '@mui/icons-material';
-import { Box, Typography, useTheme } from '@mui/material';
-import React from 'react';
+import { Typography } from '@mui/material';
 import { Wordmark } from '../../element/company/wordmark';
 
 export default function CompanyContact() {

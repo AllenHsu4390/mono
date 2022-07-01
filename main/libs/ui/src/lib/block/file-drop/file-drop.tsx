@@ -1,3 +1,4 @@
+import { useTheme } from '@mui/material';
 import React, { useRef, useState } from 'react';
 
 interface Props {
@@ -6,6 +7,7 @@ interface Props {
 }
 
 export const FileDrop = ({ children, onFileChange }: Props) => {
+  const themes = useTheme();
   const inputEl = useRef<HTMLInputElement>(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const onFileDrop: React.DragEventHandler<HTMLDivElement> = (event) => {
@@ -35,7 +37,9 @@ export const FileDrop = ({ children, onFileChange }: Props) => {
       onDragLeave={() => setIsDragOver(false)}
       onClick={() => inputEl.current?.click()}
       style={{
-        border: isDragOver ? `1px dashed red` : '1px dashed white',
+        border: isDragOver
+          ? `1px dashed ${themes.palette.error.main}`
+          : `1px dashed ${themes.palette.background.default}`,
         boxSizing: 'border-box',
       }}
     >

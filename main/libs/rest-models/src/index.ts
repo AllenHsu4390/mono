@@ -1,5 +1,6 @@
 export * from './lib/assets/assets';
 export * from './lib/assets/asset';
+export * from './lib/assets/save-asset-result';
 
 export * from './lib/creators/creator';
 

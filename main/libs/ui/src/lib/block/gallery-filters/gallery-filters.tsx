@@ -1,16 +1,16 @@
-import { Tab, Tabs, Typography } from '@mui/material';
-import PetsIcon from '@mui/icons-material/Pets';
-import LandscapeIcon from '@mui/icons-material/Landscape';
-import NightlifeIcon from '@mui/icons-material/Nightlife';
-import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
-import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
-import SportsFootballIcon from '@mui/icons-material/SportsFootball';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-import SpaIcon from '@mui/icons-material/Spa';
 import EmojiFoodBeverageIcon from '@mui/icons-material/EmojiFoodBeverage';
 import IcecreamIcon from '@mui/icons-material/Icecream';
+import LandscapeIcon from '@mui/icons-material/Landscape';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import NightlifeIcon from '@mui/icons-material/Nightlife';
+import PetsIcon from '@mui/icons-material/Pets';
 import SoupKitchenIcon from '@mui/icons-material/SoupKitchen';
+import SpaIcon from '@mui/icons-material/Spa';
+import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import SportsFootballIcon from '@mui/icons-material/SportsFootball';
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import { Tab, Tabs, Typography, useTheme } from '@mui/material';
 import { useCategories } from '../../hooks/use-categories';
 
 const CategoryIcon = ({ name }: { name: string }) => {
@@ -20,35 +20,36 @@ const CategoryIcon = ({ name }: { name: string }) => {
     case 'dogs':
       return <Typography fontWeight={'bold'}>Dogs</Typography>;
     case 'pets':
-      return <PetsIcon fontSize="large" />;
+      return <PetsIcon fontSize="medium" />;
     case 'nightlife':
-      return <NightlifeIcon fontSize="large" />;
+      return <NightlifeIcon fontSize="medium" />;
     case 'nature':
-      return <LandscapeIcon fontSize="large" />;
+      return <LandscapeIcon fontSize="medium" />;
     case 'relax':
-      return <SpaIcon fontSize="large" />;
+      return <SpaIcon fontSize="medium" />;
     case 'games':
-      return <SportsEsportsIcon fontSize="large" />;
+      return <SportsEsportsIcon fontSize="medium" />;
     case 'basketball':
-      return <SportsBasketballIcon fontSize="large" />;
+      return <SportsBasketballIcon fontSize="medium" />;
     case 'soccer':
-      return <SportsSoccerIcon fontSize="large" />;
+      return <SportsSoccerIcon fontSize="medium" />;
     case 'sports':
-      return <SportsFootballIcon fontSize="large" />;
+      return <SportsFootballIcon fontSize="medium" />;
     case 'cafe':
-      return <EmojiFoodBeverageIcon fontSize="large" />;
+      return <EmojiFoodBeverageIcon fontSize="medium" />;
     case 'dessert':
-      return <IcecreamIcon fontSize="large" />;
+      return <IcecreamIcon fontSize="medium" />;
     case 'restaurant':
-      return <LocalDiningIcon fontSize="large" />;
+      return <LocalDiningIcon fontSize="medium" />;
     case 'cooking':
-      return <SoupKitchenIcon fontSize="large" />;
+      return <SoupKitchenIcon fontSize="medium" />;
     default:
       return <Typography fontWeight={'bold'}>All</Typography>;
   }
 };
 
 export const GalleryFilters = () => {
+  const theme = useTheme();
   const { categories, currentCategory, setCurrentCategory, isLoading } =
     useCategories();
 
@@ -70,7 +71,15 @@ export const GalleryFilters = () => {
       aria-label="scrollable auto tabs"
     >
       {categories.map((name) => (
-        <Tab key={name} value={name} label={<CategoryIcon name={name} />} />
+        <Tab
+          key={name}
+          value={name}
+          label={<CategoryIcon name={name} />}
+          disableRipple={true}
+          sx={{
+            color: `${theme.palette.secondary.dark}`,
+          }}
+        />
       ))}
     </Tabs>
   );
