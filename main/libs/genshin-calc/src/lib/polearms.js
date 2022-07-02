@@ -4,7 +4,7 @@ export const deathmatch1 = (attr) => {
     return {
         name: "deathmatch",
         baseAtk: newBaseAtk,
-        atkPct: atkPct + 0.36,
+        atkPct: atkPct + 0.42,
         critRate: critRate + .368
     };
 };
@@ -16,7 +16,7 @@ export const deathmatch2 = (attr) => {
     return {
         name: "deathmatch",
         baseAtk: newBaseAtk,
-        atkPct: atkPct + 0.20,
+        atkPct: atkPct + 0.28,
         critRate: critRate + .368
     };
 };

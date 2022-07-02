@@ -65,7 +65,7 @@ const LikeButton = ({ asset }: Props) => {
           <IconButton onClick={dialog.open} sx={iconButtonSx(theme)}>
             <FavoriteBorderOutlined
               sx={{
-                fontSize: '2rem',
+                fontSize: '1.7rem',
               }}
             />
           </IconButton>

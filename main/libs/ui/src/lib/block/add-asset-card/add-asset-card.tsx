@@ -30,7 +30,6 @@ export const AddAssetCard = ({ creator, assets }: Props) => {
   return (
     <Card
       sx={{
-        background: `${themes.palette.secondary.main}`,
         textAlign: 'center',
         borderRadius: 0,
         boxShadow: 'none',
@@ -41,19 +40,21 @@ export const AddAssetCard = ({ creator, assets }: Props) => {
           <CardContent
             sx={{
               height: '25vh',
-              pt: '4rem',
+              lineHeight: '25vh',
+              padding: 0,
             }}
           >
-            <Typography color="text.secondary">{`Add something to the gallery`}</Typography>
             <Box
               sx={{
-                pt: 2,
-                pb: 1,
+                display: 'inline-block',
+                verticalAlign: 'middle',
+                lineHeight: 'normal',
               }}
             >
-              <AddBoxOutlined fontSize="large" />
+              <Typography color="text.secondary">
+                Drag a new image here to add to the gallery
+              </Typography>
             </Box>
-            <Typography color="text.secondary">{`Drag a new image here`}</Typography>
           </CardContent>
         </FileDrop>
       </CardActionArea>

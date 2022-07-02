@@ -14,7 +14,11 @@ import BalanceButton from '../../element/balance-button';
 import { useUser } from '../../hooks/use-user';
 import { useGuest } from '../../hooks/use-guest';
 
-export default function Navigation() {
+interface Props {
+  showBottomBorder?: boolean;
+}
+
+export default function Navigation({ showBottomBorder = true }: Props) {
   const { user } = useUser();
   const { guest } = useGuest();
   const theme = useTheme();
@@ -72,7 +76,7 @@ export default function Navigation() {
   );
 
   return (
-    <AppBar>
+    <AppBar showBottomBorder={showBottomBorder}>
       <Toolbar
         sx={{
           width: page.maxWidth,

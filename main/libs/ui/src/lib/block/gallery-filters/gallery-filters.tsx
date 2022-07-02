@@ -16,9 +16,9 @@ import { useCategories } from '../../hooks/use-categories';
 const CategoryIcon = ({ name }: { name: string }) => {
   switch (name) {
     case 'cats':
-      return <Typography fontWeight={'bold'}>Cats</Typography>;
+      return <Typography fontWeight={'bold'}>cats</Typography>;
     case 'dogs':
-      return <Typography fontWeight={'bold'}>Dogs</Typography>;
+      return <Typography fontWeight={'bold'}>dogs</Typography>;
     case 'pets':
       return <PetsIcon fontSize="medium" />;
     case 'nightlife':
@@ -44,7 +44,7 @@ const CategoryIcon = ({ name }: { name: string }) => {
     case 'cooking':
       return <SoupKitchenIcon fontSize="medium" />;
     default:
-      return <Typography fontWeight={'bold'}>All</Typography>;
+      return <Typography fontWeight={'bold'}>all</Typography>;
   }
 };
 
@@ -78,6 +78,7 @@ export const GalleryFilters = () => {
           disableRipple={true}
           sx={{
             color: `${theme.palette.secondary.dark}`,
+            textTransform: 'none',
           }}
         />
       ))}
