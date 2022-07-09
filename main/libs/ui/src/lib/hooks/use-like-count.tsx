@@ -15,9 +15,9 @@ export const useLikeCount = ({
     isError,
     data,
     refetch: refetchLikes,
-  } = useQuery<LikesCountResponse>(
+  } = useQuery(
     ['likes', asset.id],
-    async () => {
+    async (): Promise<LikesCountResponse> => {
       const res = await fetch(asset.links.likeCount);
       return res.json();
     },

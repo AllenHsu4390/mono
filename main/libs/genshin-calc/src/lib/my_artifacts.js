@@ -727,20 +727,20 @@ export const circlet_9 = {
 // eula
 export const flower_10 = {
     type: "pale",
-    hp: 3967,
-    critDmg: 0.233,
-    def: 46,
-    atk: 14,
-    recharge: 0.104,
+    hp: 4780,
+    critRate: 0.035,
+    critDmg: 0.381,
+    atkPct: 0.047,
+    elemMast: 21,
 };
 
 export const feather_10 = {
     type: "pale",
     atk: 311,
-    hpPct: 0.082,
-    atkPct: 0.053,
-    critRate: 0.101,
-    elemMast: 33,
+    def: 39,
+    atkPct: 0.047,
+    critRate: 0.124,
+    elemMast: 16,
 };
 
 export const sand_10 = {

@@ -73,9 +73,11 @@ export const ttds = ({ baseAtk, atk }) => {
         atk: atk + (baseAtk * 0.48)
     };
 };
-export const monaOmen = ({ elemDmg }) => {
+export const monaOmen = ({ elemDmg, reactDmg }, { stats, enemy }) => {
+    const isHydroReaction = stats.includes("hydro") || (enemy.stats.includes("hasHydro"));
     return {
-        elemDmg: elemDmg + 0.50
+        elemDmg: elemDmg + 0.50,
+        reactDmg: reactDmg + (isHydroReaction ? 0.15 : 0),
     };
 };
 export const xianglingC6 = ({ elemDmg }, hit) => {
@@ -131,3 +133,15 @@ export const makeShenheE = (num, ATK = 3300, hold = false) => {
         };
     }
 }
+
+export const xinyanC4 = ({ resDebuff }, { stats }) => {
+    return {
+        resDebuff: resDebuff + (stats.includes("physical") ? 0.15 : 0)
+    };
+};
+
+export const xinyanFervor = ({ elemDmg }, { stats }) => {
+    return {
+        elemDmg: elemDmg + (stats.includes("physical") ? 0.15 : 0)
+    };
+};
