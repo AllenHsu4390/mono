@@ -24,6 +24,7 @@ import {
   skywardHarpR1,
   stringlessR5,
   thunderingPulseR1,
+  slingshot,
 } from './bows.js';
 import { withContext } from './context.js';
 
@@ -36,16 +37,10 @@ let DICE = 0.1315;
 const yelanA1 = ({ hp }) => {
   const team = getCurrentTeam();
 
-  if (!team?.chars) {
-    return {
-      hp: hp + hp * 0.12,
-    };
-  }
-
-  const types = team.chars.reduce((accum, char) => {
-    accum[char.element] = true;
-    return accum;
-  }, {});
+    const types = team.chars.reduce((accum, char) => {
+        accum[char.element] = true;
+        return accum;
+    }, {});
 
   const typesCount = Object.keys(types).length;
   let bonusHp = 0.06;
@@ -175,126 +170,34 @@ const team = {
   ],
 };
 
+export const slingShotBonus = ({ elemDmg }, { index }) => { 
+    const bonus = (index === 4) ? 0.60 : 0;
+    return {
+        elemDmg: elemDmg + bonus,
+    };
+};
+
 export const print = () => {
   withContext({
     enemy,
     team,
     run: () => {
-      console.log('Total Combo');
-      console.log(
-        `Skyward Harp: ${damageDps(
-          stats(char, skywardHarpR1, artifacts),
-          hits(buffs, debuffs),
-          15,
-          0,
-          'hp'
-        )}`
-      );
-      console.log(
-        `Stringless: ${damageDps(
-          stats(char, stringlessR5, artifacts),
-          hits(buffs, debuffs),
-          15,
-          0,
-          'hp'
-        )}`
-      );
-      console.log(
-        `Recurve: ${damageDps(
-          stats(char, recurve, cr_artifacts),
-          hits(buffs, debuffs),
-          15,
-          0,
-          'hp'
-        )}`
-      );
-      console.log(
-        `Thundering pulse: ${damageDps(
-          stats(char, thunderingPulseR1, cr_artifacts),
-          hits(buffs, debuffs),
-          15,
-          0,
-          'hp'
-        )}`
-      );
-      console.log(
-        `Mouun: ${damageDps(
-          stats(char, mouun, artifacts),
-          hits(buffs, debuffs),
-          15,
-          0,
-          'hp'
-        )}`
-      );
-
-      console.log('');
-      console.log('Single Exquisite throw CRIT');
-      console.log(
-        `Skyward Harp: ${damageDps(
-          stats(char, skywardHarpR1, artifacts.concat({ critRate: 1 })),
-          hits(buffs, debuffs).slice(4, 5),
-          undefined,
-          0,
-          'hp'
-        )}`
-      );
-      console.log(
-        `Stringless: ${damageDps(
-          stats(char, stringlessR5, artifacts.concat({ critRate: 1 })),
-          hits(buffs, debuffs).slice(4, 5),
-          undefined,
-          0,
-          'hp'
-        )}`
-      );
-      console.log(
-        `Recurve: ${damageDps(
-          stats(char, recurve, cr_artifacts.concat({ critRate: 1 })),
-          hits(buffs, debuffs).slice(4, 5),
-          undefined,
-          0,
-          'hp'
-        )}`
-      );
-      console.log(
-        `Thundering pulse: ${damageDps(
-          stats(char, thunderingPulseR1, cr_artifacts.concat({ critRate: 1 })),
-          hits(buffs, debuffs).slice(4, 5),
-          undefined,
-          0,
-          'hp'
-        )}`
-      );
-      console.log(
-        `Mouun: ${damageDps(
-          stats(char, mouun, artifacts.concat({ critRate: 1 })),
-          hits(buffs, debuffs).slice(4, 5),
-          undefined,
-          0,
-          'hp'
-        )}`
-      );
+      console.log("Total Combo");
+      console.log(`Skyward Harp: ${damageDps(stats(char, skywardHarpR1, artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
+      console.log(`Stringless: ${damageDps(stats(char, stringlessR5, artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
+      console.log(`Recurve: ${damageDps(stats(char, recurve, cr_artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
+      console.log(`Thundering pulse: ${damageDps(stats(char, thunderingPulseR1, cr_artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
+      console.log(`Mouun: ${damageDps(stats(char, mouun, artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
+      console.log(`Slingshot: ${damageDps(stats(char, slingshot, artifacts), hits([...buffs, slingShotBonus], debuffs), 15, 0, "hp")}`);
+      
+      console.log("");
+      console.log("Single Exquisite throw CRIT");
+      console.log(`Skyward Harp: ${damageDps(stats(char, skywardHarpR1, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
+      console.log(`Stringless: ${damageDps(stats(char, stringlessR5, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
+      console.log(`Recurve: ${damageDps(stats(char, recurve, cr_artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
+      console.log(`Thundering pulse: ${damageDps(stats(char, thunderingPulseR1, cr_artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
+      console.log(`Mouun: ${damageDps(stats(char, mouun, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
+      console.log(`Slingshot: ${damageDps(stats(char, slingshot, artifacts.concat({ critRate: 1 })), hits([...buffs, slingShotBonus], debuffs).slice(4, 5), undefined, 0, "hp")}`);  
     },
   });
-
-  /* 
-    console.log("");
-    console.log(`Lion's roar CD Circ Single sword CRIT: ${damageDps(stats(xingqiu, lionroarR5, artifacts.concat({ critRate: 1})), hits.slice(0, 1))}`);
-    console.log(`Sac sword CD Circ Single sword CRIT: ${damageDps(stats(xingqiu, sacSword, artifacts.concat({ critRate: 1})), hits.slice(0, 1))}`);
-    
-    console.log(`Sac sword CD Circ: ${damage(stats(xingqiu, sacSword, artifacts), fatalRainScreen) * 0.6 * 2}`);
-    console.log(`Sac sword ATK Circ: ${damage(stats(xingqiu, sacSword, artifacts.concat(atk_circ)), fatalRainScreen) * 0.6 * 2}`);
-    console.log("");
-    console.log(`Lion's roar CD Circ: ${damage(stats(xingqiu, lionroarR5, artifacts), fatalRainScreen)}`);
-    console.log(`Lion's roar ATK Circ: ${damage(stats(xingqiu, lionroarR5, artifacts.concat(atk_circ)), fatalRainScreen)}`);
-    console.log(`Lion's roar CR Circ: ${damage(stats(xingqiu, lionroarR5, artifacts), fatalRainScreen)}`);
-    console.log(`Lion's roar ATK lvl 20 Circ: ${damage(stats(xingqiu, lionroarR5, artifacts.concat(atk_circ_lvl_20)), fatalRainScreen)}`);
-    */
 };
-
-/*
-Sac sword CD Circ: 207107
-Sac sword ATK Circ: 217104
-Lion's roar CD Circ: 285239
-Lion's roar ATK Circ: 291628
-*/

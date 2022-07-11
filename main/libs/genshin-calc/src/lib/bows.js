@@ -64,7 +64,7 @@ export const skywardHarpR1 = (attr) => {
         baseAtk: newBaseAtk,
         critRate: critRate + .221
     };
-}
+};
 
 export const recurve = (attr) => {
     const { baseAtk, hpPct } = attr;
@@ -87,3 +87,14 @@ export const mouun = (attr) => {
         atkPct: atkPct + .276
     };
 };
+
+export const slingshot = (attr) => {
+    const { baseAtk, critRate } = attr;
+    const newBaseAtk = baseAtk + 354;
+
+    return {
+        name: "slingshot",
+        baseAtk: newBaseAtk,
+        critRate: critRate + .312
+    };
+}
