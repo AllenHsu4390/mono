@@ -3,9 +3,10 @@ import { page } from '../../providers/theme';
 
 interface Props {
   children: React.ReactNode;
+  showBottomBorder: boolean;
 }
 
-export const AppBar = ({ children }: Props) => {
+export const AppBar = ({ children, showBottomBorder }: Props) => {
   const theme = useTheme();
   return (
     <Box sx={{ flexGrow: 1, maxWidth: page.maxWidth }}>
@@ -13,7 +14,9 @@ export const AppBar = ({ children }: Props) => {
         position="fixed"
         sx={{
           height: '6rem',
-          borderBottom: `2px solid ${theme.palette.secondary.main}`,
+          borderBottom: showBottomBorder
+            ? `2px solid ${theme.palette.secondary.main}`
+            : undefined,
           background: `${theme.palette.background.default}`,
         }}
       >

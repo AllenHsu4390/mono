@@ -1,5 +1,6 @@
 import type { AssetResponse } from '@main/rest-models';
-import { DeleteForeverOutlined } from '@mui/icons-material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Typography, Button, IconButton, useTheme, Theme } from '@mui/material';
 import AlertDialog from '../../block/alert';
 import { useConfirmDialog } from '../../hooks/use-confirm-dialog';
@@ -23,7 +24,7 @@ interface Props {
   asset: AssetResponse;
 }
 
-const DeleteAssetButton = ({ asset }: Props) => {
+export const VisibilityButton = ({ asset }: Props) => {
   const theme = useTheme();
   const router = useRouter();
   const { creator } = useCreator();
@@ -44,10 +45,10 @@ const DeleteAssetButton = ({ asset }: Props) => {
   };
 
   const dialogOptions = {
-    title: 'Are you sure?',
+    title: 'Make this visible to the public?',
     content: (
       <Typography>
-        {`This will delete this asset from your gallery.`}
+        {`This will make this visible to everyone on your gallery.`}
       </Typography>
     ),
     actions: (
@@ -60,7 +61,7 @@ const DeleteAssetButton = ({ asset }: Props) => {
           disabled={dialogState.isLocked}
           onClick={confirm}
         >
-          {dialogState.isConfirmed ? 'Deleting...' : 'Delete'}
+          {dialogState.isConfirmed ? 'Publishing...' : 'Publish'}
         </Button>
       </>
     ),
@@ -73,7 +74,7 @@ const DeleteAssetButton = ({ asset }: Props) => {
       {...dialogOptions}
       trigger={
         <IconButton onClick={dialog.open} sx={iconButtonSx(theme)}>
-          <DeleteForeverOutlined
+          <VisibilityOffIcon
             sx={{
               fontSize: '1.7rem',
             }}
@@ -83,5 +84,3 @@ const DeleteAssetButton = ({ asset }: Props) => {
     />
   );
 };
-
-export default DeleteAssetButton;

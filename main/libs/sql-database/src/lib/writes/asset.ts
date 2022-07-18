@@ -2,7 +2,10 @@ import { connectToDatabase } from '../db';
 import { decode, encode } from '@main/hash';
 import { Asset } from '../entity/asset';
 
-export const saveAsset = async (creatorId: string, src: string) => {
+export const saveAsset = async (
+  creatorId: string,
+  src: string
+): Promise<{ id: string }> => {
   const db = await connectToDatabase();
 
   return await db.transaction(async (manager) => {

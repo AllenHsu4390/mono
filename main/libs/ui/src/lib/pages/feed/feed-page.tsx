@@ -1,6 +1,6 @@
 import type { AssetsResponse } from '@main/rest-models';
 import { Gallery } from '../../block/gallery';
-import { GalleryFilters } from '../../block/gallery-filters/gallery-filters';
+import { GalleryFilters } from '../../block/gallery-filters';
 import { useScrollReset } from '../../hooks/use-scroll-reset';
 import Page from '../_base/page';
 

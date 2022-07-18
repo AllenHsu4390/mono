@@ -1,9 +1,9 @@
-import { sucrose } from "./my_characters.js";
+import { sucrose } from './my_characters.js';
 
 export const swirlAction = () => {
-    return {
-        char: sucrose,
-        hits: [],
-        delay: 4
-    };
+  return {
+    char: sucrose,
+    hits: [],
+    delay: 2,
+  };
 };

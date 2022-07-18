@@ -6,6 +6,7 @@ import {
   DailyTopUpResponseSchema,
   DropResponseSchema,
   GuestResponseSchema,
+  SaveAssetResultResponseSchema,
   SessionResponseSchema,
   User,
 } from '@main/rest-models';
@@ -137,6 +138,7 @@ export const rest = {
     }: {
       creatorId: string;
       cdnToken: string;
-    }) => saveAsset(creatorId, cdnToken),
+    }) =>
+      SaveAssetResultResponseSchema.parse(await saveAsset(creatorId, cdnToken)),
   },
 };

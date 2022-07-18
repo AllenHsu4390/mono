@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { rest } from '@main/rest';
-import { AssetsResponse } from '@main/rest-models';
+import { AssetsResponse, SaveAssetResultResponse } from '@main/rest-models';
 import { z } from 'zod';
-import { ApiHandler, OK, requestTo, withErrorResponse } from '@main/next-utils';
+import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
 
 const handler = new ApiHandler()
   .add(withErrorResponse)
@@ -22,24 +22,27 @@ const handler = new ApiHandler()
       );
     }
   )
-  .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
-    const { cdnToken } = z
-      .object({
-        cdnToken: z.string(),
-      })
-      .parse(req.body);
+  .withPost(
+    async (
+      req: NextApiRequest,
+      res: NextApiResponse<SaveAssetResultResponse>
+    ) => {
+      const { cdnToken } = z
+        .object({
+          cdnToken: z.string(),
+        })
+        .parse(req.body);
 
-    const user = await requestTo.user(req);
+      const user = await requestTo.user(req);
 
-    await rest.assets.post({
-      creatorId: user.creatorId,
-      cdnToken,
-    });
+      const result = await rest.assets.post({
+        creatorId: user.creatorId,
+        cdnToken,
+      });
 
-    res.status(200).json({
-      ok: true,
-    });
-  })
+      res.status(200).json(result);
+    }
+  )
   .engage();
 
 export default handler;

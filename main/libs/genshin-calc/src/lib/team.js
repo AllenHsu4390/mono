@@ -11,3 +11,5 @@ export const setCurrentTeam = (newTeam) => {
 };
 
 export const getCurrentTeam = () => currentTeam;
+
+export const resetCurrentTeam = () => currentTeam = team;
