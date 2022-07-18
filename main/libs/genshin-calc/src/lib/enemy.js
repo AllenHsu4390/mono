@@ -13,3 +13,5 @@ export const setCurrentEnemy = (newEnemy) => {
 };
 
 export const getCurrentEnemy = () => enemy;
+
+export const resetCurrentEnemy = () => enemy = basicEnemy;

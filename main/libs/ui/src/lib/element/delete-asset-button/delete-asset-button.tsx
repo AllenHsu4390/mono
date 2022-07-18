@@ -75,7 +75,7 @@ const DeleteAssetButton = ({ asset }: Props) => {
         <IconButton onClick={dialog.open} sx={iconButtonSx(theme)}>
           <DeleteForeverOutlined
             sx={{
-              fontSize: '2rem',
+              fontSize: '1.7rem',
             }}
           />
         </IconButton>

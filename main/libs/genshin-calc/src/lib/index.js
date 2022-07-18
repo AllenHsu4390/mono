@@ -20,6 +20,7 @@ import * as yae from './yae.js';
 import * as ayato from './ayato.js';
 import * as yelan from './yelan.js';
 import * as venti from './venti.js';
+import * as kazuha from './kazuha.js';
 import * as teams from './teams.js';
 
 import { getOutputString, output } from './output.js';
@@ -30,97 +31,110 @@ var args = process.argv.slice(2);
 let isSorted = false;
 
 export const print = (command, restCommands = []) => {
-    const searches = restCommands.filter((s) => s !== "--sorted");
+  const searches = restCommands.filter((s) => s !== '--sorted');
 
-    if (restCommands.length !== searches) {
-        isSorted = true;
-    }
+  if (restCommands.length !== searches) {
+    isSorted = true;
+  }
 
-    output(`-------Damage Calcs for ${command}${` ${searches.join(" ")}`}--------`);
-    switch (command) {
-        case 'xiangling':
-            xiangling.print();
-            break;
-        case 'xingqiu':
-            xingqiu.print();
-            break;
-        case 'yoimiya':
-            yoimiya.print();
-            break;
-        case 'hutao':
-            hutao.print();
-            break;
-        case 'xiao':
-            xiao.print();
-            break;
-        case 'raiden':
-            raiden.print();
-            break;
-        case 'eula':
-            eula.print();
-            break;
-        case 'ganyu':
-            ganyu.print();
-            break;
-        case 'fischl':
-            fischl.print();
-            break;
-        case 'albedo':
-            albedo.print();
-            break;
-        case 'itto':
-            itto.print();
-            break;
-        case 'ayaka':
-            ayaka.print();
-            break;
-        case 'shenhe':
-            shenhe.print();
-            break;
-        case 'yunjin':
-            yunjin.print();
-            break;
-        case 'rosaria':
-            rosaria.print();
-            break;
-        case 'diluc':
-            diluc.print();
-            break;
-        case 'jean':
-            jean.print();
-            break;
-        case 'sara':
-            sara.print();
-            break;
-        case 'yae':
-            yae.print();
-            break;
-        case 'ayato':
-            ayato.print();
-            break;
-        case 'yelan':
-            yelan.print();
-            break;
-        case 'venti':
-            venti.print();
-            break;
-        case 'teams':
-            if (searches.length > 0) {
-                Object
-                    .keys(teams)
-                    .filter((key) => searches.filter((search) => key.includes(search)).length === searches.length)
-                    .reduce((foundMap, teamKey) => foundMap.set(teamKey, teams[teamKey]), new Map())
-                    .forEach((team) => team());
-                break;
-            }
-            Object
-                .keys(teams)
-                .reduce((foundMap, teamKey) => foundMap.set(teamKey, teams[teamKey]), new Map())
-                .forEach((team) => team());
-                break;
-        default:
-            output('Who?');
-    }
+  output(
+    `-------Damage Calcs for ${command}${` ${searches.join(' ')}`}--------`
+  );
+  switch (command) {
+    case 'xiangling':
+      xiangling.print();
+      break;
+    case 'xingqiu':
+      xingqiu.print();
+      break;
+    case 'yoimiya':
+      yoimiya.print();
+      break;
+    case 'hutao':
+      hutao.print();
+      break;
+    case 'xiao':
+      xiao.print();
+      break;
+    case 'raiden':
+      raiden.print();
+      break;
+    case 'eula':
+      eula.print();
+      break;
+    case 'ganyu':
+      ganyu.print();
+      break;
+    case 'fischl':
+      fischl.print();
+      break;
+    case 'albedo':
+      albedo.print();
+      break;
+    case 'itto':
+      itto.print();
+      break;
+    case 'ayaka':
+      ayaka.print();
+      break;
+    case 'shenhe':
+      shenhe.print();
+      break;
+    case 'yunjin':
+      yunjin.print();
+      break;
+    case 'rosaria':
+      rosaria.print();
+      break;
+    case 'diluc':
+      diluc.print();
+      break;
+    case 'jean':
+      jean.print();
+      break;
+    case 'sara':
+      sara.print();
+      break;
+    case 'yae':
+      yae.print();
+      break;
+    case 'ayato':
+      ayato.print();
+      break;
+    case 'yelan':
+      yelan.print();
+      break;
+    case 'venti':
+      venti.print();
+      break;
+    case 'kazuha':
+      kazuha.print();
+      break;
+    case 'teams':
+      if (searches.length > 0) {
+        Object.keys(teams)
+          .filter(
+            (key) =>
+              searches.filter((search) => key.includes(search)).length ===
+              searches.length
+          )
+          .reduce(
+            (foundMap, teamKey) => foundMap.set(teamKey, teams[teamKey]),
+            new Map()
+          )
+          .forEach((team) => team());
+        break;
+      }
+      Object.keys(teams)
+        .reduce(
+          (foundMap, teamKey) => foundMap.set(teamKey, teams[teamKey]),
+          new Map()
+        )
+        .forEach((team) => team());
+      break;
+    default:
+      output('Who?');
+  }
 };
 
 print(args[0], args.slice(1));

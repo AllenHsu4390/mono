@@ -13,7 +13,7 @@ export const saveUser = async (
   const db = await connectToDatabase();
 
   return await db.transaction(async (manager) => {
-    const existingUser = db.getRepository(User).findOne({
+    const existingUser = await db.getRepository(User).findOne({
       where: {
         email,
       },

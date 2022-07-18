@@ -25,16 +25,17 @@ import { Session } from './entity/session';
 import { Category } from './entity/category';
 import { getAssetCategories } from './reads/category';
 import { saveAssetCategory } from './writes/category';
+import { devInit } from './writes/init';
 
-const datasource = new DataSource({
+export const datasource = new DataSource({
   type: 'mysql',
-  host: 'localhost',
-  port: 3306,
+  host: '127.0.0.1',
+  port: 3308,
   username: 'root',
-  password: 'H>c$6H2xyA`VrR{B',
+  password: '',
   database: 'creator_network',
-  synchronize: true,
-  //logging: true,
+  synchronize: process.env.NODE_ENV === 'development' ? true : false,
+  logging: true,
   entities: [
     Creator,
     User,
@@ -109,5 +110,8 @@ export const db = {
   },
   enums: {
     transactionTypes: TransactionTypes,
+  },
+  init: {
+    dev: devInit,
   },
 };

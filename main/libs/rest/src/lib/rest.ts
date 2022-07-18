@@ -6,9 +6,11 @@ import {
   DailyTopUpResponseSchema,
   DropResponseSchema,
   GuestResponseSchema,
+  SaveAssetResultResponseSchema,
   SessionResponseSchema,
   User,
 } from '@main/rest-models';
+import { db } from '@main/sql-database';
 import { z } from 'zod';
 import { deleteAsset } from './assets/delete-asset';
 import { getAsset } from './assets/get-asset';
@@ -137,6 +139,14 @@ export const rest = {
     }: {
       creatorId: string;
       cdnToken: string;
-    }) => saveAsset(creatorId, cdnToken),
+    }) =>
+      SaveAssetResultResponseSchema.parse(await saveAsset(creatorId, cdnToken)),
+  },
+
+  // init/dev
+  init: {
+    dev: async () => {
+      await db.init.dev();
+    },
   },
 };

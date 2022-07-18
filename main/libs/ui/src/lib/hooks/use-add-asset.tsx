@@ -1,4 +1,8 @@
-import type { AssetsResponse, CreatorResponse } from '@main/rest-models';
+import type {
+  AssetsResponse,
+  CreatorResponse,
+  SaveAssetResultResponse,
+} from '@main/rest-models';
 import { useMutation } from 'react-query';
 import { useAssets } from './use-assets';
 import { useUser } from './use-user';
@@ -19,7 +23,7 @@ export const useAddAsset = ({
 }) => {
   const { refetchAssets } = useAssets(assets);
   const { user } = useUser();
-  const mutation = useMutation(
+  const mutation = useMutation<SaveAssetResultResponse, unknown, File>(
     async (imageData: File) => {
       if (!creator.links.newAsset) {
         throw new Error('Missing capability new-asset');

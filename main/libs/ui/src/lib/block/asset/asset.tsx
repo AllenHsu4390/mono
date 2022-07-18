@@ -47,12 +47,7 @@ export default function AssetInteractable({ asset }: Props) {
           />
         }
         counter={<LikeCounter asset={asset} />}
-        actions={
-          <>
-            {asset.links.like ? <LikeButton asset={asset} /> : null}
-            {asset.links.delete ? <DeleteAssetButton asset={asset} /> : null}
-          </>
-        }
+        actions={asset.links.like ? <LikeButton asset={asset} /> : null}
       />
     </>
   );
