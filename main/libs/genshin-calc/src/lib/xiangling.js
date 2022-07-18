@@ -26,7 +26,14 @@ import {
   sand_9,
 } from './my_artifacts.js';
 import { stats } from './stats.js';
-import { bennBurst, noblesse, pyroRes, baalE } from './traits.js';
+import {
+  bennBurst,
+  noblesse,
+  pyroRes,
+  baalE,
+  sucroseSwirl,
+  monaOmen,
+} from './traits.js';
 import { overloaded } from './reactions.js';
 import { xiangling } from './my_characters.js';
 import { getCurrentEnemy } from './enemy.js';
@@ -39,7 +46,7 @@ const enemy = {
   resBuff: 0,
   resDebuff: 0,
   defDebuff: 0,
-  stats: ['hasPyro', 'hasHydro'],
+  stats: ['hasElectro', 'hasHydro'],
 };
 
 const char = xiangling;
@@ -168,12 +175,12 @@ export const print = () => {
         ];
       };
       const vapeHits = hits(
-        [bennBurst, noblesse, pyroRes, baalE],
+        [bennBurst, noblesse, pyroRes, sucroseSwirl],
         [],
         [pyroVape]
       );
       const overVapeHits = hits(
-        [bennBurst, noblesse, pyroRes, baalE],
+        [bennBurst, noblesse, pyroRes, sucroseSwirl],
         [],
         [pyroVape],
         [overloaded]

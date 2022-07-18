@@ -128,7 +128,7 @@ export const c6Action = ({
   amps = [],
   transforms,
   hitStats = [],
-  duration,
+  duration = 10,
 }) => {
   return {
     char: stats(fischl, weapon, artifacts),

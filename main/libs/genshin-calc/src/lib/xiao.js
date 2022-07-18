@@ -71,7 +71,7 @@ export const hits = (traits = [], debuffs = [], amps = [], transforms = []) => {
       return {
         traits: [baneOfEvil, tamerOfDemons, ...traits],
         amplifiers: [crit, ...amps],
-        stats: ['anemo', 'normal'],
+        stats: ['anemo', 'plunge'],
         motionValue,
         transforms,
         index,

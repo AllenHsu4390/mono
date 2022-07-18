@@ -6,6 +6,7 @@ import {
   amenoma,
   blackSword,
   harbinger,
+  isshin,
   lionroarR5,
   skywardBlade,
 } from './swords.js';
@@ -226,6 +227,13 @@ export const print = () => {
           6
         )}`
       );
+      console.log(
+        `Isshin Damage: ${damageDps(
+          stats(char, isshin, cr_artifacts),
+          hits(buffs, debuffs),
+          6
+        )}`
+      );
       console.log('-----Kyouka Base 2 rotations-----');
       console.log(
         `Black blade Damage: ${damageDps(
@@ -258,6 +266,13 @@ export const print = () => {
       console.log(
         `Amenoma Damage: ${damageDps(
           stats(char, amenoma, cr_artifacts),
+          hits2E(buffs, debuffs),
+          18
+        )}`
+      );
+      console.log(
+        `Isshin Damage: ${damageDps(
+          stats(char, isshin, cr_artifacts),
           hits2E(buffs, debuffs),
           18
         )}`
@@ -298,6 +313,13 @@ export const print = () => {
           6
         )}`
       );
+      console.log(
+        `Isshin Damage: ${damageDps(
+          stats(char, isshin, cr_artifacts),
+          hits(buffs, debuffs),
+          6
+        )}`
+      );
       console.log('-----CRIT 1 Kyouka Hyper-----');
       console.log(
         `Black blade Damage: ${damageDps(
@@ -326,6 +348,12 @@ export const print = () => {
       console.log(
         `Amenoma Damage: ${damageDps(
           stats(char, amenoma, cr_artifacts.concat({ critRate: 1 })),
+          kyoukaHits(hyperBuffs, hyperDebuffs).slice(0, 1)
+        )}`
+      );
+      console.log(
+        `Isshin Damage: ${damageDps(
+          stats(char, isshin, cr_artifacts.concat({ critRate: 1 })),
           kyoukaHits(hyperBuffs, hyperDebuffs).slice(0, 1)
         )}`
       );

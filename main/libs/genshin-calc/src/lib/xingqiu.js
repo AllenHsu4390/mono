@@ -1,5 +1,11 @@
 import { crit, hydroVape } from './amplifiers.js';
-import { lionroarR5, sacSword, harbinger, blackSword } from './swords.js';
+import {
+  lionroarR5,
+  sacSword,
+  harbinger,
+  blackSword,
+  isshin,
+} from './swords.js';
 import { damageDps } from './damage.js';
 import {
   flower_1,
@@ -100,7 +106,7 @@ export const raincutterAction = ({
     char: stats(xingqiu, weapon, artifacts),
     hits: hits(buffs, debuffs, amps, transforms, hitStats, duration),
     cooldown: 20,
-    delay: 1,
+    delay: 2,
   };
 };
 
@@ -151,6 +157,14 @@ export const print = () => {
         )}`
       );
 
+      console.log(
+        `Isshin: ${damageDps(
+          stats(xingqiu, isshin, artifacts),
+          hits(buffs, debuffs),
+          15
+        )}`
+      );
+
       console.log('Total rainscreen');
       console.log(
         `Sac sword: ${damageDps(
@@ -175,6 +189,12 @@ export const print = () => {
       console.log(
         `Black sword: ${damageDps(
           stats(xingqiu, blackSword, artifacts),
+          fatalRainScreenHits(buffs, debuffs)
+        )}`
+      );
+      console.log(
+        `Isshin: ${damageDps(
+          stats(xingqiu, isshin, artifacts),
           fatalRainScreenHits(buffs, debuffs)
         )}`
       );

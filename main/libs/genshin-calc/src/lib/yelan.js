@@ -25,6 +25,7 @@ import {
   stringlessR5,
   thunderingPulseR1,
   slingshot,
+  slingshot_offField,
 } from './bows.js';
 import { withContext } from './context.js';
 
@@ -37,10 +38,10 @@ let DICE = 0.1315;
 const yelanA1 = ({ hp }) => {
   const team = getCurrentTeam();
 
-    const types = team.chars.reduce((accum, char) => {
-        accum[char.element] = true;
-        return accum;
-    }, {});
+  const types = team.chars.reduce((accum, char) => {
+    accum[char.element] = true;
+    return accum;
+  }, {});
 
   const typesCount = Object.keys(types).length;
   let bonusHp = 0.06;
@@ -170,34 +171,141 @@ const team = {
   ],
 };
 
-export const slingShotBonus = ({ elemDmg }, { index }) => { 
-    const bonus = (index === 4) ? 0.60 : 0;
-    return {
-        elemDmg: elemDmg + bonus,
-    };
-};
-
 export const print = () => {
   withContext({
     enemy,
     team,
     run: () => {
-      console.log("Total Combo");
-      console.log(`Skyward Harp: ${damageDps(stats(char, skywardHarpR1, artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
-      console.log(`Stringless: ${damageDps(stats(char, stringlessR5, artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
-      console.log(`Recurve: ${damageDps(stats(char, recurve, cr_artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
-      console.log(`Thundering pulse: ${damageDps(stats(char, thunderingPulseR1, cr_artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
-      console.log(`Mouun: ${damageDps(stats(char, mouun, artifacts), hits(buffs, debuffs), 15, 0, "hp")}`);
-      console.log(`Slingshot: ${damageDps(stats(char, slingshot, artifacts), hits([...buffs, slingShotBonus], debuffs), 15, 0, "hp")}`);
-      
-      console.log("");
-      console.log("Single Exquisite throw CRIT");
-      console.log(`Skyward Harp: ${damageDps(stats(char, skywardHarpR1, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
-      console.log(`Stringless: ${damageDps(stats(char, stringlessR5, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
-      console.log(`Recurve: ${damageDps(stats(char, recurve, cr_artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
-      console.log(`Thundering pulse: ${damageDps(stats(char, thunderingPulseR1, cr_artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
-      console.log(`Mouun: ${damageDps(stats(char, mouun, artifacts.concat({ critRate: 1 })), hits(buffs, debuffs).slice(4, 5), undefined, 0, "hp")}`);
-      console.log(`Slingshot: ${damageDps(stats(char, slingshot, artifacts.concat({ critRate: 1 })), hits([...buffs, slingShotBonus], debuffs).slice(4, 5), undefined, 0, "hp")}`);  
+      console.log('Total Combo');
+      console.log(
+        `Skyward Harp: ${damageDps(
+          stats(char, skywardHarpR1, artifacts),
+          hits(buffs, debuffs),
+          15,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Stringless: ${damageDps(
+          stats(char, stringlessR5, artifacts),
+          hits(buffs, debuffs),
+          15,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Recurve: ${damageDps(
+          stats(char, recurve, cr_artifacts),
+          hits(buffs, debuffs),
+          15,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Thundering pulse: ${damageDps(
+          stats(char, thunderingPulseR1, cr_artifacts),
+          hits(buffs, debuffs),
+          15,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Mouun: ${damageDps(
+          stats(char, mouun, artifacts),
+          hits(buffs, debuffs),
+          15,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Slingshot (on field): ${damageDps(
+          stats(char, slingshot, artifacts),
+          hits([...buffs], debuffs),
+          15,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Slingshot (off field): ${damageDps(
+          stats(char, slingshot_offField, artifacts),
+          hits([...buffs], debuffs),
+          15,
+          0,
+          'hp'
+        )}`
+      );
+
+      console.log('');
+      console.log('Single Exquisite throw CRIT');
+      console.log(
+        `Skyward Harp: ${damageDps(
+          stats(char, skywardHarpR1, artifacts.concat({ critRate: 1 })),
+          hits(buffs, debuffs).slice(4, 5),
+          undefined,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Stringless: ${damageDps(
+          stats(char, stringlessR5, artifacts.concat({ critRate: 1 })),
+          hits(buffs, debuffs).slice(4, 5),
+          undefined,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Recurve: ${damageDps(
+          stats(char, recurve, cr_artifacts.concat({ critRate: 1 })),
+          hits(buffs, debuffs).slice(4, 5),
+          undefined,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Thundering pulse: ${damageDps(
+          stats(char, thunderingPulseR1, cr_artifacts.concat({ critRate: 1 })),
+          hits(buffs, debuffs).slice(4, 5),
+          undefined,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Mouun: ${damageDps(
+          stats(char, mouun, artifacts.concat({ critRate: 1 })),
+          hits(buffs, debuffs).slice(4, 5),
+          undefined,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Slingshot (on field): ${damageDps(
+          stats(char, slingshot_offField, artifacts.concat({ critRate: 1 })),
+          hits([...buffs], debuffs).slice(4, 5),
+          undefined,
+          0,
+          'hp'
+        )}`
+      );
+      console.log(
+        `Slingshot (off field): ${damageDps(
+          stats(char, slingshot, artifacts.concat({ critRate: 1 })),
+          hits([...buffs], debuffs).slice(4, 5),
+          undefined,
+          0,
+          'hp'
+        )}`
+      );
     },
   });
 };
