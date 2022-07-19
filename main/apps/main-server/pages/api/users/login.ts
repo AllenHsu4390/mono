@@ -12,15 +12,17 @@ export const initiateLogin = async (
   const session = await rest.sessions.post({
     userId,
   });
+
   const sessionKey = auth.encrypt(session.id);
+  const waitKey = auth.encrypt([userId, session.id].join('-SEP-'));
 
   // send to email
   console.log(`localhost:4200/users/auth?sessionKey=${sessionKey}`);
 
   res.setHeader('Set-Cookie', [
-    `waitKey=${auth.encrypt(
-      [userId, session.id].join('-SEP-')
-    )}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`,
+    `idKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;`,
+    `sessionKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;`,
+    `waitKey=${waitKey}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`,
   ]);
 
   res.status(200).json(await rest.sessions.param(session.id).get());

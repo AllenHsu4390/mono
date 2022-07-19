@@ -77,7 +77,7 @@ const kazuhaHits = (
   amps = [],
   transforms = [],
   stats = [],
-  duration = 4
+  duration = 5
 ) => {
   return [
     ...[KAZUHA_SLASH].map((motionValue, index) => {

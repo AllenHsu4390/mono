@@ -1979,7 +1979,7 @@ export const raiden_yelan_xingqiu_kazuha = () => {
             buffs: teamWide,
             debuffs,
             artifacts: [flower_55, feather_55, sand_55, goblet_55, circlet_55],
-            transforms: [swirl],
+            transforms: [swirl, electroCharged],
           }),
         ])}`
       );
@@ -2775,6 +2775,13 @@ export const raiden_bennett_sara_kazuha = () => {
           },
         ],
       }),
+      kazuha.kazuhaAction({
+        weapon: isshin,
+        buffs: teamWide,
+        debuffs,
+        artifacts: [flower_55, feather_55, sand_55, goblet_55, circlet_55],
+        transforms: [swirl, overloaded],
+      }),
     ])}`
   );
 };
@@ -2836,6 +2843,13 @@ export const raiden_bennett_yae_kazuha = () => {
         artifacts: [flower_42, feather_1, sand_42, goblet_50, circlet_48],
         buffs: onField,
         debuffs,
+      }),
+      kazuha.kazuhaAction({
+        weapon: isshin,
+        buffs: teamWide,
+        debuffs,
+        artifacts: [flower_55, feather_55, sand_55, goblet_55, circlet_55],
+        transforms: [swirl, overloaded],
       }),
     ])}`
   );
@@ -6174,7 +6188,7 @@ export const ayato_yae_bennett_kazuha = () => {
         buffs: teamWide,
         debuffs,
         artifacts: [flower_55, feather_55, sand_55, goblet_55, circlet_55],
-        transforms: [swirl],
+        transforms: [swirl, overloaded],
       }),
     ])}`
   );
@@ -7030,13 +7044,7 @@ export const ayato_yelan_yae_mona = () => {
             buffs: teamWide,
             debuffs,
           }),
-          kazuha.kazuhaAction({
-            weapon: isshin,
-            buffs: teamWide,
-            debuffs,
-            artifacts: [flower_55, feather_55, sand_55, goblet_55, circlet_55],
-            transforms: [swirl],
-          }),
+          mona.stellarisAction(),
         ])}`
       );
     },
@@ -7163,7 +7171,7 @@ export const kazuha_yelan_xingqiu_fischl = () => {
             buffs: teamWide,
             debuffs,
             artifacts: [flower_55, feather_55, sand_55, goblet_55, circlet_55],
-            transforms: [swirl],
+            transforms: [swirl, electroCharged],
           }),
         ])}`
       );

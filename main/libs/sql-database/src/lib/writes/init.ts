@@ -45,7 +45,7 @@ export const devInit = async () => {
 
     assetBatches[index].forEach(async (asset) => {
       // consider passing in src
-      await saveAsset(user.creatorId, 'cdn-token');
+      await saveAsset(user.creatorId, asset);
     });
   });
 };

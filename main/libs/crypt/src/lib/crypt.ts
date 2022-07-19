@@ -1,8 +1,13 @@
 import * as crypto from 'crypto';
 
-const secretKey = process.env.AUTH_SECRET;
+const passphrase = process.env.AUTH_PASS_PHRASE;
+
+if (!passphrase) {
+  throw new Error('Auth config: missing key');
+}
 
 const algorithm = 'aes-256-ctr';
+const secretKey = crypto.scryptSync(passphrase, 'salt', 32);
 const iv = crypto.randomBytes(16);
 
 export const decrypt = (token: string, delimiter = '|') => {
