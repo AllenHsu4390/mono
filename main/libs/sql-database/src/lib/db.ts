@@ -34,8 +34,8 @@ export const datasource = new DataSource({
   username: 'root',
   password: '',
   database: 'creator_network',
-  synchronize: process.env.NODE_ENV === 'development' ? true : false,
-  logging: true,
+  //synchronize: process.env.NODE_ENV === 'development' ? true : false,
+  //logging: true,
   entities: [
     Creator,
     User,
