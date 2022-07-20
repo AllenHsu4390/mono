@@ -1,25 +1,43 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { rest } from '@main/rest';
-import { DropResponse } from '@main/rest-models';
+import { Cost, DropResponse } from '@main/rest-models';
 import { z } from 'zod';
 import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
+import { environment } from '@main/environment';
+
+const dropRate = ({ pctChance } = { pctChance: 0.02 }) => {
+  return Math.random() < pctChance;
+};
 
 const handler = new ApiHandler()
   .add(withErrorResponse)
   .withPost(async (req: NextApiRequest, res: NextApiResponse<DropResponse>) => {
-    const { id } = z
+    const { id: assetId } = z
       .object({
         id: z.string(),
       })
       .parse(req.query);
 
     const userId = await requestTo.userId(req);
-
-    const drop = await rest.assets.param(id).likes.post({
+    const like = {
       userId,
+      assetId,
+    };
+    const { db, cache } = environment;
+
+    await db.like.save(like.userId, like.assetId, Cost.Like);
+
+    await cache.likesCount.save(like.assetId, (prevCount) => {
+      return prevCount + 1;
     });
 
-    res.status(200).json(drop);
+    await cache.balance.save(like.userId, (prevBalance) => {
+      return prevBalance - Cost.Like;
+    });
+
+    res.status(200).json({
+      isDropped: dropRate(),
+      assetId: like.assetId,
+    });
   })
   .engage();
 

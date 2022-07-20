@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ApiHandler, OK, requestTo, withErrorResponse } from '@main/next-utils';
-import { rest } from '@main/rest';
+import { environment } from '@main/environment';
 
 export const initiateLogout = (res: NextApiResponse) => {
   res.setHeader('Set-Cookie', [
@@ -13,7 +13,8 @@ const handler = new ApiHandler()
   .add(withErrorResponse)
   .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
     const sessionId = await requestTo.sessionId(req);
-    await rest.sessions.param(sessionId).delete();
+    const db = environment.db;
+    await db.session.delete(sessionId);
     initiateLogout(res);
     res.status(200).json({
       ok: true,

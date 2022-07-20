@@ -1,19 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { rest } from '@main/rest';
 import { CategoriesResponse, DropResponse } from '@main/rest-models';
 import { z } from 'zod';
 import { ApiHandler, OK, requestTo, withErrorResponse } from '@main/next-utils';
+import { environment } from '@main/environment';
 
 const handler = new ApiHandler()
   .add(withErrorResponse)
   .withGet(
     async (req: NextApiRequest, res: NextApiResponse<CategoriesResponse>) => {
-      const { id } = z
+      const { id: assetId } = z
         .object({
           id: z.string(),
         })
         .parse(req.query);
-      res.status(200).json(await rest.assets.param(id).categories.get());
+      const { db } = environment;
+
+      const categories = await db.category.get(assetId);
+
+      res.status(200).json({
+        categories,
+      });
     }
   )
   .withPost(async (req: NextApiRequest, res: NextApiResponse<OK>) => {
@@ -22,17 +28,16 @@ const handler = new ApiHandler()
         name: z.string(),
       })
       .parse(req.body);
-    const { id } = z
+    const { id: assetId } = z
       .object({
         id: z.string(),
       })
       .parse(req.query);
 
     const userId = await requestTo.userId(req);
-    await rest.assets.param(id).categories.post({
-      userId,
-      name,
-    });
+    const { db } = environment;
+
+    await db.category.save(userId, assetId, name);
     res.status(200).json({ ok: true });
   })
   .engage();

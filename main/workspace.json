@@ -10,7 +10,6 @@
     "main-server": "apps/main-server",
     "main-server-e2e": "apps/main-server-e2e",
     "next-utils": "libs/next-utils",
-    "rest": "libs/rest",
     "rest-models": "libs/rest-models",
     "sql-database": "libs/sql-database",
     "ui": "libs/ui"

@@ -44,6 +44,12 @@ export const noblesse = ({ baseAtk, atk }) => {
     atk: atk + baseAtk * 0.2,
   };
 };
+
+export const instructor = ({ elemMast }) => {
+  return {
+    elemMast: elemMast + 120,
+  };
+};
 export const tom = ({ baseAtk, atk }) => {
   return {
     atk: atk + baseAtk * 0.2,

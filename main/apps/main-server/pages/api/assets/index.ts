@@ -1,8 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { rest } from '@main/rest';
 import { AssetsResponse, SaveAssetResultResponse } from '@main/rest-models';
 import { z } from 'zod';
-import { ApiHandler, requestTo, withErrorResponse } from '@main/next-utils';
+import {
+  ApiHandler,
+  getAssetsResponse,
+  requestTo,
+  withErrorResponse,
+} from '@main/next-utils';
+import { environment } from '@main/environment';
+
+function getRandomInt(max: number) {
+  return Math.floor(Math.random() * max);
+}
+
+const getCdnData = (cdnToken: string) => {
+  if (process.env.NODE_ENV === 'development') {
+    return `https://source.unsplash.com/collection/${getRandomInt(10000)}`;
+  }
+
+  // lookup cdn token
+  return '';
+};
 
 const handler = new ApiHandler()
   .add(withErrorResponse)
@@ -15,11 +33,7 @@ const handler = new ApiHandler()
         })
         .parse(req.query);
 
-      res.status(200).json(
-        await rest.creators.param(creatorId).assets.get({
-          pageId,
-        })
-      );
+      res.status(200).json(await getAssetsResponse(creatorId, pageId));
     }
   )
   .withPost(
@@ -35,12 +49,19 @@ const handler = new ApiHandler()
 
       const user = await requestTo.user(req);
 
-      const result = await rest.assets.post({
-        creatorId: user.creatorId,
-        cdnToken,
-      });
+      const { db } = environment;
 
-      res.status(200).json(result);
+      const savedAsset = await db.asset.save(
+        user.creatorId,
+        getCdnData(cdnToken)
+      );
+
+      res.status(200).json({
+        id: savedAsset.id,
+        links: {
+          asset: `/assets/${savedAsset.id}`,
+        },
+      });
     }
   )
   .engage();

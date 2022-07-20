@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { rest } from '@main/rest';
 import { z } from 'zod';
 import { ApiHandler, OK, requestTo, withErrorResponse } from '@main/next-utils';
+import { environment } from '@main/environment';
 
 const handler = new ApiHandler()
   .add(withErrorResponse)
@@ -13,9 +13,8 @@ const handler = new ApiHandler()
       .parse(req.query);
 
     const user = await requestTo.user(req);
-    await rest.assets.param(id).delete({
-      creatorId: user.creatorId,
-    });
+    const { db } = environment;
+    await db.asset.delete(id, user.creatorId);
     res.status(200).json({
       ok: true,
     });

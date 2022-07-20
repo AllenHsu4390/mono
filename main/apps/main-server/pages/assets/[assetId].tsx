@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { UserProps, AssetPage, AssetPageProps } from '@main/ui';
-import { rest } from '@main/rest';
 import { z } from 'zod';
 import {
+  getAssetResponse,
   PropsHandler,
   requestTo,
   withGuestProps,
@@ -20,9 +20,7 @@ export const getServerSideProps: GetServerSideProps = new PropsHandler()
       .parse(query);
 
     const user = await requestTo.userOrNull(req);
-    const asset = await rest.assets.param(assetId).get({
-      user: user || undefined,
-    });
+    const asset = await getAssetResponse(assetId, user);
     const props: AssetPageProps & UserProps = {
       user,
       asset,

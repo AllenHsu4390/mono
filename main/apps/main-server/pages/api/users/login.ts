@@ -1,20 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '@main/auth';
-import { rest } from '@main/rest';
 import { z } from 'zod';
 import { ApiHandler, withErrorResponse } from '@main/next-utils';
 import { SessionResponse } from '@main/rest-models';
+import { environment } from '@main/environment';
 
 export const initiateLogin = async (
   userId: string,
   res: NextApiResponse<SessionResponse>
 ) => {
-  const session = await rest.sessions.post({
-    userId,
-  });
+  const db = environment.db;
+  const { id: sessionId } = await db.session.create(userId);
 
-  const sessionKey = auth.encrypt(session.id);
-  const waitKey = auth.encrypt([userId, session.id].join('-SEP-'));
+  const sessionKey = auth.encrypt(sessionId);
+  const waitKey = auth.encrypt([userId, sessionId].join('-SEP-'));
 
   // send to email
   console.log(`localhost:4200/users/auth?sessionKey=${sessionKey}`);
@@ -25,7 +24,12 @@ export const initiateLogin = async (
     `waitKey=${waitKey}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`,
   ]);
 
-  res.status(200).json(await rest.sessions.param(session.id).get());
+  res.status(200).json({
+    isLoggedIn: false,
+    links: {
+      session: `/api/sessions`,
+    },
+  });
 };
 
 const handler = new ApiHandler()
@@ -37,7 +41,8 @@ const handler = new ApiHandler()
           email: z.string().email('Not a valid email'),
         })
         .parse(req.body);
-      const userId = await rest.users.id.get({ email });
+      const db = environment.db;
+      const userId = await db.userId.get(email);
       await initiateLogin(userId, res);
     }
   )

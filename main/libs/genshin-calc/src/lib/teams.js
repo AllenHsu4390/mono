@@ -176,6 +176,7 @@ import {
   xinyanFervor,
   kazuhaBurst,
   makePetraCrystal,
+  instructor,
 } from './traits.js';
 import {
   amosR2,
@@ -6156,7 +6157,7 @@ export const ayato_yae_bennett_sucrose = () => {
 };
 
 export const ayato_yae_bennett_kazuha = () => {
-  const teamWide = [noblesse, kazuhaBurst];
+  const teamWide = [instructor, kazuhaBurst];
   const onField = [bennBurst, ...teamWide];
   const debuffs = [vvShred];
 
@@ -6184,10 +6185,11 @@ export const ayato_yae_bennett_kazuha = () => {
       }),
       bennett.passionAction(),
       kazuha.kazuhaAction({
-        weapon: isshin,
+        weapon: sacSword,
         buffs: teamWide,
         debuffs,
         artifacts: [flower_55, feather_55, sand_55, goblet_55, circlet_55],
+        amps: [pyroVape],
         transforms: [swirl, overloaded],
       }),
     ])}`

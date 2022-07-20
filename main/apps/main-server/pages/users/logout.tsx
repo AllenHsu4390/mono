@@ -1,11 +1,11 @@
-import { rest } from '@main/rest';
+import { getGuestResponse } from '@main/next-utils';
 import { LogoutPage } from '@main/ui';
 import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      guest: await rest.guests.start.get(),
+      guest: getGuestResponse(),
     },
   };
 };
