@@ -43,6 +43,9 @@ const handler = new ApiHandler()
         .parse(req.body);
       const db = environment.db;
       const userId = await db.userId.get(email);
+      if (!userId) {
+        throw new Error('New User');
+      }
       await initiateLogin(userId, res);
     }
   )

@@ -27,7 +27,7 @@ export const getUser = async (id: string) => {
 
 export const getUserId = async (email: string) => {
   const db = await connectToDatabase();
-  const user = await db.getRepository(User).findOneOrFail({
+  const user = await db.getRepository(User).findOne({
     select: {
       id: true,
     },
@@ -35,5 +35,5 @@ export const getUserId = async (email: string) => {
       email,
     },
   });
-  return encode(user.id);
+  return user ? encode(user.id) : '';
 };

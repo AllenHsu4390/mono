@@ -109,9 +109,6 @@ export const LoginForm = () => {
   });
   const { sendLogin } = useLogin({
     email: state.email,
-    onError: (e) => {
-      dispatch({ type: 'create' });
-    },
   });
 
   const { sendSignup } = useSignup({
@@ -122,11 +119,11 @@ export const LoginForm = () => {
     dispatch({ type: 'loading' });
     try {
       const session = await sendLogin();
-
       dispatch({ type: 'done', session });
     } catch (e) {
-      console.log(e);
-      dispatch({ type: 'create' });
+      if (e.message === 'New User') {
+        dispatch({ type: 'create' });
+      }
     }
   };
 
