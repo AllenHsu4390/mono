@@ -1,5 +1,5 @@
 import { auth } from '@main/auth';
-import { ErrorResponse, UserResponse } from '@main/rest-models';
+import { ErrorResponse, managedErrorMessages, UserResponse } from '@main/rest-models';
 import * as _ from 'lodash';
 import {
   GetServerSideProps,
@@ -18,8 +18,10 @@ export const getError = (e: any): ErrorResponse => {
     console.log(e);
   }
 
+  const foundError = Object.values(managedErrorMessages).find((msg) => msg === e.message);
+
   return {
-    e,
+    message: foundError ? e.message :  'Something went wrong',
     status, // derive from e later
     links: {
       home: '/',
@@ -89,13 +91,7 @@ export const withErrorResponse = (handler: NextApiHandler): NextApiHandler => {
       return await handler(req, res);
     } catch (e) {
       const error = getError(e);
-      if (process.env.NODE_ENV === 'development') {
-        console.log(error);
-      }
-      res.status(error.status).json({
-        message: 'something went wrong',
-        status: error.status,
-      });
+      res.status(error.status).json(error);
     }
   };
 };

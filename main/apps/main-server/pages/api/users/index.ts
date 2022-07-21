@@ -18,6 +18,10 @@ const handler = new ApiHandler()
       const db = environment.db;
       const userId = await db.userId.get(email);
 
+      if (!userId) {
+        throw new Error('[Managed Error] - New User');
+      }
+
       await initiateLogin(userId, res);
     }
   )

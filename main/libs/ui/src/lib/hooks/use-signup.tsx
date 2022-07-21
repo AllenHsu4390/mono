@@ -5,9 +5,13 @@ import { useGuest } from './use-guest';
 export const useSignup = ({
   email,
   onError,
+  onSettled,
+  onMutate,
 }: {
   email: string;
   onError?(error: any): void;
+  onSettled?(): void;
+  onMutate?(): void;
 }) => {
   const { guest } = useGuest();
   const mutation = useMutation<SessionResponse>(
@@ -32,9 +36,9 @@ export const useSignup = ({
       return loginResponse;
     },
     {
-      onError: (error) => {
-        onError && onError(error);
-      },
+      onError,
+      onSettled,
+      onMutate,
     }
   );
 

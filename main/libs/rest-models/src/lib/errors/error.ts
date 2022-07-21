@@ -1,5 +1,10 @@
+
+export const managedErrorMessages = {
+  newUserError: '[Managed Error] - New User',
+}
+
 export interface ErrorResponse {
-  e: Error;
+  message: string;
   status: number;
   links: {
     home: string;
