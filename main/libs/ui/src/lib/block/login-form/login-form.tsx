@@ -1,4 +1,3 @@
-import { managedErrorMessages, SessionResponse } from '@main/rest-models';
 import { Container, Typography, useTheme } from '@mui/material';
 import { useReducer } from 'react';
 import { Wordmark } from '../../element/company/wordmark';
@@ -15,39 +14,42 @@ export const LoginForm = () => {
     email: '',
     errorMsg: '',
     isLoading: false,
-    isReady: false,
+    isEmailValid: false,
     isDone: false,
     isCreate: false,
   });
 
   const { sendLogin } = useLogin({
     email: state.email,
-    onError: (e) => {
-      if (e.message === managedErrorMessages.newUserError) {
-        dispatch({ type: 'create' });
-      } else {
-        dispatch({ type: 'error' });
-      }
-    },
+    onError: () => dispatch({ type: 'error' }),
   });
 
   const { sendSignup } = useSignup({
+    session: state.session,
     email: state.email,
-    onError: (e) => {
-      dispatch({ type: 'error' });
-    },
+    onError: () => dispatch({ type: 'error' }),
   });
 
   const login = async () => {
     dispatch({ type: 'loading' });
     const session = await sendLogin();
-    dispatch({ type: 'done', session });
+    if (session.links.signup) {
+      dispatch({ type: 'create', session });
+    } else if (session.links.session) {
+      dispatch({ type: 'done', session });
+    } else {
+      dispatch({ type: 'error' });
+    }
   };
 
   const signup = async () => {
     dispatch({ type: 'loading' });
     const session = await sendSignup();
-    dispatch({ type: 'done', session });
+    if (session.links.session) {
+      dispatch({ type: 'done', session });
+    } else {
+      dispatch({ type: 'error' });
+    }
   };
 
   return (
@@ -72,19 +74,20 @@ export const LoginForm = () => {
       {state.isDone && state.session ? (
         <LoginWait
           session={state.session}
-          backClick={() => dispatch({ type: 'reset' })}
+          onBack={() => dispatch({ type: 'reset' })}
           email={state.email}
         />
       ) : state.isCreate ? (
         <LoginCreate
-          signupClick={signup}
-          backClick={() => dispatch({ type: 'reset' })}
+          isLoading={state.isLoading}
+          onSignup={signup}
+          onBack={() => dispatch({ type: 'reset' })}
           email={state.email}
         />
       ) : (
         <LoginStart
           isLoading={state.isLoading}
-          isReady={state.isReady}
+          isEmailValid={state.isEmailValid}
           login={login}
           onEmailChange={(newEmail) => {
             dispatch({ type: 'input-changed', email: newEmail });

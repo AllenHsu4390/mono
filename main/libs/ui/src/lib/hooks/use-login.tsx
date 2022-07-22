@@ -31,7 +31,7 @@ export const useLogin = ({
 
       const loginResponse = await response.json();
       if (loginResponse.status > 400) {
-        throw new Error('Wrong email');
+        throw new Error(loginResponse.message);
       }
       return loginResponse;
     },

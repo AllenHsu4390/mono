@@ -1,11 +1,10 @@
-import { SessionResponse } from "@main/rest-models";
-
+import { SessionResponse } from '@main/rest-models';
 
 interface State {
   email: string;
   isLoading: boolean;
   errorMsg: string;
-  isReady: boolean;
+  isEmailValid: boolean;
   isDone: boolean;
   isCreate: boolean;
   session?: SessionResponse;
@@ -31,7 +30,7 @@ const verifiedInput = (state: State, action: Action): State => {
     email,
     isLoading: false,
     errorMsg: '',
-    isReady: emailIsValid(email),
+    isEmailValid: emailIsValid(email),
   };
 };
 
@@ -53,6 +52,7 @@ export const reducer = (state: State, action: Action): State => {
         isLoading: false,
         isDone: false,
         isCreate: true,
+        session: action.session,
       };
     case 'loading':
       return {
@@ -66,7 +66,7 @@ export const reducer = (state: State, action: Action): State => {
         email: '',
         errorMsg: '',
         isLoading: false,
-        isReady: false,
+        isEmailValid: false,
         isDone: false,
         isCreate: false,
         session: undefined,

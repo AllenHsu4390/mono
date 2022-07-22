@@ -1,26 +1,26 @@
 import type { SessionResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
-import { useGuest } from './use-guest';
 
 export const useSignup = ({
   email,
+  session,
   onError,
   onSettled,
   onMutate,
 }: {
   email: string;
+  session?: SessionResponse;
   onError?(error: any): void;
   onSettled?(): void;
   onMutate?(): void;
 }) => {
-  const { guest } = useGuest();
   const mutation = useMutation<SessionResponse>(
     async () => {
-      if (!guest?.links.signup) {
+      if (!session?.links.signup) {
         throw new Error('Missing capability: signup');
       }
 
-      const response = await fetch(guest.links.signup, {
+      const response = await fetch(session.links.signup, {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         method: 'POST',

@@ -8,14 +8,14 @@ import {
 
 interface Props {
   isLoading: boolean;
-  isReady: boolean;
+  isEmailValid: boolean;
   login(): void;
   onEmailChange(email: string): void;
 }
 
 export const LoginStart = ({
   isLoading,
-  isReady,
+  isEmailValid,
   login,
   onEmailChange,
 }: Props) => (
@@ -45,7 +45,7 @@ export const LoginStart = ({
       }}
     >
       <Button
-        disabled={isLoading || !isReady}
+        disabled={isLoading || !isEmailValid}
         onClick={login}
         variant="contained"
         sx={{

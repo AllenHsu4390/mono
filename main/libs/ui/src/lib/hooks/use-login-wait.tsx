@@ -2,7 +2,7 @@ import type { SessionResponse } from '@main/rest-models';
 import { useQuery } from 'react-query';
 import { useRouter } from './use-router';
 
-export const useSession = ({
+export const useLoginWait = ({
   session,
   onError,
 }: {
@@ -27,9 +27,7 @@ export const useSession = ({
       return response.json();
     },
     {
-      onError: (error) => {
-        onError && onError(error);
-      },
+      onError,
       onSuccess: (data) => {
         if (data.isLoggedIn) {
           router.push('/');

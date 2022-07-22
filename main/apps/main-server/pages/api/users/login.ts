@@ -44,7 +44,13 @@ const handler = new ApiHandler()
       const db = environment.db;
       const userId = await db.userId.get(email);
       if (!userId) {
-        throw new Error('New User');
+        res.status(200).json({
+          isLoggedIn: false,
+          links: {
+            signup: '/api/users',
+          },
+        });
+        return;
       }
       await initiateLogin(userId, res);
     }

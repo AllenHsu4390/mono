@@ -1,15 +1,15 @@
 import type { SessionResponse } from '@main/rest-models';
 import { Button, Stack, Typography } from '@mui/material';
-import { useSession } from '../../hooks/use-session';
+import { useLoginWait } from '../../hooks/use-login-wait';
 
 interface Props {
   email: string;
-  backClick(): void;
+  onBack(): void;
   session: SessionResponse;
 }
 
-export const LoginWait = ({ email, backClick, session }: Props) => {
-  useSession({
+export const LoginWait = ({ email, onBack, session }: Props) => {
+  useLoginWait({
     session,
   });
 
@@ -36,7 +36,7 @@ export const LoginWait = ({ email, backClick, session }: Props) => {
         }}
       >
         <Button
-          onClick={backClick}
+          onClick={onBack}
           variant="contained"
           sx={{
             minWidth: '6rem',
