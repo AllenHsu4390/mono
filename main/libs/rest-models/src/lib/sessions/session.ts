@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const SessionResponseSchema = z.object({
   isLoggedIn: z.boolean(),
   links: z.object({
-    session: z.string().optional(),
+    wait: z.string().optional(),
     signup: z.string().optional(),
   }),
 });

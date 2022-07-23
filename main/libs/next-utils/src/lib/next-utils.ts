@@ -1,5 +1,5 @@
 import { auth } from '@main/auth';
-import { ErrorResponse, managedErrorMessages, UserResponse } from '@main/rest-models';
+import { ErrorResponse, UserResponse } from '@main/rest-models';
 import * as _ from 'lodash';
 import {
   GetServerSideProps,
@@ -11,18 +11,25 @@ import { NextApiRequestCookies } from 'next/dist/server/api-utils';
 import { z } from 'zod';
 import { getGuestResponse, getUserResponse } from './responses';
 
-export const getError = (e: any): ErrorResponse => {
-  const status = e.status || 400;
+const managedErrorMessages = {
+  rateLimit: {
+    message: 'Rate Limit Error',
+    status: 429,
+  },
+};
 
+export const getError = (e: any): ErrorResponse => {
   if (process.env.NODE_ENV === 'development') {
     console.log(e);
   }
 
-  const foundError = Object.values(managedErrorMessages).find((msg) => msg === e.message);
+  const foundError = Object.values(managedErrorMessages).find(
+    (msg) => msg === e.message
+  );
 
   return {
-    message: foundError ? e.message :  'Something went wrong',
-    status, // derive from e later
+    message: foundError ? foundError.message : 'Something went wrong',
+    status: foundError ? foundError.status : 400,
     links: {
       home: '/',
     },

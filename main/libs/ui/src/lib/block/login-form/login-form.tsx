@@ -1,54 +1,60 @@
+import { SessionResponse } from '@main/rest-models';
 import { Container, Typography, useTheme } from '@mui/material';
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import { Wordmark } from '../../element/company/wordmark';
 import { useLogin } from '../../hooks/use-login';
+import { useMultiPage } from '../../hooks/use-multi-page';
 import { useSignup } from '../../hooks/use-signup';
 import { LoginCreate } from './login-create';
 import { reducer } from './login-form-state';
 import { LoginStart } from './login-start';
 import { LoginWait } from './login-wait';
 
+const emailIsValid = (email: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
 export const LoginForm = () => {
   const theme = useTheme();
-  const [state, dispatch] = useReducer(reducer, {
-    email: '',
-    errorMsg: '',
-    isLoading: false,
-    isEmailValid: false,
-    isDone: false,
-    isCreate: false,
+  const multiPage = useMultiPage({
+    pages: ['login-start', 'login-create', 'login-wait'],
   });
+  const [session, setSession] = useState<SessionResponse>();
+  const [email, setEmail] = useState('');
 
   const { sendLogin } = useLogin({
-    email: state.email,
-    onError: () => dispatch({ type: 'error' }),
+    email,
+    onError: () => multiPage.error(),
   });
 
   const { sendSignup } = useSignup({
-    session: state.session,
-    email: state.email,
-    onError: () => dispatch({ type: 'error' }),
+    session,
+    email,
+    onError: () => multiPage.error(),
   });
 
   const login = async () => {
-    dispatch({ type: 'loading' });
-    const session = await sendLogin();
-    if (session.links.signup) {
-      dispatch({ type: 'create', session });
-    } else if (session.links.session) {
-      dispatch({ type: 'done', session });
+    multiPage.loading();
+    const newSession = await sendLogin();
+    if (newSession.links.signup) {
+      multiPage.page('login-create');
+      setSession(newSession);
+    } else if (newSession.links.wait) {
+      multiPage.page('login-wait');
+      setSession(newSession);
     } else {
-      dispatch({ type: 'error' });
+      multiPage.error();
     }
   };
 
   const signup = async () => {
-    dispatch({ type: 'loading' });
-    const session = await sendSignup();
-    if (session.links.session) {
-      dispatch({ type: 'done', session });
+    multiPage.loading();
+    const newSession = await sendSignup();
+    if (newSession.links.wait) {
+      setSession(newSession);
+      multiPage.page('login-wait');
     } else {
-      dispatch({ type: 'error' });
+      multiPage.error();
     }
   };
 
@@ -71,28 +77,26 @@ export const LoginForm = () => {
       >
         <Wordmark />
       </Typography>
-      {state.isDone && state.session ? (
-        <LoginWait
-          session={state.session}
-          onBack={() => dispatch({ type: 'reset' })}
-          email={state.email}
-        />
-      ) : state.isCreate ? (
+      {multiPage.state.currentPage === 'login-wait' && session ? (
+        <LoginWait session={session} email={email} onBack={multiPage.reset} />
+      ) : multiPage.state.currentPage === 'login-create' ? (
         <LoginCreate
-          isLoading={state.isLoading}
+          isLoading={multiPage.state.isLoading}
           onSignup={signup}
-          onBack={() => dispatch({ type: 'reset' })}
-          email={state.email}
+          onBack={multiPage.reset}
+          email={email}
         />
-      ) : (
+      ) : multiPage.state.currentPage === 'login-start' ? (
         <LoginStart
-          isLoading={state.isLoading}
-          isEmailValid={state.isEmailValid}
+          isLoading={multiPage.state.isLoading}
+          isEmailValid={emailIsValid(email)}
           login={login}
           onEmailChange={(newEmail) => {
-            dispatch({ type: 'input-changed', email: newEmail });
+            setEmail(newEmail);
           }}
         />
+      ) : (
+        <>Something went wrong</>
       )}
     </Container>
   );

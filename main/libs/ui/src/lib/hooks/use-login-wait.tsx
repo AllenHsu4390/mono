@@ -14,11 +14,11 @@ export const useLoginWait = ({
   useQuery<SessionResponse>(
     ['session', 'wait'],
     async () => {
-      if (!session.links.session) {
-        throw new Error('Missing capability: session');
+      if (!session.links.wait) {
+        throw new Error('Missing capability: wait');
       }
 
-      const response = await fetch(session.links.session, {
+      const response = await fetch(session.links.wait, {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         method: 'GET',

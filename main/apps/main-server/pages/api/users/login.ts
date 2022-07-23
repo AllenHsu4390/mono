@@ -27,7 +27,7 @@ export const initiateLogin = async (
   res.status(200).json({
     isLoggedIn: false,
     links: {
-      session: `/api/sessions`,
+      wait: `/api/sessions`,
     },
   });
 };
