@@ -1,14 +1,11 @@
-import { ScrollResetProvider } from '../hooks/use-scroll-reset';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { theme } from './theme';
 import { ThemeProvider } from '@mui/material/styles';
-import { UserProvider } from '../hooks/use-user';
+import { userAtom } from '../hooks/use-user';
 import type { GuestResponse, UserResponse } from '@main/rest-models';
-import { DropProvider } from '../hooks/use-drop';
-import { BalanceProvider } from '../hooks/use-balance';
-import { CreatorProvider } from '../hooks/use-creator';
-import { GuestProvider } from '../hooks/use-guest';
-import { CategoriesProvider } from '../hooks/use-categories';
+import { guestAtom } from '../hooks/use-guest';
+import { Provider as JotaiProvider } from 'jotai';
+import { useHydrateAtoms } from 'jotai/utils';
 
 const queryClient = new QueryClient();
 
@@ -24,6 +21,19 @@ interface ReactChildren {
   children: React.ReactNode;
 }
 
+const JotaiHydrationProvider = ({
+  user,
+  guest,
+  children,
+}: UserProps & GuestProps & ReactChildren) => {
+  useHydrateAtoms([
+    [userAtom, user],
+    [guestAtom, guest],
+  ]);
+
+  return <>{children}</>;
+};
+
 export const AppProvider = ({
   user,
   guest,
@@ -32,19 +42,11 @@ export const AppProvider = ({
   if (user) {
     return (
       <QueryClientProvider client={queryClient}>
-        <ScrollResetProvider>
-          <UserProvider user={user}>
-            <CreatorProvider user={user}>
-              <CategoriesProvider>
-                <DropProvider>
-                  <BalanceProvider user={user}>
-                    <ThemeProvider theme={theme}>{children}</ThemeProvider>
-                  </BalanceProvider>
-                </DropProvider>
-              </CategoriesProvider>
-            </CreatorProvider>
-          </UserProvider>
-        </ScrollResetProvider>
+        <JotaiProvider>
+          <JotaiHydrationProvider user={user} guest={guest}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </JotaiHydrationProvider>
+        </JotaiProvider>
       </QueryClientProvider>
     );
   }
@@ -52,22 +54,22 @@ export const AppProvider = ({
   if (guest) {
     return (
       <QueryClientProvider client={queryClient}>
-        <ScrollResetProvider>
-          <GuestProvider guest={guest}>
-            <CategoriesProvider>
-              <ThemeProvider theme={theme}>{children}</ThemeProvider>
-            </CategoriesProvider>
-          </GuestProvider>
-        </ScrollResetProvider>
+        <JotaiProvider>
+          <JotaiHydrationProvider user={user} guest={guest}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </JotaiHydrationProvider>
+        </JotaiProvider>
       </QueryClientProvider>
     );
   }
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ScrollResetProvider>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      </ScrollResetProvider>
+      <JotaiProvider>
+        <JotaiHydrationProvider user={user} guest={guest}>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </JotaiHydrationProvider>
+      </JotaiProvider>
     </QueryClientProvider>
   );
 };

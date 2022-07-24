@@ -1,19 +1,19 @@
 import type { SessionResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
+import { useSession } from './use-session';
 
 export const useSignup = ({
   email,
-  session,
   onError,
   onSettled,
   onMutate,
 }: {
   email: string;
-  session?: SessionResponse;
   onError?(error: any): void;
   onSettled?(): void;
   onMutate?(): void;
 }) => {
+  const [session, setSession] = useSession();
   const mutation = useMutation<SessionResponse>(
     async () => {
       if (!session?.links.signup) {
@@ -39,6 +39,9 @@ export const useSignup = ({
       onError,
       onSettled,
       onMutate,
+      onSuccess: (data) => {
+        setSession(data);
+      },
     }
   );
 

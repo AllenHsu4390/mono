@@ -5,13 +5,10 @@ import { useLoginWait } from '../../hooks/use-login-wait';
 interface Props {
   email: string;
   onBack(): void;
-  session: SessionResponse;
 }
 
-export const LoginWait = ({ email, onBack, session }: Props) => {
-  useLoginWait({
-    session,
-  });
+export const LoginWait = ({ email, onBack }: Props) => {
+  useLoginWait();
 
   return (
     <>

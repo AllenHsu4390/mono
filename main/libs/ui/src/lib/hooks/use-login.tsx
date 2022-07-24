@@ -1,6 +1,7 @@
 import type { SessionResponse } from '@main/rest-models';
 import { useMutation } from 'react-query';
 import { useGuest } from './use-guest';
+import { useSession } from './use-session';
 
 export const useLogin = ({
   email,
@@ -13,6 +14,7 @@ export const useLogin = ({
   onMutate?(error: any): void;
   onSettled?(): void;
 }) => {
+  const [, setSession] = useSession();
   const { guest } = useGuest();
   const mutation = useMutation<SessionResponse>(
     async () => {
@@ -39,6 +41,9 @@ export const useLogin = ({
       onError,
       onMutate,
       onSettled,
+      onSuccess: (data) => {
+        setSession(data);
+      },
     }
   );
 

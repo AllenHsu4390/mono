@@ -8,28 +8,35 @@ interface Props {
   asset: AssetResponse;
 }
 
-const LikeCounter = ({ asset }: Props) => {
-  const theme = useTheme();
+const useCounter = () => {
   const [state, setState] = useState({
-    likes: 0,
+    count: 0,
     isInitial: true,
   });
+  return {
+    state,
+    setCount: (count: number) =>
+      setState({
+        isInitial: false,
+        count,
+      }),
+  };
+};
+
+const LikeCounter = ({ asset }: Props) => {
+  const theme = useTheme();
+  const counter = useCounter();
   const { isLoading, isError, likes } = useLikeCount({
     asset,
     refetchInterval: 5000,
-    onSuccess: state.isInitial
-      ? (likesData) => {
-          setState({
-            ...state,
-            isInitial: false,
-            likes: likesData.count,
-          });
-        }
+    onSuccess: counter.state.isInitial
+      ? (likesData) => counter.setCount(likesData.count)
       : undefined,
   });
 
   const hasLikes = !isLoading && !isError && !!likes;
-  const showToast = hasLikes && likes.count > state.likes && !state.isInitial;
+  const showToast =
+    hasLikes && likes.count > counter.state.count && !counter.state.isInitial;
 
   return (
     <Box
@@ -42,15 +49,12 @@ const LikeCounter = ({ asset }: Props) => {
       <Typography>{hasLikes ? likes?.count : '...'} snaps</Typography>
       {showToast ? (
         <Toast
-          onDelete={() =>
-            setState({
-              ...state,
-              likes: likes.count,
-            })
-          }
+          onDelete={() => counter.setCount(likes.count)}
           timer={2000}
           content={
-            <Typography>{`+${Math.abs(likes.count - state.likes)}`}</Typography>
+            <Typography>{`+${Math.abs(
+              likes.count - counter.state.count
+            )}`}</Typography>
           }
           color={theme.palette.success.main}
           sx={{

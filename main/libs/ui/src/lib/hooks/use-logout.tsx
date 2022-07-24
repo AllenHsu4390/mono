@@ -1,10 +1,8 @@
 import { useMutation } from 'react-query';
 import { useGuest } from './use-guest';
-import { useRouter } from './use-router';
 
 export const useLogout = () => {
   const { guest } = useGuest();
-  const router = useRouter();
 
   const mutation = useMutation(
     async () => {
@@ -20,12 +18,10 @@ export const useLogout = () => {
           isSignedIn: false,
         }),
       });
-
-      router.push('/');
     },
     {
-      onError: () => {
-        router.push('/');
+      onSettled: () => {
+        window.location.href = '/';
       },
     }
   );

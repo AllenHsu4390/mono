@@ -1,12 +1,10 @@
-import { SessionResponse } from '@main/rest-models';
 import { Container, Typography, useTheme } from '@mui/material';
-import { useReducer, useState } from 'react';
+import { useState } from 'react';
 import { Wordmark } from '../../element/company/wordmark';
 import { useLogin } from '../../hooks/use-login';
 import { useMultiPage } from '../../hooks/use-multi-page';
 import { useSignup } from '../../hooks/use-signup';
 import { LoginCreate } from './login-create';
-import { reducer } from './login-form-state';
 import { LoginStart } from './login-start';
 import { LoginWait } from './login-wait';
 
@@ -19,7 +17,6 @@ export const LoginForm = () => {
   const multiPage = useMultiPage({
     pages: ['login-start', 'login-create', 'login-wait'],
   });
-  const [session, setSession] = useState<SessionResponse>();
   const [email, setEmail] = useState('');
 
   const { sendLogin } = useLogin({
@@ -28,20 +25,17 @@ export const LoginForm = () => {
   });
 
   const { sendSignup } = useSignup({
-    session,
     email,
     onError: () => multiPage.error(),
   });
 
   const login = async () => {
     multiPage.loading();
-    const newSession = await sendLogin();
-    if (newSession.links.signup) {
+    const session = await sendLogin();
+    if (session.links.signup) {
       multiPage.page('login-create');
-      setSession(newSession);
-    } else if (newSession.links.wait) {
+    } else if (session.links.wait) {
       multiPage.page('login-wait');
-      setSession(newSession);
     } else {
       multiPage.error();
     }
@@ -49,9 +43,8 @@ export const LoginForm = () => {
 
   const signup = async () => {
     multiPage.loading();
-    const newSession = await sendSignup();
-    if (newSession.links.wait) {
-      setSession(newSession);
+    const session = await sendSignup();
+    if (session.links.wait) {
       multiPage.page('login-wait');
     } else {
       multiPage.error();
@@ -77,8 +70,8 @@ export const LoginForm = () => {
       >
         <Wordmark />
       </Typography>
-      {multiPage.state.currentPage === 'login-wait' && session ? (
-        <LoginWait session={session} email={email} onBack={multiPage.reset} />
+      {multiPage.state.currentPage === 'login-wait' ? (
+        <LoginWait email={email} onBack={multiPage.reset} />
       ) : multiPage.state.currentPage === 'login-create' ? (
         <LoginCreate
           isLoading={multiPage.state.isLoading}
@@ -91,9 +84,7 @@ export const LoginForm = () => {
           isLoading={multiPage.state.isLoading}
           isEmailValid={emailIsValid(email)}
           login={login}
-          onEmailChange={(newEmail) => {
-            setEmail(newEmail);
-          }}
+          onEmailChange={setEmail}
         />
       ) : (
         <>Something went wrong</>

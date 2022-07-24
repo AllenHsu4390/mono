@@ -1,24 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import { atom, useAtom } from 'jotai';
+import { useEffect } from 'react';
 
-const positionsMap = new Map<string, { scrollPos: number }>();
-
-const ScrollResetContext =
-  React.createContext<Map<string, { scrollPos: number }>>(positionsMap);
-
-interface ScrollResetProviderProps {
-  children: React.ReactNode;
-}
-
-export const ScrollResetProvider = ({ children }: ScrollResetProviderProps) => {
-  return (
-    <ScrollResetContext.Provider value={positionsMap}>
-      {children}
-    </ScrollResetContext.Provider>
-  );
-};
+const positionsMapAtom = atom<Map<string, { scrollPos: number }>>(
+  new Map<string, { scrollPos: number }>()
+);
 
 export const useScrollReset = (key: string) => {
-  const pageLookup = useContext(ScrollResetContext);
+  const [pageLookup] = useAtom(positionsMapAtom);
   if (!pageLookup.has(key)) {
     pageLookup.set(key, {
       scrollPos: 0,

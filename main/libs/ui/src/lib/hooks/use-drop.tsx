@@ -1,27 +1,11 @@
-import type { Drop } from '@main/rest-models';
-import { noop } from 'lodash';
-import * as React from 'react';
+import { DropResponse } from '@main/rest-models';
+import { atom, useAtom } from 'jotai';
 
-export const DropContext = React.createContext<
-  [Drop, React.Dispatch<React.SetStateAction<Drop>>]
->([{ isDropped: false, assetId: '' }, noop]);
+const dropAtom = atom<DropResponse>({
+  isDropped: false,
+  assetId: '',
+});
 
 export const useDrop = () => {
-  return React.useContext(DropContext);
-};
-
-interface Props {
-  children?: React.ReactNode;
-}
-
-export const DropProvider = ({ children }: Props) => {
-  const [drop, setDrop] = React.useState<Drop>({
-    isDropped: false,
-    assetId: '',
-  });
-  return (
-    <DropContext.Provider value={[drop, setDrop]}>
-      {children}
-    </DropContext.Provider>
-  );
+  return useAtom(dropAtom);
 };

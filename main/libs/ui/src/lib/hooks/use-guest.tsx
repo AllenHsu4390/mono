@@ -1,21 +1,10 @@
 import type { GuestResponse } from '@main/rest-models';
-import React, { createContext, useContext } from 'react';
+import { atom, useAtom } from 'jotai';
 
-interface ProviderProps {
-  guest: GuestResponse;
-  children: React.ReactNode;
-}
-
-const GuestContext = createContext<{ guest: GuestResponse | undefined }>({
-  guest: undefined,
-});
-
-export const GuestProvider = ({ guest, children }: ProviderProps) => {
-  return (
-    <GuestContext.Provider value={{ guest }}>{children}</GuestContext.Provider>
-  );
-};
+export const guestAtom = atom<GuestResponse | undefined>(undefined);
 
 export const useGuest = () => {
-  return useContext(GuestContext);
+  const [guest] = useAtom(guestAtom);
+
+  return { guest };
 };

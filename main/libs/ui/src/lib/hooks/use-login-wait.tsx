@@ -1,20 +1,15 @@
 import type { SessionResponse } from '@main/rest-models';
 import { useQuery } from 'react-query';
-import { useRouter } from './use-router';
+import { useSession } from './use-session';
 
 export const useLoginWait = ({
-  session,
   onError,
-}: {
-  session: SessionResponse;
-  onError?(error: any): void;
-}) => {
-  const router = useRouter();
-
+}: { onError?(error: any): void } = {}) => {
+  const [session] = useSession();
   useQuery<SessionResponse>(
     ['session', 'wait'],
     async () => {
-      if (!session.links.wait) {
+      if (!session?.links.wait) {
         throw new Error('Missing capability: wait');
       }
 
@@ -30,7 +25,7 @@ export const useLoginWait = ({
       onError,
       onSuccess: (data) => {
         if (data.isLoggedIn) {
-          router.push('/');
+          window.location.href = '/';
         }
       },
       refetchInterval: 4000,

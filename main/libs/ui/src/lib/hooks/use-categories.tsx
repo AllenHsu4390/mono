@@ -1,55 +1,34 @@
 import type { CategoriesResponse } from '@main/rest-models';
-import { noop } from 'lodash';
-import { createContext, useContext, useState } from 'react';
+import { atom, useAtom } from 'jotai';
 import { useQuery } from 'react-query';
 import { useGuest } from './use-guest';
-import { useUser } from './use-user';
 
-const useCategoriesController = () => {
+const currentCategoryAtom = atom<string>('misc');
+
+export const useCategories = () => {
   const { guest } = useGuest();
-  const { user } = useUser();
-  const [currentCategory, setCurrentCategory] = useState('misc');
-  const { isLoading, isError, data } = useQuery<CategoriesResponse>(
+  const [currentCategory, setCurrentCategory] = useAtom(currentCategoryAtom);
+  const { data, isLoading, isError } = useQuery<CategoriesResponse>(
     ['categories'],
     async () => {
-      const res = await fetch('/api/categories');
+      if (!guest?.links.categories) {
+        throw new Error('Missing capability: categories');
+      }
+
+      const res = await fetch(guest.links.categories);
       return res.json();
+    },
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
 
   return {
-    categories: data?.categories,
+    categories: data ? data.categories : ['misc'],
     currentCategory,
     setCurrentCategory,
     isError,
     isLoading,
   };
-};
-
-export const CategoriesContext = createContext<
-  ReturnType<typeof useCategoriesController>
->({
-  categories: [],
-  currentCategory: 'misc',
-  setCurrentCategory: noop,
-  isError: false,
-  isLoading: false,
-});
-
-export const CategoriesProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const value = useCategoriesController();
-
-  return (
-    <CategoriesContext.Provider value={value}>
-      {children}
-    </CategoriesContext.Provider>
-  );
-};
-
-export const useCategories = () => {
-  return useContext(CategoriesContext);
 };

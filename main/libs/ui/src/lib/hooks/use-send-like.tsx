@@ -23,9 +23,7 @@ export const useSendLike = ({
       return res.json();
     },
     {
-      onError: (error) => {
-        onError && onError(error);
-      },
+      onError,
     }
   );
 
