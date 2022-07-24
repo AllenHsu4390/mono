@@ -1,5 +1,5 @@
 import type { AssetResponse } from '@main/rest-models';
-import { Typography, Box, useTheme } from '@mui/material';
+import { Typography, Box, useTheme, CircularProgress } from '@mui/material';
 import { useState } from 'react';
 import { useLikeCount } from '../../hooks/use-like-count';
 import Toast from '../toast';
@@ -38,6 +38,14 @@ const LikeCounter = ({ asset }: Props) => {
   const showToast =
     hasLikes && likes.count > counter.state.count && !counter.state.isInitial;
 
+  const Likes = () => {
+    if (!hasLikes) {
+      return <CircularProgress size={'1rem'} />;
+    }
+
+    return <Typography>{likes.count} snaps</Typography>;
+  };
+
   return (
     <Box
       sx={{
@@ -46,7 +54,7 @@ const LikeCounter = ({ asset }: Props) => {
         position: 'relative',
       }}
     >
-      <Typography>{hasLikes ? likes?.count : '...'} snaps</Typography>
+      <Likes />
       {showToast ? (
         <Toast
           onDelete={() => counter.setCount(likes.count)}

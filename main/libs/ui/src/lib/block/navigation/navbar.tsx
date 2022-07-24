@@ -10,7 +10,7 @@ import { AppBar } from './appbar';
 import Link from '../../element/link';
 import ProfileMenu from '../profile-menu';
 import { page } from '../../providers/theme';
-import BalanceButton from '../../element/balance-button';
+import { BalanceButton } from '../../element/balance-button';
 import { useUser } from '../../hooks/use-user';
 import { useGuest } from '../../hooks/use-guest';
 

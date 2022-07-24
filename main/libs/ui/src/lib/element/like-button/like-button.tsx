@@ -76,13 +76,13 @@ const LikeButton = ({ asset }: Props) => {
 
   const confirm = async () => {
     dialog.confirm();
+    dialog.close();
     const res = await sendLike();
     await refetchLikes();
     await refetchBalance();
     if (res.isDropped) {
       setDrop(res);
     }
-    dialog.close();
   };
 
   const dialogOptions =
