@@ -1,6 +1,5 @@
 import type { AssetResponse } from '@main/rest-models';
-import { Typography, Box, useTheme, CircularProgress } from '@mui/material';
-import { useState } from 'react';
+import { Typography, Box, CircularProgress } from '@mui/material';
 import { useLikeCount } from '../../hooks/use-like-count';
 import Toast from '../toast';
 
@@ -8,30 +7,10 @@ interface Props {
   asset: AssetResponse;
 }
 
-const useCounter = () => {
-  const [state, setState] = useState({
-    count: 0,
-    isInitial: true,
-  });
-  return {
-    state,
-    setCount: (count: number) =>
-      setState({
-        isInitial: false,
-        count,
-      }),
-  };
-};
-
-const LikeCounter = ({ asset }: Props) => {
-  const theme = useTheme();
-  const counter = useCounter();
-  const { isLoading, isError, likes } = useLikeCount({
+export const LikeCounter = ({ asset }: Props) => {
+  const { isLoading, isError, likes, counter } = useLikeCount({
     asset,
     refetchInterval: 5000,
-    onSuccess: counter.state.isInitial
-      ? (likesData) => counter.setCount(likesData.count)
-      : undefined,
   });
 
   const hasLikes = !isLoading && !isError && !!likes;
@@ -43,7 +22,38 @@ const LikeCounter = ({ asset }: Props) => {
       return <CircularProgress size={'1rem'} />;
     }
 
-    return <Typography>{likes.count} snaps</Typography>;
+    return (
+      <Typography>
+        {hasLikes ? likes.count : <CircularProgress size={'1rem'} />} snaps
+      </Typography>
+    );
+  };
+
+  const DiffToast = () => {
+    if (!showToast) {
+      return null;
+    }
+
+    const diff = likes.count - counter.state.count;
+
+    return (
+      <Toast
+        onDelete={() => counter.setCount(likes.count)}
+        timer={2000}
+        content={
+          <Typography>
+            {diff >= 0 ? '+' : '-'}
+            {Math.abs(diff)}
+          </Typography>
+        }
+        sx={{
+          right: '100%',
+          top: '0',
+          p: '1rem',
+          fontWeight: 'bold',
+        }}
+      />
+    );
   };
 
   return (
@@ -55,26 +65,7 @@ const LikeCounter = ({ asset }: Props) => {
       }}
     >
       <Likes />
-      {showToast ? (
-        <Toast
-          onDelete={() => counter.setCount(likes.count)}
-          timer={2000}
-          content={
-            <Typography>{`+${Math.abs(
-              likes.count - counter.state.count
-            )}`}</Typography>
-          }
-          color={theme.palette.success.main}
-          sx={{
-            right: '100%',
-            top: '0',
-            p: '1rem',
-            fontWeight: 'bold',
-          }}
-        />
-      ) : null}
+      <DiffToast />
     </Box>
   );
 };
-
-export default LikeCounter;

@@ -9,22 +9,26 @@ const fadeInAndOut = keyframes`
 `;
 
 interface Props {
-  color: string;
   content: React.ReactNode;
   sx: SxProps<Theme>;
   timer: number;
+  color?: string;
   onDelete?(): void;
 }
 
-const Toast = ({ color, content, sx, timer, onDelete }: Props) => {
+const useTimer = ({ onDone, timer }: { onDone?(): void; timer: number }) => {
   useEffect(() => {
     const interval = setInterval(() => {
-      onDelete && onDelete();
+      onDone && onDone();
     }, timer);
     return () => {
       clearInterval(interval);
     };
-  }, [onDelete, timer]);
+  }, [onDone, timer]);
+};
+
+const Toast = ({ color, content, sx, timer, onDelete }: Props) => {
+  useTimer({ timer, onDone: onDelete });
 
   return (
     <Box

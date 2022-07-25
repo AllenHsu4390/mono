@@ -1,6 +1,14 @@
 import type { AssetResponse } from '@main/rest-models';
 import { FavoriteBorderOutlined } from '@mui/icons-material';
-import { Typography, Button, IconButton, useTheme, Theme } from '@mui/material';
+import {
+  Typography,
+  Button,
+  IconButton,
+  useTheme,
+  Theme,
+  CircularProgress,
+  keyframes,
+} from '@mui/material';
 import AlertDialog from '../../block/alert';
 import { useBalance } from '../../hooks/use-balance';
 import { useConfirmDialog } from '../../hooks/use-confirm-dialog';
@@ -13,6 +21,18 @@ import Link from '../link';
 const Cost = {
   Like: 60,
 };
+
+const pulse = keyframes`
+  0% {
+    background-color: #fff;
+  }
+  50% {
+    background-color: #f50000;
+  }
+  100 {
+    background-color: #fff;
+  }
+`;
 
 const iconButtonSx = (theme: Theme) => ({
   borderRadius: '0',
@@ -33,7 +53,13 @@ interface Props {
 const LikeButton = ({ asset }: Props) => {
   const theme = useTheme();
   const [_, setDrop] = useDrop();
-  const { balance, refetchBalance } = useBalance();
+  const {
+    balance,
+    refetchBalance,
+    startBalanceLoading,
+    stopBalanceLoading,
+    isBalanceLoading,
+  } = useBalance();
   const { sendLike, isAvailable: isLikeAvailable } = useSendLike({
     asset,
   });
@@ -77,12 +103,14 @@ const LikeButton = ({ asset }: Props) => {
   const confirm = async () => {
     dialog.confirm();
     dialog.close();
+    startBalanceLoading();
     const res = await sendLike();
     await refetchLikes();
     await refetchBalance();
     if (res.isDropped) {
       setDrop(res);
     }
+    stopBalanceLoading();
   };
 
   const dialogOptions =
@@ -125,12 +153,20 @@ const LikeButton = ({ asset }: Props) => {
       onClose={dialog.close}
       {...dialogOptions}
       trigger={
-        <IconButton onClick={dialog.open} sx={iconButtonSx(theme)}>
-          <FavoriteBorderOutlined
-            sx={{
-              fontSize: '2rem',
-            }}
-          />
+        <IconButton
+          disabled={isBalanceLoading}
+          onClick={dialog.open}
+          sx={iconButtonSx(theme)}
+        >
+          {isBalanceLoading ? (
+            <CircularProgress size={'1rem'} />
+          ) : (
+            <FavoriteBorderOutlined
+              sx={{
+                fontSize: '2rem',
+              }}
+            />
+          )}
         </IconButton>
       }
     />

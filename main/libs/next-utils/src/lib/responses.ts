@@ -13,10 +13,10 @@ export const getUserResponse = async (userId: string) => {
 
   const { cache, db } = environment;
 
-  const user = await cache.user.get(
-    userId,
-    async () => await db.user.get(userId)
-  );
+  const user = await cache.user.get(userId, async () => {
+    console.log('db hit');
+    return await db.user.get(userId);
+  });
 
   return {
     ...user,
@@ -112,7 +112,7 @@ export const getAssetsResponse = async (creatorId: string, pageId: string) => {
 export const getTopAssetsResponse = async (
   pageId: string
 ): Promise<AssetsResponse> => {
-  const db = environment.db;
+  const { db } = environment;
   const { assets, pagination } = await db.topAssets.get(pageId);
 
   return {

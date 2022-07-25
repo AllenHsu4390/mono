@@ -1,8 +1,27 @@
-import { Typography, Button, Badge, CircularProgress } from '@mui/material';
+import {
+  Typography,
+  Button,
+  Badge,
+  CircularProgress,
+  keyframes,
+} from '@mui/material';
 import AlertDialog from '../../block/alert';
 import { useBalance } from '../../hooks/use-balance';
 import { useConfirmDialog } from '../../hooks/use-confirm-dialog';
 import { useDailyTopUp } from '../../hooks/use-daily-top-up';
+import { BalanceCounter } from '../balance-counter';
+
+const pulse = keyframes`
+  0% {
+    background-color: #fff;
+  }
+  50% {
+    background-color: #f5f5f5;
+  }
+  100 {
+    background-color: #fff;
+  }
+`;
 
 export const BalanceButton = () => {
   const {
@@ -12,27 +31,35 @@ export const BalanceButton = () => {
   } = useDailyTopUp({
     onError: () => console.log('mint failed'),
   });
-  const { balance, refetchBalance, isBalanceLoading } = useBalance();
-  const dialog = useConfirmDialog();
 
-  const { state } = dialog;
+  const {
+    balance,
+    refetchBalance,
+    startBalanceLoading,
+    stopBalanceLoading,
+    isBalanceLoading,
+  } = useBalance();
+
+  const dialog = useConfirmDialog();
 
   const confirm = async () => {
     dialog.confirm();
+    dialog.close();
+    startBalanceLoading();
     await sendDailyTopUp();
     await refetchBalance();
-    dialog.close();
+    stopBalanceLoading();
   };
 
   if (!balance) {
-    return null;
+    return <CircularProgress size={'1rem'} />;
   }
 
   const newBalance = balance.sum + credit;
   const dialogOptions = isTopUpAvailable
     ? {
         title: 'Daily top-up',
-        content: state.isLocked ? (
+        content: dialog.state.isLocked ? (
           <Typography>{`Updating Balance... Please wait`}</Typography>
         ) : (
           <Typography>
@@ -42,14 +69,14 @@ export const BalanceButton = () => {
         actions: (
           <>
             <Button onClick={dialog.close}>
-              {state.isConfirmed ? 'Close' : 'Cancel'}
+              {dialog.state.isConfirmed ? 'Close' : 'Cancel'}
             </Button>
             <Button
               variant="contained"
-              disabled={state.isLocked}
+              disabled={dialog.state.isLocked}
               onClick={confirm}
             >
-              {state.isConfirmed ? 'Sending...' : 'Get'}
+              {dialog.state.isConfirmed ? 'Sending...' : 'Get'}
             </Button>
           </>
         ),
@@ -64,28 +91,14 @@ export const BalanceButton = () => {
         actions: <Button onClick={dialog.close}>Close</Button>,
       };
 
-  const BalanceLabel = () => {
-    if (isBalanceLoading || !balance) {
-      return <CircularProgress size={'1rem'} />;
-    }
-
-    return (
-      <Typography
-        component="p"
-        sx={{
-          ml: '0.2rem',
-          display: 'inline',
-          verticalAlign: 'middle',
-        }}
-      >
-        Balance: {balance.sum} SNP
-      </Typography>
-    );
-  };
-
   const button = (
-    <Button onClick={dialog.open}>
-      <BalanceLabel />
+    <Button
+      onClick={dialog.open}
+      sx={{
+        animation: isBalanceLoading ? `${pulse} 2s infinite` : undefined,
+      }}
+    >
+      <BalanceCounter />
     </Button>
   );
 
@@ -99,7 +112,7 @@ export const BalanceButton = () => {
 
   return (
     <AlertDialog
-      open={state.isOpen}
+      open={dialog.state.isOpen}
       onClose={dialog.close}
       {...dialogOptions}
       trigger={trigger}

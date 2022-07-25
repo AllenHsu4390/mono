@@ -1,3 +1,1 @@
-import LikeCounter from './like-counter';
-
-export default LikeCounter;
+export * from './like-counter';

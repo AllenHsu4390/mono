@@ -1,12 +1,11 @@
-import { Alert } from '@mui/material';
+import { Alert, Typography } from '@mui/material';
 import LikeButton from '../../element/like-button';
 import CreatorAvatar from '../../element/avatar';
 import { AssetCardFull } from './card-full';
-import LikeCounter from '../../element/like-counter';
+import { LikeCounter } from '../../element/like-counter';
 import { useDrop } from '../../hooks/use-drop';
 import type { AssetResponse } from '@main/rest-models';
 import { CreatorLink } from '../../element/creator-link/creator-link';
-import DeleteAssetButton from '../../element/delete-asset-button';
 
 interface Props {
   asset: AssetResponse;
@@ -19,7 +18,7 @@ export default function AssetInteractable({ asset }: Props) {
     <>
       {drop.isDropped && (
         <Alert severity="success">
-          You got a drop! Asset id: {drop.assetId}
+          <Typography>You got a drop! Asset id: {drop.assetId}</Typography>
         </Alert>
       )}
       <AssetCardFull

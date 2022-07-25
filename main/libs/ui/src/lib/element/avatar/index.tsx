@@ -1,6 +1,5 @@
 import type { Creator } from '@main/rest-models';
-import { Avatar, Stack, Typography } from '@mui/material';
-import { indigo } from '@mui/material/colors';
+import { Avatar } from '@mui/material';
 import Link from '../link';
 
 interface Props {

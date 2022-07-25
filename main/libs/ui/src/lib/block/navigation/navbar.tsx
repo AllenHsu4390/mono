@@ -92,7 +92,7 @@ export default function Navigation({ showBottomBorder = true }: Props) {
             sx={{
               color: theme.palette.primary.dark,
               borderRadius: '0.3rem',
-              padding: '0.2rem',
+              height: '2.0rem',
             }}
           >
             {user ? <BalanceButton /> : null}
