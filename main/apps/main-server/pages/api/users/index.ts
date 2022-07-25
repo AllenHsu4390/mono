@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
-import { ApiHandler, withErrorResponse } from '@main/next-utils';
-import { initiateLogin } from './login';
+import { ApiHandler, sessionStart, withErrorResponse } from '@main/next-utils';
 import { SessionResponse } from '@main/rest-models';
 import { environment } from '@main/environment';
 
@@ -17,9 +16,18 @@ const handler = new ApiHandler()
 
       const db = environment.db;
 
+      // create user
       const { id: userId } = await db.user.save(email, 5000);
 
-      await initiateLogin(userId, res);
+      // send to session wait
+      await sessionStart(userId, res);
+
+      res.status(200).json({
+        isLoggedIn: false,
+        links: {
+          wait: `/api/sessions`,
+        },
+      });
     }
   )
   .engage();

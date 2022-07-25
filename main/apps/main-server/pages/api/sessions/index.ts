@@ -31,14 +31,18 @@ const handler = new ApiHandler()
 
       const [userId, sessionId] = auth.decrypt(waitKey).split('-SEP-');
       const { db } = environment;
+
       const session = await db.session.get(sessionId);
+
+      // set user cookies if logged in
       if (session.isLoggedIn) {
         authorizeLogin(res, userId, sessionId);
       }
+
       res.status(200).json({
         isLoggedIn: session.isLoggedIn,
         links: {
-          session: `/api/sessions`,
+          wait: `/api/sessions`,
         },
       });
     }
@@ -51,7 +55,10 @@ const handler = new ApiHandler()
       .parse(req.query);
     const sessionId = auth.decrypt(sessionKey);
     const { db } = environment;
+
+    // set isLoggedIn in database to true
     await db.session.update(sessionId);
+
     res.status(200).json({
       ok: true,
     });

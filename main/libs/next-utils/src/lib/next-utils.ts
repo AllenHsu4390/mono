@@ -1,4 +1,5 @@
 import { auth } from '@main/auth';
+import { environment } from '@main/environment';
 import { ErrorResponse, UserResponse } from '@main/rest-models';
 import * as _ from 'lodash';
 import {
@@ -219,4 +220,28 @@ export const requestTo = {
 
     return getUserResponse(userId);
   },
+};
+
+export const sessionStart = async (userId: string, res: NextApiResponse) => {
+  const { db } = environment;
+  const { id: sessionId } = await db.session.create(userId);
+
+  const sendToEmail = () => {
+    const sessionKey = auth.encrypt(sessionId);
+    // send auth to email
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`localhost:4200/users/auth?sessionKey=${sessionKey}`);
+    }
+  };
+
+  sendToEmail();
+
+  // start session in cookie
+  const waitKey = auth.encrypt([userId, sessionId].join('-SEP-'));
+  res.setHeader('Set-Cookie', [
+    `idKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;`,
+    `sessionKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;`,
+    `waitKey=${waitKey}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`,
+  ]);
 };

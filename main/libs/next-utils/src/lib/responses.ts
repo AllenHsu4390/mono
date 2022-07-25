@@ -1,9 +1,14 @@
 import { environment } from '@main/environment';
 import {
+  AssetResponseSchema,
   AssetsResponse,
+  AssetsResponseSchema,
   CategoriesResponse,
+  CreatorResponseSchema,
   GuestResponse,
+  GuestResponseSchema,
   User,
+  UserResponseSchema,
 } from '@main/rest-models';
 
 export const getUserResponse = async (userId: string) => {
@@ -14,11 +19,10 @@ export const getUserResponse = async (userId: string) => {
   const { cache, db } = environment;
 
   const user = await cache.user.get(userId, async () => {
-    console.log('db hit');
     return await db.user.get(userId);
   });
 
-  return {
+  return UserResponseSchema.parse({
     ...user,
     links: {
       editAccount: '/users/edit',
@@ -33,7 +37,7 @@ export const getUserResponse = async (userId: string) => {
           }
         : {}),
     },
-  };
+  });
 };
 
 export const getCreatorResponse = async (
@@ -43,7 +47,7 @@ export const getCreatorResponse = async (
   const { db } = environment;
   const creator = await db.creator.get(creatorId);
 
-  return {
+  return CreatorResponseSchema.parse({
     ...creator,
     links: {
       assets: `/api/assets?creatorId=${creatorId}&pageId=1`,
@@ -54,11 +58,11 @@ export const getCreatorResponse = async (
           }
         : {}),
     },
-  };
+  });
 };
 
 export const getGuestResponse = (): GuestResponse => {
-  return {
+  return GuestResponseSchema.parse({
     links: {
       loginPage: '/users/login',
       login: '/api/users/login',
@@ -66,7 +70,7 @@ export const getGuestResponse = (): GuestResponse => {
       signup: '/api/users',
       categories: '/api/categories',
     },
-  };
+  });
 };
 
 export const getCategoriesResponse = (): CategoriesResponse => {
@@ -95,7 +99,7 @@ export const getAssetsResponse = async (creatorId: string, pageId: string) => {
   const { db } = environment;
   const { assets, pagination } = await db.assets.get(creatorId, pageId);
 
-  return {
+  return AssetsResponseSchema.parse({
     assets,
     pagination,
     links: {
@@ -106,7 +110,7 @@ export const getAssetsResponse = async (creatorId: string, pageId: string) => {
           }
         : {}),
     },
-  };
+  });
 };
 
 export const getTopAssetsResponse = async (
@@ -115,7 +119,7 @@ export const getTopAssetsResponse = async (
   const { db } = environment;
   const { assets, pagination } = await db.topAssets.get(pageId);
 
-  return {
+  return AssetsResponseSchema.parse({
     assets,
     pagination,
     links: {
@@ -126,7 +130,7 @@ export const getTopAssetsResponse = async (
           }
         : {}),
     },
-  };
+  });
 };
 
 export const getAssetResponse = async (id: string, user: User | null) => {
@@ -135,7 +139,7 @@ export const getAssetResponse = async (id: string, user: User | null) => {
   const isLogin = !!user;
   const isOwnAsset = isLogin && asset.creator.id === user.creatorId;
 
-  return {
+  return AssetResponseSchema.parse({
     ...asset,
     links: {
       likeCount: `/api/assets/${asset.id}/likes/count`,
@@ -148,5 +152,5 @@ export const getAssetResponse = async (id: string, user: User | null) => {
           }),
       creator: `/galleries/${asset.creator.id}`,
     },
-  };
+  });
 };
