@@ -2907,7 +2907,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@18.1.0":
+"@types/react-dom@18.2.0":
   version "18.0.6"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.6.tgz#36652900024842b74607a17786b6662dd1e103a1"
   integrity sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==
@@ -2951,7 +2951,7 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@18.1.0":
+"@types/react@18.2.0":
   version "18.0.15"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.15.tgz#d355644c26832dc27f3e6cbf0c4f4603fc4ab7fe"
   integrity sha512-iz3BtLuIYH1uWdsv6wXYdhozhqj20oD4/Hk2DNXIn1kFsmp9x8d9QB6FnPhfkbhd2PgEONt9Q1x/ebkwjfFLow==
@@ -8292,7 +8292,7 @@ nx@13.9.5:
     v8-compile-cache "2.3.0"
     yargs-parser "20.0.0"
 
-nx@14.4.3, nx@^14.0.3:
+nx@14.4.3, nx@^14.4.3:
   version "14.4.3"
   resolved "https://registry.yarnpkg.com/nx/-/nx-14.4.3.tgz#27a1aea9ffaf143800c20006ed20f9a26f4610a3"
   integrity sha512-XPaoEAfJI9056qdwTvkutQSwwA3iihqNDwhvk3dmgpT35j8Uzm/y67goACaCUBCjP2dIQqXfNfJVWQIpcG3MTw==
