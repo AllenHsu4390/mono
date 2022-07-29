@@ -1,5 +1,4 @@
 {
-  "root": "libs/crypt",
   "sourceRoot": "libs/crypt/src",
   "projectType": "library",
   "targets": {

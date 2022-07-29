@@ -1,5 +1,4 @@
 {
-  "root": "apps/main-server",
   "sourceRoot": "apps/main-server",
   "projectType": "application",
   "targets": {

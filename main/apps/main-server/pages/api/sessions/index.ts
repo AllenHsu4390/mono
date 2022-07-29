@@ -5,7 +5,7 @@ import { auth } from '@main/auth';
 import { SessionResponse } from '@main/rest-models';
 import { environment } from '@main/environment';
 
-const authorizeLogin = (
+const addAuthHeaders = (
   res: NextApiResponse,
   userId: string,
   sessionId: string
@@ -36,7 +36,7 @@ const handler = new ApiHandler()
 
       // set user cookies if logged in
       if (session.isLoggedIn) {
-        authorizeLogin(res, userId, sessionId);
+        addAuthHeaders(res, userId, sessionId);
       }
 
       res.status(200).json({

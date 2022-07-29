@@ -1,19 +1,20 @@
 {
-  "sourceRoot": "libs/hash/src",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/cn-prisma/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/hash/**/*.ts"]
+        "lintFilePatterns": ["libs/cn-prisma/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/hash"],
+      "outputs": ["coverage/libs/cn-prisma"],
       "options": {
-        "jestConfig": "libs/hash/jest.config.js",
+        "jestConfig": "libs/cn-prisma/jest.config.ts",
         "passWithNoTests": true
       }
     }

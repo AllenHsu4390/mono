@@ -1,5 +1,4 @@
 {
-  "root": "libs/genshin-calc",
   "sourceRoot": "libs/genshin-calc/src",
   "projectType": "library",
   "targets": {

@@ -1,5 +1,4 @@
 {
-  "root": "libs/next-utils",
   "sourceRoot": "libs/next-utils/src",
   "projectType": "library",
   "targets": {

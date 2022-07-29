@@ -1,5 +1,4 @@
 {
-  "root": "libs/sql-database",
   "sourceRoot": "libs/sql-database/src",
   "projectType": "library",
   "targets": {

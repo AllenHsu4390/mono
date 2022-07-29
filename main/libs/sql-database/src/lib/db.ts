@@ -62,9 +62,6 @@ export const db = {
     get: getUser,
     save: saveUser,
   },
-  creator: {
-    get: getCreator,
-  },
   category: {
     get: getAssetCategories,
     save: saveAssetCategory,
@@ -73,9 +70,6 @@ export const db = {
     get: getAsset,
     save: saveAsset,
     delete: deleteAsset,
-  },
-  assets: {
-    get: getAssets,
   },
   topAssets: {
     get: getTopAssets,

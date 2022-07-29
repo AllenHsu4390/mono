@@ -1,8 +1,36 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
-import { ApiHandler, sessionStart, withErrorResponse } from '@main/next-utils';
+import { ApiHandler, withErrorResponse } from '@main/next-utils';
 import { SessionResponse } from '@main/rest-models';
 import { environment } from '@main/environment';
+import { auth } from '@main/auth';
+
+export const addSessionHeader = async (
+  userId: string,
+  res: NextApiResponse
+) => {
+  const { db } = environment;
+  const { id: sessionId } = await db.session.create(userId);
+
+  const sendToEmail = () => {
+    const sessionKey = auth.encrypt(sessionId);
+    // send auth to email
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`localhost:4200/users/auth?sessionKey=${sessionKey}`);
+    }
+  };
+
+  sendToEmail();
+
+  // start session in cookie
+  const waitKey = auth.encrypt([userId, sessionId].join('-SEP-'));
+  res.setHeader('Set-Cookie', [
+    `idKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;`,
+    `sessionKey=deleted; Secure; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;`,
+    `waitKey=${waitKey}; SameSite=Strict; Secure; Path=/; Max-Age=25920000; HttpOnly;`,
+  ]);
+};
 
 const handler = new ApiHandler()
   .add(withErrorResponse)
@@ -29,7 +57,7 @@ const handler = new ApiHandler()
       }
 
       // existing user, send to session wait
-      await sessionStart(userId, res);
+      await addSessionHeader(userId, res);
 
       res.status(200).json({
         isLoggedIn: false,

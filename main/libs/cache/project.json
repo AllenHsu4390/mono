@@ -1,5 +1,4 @@
 {
-  "root": "libs/cache",
   "sourceRoot": "libs/cache/src",
   "projectType": "library",
   "targets": {

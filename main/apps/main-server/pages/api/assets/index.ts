@@ -28,7 +28,7 @@ const handler = new ApiHandler()
     async (req: NextApiRequest, res: NextApiResponse<AssetsResponse>) => {
       const { pageId, creatorId } = z
         .object({
-          pageId: z.string(),
+          pageId: z.string().optional(),
           creatorId: z.string(),
         })
         .parse(req.query);

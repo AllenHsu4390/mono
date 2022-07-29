@@ -1,5 +1,4 @@
 {
-  "root": "libs/rest-models",
   "sourceRoot": "libs/rest-models/src",
   "projectType": "library",
   "targets": {

@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model asset {
+  creatorId Int
+  creator   creator  @relation(fields: [creatorId], references: [id])
+  src       String   @db.VarChar(255)
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model category {
+  userId    Int
+  assetId   Int
+  name      String   @db.VarChar(255)
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model creator {
+  name        String   @db.VarChar(255)
+  description String   @db.Text
+  avatarUrl   String   @db.VarChar(255)
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @db.DateTime(0)
+  updatedAt   DateTime @db.DateTime(0)
+  asset       asset[]
+}
+
+model daily_top_up {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model follow {
+  userId    Int
+  creatorId Int
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model like {
+  userId    Int
+  assetId   Int
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model migrations {
+  id        Int    @id @default(autoincrement())
+  timestamp BigInt
+  name      String @db.VarChar(255)
+}
+
+model session {
+  userId     Int
+  isLoggedIn Int      @db.TinyInt
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @db.DateTime(0)
+  updatedAt  DateTime @db.DateTime(0)
+}
+
+model transaction {
+  userId    Int
+  actionId  Int?
+  type      transaction_type @default(unknown)
+  credit    Int
+  debit     Int
+  id        Int              @id @default(autoincrement())
+  createdAt DateTime         @db.DateTime(0)
+  updatedAt DateTime         @db.DateTime(0)
+}
+
+model user {
+  email        String   @db.VarChar(255)
+  creatorId    Int      @unique(map: "REL_b40ff13132b995b758b1187ee8")
+  dailyTopUpId Int      @unique(map: "REL_1e49e4d986a120889f533e3d94")
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @db.DateTime(0)
+  updatedAt    DateTime @db.DateTime(0)
+}
+
+enum transaction_type {
+  like
+  mint
+  unknown
+}

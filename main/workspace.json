@@ -3,6 +3,7 @@
   "projects": {
     "auth": "libs/auth",
     "cache": "libs/cache",
+    "cn-prisma": "libs/cn-prisma",
     "crypt": "libs/crypt",
     "environment": "libs/environment",
     "genshin-calc": "libs/genshin-calc",

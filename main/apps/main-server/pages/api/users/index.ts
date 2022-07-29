@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
-import { ApiHandler, sessionStart, withErrorResponse } from '@main/next-utils';
+import { ApiHandler, withErrorResponse } from '@main/next-utils';
 import { SessionResponse } from '@main/rest-models';
 import { environment } from '@main/environment';
+import { addSessionHeader } from './login';
 
 const handler = new ApiHandler()
   .add(withErrorResponse)
@@ -20,7 +21,7 @@ const handler = new ApiHandler()
       const { id: userId } = await db.user.save(email, 5000);
 
       // send to session wait
-      await sessionStart(userId, res);
+      await addSessionHeader(userId, res);
 
       res.status(200).json({
         isLoggedIn: false,

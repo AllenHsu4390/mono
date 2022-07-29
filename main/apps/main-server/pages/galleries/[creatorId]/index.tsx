@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = new PropsHandler()
       .parse(query);
     const user = await requestTo.userOrNull(req);
     const creator = await getCreatorResponse(creatorId, user);
-    const assets = await getAssetsResponse(creatorId, '1');
+    const assets = await getAssetsResponse(creatorId);
     const props: GalleryPageProps & UserProps = {
       user,
       creator,

@@ -50,7 +50,7 @@ export const getCreatorResponse = async (
   return CreatorResponseSchema.parse({
     ...creator,
     links: {
-      assets: `/api/assets?creatorId=${creatorId}&pageId=1`,
+      assets: `/api/assets?creatorId=${creatorId}`,
       gallery: `/galleries/${creatorId}`,
       ...(user && user.creatorId === creatorId
         ? {
@@ -95,9 +95,12 @@ export const getCategoriesResponse = (): CategoriesResponse => {
   };
 };
 
-export const getAssetsResponse = async (creatorId: string, pageId: string) => {
+export const getAssetsResponse = async (
+  creatorId: string,
+  cursorId?: string
+) => {
   const { db } = environment;
-  const { assets, pagination } = await db.assets.get(creatorId, pageId);
+  const { assets, pagination } = await db.assets.get(creatorId, cursorId);
 
   return AssetsResponseSchema.parse({
     assets,
